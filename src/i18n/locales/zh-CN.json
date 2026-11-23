@@ -1,0 +1,468 @@
+{
+  "meta": {
+    "title": "{{name}} — 前端开发工程师 | 作品集",
+    "description": "{{name}} 的作品集——一名使用 React、TypeScript 和 Next.js 打造快速、无障碍 Web 应用的前端开发者。"
+  },
+  "language": {
+    "label": "语言",
+    "choose": "选择语言——当前：{{language}}",
+    "menu": "语言"
+  },
+  "education": {
+    "eyebrow": "学业背景",
+    "title": "教育经历",
+    "chapter": "第 2.{{n}} 节",
+    "current": "在读",
+    "visit": "访问网站",
+    "visitAria": "{{school}} —— 访问网站",
+    "logoAlt": "{{school}} 标志"
+  },
+  "skills": {
+    "eyebrow": "我常用的技术",
+    "title": "我的技术栈",
+    "hint": "← 选择索引中的一个章节",
+    "index": "索引 —— {{group}}",
+    "entries": "{{n}} 项",
+    "levels": {
+      "expert": "精通",
+      "advanced": "熟练",
+      "proficient": "掌握",
+      "learning": "学习中"
+    },
+    "meterAria": "{{level}} / {{max}}",
+    "verified": "所有条目均已核实",
+    "revised": "—— 最后修订于 {{date}}",
+    "drawnBy": "绘制者：{{name}}",
+    "sheet": "图纸 {{current}} / {{total}}",
+    "scale": "比例 1:1",
+    "online": "在线"
+  },
+  "certifications": {
+    "eyebrow": "已认证的资质",
+    "title": "证书",
+    "view": "查看证书",
+    "viewAria": "查看证书：{{title}}",
+    "previewAlt": "证书预览：{{title}}",
+    "hint": "↑ 点击任意文件即可查看完整证书",
+    "close": "关闭证书查看器",
+    "dialog": "证书：{{title}}",
+    "issuedBy": "{{title}} —— 颁发机构：{{issuer}}",
+    "placeholder": {
+      "heading": "结业证书",
+      "awarded": "特此授予",
+      "add": "请在 portfolio.ts 中添加图片"
+    }
+  },
+  "projects": {
+    "eyebrow": "精选作品",
+    "title": "精选项目",
+    "featured": "精选 · 案例 00",
+    "caseStudy": "案例 {{n}}",
+    "live": "已上线",
+    "repoOnly": "仅代码仓库",
+    "visitLive": "访问线上版本",
+    "viewRepo": "查看代码仓库",
+    "liveShort": "线上",
+    "repo": "仓库",
+    "more": "在 GitHub 上查看更多",
+    "previewAlt": "{{name}} 预览"
+  },
+  "services": {
+    "eyebrow": "我能提供的帮助",
+    "title": "专长领域",
+    "subline": "{{count}}项实践 · 按实际交付工作中的使用频率排序。",
+    "numbers": [
+      "零",
+      "一",
+      "两",
+      "三",
+      "四",
+      "五",
+      "六",
+      "七",
+      "八",
+      "九",
+      "十",
+      "十一",
+      "十二"
+    ],
+    "fig": "图 {{n}}",
+    "spec": "规格",
+    "cta": "你的项目不属于以上任何一类？",
+    "ctaLink": "聊一聊"
+  },
+  "stats": {
+    "aria": "统计数据"
+  },
+  "contact": {
+    "eyebrow": "保持联系",
+    "title": "一起书写下一章。",
+    "addressBook": "通讯录",
+    "email": "电子邮件",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "telegram": "Telegram",
+    "cv": "下载简历",
+    "dear": "亲爱的 {{name}}：",
+    "labels": {
+      "name": "我的名字是",
+      "email": "你可以通过这个邮箱联系我",
+      "message": "我想聊聊"
+    },
+    "placeholders": {
+      "name": "你的名字",
+      "email": "you@example.com",
+      "message": "说说你的项目或工作机会……"
+    },
+    "validation": {
+      "required": "请填写此字段。",
+      "email": "请输入有效的电子邮件地址。"
+    },
+    "submit": "发送消息",
+    "sending": "发送中…",
+    "sent": "消息已准备好——谢谢！",
+    "error": "出了点问题，请直接给我发邮件。",
+    "mailSubject": "来自 {{name}} 的作品集咨询"
+  },
+  "images": {
+    "conceptPreview": "概念预览",
+    "samplePreview": "示例预览",
+    "placeholder": "占位图",
+    "alt": {
+      "profile": "插画头像（占位图）",
+      "project": "{{name}} 的概念插图（非真实截图）",
+      "certificate": "{{title}} 的示例证书版式（占位图）"
+    }
+  },
+  "content": {
+    "profile": {
+      "role": "前端开发工程师",
+      "badgeRole": "前端 · 全栈",
+      "preloaderRole": "前端开发工程师 • 正在学习全栈",
+      "tagline": "前端开发者，使用 React、TypeScript 和 Next.js 打造快速、无障碍的 Web 应用——同时也在不断拓展后端能力。",
+      "location": "[你的所在地]",
+      "flightPlan": "[你当前的目标]",
+      "availability": "我目前正在寻找新的机会。无论你已有项目构想，还是只想认识一下——我的收件箱随时为你敞开。",
+      "footerBlurb": "一名前端开发者，致力于打造快速、可靠的 Web 体验。",
+      "status": "已部署",
+      "payload": "1 名工程师"
+    },
+    "terminal": [
+      "",
+      "✓ 构建完成，用时 1.84s",
+      "✓ 就绪 · 生产环境",
+      "200 OK · {\"status\":\"live\"}"
+    ],
+    "about": {
+      "paragraphs": [
+        "我是一名前端开发者，拥有约三年使用 React、TypeScript 和 Next.js 构建 Web 应用的经验。我注重清晰的组件架构、无障碍的界面，以及那些让产品用起来更快的细节。",
+        "最近，我也在后端方面不断成长——使用 NestJS 构建 API，研究基于角色的访问控制（RBAC），并在学习 Spring Boot。我也很喜欢 headless 架构，例如结合 REST 和 GraphQL 的 WordPress + Next.js。",
+        "[添加一句话，说明你在寻找什么，或是什么在驱动着你。]"
+      ],
+      "chips": [
+        "前端开发者",
+        "React 与 Next.js",
+        "TypeScript",
+        "终身学习者"
+      ],
+      "features": [
+        "清晰的架构",
+        "默认类型安全",
+        "注重性能",
+        "高质量交付"
+      ]
+    },
+    "education": {
+      "edu-1": {
+        "details": [
+          "[学位或专业，例如：计算机科学学士]"
+        ]
+      },
+      "edu-2": {
+        "details": [
+          "[你学习的内容]",
+          "[可选的第二行]"
+        ]
+      },
+      "edu-3": {
+        "details": [
+          "[文凭 / 考试]"
+        ]
+      }
+    },
+    "skills": {
+      "frontend": "前端",
+      "backend": "后端",
+      "data": "API 与 CMS",
+      "tools": "工具"
+    },
+    "projects": {
+      "featured-project": {
+        "tagline": "[一句话介绍这个项目]",
+        "description": "[用两到三句话说明它的功能、面向的用户，以及你在其中的角色。]",
+        "highlights": [
+          "[核心功能]",
+          "[核心功能]",
+          "[核心功能]"
+        ]
+      },
+      "project-one": {
+        "description": "[简短描述]",
+        "highlights": [
+          "[功能]",
+          "[功能]",
+          "[功能]"
+        ]
+      },
+      "project-two": {
+        "description": "[简短描述]",
+        "highlights": [
+          "[功能]",
+          "[功能]",
+          "[功能]"
+        ]
+      },
+      "project-three": {
+        "description": "[简短描述]",
+        "highlights": [
+          "[功能]",
+          "[功能]",
+          "[功能]"
+        ]
+      }
+    },
+    "services": {
+      "frontend": {
+        "title": "前端开发",
+        "description": "使用可复用、类型安全的 React 组件，构建响应式、无障碍的界面。"
+      },
+      "nextjs": {
+        "title": "Next.js 应用",
+        "description": "基于 App Router、ISR 和清晰的数据获取方式，构建服务端渲染与静态生成的应用。"
+      },
+      "cms": {
+        "title": "Headless CMS",
+        "description": "编辑人员继续使用熟悉的 CMS，而前端依然保持快速且可完全定制。"
+      },
+      "api": {
+        "title": "API 开发",
+        "description": "结构清晰、文档完善的 REST API，包含数据校验、模块划分和合理的错误处理。"
+      },
+      "auth": {
+        "title": "身份验证与访问控制",
+        "description": "通过 guard 和 decorator 实现基于角色和权限的访问控制——默认即安全。"
+      },
+      "performance": {
+        "title": "性能优化",
+        "description": "通过代码分割、图片优化和减少不必要的重新渲染，让页面加载更快。"
+      },
+      "a11y": {
+        "title": "无障碍设计",
+        "description": "语义化标记、键盘操作支持和清晰易读的对比度，让每个人都能使用产品。"
+      },
+      "integration": {
+        "title": "API 集成",
+        "description": "使用类型明确、稳健可靠的客户端，将前端与第三方服务和后端连接起来。"
+      },
+      "ai": {
+        "title": "AI 辅助工作流",
+        "description": "借助 AI 编程工具提升效率，同时确保代码经过审查、测试且易于维护。"
+      }
+    },
+    "stats": {
+      "projects": "已完成项目",
+      "technologies": "使用过的技术",
+      "years": "编程年限",
+      "hours": "编程小时数"
+    }
+  },
+  "os": {
+    "name": "DeveloperOS",
+    "tagline": "我的数字工作空间",
+    "apps": {
+      "about": "关于我",
+      "projects": "项目",
+      "skills": "技能",
+      "education": "教育经历",
+      "certificates": "证书",
+      "services": "专长",
+      "monitor": "系统监视器",
+      "contact": "联系"
+    },
+    "titles": {
+      "about": "个人资料",
+      "projects": "文件资源管理器",
+      "skills": "技术栈",
+      "education": "教育资源管理器",
+      "certificates": "证书查看器",
+      "services": "开发者工具",
+      "monitor": "系统监视器",
+      "contact": "信息"
+    },
+    "window": {
+      "minimize": "最小化",
+      "maximize": "最大化",
+      "restore": "还原",
+      "close": "关闭",
+      "move": "{{title}}标题栏。使用方向键移动窗口。",
+      "resize": "调整窗口大小",
+      "loading": "加载中…"
+    },
+    "taskbar": {
+      "aria": "任务栏",
+      "launcher": "打开应用启动器",
+      "showDesktop": "显示桌面",
+      "running": "正在运行的应用",
+      "item": "{{app}}（{{state}}）",
+      "state": {
+        "active": "当前窗口",
+        "open": "已打开",
+        "minimized": "已最小化"
+      },
+      "toLight": "切换到浅色窗口",
+      "toDark": "切换到深色窗口",
+      "clock": "日期和时间"
+    },
+    "launcher": {
+      "title": "应用启动器",
+      "search": "搜索应用…",
+      "searchLabel": "搜索应用",
+      "empty": "没有与“{{query}}”匹配的应用",
+      "all": "全部应用",
+      "close": "关闭启动器"
+    },
+    "boot": {
+      "aria": "正在启动 DeveloperOS",
+      "steps": [
+        "正在启动 DeveloperOS…",
+        "正在加载工作空间…",
+        "正在挂载项目…",
+        "准备就绪"
+      ],
+      "skip": "点击或按任意键跳过"
+    },
+    "welcome": {
+      "title": "欢迎来到我的数字工作空间。",
+      "subtitle": "通过交互式开发者桌面，探索我的作品、技能和经历。",
+      "hello": "你好，我是 {{name}}",
+      "openProjects": "打开项目",
+      "sayHello": "打个招呼",
+      "hint": "双击图标即可打开——触屏设备上直接点按即可。"
+    },
+    "desktop": {
+      "aria": "桌面",
+      "icons": "桌面应用",
+      "windows": "已打开的窗口"
+    },
+    "menu": {
+      "aria": "桌面菜单",
+      "launcher": "打开应用启动器",
+      "showDesktop": "显示桌面",
+      "closeAll": "关闭所有窗口",
+      "toLight": "使用浅色窗口",
+      "toDark": "使用深色窗口",
+      "language": "语言"
+    },
+    "mobile": {
+      "status": "状态栏",
+      "home": "主屏幕",
+      "back": "返回",
+      "dock": "快捷应用",
+      "apps": "应用"
+    },
+    "about": {
+      "role": "职位",
+      "location": "所在地",
+      "handle": "用户名",
+      "entry": "资料编号",
+      "status": "状态",
+      "bio": "简介",
+      "info": "详细信息",
+      "highlights": "亮点",
+      "toolbox": "工具箱",
+      "links": "在线找到我",
+      "cv": "下载简历",
+      "hello": "打个招呼"
+    },
+    "projects": {
+      "path": "项目",
+      "back": "返回项目",
+      "grid": "网格视图",
+      "list": "列表视图",
+      "open": "打开",
+      "folder": "文件夹",
+      "items": "{{n}} 个项目",
+      "quick": "快速访问",
+      "all": "全部项目",
+      "techStack": "技术栈",
+      "highlights": "亮点",
+      "links": "链接",
+      "selected": "已选择 {{name}}",
+      "view": "视图"
+    },
+    "skills": {
+      "search": "筛选工具…",
+      "searchLabel": "筛选工具",
+      "all": "全部",
+      "categories": "分类",
+      "levelFilter": "熟练度",
+      "results": "共 {{total}} 个工具，显示 {{shown}} 个",
+      "none": "没有符合筛选条件的工具。"
+    },
+    "education": {
+      "records": "记录",
+      "count": "{{n}} 条记录",
+      "back": "返回记录",
+      "details": "详细信息",
+      "period": "时间",
+      "institution": "院校"
+    },
+    "certificates": {
+      "documents": "文档",
+      "zoomIn": "放大",
+      "zoomOut": "缩小",
+      "zoomReset": "重置缩放",
+      "prev": "上一份文档",
+      "next": "下一份文档",
+      "openFile": "在新标签页中打开图片",
+      "page": "{{current}} / {{total}}",
+      "issuer": "颁发机构",
+      "date": "日期"
+    },
+    "services": {
+      "kpiPractices": "专长领域",
+      "kpiTech": "技术",
+      "kpiCore": "核心领域",
+      "search": "筛选专长…",
+      "searchLabel": "筛选专长",
+      "core": "核心",
+      "none": "没有符合筛选条件的专长。",
+      "results": "共 {{total}} 项专长，显示 {{shown}} 项"
+    },
+    "monitor": {
+      "metrics": "作品集指标",
+      "skillLoad": "各领域技能负载",
+      "overall": "总体",
+      "session": "会话运行时间",
+      "region": "区域",
+      "deploys": "部署次数",
+      "uptime": "正常运行时间",
+      "log": "部署日志",
+      "globe": "位置",
+      "live": "实时",
+      "system": "系统"
+    },
+    "contact": {
+      "inbox": "收件箱",
+      "channels": "联系渠道",
+      "thread": "对话",
+      "compose": "新信息",
+      "to": "收件人",
+      "online": "在线",
+      "composeAria": "留言表单"
+    },
+    "search": {
+      "clear": "清除搜索"
+    }
+  }
+}

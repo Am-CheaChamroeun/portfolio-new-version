@@ -1,0 +1,468 @@
+{
+  "meta": {
+    "title": "{{name}} — Frontend Developer | Portfolio",
+    "description": "Portfolio of {{name}} — frontend developer building fast, accessible web apps with React, TypeScript and Next.js."
+  },
+  "language": {
+    "label": "Language",
+    "choose": "Choose language — current: {{language}}",
+    "menu": "Languages"
+  },
+  "education": {
+    "eyebrow": "Academic background",
+    "title": "Education",
+    "chapter": "Ch. 2.{{n}}",
+    "current": "Current",
+    "visit": "Visit site",
+    "visitAria": "{{school}} — visit website",
+    "logoAlt": "{{school}} logo"
+  },
+  "skills": {
+    "eyebrow": "What I work with",
+    "title": "My Tech Stack",
+    "hint": "← pick a chapter of the index",
+    "index": "Index — {{group}}",
+    "entries": "{{n}} entries",
+    "levels": {
+      "expert": "expert",
+      "advanced": "advanced",
+      "proficient": "proficient",
+      "learning": "learning"
+    },
+    "meterAria": "{{level}} of {{max}}",
+    "verified": "all entries verified",
+    "revised": "— last revised {{date}}",
+    "drawnBy": "Drawn by {{name}}",
+    "sheet": "Sheet {{current}} / {{total}}",
+    "scale": "Scale 1:1",
+    "online": "online"
+  },
+  "certifications": {
+    "eyebrow": "Verified credentials",
+    "title": "Certifications",
+    "view": "View certificate",
+    "viewAria": "View {{title}} certificate",
+    "previewAlt": "{{title}} certificate preview",
+    "hint": "↑ click any document to view the full certificate",
+    "close": "Close certificate viewer",
+    "dialog": "{{title}} certificate",
+    "issuedBy": "{{title}} — issued by {{issuer}}",
+    "placeholder": {
+      "heading": "Certificate of Completion",
+      "awarded": "This is awarded to",
+      "add": "Add image in portfolio.ts"
+    }
+  },
+  "projects": {
+    "eyebrow": "Selected work",
+    "title": "Featured Projects",
+    "featured": "Featured · Case study 00",
+    "caseStudy": "Case study {{n}}",
+    "live": "Live",
+    "repoOnly": "Repo only",
+    "visitLive": "Visit Live",
+    "viewRepo": "View Repo",
+    "liveShort": "Live",
+    "repo": "Repo",
+    "more": "See more on GitHub",
+    "previewAlt": "{{name}} preview"
+  },
+  "services": {
+    "eyebrow": "How I can help",
+    "title": "Specializations",
+    "subline": "{{count}} practices · ordered by frequency in shipped work.",
+    "numbers": [
+      "Zero",
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+      "Eleven",
+      "Twelve"
+    ],
+    "fig": "Fig. {{n}}",
+    "spec": "Spec",
+    "cta": "Have a project that doesn't fit a box?",
+    "ctaLink": "Let's talk"
+  },
+  "stats": {
+    "aria": "Stats"
+  },
+  "contact": {
+    "eyebrow": "Let's connect",
+    "title": "Write the Next Chapter.",
+    "addressBook": "Address book",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "telegram": "Telegram",
+    "cv": "Download CV",
+    "dear": "Dear {{name}},",
+    "labels": {
+      "name": "my name is",
+      "email": "you can reach me at",
+      "message": "and I'd like to talk about"
+    },
+    "placeholders": {
+      "name": "Your name",
+      "email": "you@example.com",
+      "message": "Tell me about your project or opportunity..."
+    },
+    "validation": {
+      "required": "Please fill in this field.",
+      "email": "Please enter a valid email address."
+    },
+    "submit": "Send Message",
+    "sending": "Sending…",
+    "sent": "Message ready — thank you!",
+    "error": "Something went wrong. Please email me directly instead.",
+    "mailSubject": "Portfolio enquiry from {{name}}"
+  },
+  "images": {
+    "conceptPreview": "Concept preview",
+    "samplePreview": "Sample preview",
+    "placeholder": "Placeholder",
+    "alt": {
+      "profile": "Illustrated portrait (placeholder)",
+      "project": "Concept illustration for {{name}} (not a real screenshot)",
+      "certificate": "Sample certificate layout (placeholder) for {{title}}"
+    }
+  },
+  "content": {
+    "profile": {
+      "role": "Frontend Developer",
+      "badgeRole": "Frontend · Full-Stack",
+      "preloaderRole": "Frontend Developer • Full-Stack Learner",
+      "tagline": "Frontend developer building fast, accessible web apps with React, TypeScript and Next.js — and growing into the backend.",
+      "location": "[YOUR LOCATION]",
+      "flightPlan": "[YOUR CURRENT GOAL]",
+      "availability": "I'm currently open to new opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.",
+      "footerBlurb": "Frontend developer building fast, reliable web experiences.",
+      "status": "Deployed",
+      "payload": "1 Engineer"
+    },
+    "terminal": [
+      "",
+      "✓ built in 1.84s",
+      "✓ Ready · Production",
+      "200 OK · {\"status\":\"live\"}"
+    ],
+    "about": {
+      "paragraphs": [
+        "I'm a frontend developer with around three years of experience building web applications in React, TypeScript and Next.js. I care about clean component architecture, accessible interfaces and the small details that make a product feel fast.",
+        "Lately I have been growing on the backend side — building APIs with NestJS, exploring role-based access control, and learning Spring Boot. I also enjoy headless setups like WordPress + Next.js with REST and GraphQL.",
+        "[ADD A LINE ABOUT WHAT YOU ARE LOOKING FOR OR WHAT DRIVES YOU.]"
+      ],
+      "chips": [
+        "Frontend Developer",
+        "React & Next.js",
+        "TypeScript",
+        "Lifelong Learner"
+      ],
+      "features": [
+        "Clean Architecture",
+        "Type-safe by Default",
+        "Performance Minded",
+        "Quality Delivery"
+      ]
+    },
+    "education": {
+      "edu-1": {
+        "details": [
+          "[DEGREE OR PROGRAM, e.g. Bachelor's Degree in Computer Science]"
+        ]
+      },
+      "edu-2": {
+        "details": [
+          "[WHAT YOU STUDIED]",
+          "[OPTIONAL SECOND LINE]"
+        ]
+      },
+      "edu-3": {
+        "details": [
+          "[DIPLOMA / EXAM]"
+        ]
+      }
+    },
+    "skills": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "APIs & CMS",
+      "tools": "Tools"
+    },
+    "projects": {
+      "featured-project": {
+        "tagline": "[ONE-LINE PITCH OF THE PROJECT]",
+        "description": "[TWO OR THREE SENTENCES ABOUT WHAT IT DOES, WHO IT IS FOR, AND YOUR ROLE.]",
+        "highlights": [
+          "[KEY FEATURE]",
+          "[KEY FEATURE]",
+          "[KEY FEATURE]"
+        ]
+      },
+      "project-one": {
+        "description": "[SHORT DESCRIPTION]",
+        "highlights": [
+          "[FEATURE]",
+          "[FEATURE]",
+          "[FEATURE]"
+        ]
+      },
+      "project-two": {
+        "description": "[SHORT DESCRIPTION]",
+        "highlights": [
+          "[FEATURE]",
+          "[FEATURE]",
+          "[FEATURE]"
+        ]
+      },
+      "project-three": {
+        "description": "[SHORT DESCRIPTION]",
+        "highlights": [
+          "[FEATURE]",
+          "[FEATURE]",
+          "[FEATURE]"
+        ]
+      }
+    },
+    "services": {
+      "frontend": {
+        "title": "Frontend Development",
+        "description": "Responsive, accessible interfaces built from reusable, type-safe React components."
+      },
+      "nextjs": {
+        "title": "Next.js Applications",
+        "description": "Server-rendered and statically generated apps with the App Router, ISR and clean data fetching."
+      },
+      "cms": {
+        "title": "Headless CMS",
+        "description": "Editors keep their familiar CMS while the frontend stays fast and fully custom."
+      },
+      "api": {
+        "title": "API Development",
+        "description": "Structured, documented REST APIs with validation, modules and sensible error handling."
+      },
+      "auth": {
+        "title": "Auth & Access Control",
+        "description": "Role- and permission-based access with guards and decorators — locked down by default."
+      },
+      "performance": {
+        "title": "Performance Tuning",
+        "description": "Faster loads through code-splitting, image optimisation and fewer unnecessary re-renders."
+      },
+      "a11y": {
+        "title": "Accessibility",
+        "description": "Semantic markup, keyboard support and readable contrast so everyone can use the product."
+      },
+      "integration": {
+        "title": "API Integration",
+        "description": "Connecting frontends to third-party services and backends with typed, resilient clients."
+      },
+      "ai": {
+        "title": "AI-Assisted Workflow",
+        "description": "Using AI coding tools to move faster while keeping code reviewed, tested and maintainable."
+      }
+    },
+    "stats": {
+      "projects": "Projects Completed",
+      "technologies": "Technologies Used",
+      "years": "Years Coding",
+      "hours": "Hours Coding"
+    }
+  },
+  "os": {
+    "name": "DeveloperOS",
+    "tagline": "My Digital Workspace",
+    "apps": {
+      "about": "About Me",
+      "projects": "Projects",
+      "skills": "Skills",
+      "education": "Education",
+      "certificates": "Certifications",
+      "services": "Specializations",
+      "monitor": "System Monitor",
+      "contact": "Contact"
+    },
+    "titles": {
+      "about": "Profile",
+      "projects": "File Explorer",
+      "skills": "Tech Stack",
+      "education": "Education Explorer",
+      "certificates": "Certificate Viewer",
+      "services": "Developer Tools",
+      "monitor": "System Monitor",
+      "contact": "Messages"
+    },
+    "window": {
+      "minimize": "Minimize",
+      "maximize": "Maximize",
+      "restore": "Restore",
+      "close": "Close",
+      "move": "{{title}} title bar. Use the arrow keys to move the window.",
+      "resize": "Resize window",
+      "loading": "Loading…"
+    },
+    "taskbar": {
+      "aria": "Taskbar",
+      "launcher": "Open app launcher",
+      "showDesktop": "Show desktop",
+      "running": "Running apps",
+      "item": "{{app}} ({{state}})",
+      "state": {
+        "active": "active",
+        "open": "open",
+        "minimized": "minimized"
+      },
+      "toLight": "Switch to light windows",
+      "toDark": "Switch to dark windows",
+      "clock": "Date and time"
+    },
+    "launcher": {
+      "title": "App launcher",
+      "search": "Search apps…",
+      "searchLabel": "Search apps",
+      "empty": "No apps match “{{query}}”",
+      "all": "All apps",
+      "close": "Close launcher"
+    },
+    "boot": {
+      "aria": "Starting DeveloperOS",
+      "steps": [
+        "Starting DeveloperOS…",
+        "Loading workspace…",
+        "Mounting projects…",
+        "Ready"
+      ],
+      "skip": "Click or press any key to skip"
+    },
+    "welcome": {
+      "title": "Welcome to My Digital Workspace.",
+      "subtitle": "Explore my work, skills, and experience through an interactive developer desktop.",
+      "hello": "Hi, I'm {{name}}",
+      "openProjects": "Open Projects",
+      "sayHello": "Say hello",
+      "hint": "Double-click an icon to open it — or just tap it on a touch screen."
+    },
+    "desktop": {
+      "aria": "Desktop",
+      "icons": "Desktop apps",
+      "windows": "Open windows"
+    },
+    "menu": {
+      "aria": "Desktop menu",
+      "launcher": "Open app launcher",
+      "showDesktop": "Show desktop",
+      "closeAll": "Close all windows",
+      "toLight": "Use light windows",
+      "toDark": "Use dark windows",
+      "language": "Language"
+    },
+    "mobile": {
+      "status": "Status bar",
+      "home": "Home",
+      "back": "Back",
+      "dock": "Quick apps",
+      "apps": "Apps"
+    },
+    "about": {
+      "role": "Role",
+      "location": "Location",
+      "handle": "Handle",
+      "entry": "Profile ID",
+      "status": "Status",
+      "bio": "About",
+      "info": "Details",
+      "highlights": "Highlights",
+      "toolbox": "Toolbox",
+      "links": "Find me online",
+      "cv": "Download CV",
+      "hello": "Say hello"
+    },
+    "projects": {
+      "path": "Projects",
+      "back": "Back to projects",
+      "grid": "Grid view",
+      "list": "List view",
+      "open": "Open",
+      "folder": "Folder",
+      "items": "{{n}} items",
+      "quick": "Quick access",
+      "all": "All projects",
+      "techStack": "Tech stack",
+      "highlights": "Highlights",
+      "links": "Links",
+      "selected": "{{name}} selected",
+      "view": "View"
+    },
+    "skills": {
+      "search": "Filter tools…",
+      "searchLabel": "Filter tools",
+      "all": "All",
+      "categories": "Categories",
+      "levelFilter": "Level",
+      "results": "{{shown}} of {{total}} tools",
+      "none": "No tools match your filter."
+    },
+    "education": {
+      "records": "Records",
+      "count": "{{n}} records",
+      "back": "Back to records",
+      "details": "Details",
+      "period": "Period",
+      "institution": "Institution"
+    },
+    "certificates": {
+      "documents": "Documents",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "zoomReset": "Reset zoom",
+      "prev": "Previous document",
+      "next": "Next document",
+      "openFile": "Open image in a new tab",
+      "page": "{{current}} / {{total}}",
+      "issuer": "Issuer",
+      "date": "Date"
+    },
+    "services": {
+      "kpiPractices": "Practices",
+      "kpiTech": "Technologies",
+      "kpiCore": "Core practices",
+      "search": "Filter practices…",
+      "searchLabel": "Filter practices",
+      "core": "Core",
+      "none": "No practices match your filter.",
+      "results": "{{shown}} of {{total}} practices"
+    },
+    "monitor": {
+      "metrics": "Portfolio metrics",
+      "skillLoad": "Skill load by area",
+      "overall": "Overall",
+      "session": "Session uptime",
+      "region": "Region",
+      "deploys": "Deploys",
+      "uptime": "Uptime",
+      "log": "Deploy log",
+      "globe": "Location",
+      "live": "live",
+      "system": "System"
+    },
+    "contact": {
+      "inbox": "Inbox",
+      "channels": "Channels",
+      "thread": "Conversation",
+      "compose": "New message",
+      "to": "To",
+      "online": "Available",
+      "composeAria": "Message form"
+    },
+    "search": {
+      "clear": "Clear search"
+    }
+  }
+}

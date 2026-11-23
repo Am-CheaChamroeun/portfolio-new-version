@@ -1,0 +1,376 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * DeveloperOS design tokens — Neon Yellow + Dark Graphite.
+ * Dark = graphite workstation (default). Light = warm daylight windows over the
+ * same dark desktop. Every colour in the UI comes from this file.
+ *
+ * Brand palette: Graphite #0B0D0F · Graphite 2 #191C20 · Neon #EFFF00
+ *                Gold #FFD600 · Warm White #F5F5E9 · Steel #A8ADB5 · Edge #34383E
+ */
+:root {
+  --graphite: #0b0d0f;
+  --graphite-2: #191c20;
+  --neon: #efff00;
+  --gold: #ffd600;
+  --warm: #f5f5e9;
+  --steel: #a8adb5;
+  --edge: #34383e;
+
+  /* Light theme: warm daylight windows */
+  --bg: #f5f5e9;
+  --bg-subtle: #ececdd;
+  --bg-elevated: #fbfbf4;
+  --border: #d9d9c8;
+  --border-strong: #b5b59f;
+  --text: #0b0d0f;
+  --text-muted: #4a4e55;
+  --text-faint: #63676d;
+  --primary: #5e5600; /* readable olive-gold for text/icons on light windows */
+  --primary-hover: #0b0d0f;
+  --primary-glow: rgba(239, 255, 0, 0.35);
+  --accent: #b8a400; /* decorative dots, underlines, meters */
+  --highlight: rgba(239, 255, 0, 0.85); /* highlighter-pen marks */
+  --cta: #0b0d0f; /* filled buttons */
+  --cta-hover: #2a2e33;
+  --on-cta: #efff00;
+  --focus: #0b0d0f;
+  --card: #fbfbf4;
+  --card-border: #d9d9c8;
+  --grid-line: rgba(11, 13, 15, 0.055);
+  --rule: rgba(11, 13, 15, 0.1);
+  --margin-line: rgba(201, 180, 0, 0.6);
+  --sheet: #fbfbf4; /* window surface */
+  --titlebar: #ececdd;
+  --shadow-window: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 24px 60px -18px rgba(0, 0, 0, 0.55);
+  --shadow-window-active: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 34px 90px -18px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(11, 13, 15, 0.18);
+}
+
+.dark {
+  /* Dark theme: graphite workstation */
+  --bg: #0b0d0f;
+  --bg-subtle: #111316;
+  --bg-elevated: #1f2328;
+  --border: #34383e;
+  --border-strong: #4a4f57;
+  --text: #f5f5e9;
+  --text-muted: #a8adb5;
+  --text-faint: #868b93;
+  --primary: #efff00;
+  --primary-hover: #ffd600;
+  --primary-glow: rgba(239, 255, 0, 0.12);
+  --accent: #efff00;
+  --highlight: rgba(239, 255, 0, 0.22);
+  --cta: #efff00;
+  --cta-hover: #ffd600;
+  --on-cta: #0b0d0f;
+  --focus: #efff00;
+  --card: #191c20;
+  --card-border: #34383e;
+  --grid-line: rgba(245, 245, 233, 0.04);
+  --rule: rgba(245, 245, 233, 0.07);
+  --margin-line: rgba(239, 255, 0, 0.35);
+  --sheet: #191c20;
+  --titlebar: #14171a;
+  --shadow-window: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  --shadow-window-active: 0 34px 90px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(239, 255, 0, 0.22), 0 0 50px -20px rgba(239, 255, 0, 0.35);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-glow: var(--primary-glow);
+  --color-accent: var(--accent);
+  --color-highlight: var(--highlight);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-on-cta: var(--on-cta);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-sheet: var(--sheet);
+  --color-titlebar: var(--titlebar);
+
+  /* fixed brand colours (same in both themes) — for always-dark surfaces
+     such as the hero, specializations band and footer */
+  --color-graphite: #0b0d0f;
+  --color-graphite-2: #191c20;
+  --color-neon: #efff00;
+  --color-gold: #ffd600;
+  --color-warm: #f5f5e9;
+  --color-steel: #a8adb5;
+  --color-edge: #34383e;
+}
+
+/* Subtle neon glow — used sparingly on key elements only */
+@theme {
+  --shadow-neon: 0 0 0 1px rgba(239, 255, 0, 0.35), 0 0 22px -4px rgba(239, 255, 0, 0.35);
+  --shadow-neon-sm: 0 0 14px -4px rgba(239, 255, 0, 0.45);
+}
+
+/* Fonts are a separate (non-inline) theme block so utilities read the CSS
+   variables — which lets each language swap in its own fonts below. */
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * Language-specific typography.
+ * Latin text keeps the existing fonts; Khmer / Chinese characters fall through
+ * to Noto Sans Khmer / Noto Sans SC (only the glyph ranges actually used are downloaded).
+ */
+html[lang='km'] {
+  --font-sans: 'Geist Variable', 'Noto Sans Khmer Variable', 'Khmer OS', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans Khmer Variable', monospace;
+  --font-display: 'Geist Variable', 'Noto Sans Khmer Variable', sans-serif;
+}
+html[lang='zh-CN'] {
+  --font-sans: 'Geist Variable', 'Noto Sans SC Variable', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans SC Variable', monospace;
+  --font-display: 'Geist Variable', 'Noto Sans SC Variable', sans-serif;
+}
+
+@layer base {
+  /* Letter-spacing breaks Khmer clusters (vowel signs and subscripts); keep it at zero. */
+  html[lang='km'] * {
+    letter-spacing: normal !important;
+  }
+  /* Chinese reads better with only a hint of tracking on the small caps-style labels. */
+  html[lang='zh-CN'] [class*='tracking-'] {
+    letter-spacing: 0.04em !important;
+  }
+
+  /* Khmer stacks vowel signs above and subscripts below the line: give it room. */
+  html[lang='km'] body {
+    line-height: 1.7;
+  }
+  html[lang='km'] :is(h1, h2, h3, .leading-none, .leading-tight, .leading-snug, [class*='leading-[0'], [class*='leading-[1']) {
+    line-height: 1.45 !important;
+  }
+  html[lang='zh-CN'] :is(h1, h2, h3, .leading-none, [class*='leading-[0'], [class*='leading-[1']) {
+    line-height: 1.3 !important;
+  }
+
+  /* Khmer and Chinese have no true italics — the browser would fake a slant */
+  html:is([lang='km'], [lang='zh-CN']) .italic {
+    font-style: normal !important;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    min-width: 0;
+  }
+
+  /* The OS never scrolls as a page: every app scrolls inside its own window. */
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  html {
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--graphite);
+    color: var(--text);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-optical-sizing: auto;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:not(:disabled),
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--neon);
+    color: var(--graphite);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* inside the always-dark desktop chrome the focus ring is neon in both themes */
+  .os-chrome :focus-visible {
+    outline-color: var(--neon);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    background-clip: padding-box;
+  }
+  @media (max-width: 767px) {
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  @media (pointer: coarse) {
+    button,
+    a[role='button'],
+    input[type='button'],
+    input[type='submit'] {
+      min-height: 40px;
+    }
+  }
+}
+
+/* Theme switch uses a circular view transition driven from JS */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Frosted surface that follows the theme */
+@utility glass {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+}
+
+/* Frosted graphite — taskbar, launcher, menus. Same in both themes. */
+@utility glass-dark {
+  background: rgba(14, 16, 19, 0.78);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+/* Fine blueprint grid */
+@utility grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Graphite surface with a fine + major grid (always dark) */
+@utility drafting-grid {
+  background-color: var(--graphite);
+  background-image:
+    linear-gradient(rgba(245, 245, 233, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 245, 233, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(245, 245, 233, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 245, 233, 0.03) 1px, transparent 1px);
+  background-size:
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px;
+  background-position: -1px -1px;
+}
+
+@utility shadow-window {
+  box-shadow: var(--shadow-window);
+}
+
+@utility shadow-window-active {
+  box-shadow: var(--shadow-window-active);
+}
+
+/* Window geometry animates (maximize / restore) except while it is being dragged */
+@utility win-geom {
+  transition:
+    left 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-boot {
+  animation: boot-bar var(--boot-ms, 1.6s) cubic-bezier(0.45, 0, 0.25, 1) forwards;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes boot-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" class="dark" style="color-scheme: dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0D0F" />
+    <title>Roeun — Frontend Developer | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Roeun — frontend developer building fast, accessible web apps with React, TypeScript and Next.js."
+    />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      // Graphite (dark) is the default; warm paper is the light theme.
+      try {
+        // Saved language (en / km / zh-CN) — set <html lang> early so the right
+        // fonts apply from the first paint. English is the default.
+        const lang = localStorage.getItem('notebook-lang')
+        if (lang === 'km' || lang === 'zh-CN') document.documentElement.lang = lang
+        if (localStorage.getItem('notebook-theme-v2') === 'light') {
+          document.documentElement.classList.remove('dark')
+          document.documentElement.style.colorScheme = 'light'
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
