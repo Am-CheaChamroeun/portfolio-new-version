@@ -11,7 +11,14 @@ const item =
   'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] text-warm/90 transition-colors hover:bg-warm/10 focus:bg-warm/10 focus:text-neon focus:outline-none disabled:pointer-events-none disabled:opacity-40'
 
 const Sep = () => <div role="separator" className="my-1 h-px bg-edge" />
-const Row = ({ icon, children, ...rest }: { icon: ReactNode; children: ReactNode } & ButtonHTMLAttributes<HTMLButtonElement>) => (
+const Row = ({
+  icon,
+  children,
+  ...rest
+}: {
+  icon: ReactNode
+  children: ReactNode
+} & ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button type="button" role="menuitem" className={item} {...rest}>
     <span className="flex h-4 w-4 shrink-0 items-center justify-center text-steel">{icon}</span>
     <span className="flex-1">{children}</span>
@@ -63,7 +70,10 @@ export function DesktopMenu({ x, y, onClose }: Props) {
       aria-label={t('os.menu.aria')}
       onKeyDown={onKey}
       onContextMenu={(e) => e.preventDefault()}
-      style={{ left: Math.min(x, window.innerWidth - 248), top: Math.min(y, window.innerHeight - 330) }}
+      style={{
+        left: Math.min(x, window.innerWidth - 248),
+        top: Math.min(y, window.innerHeight - 330),
+      }}
       className="os-chrome glass-dark absolute z-[9200] w-60 rounded-xl border border-edge p-1.5 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.95)]"
     >
       <Row icon={<LayoutGrid size={15} />} onClick={run(() => actions.setLauncher(true))}>

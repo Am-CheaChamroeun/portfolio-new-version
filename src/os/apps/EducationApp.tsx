@@ -53,7 +53,10 @@ export default function EducationApp() {
       </Toolbar>
 
       <div className="flex min-h-0 flex-1">
-        <nav aria-label={t('os.education.records')} className={`min-h-0 w-full shrink-0 overflow-y-auto border-card-border p-2 @2xl:block @2xl:w-72 @2xl:border-r ${selected !== null ? 'hidden' : 'block'}`}>
+        <nav
+          aria-label={t('os.education.records')}
+          className={`min-h-0 w-full shrink-0 overflow-y-auto border-card-border p-2 @2xl:block @2xl:w-72 @2xl:border-r ${selected !== null ? 'hidden' : 'block'}`}
+        >
           <Eyebrow className="px-2 pb-1.5 pt-1">{t('os.education.records')}</Eyebrow>
           <ul className="space-y-1">
             {education.map((e, i) => {
@@ -73,7 +76,9 @@ export default function EducationApp() {
                       <span className="block truncate text-[13.5px] font-semibold">{e.school}</span>
                       <span className="block truncate font-mono text-[11px] text-faint">{e.period}</span>
                     </span>
-                    {e.current && <span className="h-2 w-2 shrink-0 rounded-full bg-accent shadow-[0_0_8px_var(--accent)]" aria-label={t('education.current')} />}
+                    {e.current && (
+                      <span className="h-2 w-2 shrink-0 rounded-full bg-accent shadow-[0_0_8px_var(--accent)]" aria-label={t('education.current')} />
+                    )}
                   </button>
                 </li>
               )

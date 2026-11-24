@@ -64,7 +64,10 @@ export default function ContactApp() {
     try {
       const res = await fetch(contactFormEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify(data),
       })
       if (!res.ok) throw new Error(String(res.status))

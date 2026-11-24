@@ -48,11 +48,7 @@ export function Globe({ marker, className = '' }: Props) {
 
   return (
     <div className={`absolute inset-0 mx-auto aspect-square w-full ${className}`}>
-      <canvas
-        ref={canvasRef}
-        className="size-full transition-opacity duration-500 [contain:layout_paint_size]"
-        style={{ opacity: ready ? 1 : 0 }}
-      />
+      <canvas ref={canvasRef} className="size-full transition-opacity duration-500 [contain:layout_paint_size]" style={{ opacity: ready ? 1 : 0 }} />
     </div>
   )
 }

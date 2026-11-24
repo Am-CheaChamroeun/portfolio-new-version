@@ -1,15 +1,15 @@
-import { ArrowLeft, ArrowUpRight, FolderOpen, Globe, LayoutGrid, List, Sparkles } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, FolderOpen, LayoutGrid, List } from 'lucide-react'
 import { useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { featuredProject, projects, socials, type Project } from '../../data/portfolio'
 import { GithubIcon } from '../../lib/icons'
-import { Eyebrow, Pill, StatusBar, TechBadge, Toolbar } from './shared'
+import { useOSActions, useOSState } from '../hooks'
+import { CaseStudy, projectCategory, type ProjectText } from './CaseStudy'
+import { BrowserFrame, Eyebrow, Pill, StatusBar, Toolbar } from './shared'
 
 const all: Project[] = [featuredProject, ...projects]
-
-type ProjectText = { tagline?: string; description: string; highlights: string[] }
 
 /** A project's translated text (content.projects.<slug> in the locale files). */
 function useProjectText(slug: string): ProjectText {
@@ -51,72 +51,58 @@ function Status({ project }: { project: Project }) {
   return project.liveUrl ? <Pill>{t('projects.live')}</Pill> : <Pill tone="muted">{t('projects.repoOnly')}</Pill>
 }
 
-function Details({ project }: { project: Project }) {
+/** Premium project card: browser-frame preview, category, tech badges and a neon-lit hover. */
+function ProjectCard({
+  project: p,
+  selected,
+  onSelect,
+  onPreview,
+}: {
+  project: Project
+  selected: boolean
+  onSelect: (e: MouseEvent) => void
+  onPreview: () => void
+}) {
   const { t } = useTranslation()
-  const text = useProjectText(project.slug)
-  const featured = project.slug === featuredProject.slug
+  const text = useProjectText(p.slug)
+  const category = projectCategory(p)
+  const shown = p.tech.slice(0, 4)
   return (
-    <div className="@container h-full overflow-y-auto">
-      <div className="grid gap-6 p-4 @2xl:p-6 @3xl:grid-cols-[1.1fr_1fr]">
-        <Thumb project={project} className="aspect-video rounded-xl border border-card-border @3xl:self-start" />
-        <div>
-          <div className="flex flex-wrap items-center gap-2">
-            {featured && (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-graphite px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-neon ring-1 ring-neon/40">
-                <Sparkles size={11} />
-                {t('projects.featured')}
-              </span>
-            )}
-            <Status project={project} />
-          </div>
-          <h3 className="mt-2 text-2xl font-semibold tracking-tight">{project.name}</h3>
-          {text.tagline && <p className="mt-0.5 text-[14px] font-medium text-primary">{text.tagline}</p>}
-          <p className="mt-3 text-[14px] leading-7 text-muted">{text.description}</p>
-
-          <Eyebrow className="mt-5">{t('os.projects.techStack')}</Eyebrow>
-          <ul className="mt-2 flex flex-wrap gap-1.5">
-            {project.tech.map((n) => (
-              <li key={n}>
-                <TechBadge name={n} />
-              </li>
-            ))}
-          </ul>
-
-          <Eyebrow className="mt-5">{t('os.projects.highlights')}</Eyebrow>
-          <ul className="mt-2 space-y-1.5">
-            {text.highlights.map((h, i) => (
-              <li key={i} className="flex gap-2 text-[13.5px] leading-6 text-muted">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                {h}
-              </li>
-            ))}
-          </ul>
-
-          <Eyebrow className="mt-5">{t('os.projects.links')}</Eyebrow>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-cta px-4 py-2 text-[13px] font-semibold text-on-cta transition-colors hover:bg-cta-hover"
-              >
-                <Globe size={15} />
-                {t('projects.visitLive')}
-                <ArrowUpRight size={14} />
-              </a>
-            )}
-            <a
-              href={project.repoUrl || socials.github.url}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-card-border bg-sheet px-4 py-2 text-[13px] font-semibold transition-colors hover:border-primary hover:text-primary"
-            >
-              <GithubIcon size={15} />
-              {t('projects.viewRepo')}
-            </a>
-          </div>
+    <div
+      className={`group relative flex h-full flex-col rounded-2xl border p-2.5 transition-all duration-200 hover:-translate-y-1 ${
+        selected
+          ? 'border-neon/70 bg-glow shadow-[0_0_28px_-10px_rgba(239,255,0,0.55)]'
+          : 'border-card-border bg-sheet hover:border-neon/50 hover:shadow-[0_14px_36px_-16px_rgba(239,255,0,0.4)]'
+      }`}
+    >
+      <button type="button" onClick={onSelect} aria-pressed={selected} aria-label={p.name} className="rounded-xl text-left">
+        <BrowserFrame label={`${p.slug}.app`}>
+          <Thumb project={p} className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]" />
+        </BrowserFrame>
+      </button>
+      <div className="flex flex-1 flex-col px-1.5 pb-1 pt-3">
+        <div className="flex items-center justify-between gap-2">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">{t(`os.projects.category.${category}`)}</span>
+          <Status project={p} />
         </div>
+        <p className="mt-1.5 truncate text-[15px] font-semibold">{p.name}</p>
+        {text.tagline && <p className="mt-0.5 line-clamp-2 text-[12.5px] leading-5 text-muted">{text.tagline}</p>}
+        <ul className="mt-2.5 flex flex-wrap gap-1">
+          {shown.map((n) => (
+            <li key={n} className="rounded-md border border-card-border px-1.5 py-0.5 font-mono text-[10.5px] text-muted">
+              {n}
+            </li>
+          ))}
+          {p.tech.length > shown.length && <li className="px-1 py-0.5 font-mono text-[10.5px] text-faint">+{p.tech.length - shown.length}</li>}
+        </ul>
+        <button
+          type="button"
+          onClick={onPreview}
+          className="btn-glow mt-3.5 inline-flex items-center justify-center gap-1.5 rounded-lg border border-edge bg-graphite px-3 py-2 text-[12.5px] font-semibold text-neon transition-all hover:border-neon hover:bg-neon hover:text-graphite"
+        >
+          {t('os.projects.preview')}
+          <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+        </button>
       </div>
     </div>
   )
@@ -127,12 +113,15 @@ export default function ProjectsApp() {
   const { t } = useTranslation()
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [selected, setSelected] = useState<string | null>(null)
-  const [openSlug, setOpenSlug] = useState<string | null>(null)
+  const { projectSlug: openSlug } = useOSState()
+  const { openProject } = useOSActions()
   const current = all.find((p) => p.slug === openSlug)
+  const currentText = useProjectText(current?.slug ?? '')
+  const setOpenSlug = openProject
 
   const open = (slug: string) => {
     setSelected(slug)
-    setOpenSlug(slug)
+    openProject(slug)
   }
   const onItem = (slug: string) => (e: MouseEvent) => {
     setSelected(slug)
@@ -153,7 +142,10 @@ export default function ProjectsApp() {
         >
           <ArrowLeft size={16} />
         </button>
-        <nav aria-label={t('os.projects.path')} className="flex min-w-0 flex-1 items-center gap-0.5 rounded-md border border-card-border bg-sheet px-2 py-1 font-mono text-[12px] text-muted">
+        <nav
+          aria-label={t('os.projects.path')}
+          className="flex min-w-0 flex-1 items-center gap-0.5 rounded-md border border-card-border bg-sheet px-2 py-1 font-mono text-[12px] text-muted"
+        >
           <FolderOpen size={13} className="mr-1 shrink-0 text-primary" />
           <button type="button" onClick={() => setOpenSlug(null)} className={crumb} aria-current={current ? undefined : 'page'}>
             ~/{t('os.projects.path').toLowerCase()}
@@ -216,28 +208,12 @@ export default function ProjectsApp() {
 
         <div className="min-w-0 flex-1">
           {current ? (
-            <Details project={current} />
+            <CaseStudy key={current.slug} project={current} text={currentText} all={all} onBack={() => openProject(null)} onOpen={open} />
           ) : view === 'grid' ? (
-            <ul className="grid h-full content-start gap-3 overflow-y-auto p-4 @md:grid-cols-2 @3xl:grid-cols-3">
+            <ul className="grid h-full content-start gap-4 overflow-y-auto p-4 @md:grid-cols-2 @3xl:grid-cols-3">
               {all.map((p) => (
                 <li key={p.slug}>
-                  <button
-                    type="button"
-                    onClick={onItem(p.slug)}
-                    aria-pressed={selected === p.slug}
-                    className={`group block w-full rounded-xl border p-2 text-left transition-all hover:-translate-y-0.5 ${
-                      selected === p.slug ? 'border-primary bg-glow' : 'border-card-border bg-sheet hover:border-line-strong'
-                    }`}
-                  >
-                    <Thumb project={p} className="aspect-video rounded-lg" />
-                    <div className="px-1 pb-1 pt-2.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="truncate text-[13.5px] font-semibold">{p.name}</p>
-                        <Status project={p} />
-                      </div>
-                      <p className="mt-0.5 truncate font-mono text-[11px] text-faint">{p.tech.join(' · ')}</p>
-                    </div>
-                  </button>
+                  <ProjectCard project={p} selected={selected === p.slug} onSelect={onItem(p.slug)} onPreview={() => open(p.slug)} />
                 </li>
               ))}
             </ul>
@@ -271,7 +247,13 @@ export default function ProjectsApp() {
 
       <StatusBar>
         <span>{t('os.projects.items', { n: all.length })}</span>
-        {selected && !current && <span className="truncate">{t('os.projects.selected', { name: all.find((p) => p.slug === selected)?.name })}</span>}
+        {selected && !current && (
+          <span className="truncate">
+            {t('os.projects.selected', {
+              name: all.find((p) => p.slug === selected)?.name,
+            })}
+          </span>
+        )}
         <a
           href={socials.github.url}
           target="_blank"

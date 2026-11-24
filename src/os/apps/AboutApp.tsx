@@ -30,10 +30,26 @@ export default function AboutApp() {
   ]
 
   const social = [
-    { href: `mailto:${socials.email}`, label: t('contact.email'), icon: <Mail size={16} /> },
-    { href: socials.github.url, label: t('contact.github'), icon: <GithubIcon size={16} /> },
-    { href: socials.linkedin.url, label: t('contact.linkedin'), icon: <LinkedinIcon size={16} /> },
-    { href: socials.telegram.url, label: t('contact.telegram'), icon: <TelegramIcon size={16} /> },
+    {
+      href: `mailto:${socials.email}`,
+      label: t('contact.email'),
+      icon: <Mail size={16} />,
+    },
+    {
+      href: socials.github.url,
+      label: t('contact.github'),
+      icon: <GithubIcon size={16} />,
+    },
+    {
+      href: socials.linkedin.url,
+      label: t('contact.linkedin'),
+      icon: <LinkedinIcon size={16} />,
+    },
+    {
+      href: socials.telegram.url,
+      label: t('contact.telegram'),
+      icon: <TelegramIcon size={16} />,
+    },
   ]
 
   return (
@@ -43,12 +59,7 @@ export default function AboutApp() {
           <div className="mx-auto w-40 @2xl:w-full">
             <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-card-border bg-graphite">
               {photo && (
-                <img
-                  src={photo.src}
-                  alt={photo.isMock ? t('images.alt.profile') : profile.name}
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
+                <img src={photo.src} alt={photo.isMock ? t('images.alt.profile') : profile.name} decoding="async" className="h-full w-full object-cover" />
               )}
               {photo?.isMock && <MockBadge kind="placeholder" className="absolute left-2 top-2" />}
             </div>
@@ -61,7 +72,10 @@ export default function AboutApp() {
               <li key={s.label}>
                 <a
                   href={s.href}
-                  {...(s.href.startsWith('http') && { target: '_blank', rel: 'noreferrer' })}
+                  {...(s.href.startsWith('http') && {
+                    target: '_blank',
+                    rel: 'noreferrer',
+                  })}
                   aria-label={s.label}
                   title={s.label}
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-card-border bg-sheet text-muted transition-colors hover:border-primary hover:text-primary"
@@ -147,11 +161,7 @@ export default function AboutApp() {
             <Eyebrow>{t('os.about.toolbox')}</Eyebrow>
             <ul className="mt-2 flex flex-wrap gap-2">
               {tools.map((k) => (
-                <li
-                  key={k}
-                  title={techIcons[k].title}
-                  className="flex items-center gap-2 rounded-lg border border-card-border bg-sheet py-1.5 pl-1.5 pr-3"
-                >
+                <li key={k} title={techIcons[k].title} className="flex items-center gap-2 rounded-lg border border-card-border bg-sheet py-1.5 pl-1.5 pr-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded-md bg-warm">
                     <TechIcon name={k} size={17} />
                   </span>

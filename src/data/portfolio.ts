@@ -58,7 +58,10 @@ export const profile = {
 export const socials = {
   email: '[YOUR EMAIL]',
   github: { url: 'https://github.com/[YOUR GITHUB]', label: '@[YOUR GITHUB]' },
-  linkedin: { url: 'https://www.linkedin.com/in/[YOUR LINKEDIN]', label: '/in/[YOUR LINKEDIN]' },
+  linkedin: {
+    url: 'https://www.linkedin.com/in/[YOUR LINKEDIN]',
+    label: '/in/[YOUR LINKEDIN]',
+  },
   telegram: { url: 'https://t.me/[YOUR TELEGRAM]', label: '@[YOUR TELEGRAM]' },
 }
 
@@ -122,8 +125,19 @@ export type EducationItem = {
 }
 
 export const education: EducationItem[] = [
-  { id: 'edu-1', school: '[UNIVERSITY / SCHOOL NAME]', period: '[YEAR] — [YEAR]', current: true, url: '' },
-  { id: 'edu-2', school: '[COURSE, BOOTCAMP OR ACADEMY]', period: '[YEAR] — [YEAR]', url: '' },
+  {
+    id: 'edu-1',
+    school: '[UNIVERSITY / SCHOOL NAME]',
+    period: '[YEAR] — [YEAR]',
+    current: true,
+    url: '',
+  },
+  {
+    id: 'edu-2',
+    school: '[COURSE, BOOTCAMP OR ACADEMY]',
+    period: '[YEAR] — [YEAR]',
+    url: '',
+  },
   { id: 'edu-3', school: '[HIGH SCHOOL]', period: '[YEAR] — [YEAR]' },
 ]
 
@@ -188,8 +202,18 @@ export type Certificate = {
 }
 
 export const certificates: Certificate[] = [
-  { title: '[CERTIFICATE TITLE]', issuer: '[ISSUER]', issuerFull: '[ISSUER FULL NAME]', date: '[MON YEAR]' },
-  { title: '[CERTIFICATE TITLE]', issuer: '[ISSUER]', issuerFull: '[ISSUER FULL NAME]', date: '[MON YEAR]' },
+  {
+    title: '[CERTIFICATE TITLE]',
+    issuer: '[ISSUER]',
+    issuerFull: '[ISSUER FULL NAME]',
+    date: '[MON YEAR]',
+  },
+  {
+    title: '[CERTIFICATE TITLE]',
+    issuer: '[ISSUER]',
+    issuerFull: '[ISSUER FULL NAME]',
+    date: '[MON YEAR]',
+  },
 ]
 
 /* ───────────── Projects ───────────── */
@@ -205,6 +229,10 @@ export type Project = {
   repoUrl?: string
   image?: string // screenshot or logo in /public
   imageFit?: 'cover' | 'contain'
+  /** Optional: overrides the category shown on the card (otherwise it is worked out from `tech`) */
+  category?: 'frontend' | 'fullstack' | 'backend' | 'cms'
+  /** Optional: extra screenshots for the case-study gallery, e.g. ['/projects/shop-1.webp'] (mock visuals are used until set) */
+  gallery?: string[]
 }
 
 export const featuredProject: Project = {
@@ -217,21 +245,51 @@ export const featuredProject: Project = {
 }
 
 export const projects: Project[] = [
-  { name: '[PROJECT NAME]', slug: 'project-one', tech: ['React', 'TypeScript', 'Vite'], accent: '#ffd600', repoUrl: '' },
-  { name: '[PROJECT NAME]', slug: 'project-two', tech: ['Next.js', 'WordPress', 'GraphQL'], accent: '#efff00', repoUrl: '' },
-  { name: '[PROJECT NAME]', slug: 'project-three', tech: ['NestJS', 'PostgreSQL', 'Docker'], accent: '#ffd600', repoUrl: '' },
+  {
+    name: '[PROJECT NAME]',
+    slug: 'project-one',
+    tech: ['React', 'TypeScript', 'Vite'],
+    accent: '#ffd600',
+    repoUrl: '',
+  },
+  {
+    name: '[PROJECT NAME]',
+    slug: 'project-two',
+    tech: ['Next.js', 'WordPress', 'GraphQL'],
+    accent: '#efff00',
+    repoUrl: '',
+  },
+  {
+    name: '[PROJECT NAME]',
+    slug: 'project-three',
+    tech: ['NestJS', 'PostgreSQL', 'Docker'],
+    accent: '#ffd600',
+    repoUrl: '',
+  },
 ]
 
 /* ───────────── Services ───────────── */
 
 /** Title + description live in content.services.<id> */
 export const services: { id: string; stack: string; icon: LucideIcon }[] = [
-  { id: 'frontend', stack: 'React · TypeScript · Vite · Tailwind', icon: PanelsTopLeft },
-  { id: 'nextjs', stack: 'Next.js · App Router · ISR · Vercel', icon: LayoutTemplate },
+  {
+    id: 'frontend',
+    stack: 'React · TypeScript · Vite · Tailwind',
+    icon: PanelsTopLeft,
+  },
+  {
+    id: 'nextjs',
+    stack: 'Next.js · App Router · ISR · Vercel',
+    icon: LayoutTemplate,
+  },
   { id: 'cms', stack: 'WordPress · REST · GraphQL', icon: Boxes },
   { id: 'api', stack: 'NestJS · Node.js · Spring Boot', icon: Server },
   { id: 'auth', stack: 'RBAC · Guards · JWT', icon: KeyRound },
-  { id: 'performance', stack: 'Lighthouse · Web Vitals · Profiler', icon: Gauge },
+  {
+    id: 'performance',
+    stack: 'Lighthouse · Web Vitals · Profiler',
+    icon: Gauge,
+  },
   { id: 'a11y', stack: 'WCAG · ARIA · Semantic HTML', icon: Accessibility },
   { id: 'integration', stack: 'REST · GraphQL · Webhooks', icon: Network },
   { id: 'ai', stack: 'Claude Code · Prompting · Review', icon: Bot },

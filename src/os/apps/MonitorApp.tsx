@@ -13,7 +13,11 @@ const pad = (n: number) => String(n).padStart(2, '0')
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const [n, setN] = useState(0)
   useEffect(() => {
-    const controls = animate(0, value, { duration: 1.6, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => setN(Math.round(v)) })
+    const controls = animate(0, value, {
+      duration: 1.6,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => setN(Math.round(v)),
+    })
     return () => controls.stop()
   }, [value])
   return (
@@ -57,7 +61,10 @@ function Gauge({ percent }: { percent: number }) {
         strokeLinecap="round"
         strokeDasharray={c}
         strokeDashoffset={c * (1 - p / 100)}
-        style={{ transition: 'stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1)', filter: 'drop-shadow(0 0 4px var(--accent))' }}
+        style={{
+          transition: 'stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1)',
+          filter: 'drop-shadow(0 0 4px var(--accent))',
+        }}
       />
     </svg>
   )
@@ -70,7 +77,11 @@ function DeployLog() {
   const { t, i18n } = useTranslation()
   const lines = useMemo(() => {
     const outputs = t('content.terminal', { returnObjects: true })
-    return terminalCommands.map((cmd, i) => ({ cmd, out: outputs[i] || undefined, info: terminalInfoLines.includes(i) }))
+    return terminalCommands.map((cmd, i) => ({
+      cmd,
+      out: outputs[i] || undefined,
+      info: terminalInfoLines.includes(i),
+    }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.language])
   const [shown, setShown] = useState<Shown[]>(() => lines.map((l) => ({ ...l, typing: false })))
@@ -106,7 +117,12 @@ function DeployLog() {
   }, [lines])
 
   return (
-    <div ref={box} className="min-h-[9.5rem] space-y-1 rounded-b-xl bg-graphite p-3.5 font-mono text-[12px] leading-relaxed text-warm" aria-label={t('os.monitor.log')} role="log">
+    <div
+      ref={box}
+      className="min-h-[9.5rem] space-y-1 rounded-b-xl bg-graphite p-3.5 font-mono text-[12px] leading-relaxed text-warm"
+      aria-label={t('os.monitor.log')}
+      role="log"
+    >
       {shown.map((l, i) => (
         <div key={i}>
           <div className="flex gap-2">
@@ -137,7 +153,10 @@ const Panel = ({ title, children, className = '' }: { title: string; children: R
 export default function MonitorApp() {
   const { t } = useTranslation()
   // derived from the skill levels in portfolio.ts — nothing is invented
-  const load = skillGroups.map((g) => ({ key: g.key, percent: Math.round((g.skills.reduce((n, s) => n + s.level, 0) / (g.skills.length * 12)) * 100) }))
+  const load = skillGroups.map((g) => ({
+    key: g.key,
+    percent: Math.round((g.skills.reduce((n, s) => n + s.level, 0) / (g.skills.length * 12)) * 100),
+  }))
   const all = skillGroups.flatMap((g) => g.skills)
   const overall = Math.round((all.reduce((n, s) => n + s.level, 0) / (all.length * 12)) * 100)
   const [grow, setGrow] = useState(false)
@@ -157,7 +176,10 @@ export default function MonitorApp() {
             </p>
             <p className="mt-1 text-[12px] text-muted">{t(`content.stats.${s.id}` as 'content.stats.projects')}</p>
             <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-fg/10" aria-hidden="true">
-              <div className="h-full origin-left rounded-full bg-accent transition-transform duration-[1400ms] ease-out" style={{ transform: `scaleX(${grow ? 1 : 0})` }} />
+              <div
+                className="h-full origin-left rounded-full bg-accent transition-transform duration-[1400ms] ease-out"
+                style={{ transform: `scaleX(${grow ? 1 : 0})` }}
+              />
             </div>
           </li>
         ))}
@@ -183,7 +205,10 @@ export default function MonitorApp() {
                   <div className="h-1.5 overflow-hidden rounded-full bg-fg/10">
                     <div
                       className="h-full origin-left rounded-full bg-accent shadow-[0_0_8px_-1px_var(--accent)] transition-transform duration-[1200ms] ease-out"
-                      style={{ width: `${g.percent}%`, transform: `scaleX(${grow ? 1 : 0})` }}
+                      style={{
+                        width: `${g.percent}%`,
+                        transform: `scaleX(${grow ? 1 : 0})`,
+                      }}
                     />
                   </div>
                 </li>

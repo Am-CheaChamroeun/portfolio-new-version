@@ -4,17 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { easeOut } from '../lib/motion'
 import { useOSState } from './hooks'
 import { TASKBAR_H } from './layout'
+import { AppSkeleton } from './apps/shared'
 import { appById } from './registry'
-
-function Loading() {
-  const { t } = useTranslation()
-  return (
-    <div role="status" className="flex h-full items-center justify-center gap-2 font-mono text-xs text-faint">
-      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-      {t('os.window.loading')}
-    </div>
-  )
-}
 
 /**
  * The main desktop area: renders the one active app in the empty space beside the icons.
@@ -43,7 +34,7 @@ export function Workspace() {
           transition={{ duration: 0.16, ease: easeOut }}
           className="relative h-full w-full"
         >
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<AppSkeleton label={t('os.window.loading')} />}>
             <def.Component />
           </Suspense>
         </motion.div>

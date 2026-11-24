@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next'
 
-type Props = { kind?: 'concept' | 'sample' | 'placeholder'; className?: string }
+type Props = {
+  kind?: 'concept' | 'sample' | 'placeholder'
+  className?: string
+}
 
 /** Small label that marks a temporary mock image, so it is never mistaken for the real thing. */
 export function MockBadge({ kind = 'concept', className = '' }: Props) {

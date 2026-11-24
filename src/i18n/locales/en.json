@@ -71,21 +71,7 @@
     "eyebrow": "How I can help",
     "title": "Specializations",
     "subline": "{{count}} practices · ordered by frequency in shipped work.",
-    "numbers": [
-      "Zero",
-      "One",
-      "Two",
-      "Three",
-      "Four",
-      "Five",
-      "Six",
-      "Seven",
-      "Eight",
-      "Nine",
-      "Ten",
-      "Eleven",
-      "Twelve"
-    ],
+    "numbers": ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"],
     "fig": "Fig. {{n}}",
     "spec": "Spec",
     "cta": "Have a project that doesn't fit a box?",
@@ -147,47 +133,25 @@
       "status": "Deployed",
       "payload": "1 Engineer"
     },
-    "terminal": [
-      "",
-      "✓ built in 1.84s",
-      "✓ Ready · Production",
-      "200 OK · {\"status\":\"live\"}"
-    ],
+    "terminal": ["", "✓ built in 1.84s", "✓ Ready · Production", "200 OK · {\"status\":\"live\"}"],
     "about": {
       "paragraphs": [
         "I'm a frontend developer with around three years of experience building web applications in React, TypeScript and Next.js. I care about clean component architecture, accessible interfaces and the small details that make a product feel fast.",
         "Lately I have been growing on the backend side — building APIs with NestJS, exploring role-based access control, and learning Spring Boot. I also enjoy headless setups like WordPress + Next.js with REST and GraphQL.",
         "[ADD A LINE ABOUT WHAT YOU ARE LOOKING FOR OR WHAT DRIVES YOU.]"
       ],
-      "chips": [
-        "Frontend Developer",
-        "React & Next.js",
-        "TypeScript",
-        "Lifelong Learner"
-      ],
-      "features": [
-        "Clean Architecture",
-        "Type-safe by Default",
-        "Performance Minded",
-        "Quality Delivery"
-      ]
+      "chips": ["Frontend Developer", "React & Next.js", "TypeScript", "Lifelong Learner"],
+      "features": ["Clean Architecture", "Type-safe by Default", "Performance Minded", "Quality Delivery"]
     },
     "education": {
       "edu-1": {
-        "details": [
-          "[DEGREE OR PROGRAM, e.g. Bachelor's Degree in Computer Science]"
-        ]
+        "details": ["[DEGREE OR PROGRAM, e.g. Bachelor's Degree in Computer Science]"]
       },
       "edu-2": {
-        "details": [
-          "[WHAT YOU STUDIED]",
-          "[OPTIONAL SECOND LINE]"
-        ]
+        "details": ["[WHAT YOU STUDIED]", "[OPTIONAL SECOND LINE]"]
       },
       "edu-3": {
-        "details": [
-          "[DIPLOMA / EXAM]"
-        ]
+        "details": ["[DIPLOMA / EXAM]"]
       }
     },
     "skills": {
@@ -200,35 +164,19 @@
       "featured-project": {
         "tagline": "[ONE-LINE PITCH OF THE PROJECT]",
         "description": "[TWO OR THREE SENTENCES ABOUT WHAT IT DOES, WHO IT IS FOR, AND YOUR ROLE.]",
-        "highlights": [
-          "[KEY FEATURE]",
-          "[KEY FEATURE]",
-          "[KEY FEATURE]"
-        ]
+        "highlights": ["[KEY FEATURE]", "[KEY FEATURE]", "[KEY FEATURE]"]
       },
       "project-one": {
         "description": "[SHORT DESCRIPTION]",
-        "highlights": [
-          "[FEATURE]",
-          "[FEATURE]",
-          "[FEATURE]"
-        ]
+        "highlights": ["[FEATURE]", "[FEATURE]", "[FEATURE]"]
       },
       "project-two": {
         "description": "[SHORT DESCRIPTION]",
-        "highlights": [
-          "[FEATURE]",
-          "[FEATURE]",
-          "[FEATURE]"
-        ]
+        "highlights": ["[FEATURE]", "[FEATURE]", "[FEATURE]"]
       },
       "project-three": {
         "description": "[SHORT DESCRIPTION]",
-        "highlights": [
-          "[FEATURE]",
-          "[FEATURE]",
-          "[FEATURE]"
-        ]
+        "highlights": ["[FEATURE]", "[FEATURE]", "[FEATURE]"]
       }
     },
     "services": {
@@ -287,7 +235,8 @@
       "certificates": "Certifications",
       "services": "Specializations",
       "monitor": "System Monitor",
-      "contact": "Contact"
+      "contact": "Contact",
+      "terminal": "Terminal"
     },
     "titles": {
       "about": "Profile",
@@ -297,7 +246,8 @@
       "certificates": "Certificate Viewer",
       "services": "Developer Tools",
       "monitor": "System Monitor",
-      "contact": "Messages"
+      "contact": "Messages",
+      "terminal": "Terminal"
     },
     "window": {
       "minimize": "Minimize",
@@ -321,7 +271,8 @@
       },
       "toLight": "Switch to light windows",
       "toDark": "Switch to dark windows",
-      "clock": "Date and time"
+      "clock": "Date and time",
+      "search": "Search"
     },
     "launcher": {
       "title": "App launcher",
@@ -333,12 +284,7 @@
     },
     "boot": {
       "aria": "Starting DeveloperOS",
-      "steps": [
-        "Starting DeveloperOS…",
-        "Loading workspace…",
-        "Mounting projects…",
-        "Ready"
-      ],
+      "steps": ["Starting DeveloperOS…", "Loading workspace…", "Mounting projects…", "Ready"],
       "skip": "Click or press any key to skip"
     },
     "welcome": {
@@ -408,7 +354,55 @@
       "highlights": "Highlights",
       "links": "Links",
       "selected": "{{name}} selected",
-      "view": "View"
+      "view": "View",
+      "preview": "View case study",
+      "caseStudy": "Case study",
+      "category": {
+        "frontend": "Frontend",
+        "fullstack": "Full-stack",
+        "backend": "Backend & API",
+        "cms": "Headless CMS"
+      },
+      "study": {
+        "sections": "Case study sections",
+        "overview": "Overview",
+        "objectives": "Objectives",
+        "problemSolution": "Problem & solution",
+        "problem": "The problem",
+        "solution": "The solution",
+        "role": "My role & responsibilities",
+        "stack": "Technology stack",
+        "features": "Key features",
+        "architecture": "Architecture overview",
+        "challenges": "Development challenges",
+        "gallery": "Screenshot gallery",
+        "facts": {
+          "category": "Category",
+          "status": "Status",
+          "stack": "Technologies",
+          "repo": "Repository"
+        },
+        "next": "Next project",
+        "shot": "Screenshot {{n}} of {{total}}",
+        "viewShot": "Show screenshot {{n}}",
+        "shotAlt": "Mock screenshot {{n}} for {{name}} (placeholder)",
+        "layers": {
+          "client": "Client",
+          "server": "Server & API",
+          "data": "Data",
+          "infra": "Infrastructure & tooling"
+        },
+        "stackNote": "Built from this project’s technology list.",
+        "placeholderNote": "Placeholder — replace in content.projects.{{slug}}.study",
+        "placeholder": {
+          "objectives": ["[DESCRIBE THE FIRST GOAL OF THE PROJECT]", "[DESCRIBE THE SECOND GOAL]", "[DESCRIBE THE THIRD GOAL]"],
+          "problem": "[DESCRIBE THE PROBLEM THIS PROJECT SETS OUT TO SOLVE.]",
+          "solution": "[DESCRIBE HOW THE PROJECT SOLVES IT.]",
+          "role": ["[YOUR MAIN RESPONSIBILITY]", "[ANOTHER RESPONSIBILITY]", "[ANOTHER RESPONSIBILITY]"],
+          "architecture": "[EXPLAIN HOW THE PIECES FIT TOGETHER: FRONTEND, API, DATABASE, HOSTING.]",
+          "challenges": ["[A CHALLENGE YOU FACED AND HOW YOU SOLVED IT]", "[ANOTHER CHALLENGE]"]
+        }
+      }
     },
     "skills": {
       "search": "Filter tools…",
@@ -473,6 +467,104 @@
     },
     "search": {
       "clear": "Clear search"
+    },
+    "palette": {
+      "trigger": "Search",
+      "label": "Command palette",
+      "placeholder": "Search apps, projects, skills, actions…",
+      "empty": "No results for “{{query}}”",
+      "recent": "Recent",
+      "count": "{{n}} results",
+      "groups": {
+        "apps": "Applications",
+        "projects": "Projects",
+        "skills": "Skills & technologies",
+        "specializations": "Specializations",
+        "actions": "Actions",
+        "language": "Language"
+      },
+      "kinds": {
+        "app": "App",
+        "project": "Case study",
+        "skill": "Skill",
+        "service": "Specialization",
+        "action": "Action",
+        "language": "Language"
+      },
+      "hints": {
+        "navigate": "Navigate",
+        "open": "Open",
+        "close": "Close"
+      },
+      "actions": {
+        "cv": "Download CV",
+        "cvMissing": "CV file not found yet — add it as public/cv.pdf",
+        "github": "Open GitHub profile",
+        "linkMissing": "This link hasn’t been set yet",
+        "linkedin": "Open LinkedIn profile",
+        "language": "Language: {{name}}",
+        "current": "Current"
+      }
+    },
+    "terminal": {
+      "welcome": "Welcome to the DeveloperOS terminal.",
+      "hint": "Type a command, press Tab to autocomplete, ↑ ↓ for history.",
+      "try": "Try:",
+      "inputLabel": "Terminal command input",
+      "outputLabel": "Terminal output",
+      "header": "terminal",
+      "unknown": "command not found: {{cmd}}",
+      "didYouMean": "Did you mean “{{cmd}}”?",
+      "typeHelp": "Type help to see the available commands. This terminal only runs portfolio commands.",
+      "helpTitle": "Available commands",
+      "desc": {
+        "help": "Show this list",
+        "whoami": "A short introduction",
+        "about": "Open About Me",
+        "projects": "Open Projects",
+        "skills": "List my technical skills",
+        "education": "List my education",
+        "certifications": "List my certifications",
+        "experience": "Show my experience",
+        "contact": "Show contact information",
+        "github": "Open my GitHub profile",
+        "linkedin": "Open my LinkedIn profile",
+        "cv": "Download my CV",
+        "date": "Show the current date and time",
+        "clear": "Clear the terminal",
+        "history": "Show command history",
+        "neofetch": "DeveloperOS system summary",
+        "exit": "Return to About Me"
+      },
+      "navigating": "Opening {{app}}…",
+      "opening": "Opening {{name}} in a new tab…",
+      "linkMissing": "The {{name}} link hasn’t been set yet.",
+      "cvDownloading": "Downloading CV…",
+      "cvMissing": "CV file not found yet — add it as public/cv.pdf.",
+      "noExperience": "No experience entries have been added yet.",
+      "empty": "Nothing added yet.",
+      "historyEmpty": "No commands in history yet.",
+      "exit": "Returning to About Me…",
+      "sections": {
+        "skills": "Technical skills",
+        "education": "Education",
+        "certifications": "Certifications",
+        "contact": "Contact"
+      },
+      "current": "current",
+      "neofetch": {
+        "os": "OS",
+        "host": "Host",
+        "shell": "Shell",
+        "theme": "Theme",
+        "language": "Language",
+        "apps": "Apps",
+        "stack": "Stack",
+        "uptime": "Uptime",
+        "shellValue": "DeveloperOS Terminal",
+        "themeValue": "Neon Yellow / Dark Graphite",
+        "uptimeValue": "{{m}} min {{s}} s"
+      }
     }
   }
 }

@@ -13,7 +13,12 @@ export default function ServicesApp() {
   const list = useMemo(() => {
     const q = query.trim().toLowerCase()
     return services
-      .map((s, i) => ({ s, i, title: t(`content.services.${s.id}.title` as 'content.services.frontend.title'), description: t(`content.services.${s.id}.description` as 'content.services.frontend.description') }))
+      .map((s, i) => ({
+        s,
+        i,
+        title: t(`content.services.${s.id}.title` as 'content.services.frontend.title'),
+        description: t(`content.services.${s.id}.description` as 'content.services.frontend.description'),
+      }))
       .filter(({ s, title, description }) => !q || `${title} ${description} ${s.stack}`.toLowerCase().includes(q))
   }, [query, t])
 
@@ -26,7 +31,13 @@ export default function ServicesApp() {
   return (
     <div className="@container flex h-full min-h-0 flex-col">
       <Toolbar>
-        <SearchField value={query} onChange={(e) => setQuery(e.target.value)} label={t('os.services.searchLabel')} placeholder={t('os.services.search')} className="w-full @lg:w-64" />
+        <SearchField
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          label={t('os.services.searchLabel')}
+          placeholder={t('os.services.search')}
+          className="w-full @lg:w-64"
+        />
       </Toolbar>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-4">
@@ -52,9 +63,22 @@ export default function ServicesApp() {
               >
                 <div className="relative flex h-24 items-center justify-center overflow-hidden border-b border-card-border bg-graphite">
                   <div className="grid-bg absolute inset-0 [--grid-line:rgba(245,245,233,0.05)]" />
-                  {art && <img src={art} alt="" aria-hidden="true" loading="lazy" decoding="async" className="relative h-16 w-auto opacity-90 transition-transform duration-300 group-hover:scale-105" />}
+                  {art && (
+                    <img
+                      src={art}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      className="relative h-16 w-auto opacity-90 transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
                   <span className="absolute left-2.5 top-2.5 font-mono text-[10px] text-neon/80">{String(i + 1).padStart(2, '0')}</span>
-                  {hot && <span className="absolute right-2.5 top-2.5 rounded-full bg-neon px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-graphite">{t('os.services.core')}</span>}
+                  {hot && (
+                    <span className="absolute right-2.5 top-2.5 rounded-full bg-neon px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-graphite">
+                      {t('os.services.core')}
+                    </span>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col p-3.5">
                   <div className="flex items-center gap-2">
@@ -82,7 +106,12 @@ export default function ServicesApp() {
       </div>
 
       <StatusBar>
-        <span>{t('os.services.results', { shown: list.length, total: services.length })}</span>
+        <span>
+          {t('os.services.results', {
+            shown: list.length,
+            total: services.length,
+          })}
+        </span>
       </StatusBar>
     </div>
   )

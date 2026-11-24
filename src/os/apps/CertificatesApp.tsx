@@ -66,23 +66,56 @@ export default function CertificatesApp() {
         <button type="button" className={tool} onClick={() => go(index + 1)} aria-label={t('os.certificates.next')} title={t('os.certificates.next')}>
           <ChevronRight size={17} />
         </button>
-        <span className="font-mono text-[12px] text-faint">{t('os.certificates.page', { current: index + 1, total: certificates.length })}</span>
+        <span className="font-mono text-[12px] text-faint">
+          {t('os.certificates.page', {
+            current: index + 1,
+            total: certificates.length,
+          })}
+        </span>
         <p className="min-w-0 flex-1 truncate px-1 text-[13px] font-medium">{cert.title}</p>
         <div className="flex items-center gap-0.5">
-          <button type="button" className={tool} onClick={() => setZoom((v) => Math.max(0, v - 1))} disabled={zoom === 0} aria-label={t('os.certificates.zoomOut')} title={t('os.certificates.zoomOut')}>
+          <button
+            type="button"
+            className={tool}
+            onClick={() => setZoom((v) => Math.max(0, v - 1))}
+            disabled={zoom === 0}
+            aria-label={t('os.certificates.zoomOut')}
+            title={t('os.certificates.zoomOut')}
+          >
             <ZoomOut size={16} />
           </button>
           <span className="w-11 text-center font-mono text-[11.5px] text-muted" aria-live="polite">
             {Math.round(z * 100)}%
           </span>
-          <button type="button" className={tool} onClick={() => setZoom((v) => Math.min(ZOOMS.length - 1, v + 1))} disabled={zoom === ZOOMS.length - 1} aria-label={t('os.certificates.zoomIn')} title={t('os.certificates.zoomIn')}>
+          <button
+            type="button"
+            className={tool}
+            onClick={() => setZoom((v) => Math.min(ZOOMS.length - 1, v + 1))}
+            disabled={zoom === ZOOMS.length - 1}
+            aria-label={t('os.certificates.zoomIn')}
+            title={t('os.certificates.zoomIn')}
+          >
             <ZoomIn size={16} />
           </button>
-          <button type="button" className={tool} onClick={() => setZoom(2)} disabled={zoom === 2} aria-label={t('os.certificates.zoomReset')} title={t('os.certificates.zoomReset')}>
+          <button
+            type="button"
+            className={tool}
+            onClick={() => setZoom(2)}
+            disabled={zoom === 2}
+            aria-label={t('os.certificates.zoomReset')}
+            title={t('os.certificates.zoomReset')}
+          >
             <RotateCcw size={14} />
           </button>
           {image && !image.isMock && (
-            <a href={image.src} target="_blank" rel="noreferrer" className={tool} aria-label={t('os.certificates.openFile')} title={t('os.certificates.openFile')}>
+            <a
+              href={image.src}
+              target="_blank"
+              rel="noreferrer"
+              className={tool}
+              aria-label={t('os.certificates.openFile')}
+              title={t('os.certificates.openFile')}
+            >
               <ExternalLink size={15} />
             </a>
           )}
@@ -90,7 +123,10 @@ export default function CertificatesApp() {
       </Toolbar>
 
       <div className="flex min-h-0 flex-1 flex-col @2xl:flex-row">
-        <nav aria-label={t('os.certificates.documents')} className="shrink-0 overflow-x-auto border-b border-card-border bg-bg-subtle/50 p-2 @2xl:w-56 @2xl:overflow-y-auto @2xl:border-b-0 @2xl:border-r">
+        <nav
+          aria-label={t('os.certificates.documents')}
+          className="shrink-0 overflow-x-auto border-b border-card-border bg-bg-subtle/50 p-2 @2xl:w-56 @2xl:overflow-y-auto @2xl:border-b-0 @2xl:border-r"
+        >
           <Eyebrow className="hidden px-1.5 pb-1.5 pt-1 @2xl:block">{t('os.certificates.documents')}</Eyebrow>
           <ul className="flex gap-2 @2xl:flex-col">
             {certificates.map((c, i) => {
@@ -101,7 +137,9 @@ export default function CertificatesApp() {
                   <button
                     type="button"
                     onClick={() => go(i)}
-                    aria-label={t('certifications.viewAria', { title: c.title })}
+                    aria-label={t('certifications.viewAria', {
+                      title: c.title,
+                    })}
                     aria-current={on ? 'true' : undefined}
                     className={`block w-full rounded-lg border p-1.5 text-left transition-colors ${on ? 'border-primary bg-glow' : 'border-card-border bg-sheet hover:border-line-strong'}`}
                   >
@@ -126,13 +164,26 @@ export default function CertificatesApp() {
         </nav>
 
         <div className="min-h-0 flex-1 overflow-auto bg-bg-subtle/60 p-4 @2xl:p-6">
-          <div className="mx-auto transition-[width] duration-200" style={{ width: `${z * 100}%`, maxWidth: z > 1 ? 'none' : `${z * 880}px` }}>
+          <div
+            className="mx-auto transition-[width] duration-200"
+            style={{
+              width: `${z * 100}%`,
+              maxWidth: z > 1 ? 'none' : `${z * 880}px`,
+            }}
+          >
             <div className="relative overflow-hidden rounded-lg border border-card-border bg-sheet shadow-window">
               {image ? (
                 <>
                   <img
                     src={image.src}
-                    alt={image.isMock ? t('images.alt.certificate', { title: cert.title }) : t('certifications.issuedBy', { title: cert.title, issuer: cert.issuerFull ?? cert.issuer })}
+                    alt={
+                      image.isMock
+                        ? t('images.alt.certificate', { title: cert.title })
+                        : t('certifications.issuedBy', {
+                            title: cert.title,
+                            issuer: cert.issuerFull ?? cert.issuer,
+                          })
+                    }
                     decoding="async"
                     className="block h-auto w-full"
                   />

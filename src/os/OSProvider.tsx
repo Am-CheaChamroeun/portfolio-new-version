@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useReducer, useRef, type ReactNode } from 'react'
 import { useLayoutMode } from './layout'
-import { ActionsContext, StateContext, createInitialState, reducer, type OSActions } from './store'
+import { ActionsContext, RECENT_KEY, StateContext, createInitialState, reducer, type OSActions } from './store'
 
 /**
- * Central OS state: which app is active, the launcher, and the phone's open app.
- * Two contexts keep re-renders small: components that only trigger actions
- * (icons, menus) subscribe to the stable actions object.
+ * Central OS state: the active app, the launcher, the command palette, the open case study
+ * and the phone's open app. Two contexts keep re-renders small: components that only trigger
+ * actions (icons, menus) subscribe to the stable actions object.
  */
 export function OSProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, createInitialState)
@@ -18,11 +18,43 @@ export function OSProvider({ children }: { children: ReactNode }) {
   const actions = useMemo<OSActions>(
     () => ({
       openApp: (id) => dispatch({ type: 'open', id, mobile: modeRef.current === 'mobile' }),
+      openProject: (slug) =>
+        dispatch({
+          type: 'openProject',
+          slug,
+          mobile: modeRef.current === 'mobile',
+        }),
       setLauncher: (open) => dispatch({ type: 'launcher', open }),
+      setPalette: (open) => dispatch({ type: 'palette', open }),
       closeMobile: () => dispatch({ type: 'mobileHome' }),
     }),
     [],
   )
+
+  // Cmd + K (macOS) / Ctrl + K (Windows, Linux) toggles the command palette
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        dispatch({ type: 'palette', open: !stateRef.current.palette })
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+  const stateRef = useRef(state)
+  useEffect(() => {
+    stateRef.current = state
+  })
+
+  // remember which apps were opened, across visits
+  useEffect(() => {
+    try {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(state.recent))
+    } catch {
+      /* storage unavailable — recents just won't persist */
+    }
+  }, [state.recent])
 
   return (
     <ActionsContext.Provider value={actions}>

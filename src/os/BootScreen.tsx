@@ -42,9 +42,16 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(50% 45% at 50% 45%, rgba(239,255,0,0.10), transparent 70%)' }}
+        style={{
+          background: 'radial-gradient(50% 45% at 50% 45%, rgba(239,255,0,0.10), transparent 70%)',
+        }}
       />
-      <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="relative">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="relative"
+      >
         <OSLogo size={84} className="drop-shadow-[0_0_28px_rgba(239,255,0,0.35)]" />
       </motion.div>
       <p className="relative mt-6 text-lg font-semibold tracking-tight">

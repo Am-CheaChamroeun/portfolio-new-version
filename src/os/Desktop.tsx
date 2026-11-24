@@ -2,6 +2,7 @@ import { AnimatePresence } from 'motion/react'
 import { useCallback, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppLauncher } from './AppLauncher'
+import { CommandPalette } from './CommandPalette'
 import { DesktopIcon } from './DesktopIcon'
 import { DesktopMenu } from './DesktopMenu'
 import { useOSState } from './hooks'
@@ -14,7 +15,7 @@ import { Workspace } from './Workspace'
 /** The full desktop (tablet + desktop): wallpaper, icons, the active app's workspace, taskbar. */
 export function Desktop() {
   const { t } = useTranslation()
-  const { activeApp, launcher } = useOSState()
+  const { activeApp, launcher, palette } = useOSState()
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null)
   const closeMenu = useCallback(() => setMenu(null), [])
 
@@ -43,6 +44,7 @@ export function Desktop() {
       <Taskbar />
 
       <AnimatePresence>{launcher && <AppLauncher key="launcher" />}</AnimatePresence>
+      <AnimatePresence>{palette && <CommandPalette key="palette" />}</AnimatePresence>
       {menu && <DesktopMenu x={menu.x} y={menu.y} onClose={closeMenu} />}
     </main>
   )

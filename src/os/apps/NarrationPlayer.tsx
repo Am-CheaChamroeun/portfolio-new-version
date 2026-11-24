@@ -5,8 +5,8 @@ import { createEngine, type Engine, type NarrationStatus } from '../../lib/narra
 
 /** Bar heights (% of the track) — a fixed, natural-looking waveform. */
 const BARS = [
-  20, 32, 46, 38, 54, 36, 48, 40, 58, 44, 62, 48, 64, 52, 62, 46, 58, 40, 54, 42, 52, 40, 46, 32, 22, 42, 48, 36, 60, 46, 56, 40, 62, 52, 66, 46, 54,
-  38, 46, 36, 28, 36, 30, 48, 56, 46, 62, 58, 44,
+  20, 32, 46, 38, 54, 36, 48, 40, 58, 44, 62, 48, 64, 52, 62, 46, 58, 40, 54, 42, 52, 40, 46, 32, 22, 42, 48, 36, 60, 46, 56, 40, 62, 52, 66, 46, 54, 38, 46,
+  36, 28, 36, 30, 48, 56, 46, 62, 58, 44,
 ]
 
 /**
@@ -109,7 +109,10 @@ export const NarrationPlayer = memo(function NarrationPlayer({ text, lang }: { t
               <span
                 key={i}
                 aria-hidden="true"
-                style={{ height: `${h}%`, animationDelay: `${(i * 53) % 700}ms` }}
+                style={{
+                  height: `${h}%`,
+                  animationDelay: `${(i * 53) % 700}ms`,
+                }}
                 className={`min-w-[2px] max-w-[7px] flex-1 rounded-full transition-colors duration-200 ${
                   done ? 'bg-neon' : head ? 'bg-neon shadow-[0_0_10px_#efff00]' : 'bg-warm/30'
                 } ${playing ? 'animate-wave motion-reduce:animate-none' : ''}`}

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Mock code editor and terminal (placeholder)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14171a"/><stop offset="1" stop-color="#0b0d0f"/></linearGradient>
+    <radialGradient id="glow" cx="30%" cy="40%" r="60%"><stop offset="0" stop-color="#efff00" stop-opacity=".16"/><stop offset="1" stop-color="#efff00" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/><rect width="1200" height="750" fill="url(#glow)"/>
+  <g transform="translate(90 70)">
+    <rect width="1020" height="610" rx="20" fill="#0f1215" stroke="#34383e" stroke-width="2"/>
+    <rect width="1020" height="46" rx="20" fill="#191c20"/><rect y="26" width="1020" height="20" fill="#191c20"/>
+    <circle cx="30" cy="23" r="6" fill="#34383e"/><circle cx="52" cy="23" r="6" fill="#34383e"/><circle cx="74" cy="23" r="6" fill="#34383e"/>
+    <rect x="110" y="10" width="140" height="26" rx="8" fill="#0b0d0f"/><rect x="126" y="20" width="80" height="7" rx="3.5" fill="#efff00" opacity=".8"/>
+    <rect x="262" y="10" width="120" height="26" rx="8" fill="#14171a"/><rect x="278" y="20" width="70" height="7" rx="3.5" fill="#a8adb5" opacity=".5"/>
+    <rect x="0" y="46" width="210" height="564" fill="#12151a"/>
+    <g fill="#a8adb5" opacity=".55"><rect x="24" y="76" width="120" height="8" rx="4"/><rect x="40" y="102" width="100" height="8" rx="4"/><rect x="40" y="128" width="130" height="8" rx="4"/><rect x="24" y="154" width="90" height="8" rx="4"/><rect x="40" y="180" width="110" height="8" rx="4"/></g>
+    <rect x="30" y="98" width="8" height="8" rx="2" fill="#efff00"/>
+    <g transform="translate(236 78)" font-family="ui-monospace,Menlo,monospace" font-size="19">
+      <g fill="#a8adb5" opacity=".4"><text y="0">1</text><text y="30">2</text><text y="60">3</text><text y="90">4</text><text y="120">5</text><text y="150">6</text><text y="180">7</text></g>
+      <g transform="translate(40 0)">
+        <rect y="-16" width="150" height="14" rx="7" fill="#efff00" opacity=".85"/><rect x="170" y="-16" width="120" height="14" rx="7" fill="#f5f5e9" opacity=".55"/>
+        <rect y="14" width="210" height="14" rx="7" fill="#ffd600" opacity=".7"/><rect x="230" y="14" width="160" height="14" rx="7" fill="#f5f5e9" opacity=".45"/>
+        <rect x="30" y="44" width="260" height="14" rx="7" fill="#f5f5e9" opacity=".55"/>
+        <rect x="30" y="74" width="190" height="14" rx="7" fill="#a8adb5" opacity=".5"/><rect x="240" y="74" width="140" height="14" rx="7" fill="#efff00" opacity=".6"/>
+        <rect x="30" y="104" width="300" height="14" rx="7" fill="#f5f5e9" opacity=".45"/>
+        <rect y="134" width="90" height="14" rx="7" fill="#ffd600" opacity=".7"/>
+        <rect y="164" width="170" height="14" rx="7" fill="#efff00" opacity=".6"/>
+      </g>
+    </g>
+    <rect x="210" y="360" width="810" height="250" fill="#0b0d0f"/><rect x="210" y="360" width="810" height="2" fill="#34383e"/>
+    <g font-family="ui-monospace,Menlo,monospace" font-size="20"><text x="240" y="406" fill="#efff00">$</text></g>
+    <rect x="268" y="392" width="190" height="14" rx="7" fill="#f5f5e9" opacity=".7"/>
+    <rect x="240" y="428" width="320" height="12" rx="6" fill="#a8adb5" opacity=".5"/><rect x="240" y="454" width="260" height="12" rx="6" fill="#a8adb5" opacity=".5"/>
+    <rect x="240" y="480" width="360" height="12" rx="6" fill="#efff00" opacity=".55"/><rect x="240" y="506" width="210" height="12" rx="6" fill="#a8adb5" opacity=".5"/>
+    <rect x="240" y="540" width="14" height="22" fill="#efff00"/>
+  </g>
+</svg>

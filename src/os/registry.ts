@@ -1,7 +1,7 @@
-import { Activity, BadgeCheck, FolderKanban, GraduationCap, Layers, MessagesSquare, UserRound, Wrench, type LucideIcon } from 'lucide-react'
+import { Activity, BadgeCheck, FolderKanban, GraduationCap, Layers, MessagesSquare, SquareTerminal, UserRound, Wrench, type LucideIcon } from 'lucide-react'
 import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
 
-export type AppId = 'about' | 'projects' | 'skills' | 'education' | 'certificates' | 'services' | 'monitor' | 'contact'
+export type AppId = 'about' | 'projects' | 'skills' | 'education' | 'certificates' | 'services' | 'monitor' | 'terminal' | 'contact'
 
 export type AppDef = {
   id: AppId
@@ -18,14 +18,51 @@ export type AppDef = {
  * Apps are lazy-loaded, so they cost nothing until first opened.
  */
 export const apps: AppDef[] = [
-  { id: 'about', icon: UserRound, Component: lazy(() => import('./apps/AboutApp')) },
-  { id: 'projects', icon: FolderKanban, Component: lazy(() => import('./apps/ProjectsApp')) },
-  { id: 'skills', icon: Layers, Component: lazy(() => import('./apps/SkillsApp')) },
-  { id: 'education', icon: GraduationCap, Component: lazy(() => import('./apps/EducationApp')) },
-  { id: 'certificates', icon: BadgeCheck, Component: lazy(() => import('./apps/CertificatesApp')) },
-  { id: 'services', icon: Wrench, Component: lazy(() => import('./apps/ServicesApp')) },
-  { id: 'monitor', icon: Activity, Component: lazy(() => import('./apps/MonitorApp')) },
-  { id: 'contact', icon: MessagesSquare, Component: lazy(() => import('./apps/ContactApp')) },
+  {
+    id: 'about',
+    icon: UserRound,
+    Component: lazy(() => import('./apps/AboutApp')),
+  },
+  {
+    id: 'projects',
+    icon: FolderKanban,
+    Component: lazy(() => import('./apps/ProjectsApp')),
+  },
+  {
+    id: 'skills',
+    icon: Layers,
+    Component: lazy(() => import('./apps/SkillsApp')),
+  },
+  {
+    id: 'education',
+    icon: GraduationCap,
+    Component: lazy(() => import('./apps/EducationApp')),
+  },
+  {
+    id: 'certificates',
+    icon: BadgeCheck,
+    Component: lazy(() => import('./apps/CertificatesApp')),
+  },
+  {
+    id: 'services',
+    icon: Wrench,
+    Component: lazy(() => import('./apps/ServicesApp')),
+  },
+  {
+    id: 'monitor',
+    icon: Activity,
+    Component: lazy(() => import('./apps/MonitorApp')),
+  },
+  {
+    id: 'terminal',
+    icon: SquareTerminal,
+    Component: lazy(() => import('./apps/TerminalApp')),
+  },
+  {
+    id: 'contact',
+    icon: MessagesSquare,
+    Component: lazy(() => import('./apps/ContactApp')),
+  },
 ]
 
 export const appById = Object.fromEntries(apps.map((a) => [a.id, a])) as Record<AppId, AppDef>

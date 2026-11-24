@@ -43,7 +43,13 @@ export default function SkillsApp() {
   return (
     <div className="@container flex h-full min-h-0 flex-col">
       <Toolbar>
-        <SearchField value={query} onChange={(e) => setQuery(e.target.value)} label={t('os.skills.searchLabel')} placeholder={t('os.skills.search')} className="w-full @lg:w-60" />
+        <SearchField
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          label={t('os.skills.searchLabel')}
+          placeholder={t('os.skills.search')}
+          className="w-full @lg:w-60"
+        />
         <div role="group" aria-label={t('os.skills.levelFilter')} className="flex flex-wrap gap-1">
           <button type="button" aria-pressed={level === 'all'} onClick={() => setLevel('all')} className={chip(level === 'all')}>
             {t('os.skills.all')}
@@ -62,7 +68,14 @@ export default function SkillsApp() {
           className="flex shrink-0 gap-1 overflow-x-auto border-b border-card-border bg-bg-subtle/50 p-2 @2xl:w-52 @2xl:flex-col @2xl:overflow-y-auto @2xl:border-b-0 @2xl:border-r"
         >
           <Eyebrow className="hidden px-2 pb-1 pt-1 @2xl:block">{t('os.skills.categories')}</Eyebrow>
-          {[{ key: 'all', icon: null, count: total }, ...skillGroups.map((g) => ({ key: g.key, icon: g.icon, count: g.skills.length }))].map((g) => {
+          {[
+            { key: 'all', icon: null, count: total },
+            ...skillGroups.map((g) => ({
+              key: g.key,
+              icon: g.icon,
+              count: g.skills.length,
+            })),
+          ].map((g) => {
             const on = group === g.key
             const Icon = g.icon
             return (
@@ -75,7 +88,11 @@ export default function SkillsApp() {
                   on ? 'bg-graphite text-neon' : 'text-muted hover:bg-fg/10 hover:text-fg'
                 }`}
               >
-                {Icon ? <Icon size={15} strokeWidth={1.7} className="shrink-0" /> : <span className="h-[15px] w-[15px] shrink-0 rounded-sm border border-current opacity-60" />}
+                {Icon ? (
+                  <Icon size={15} strokeWidth={1.7} className="shrink-0" />
+                ) : (
+                  <span className="h-[15px] w-[15px] shrink-0 rounded-sm border border-current opacity-60" />
+                )}
                 <span className="whitespace-nowrap">{g.key === 'all' ? t('os.skills.all') : label(g.key)}</span>
                 <span className={`ml-auto pl-2 font-mono text-[10.5px] ${on ? 'text-steel' : 'text-faint'}`}>{pad(g.count)}</span>
               </button>
@@ -109,13 +126,23 @@ export default function SkillsApp() {
                         <TechIcon name={s.icon} size={18} />
                       </span>
                       <span className="truncate text-[14px] font-medium">{s.name}</span>
-                      <span className="flex gap-[3px]" role="img" aria-label={t('skills.meterAria', { level: s.level, max: SEGMENTS })}>
+                      <span
+                        className="flex gap-[3px]"
+                        role="img"
+                        aria-label={t('skills.meterAria', {
+                          level: s.level,
+                          max: SEGMENTS,
+                        })}
+                      >
                         {Array.from({ length: SEGMENTS }, (_, n) => (
                           <motion.span
                             key={n}
                             initial={{ scaleY: 0.2, opacity: 0 }}
                             animate={{ scaleY: 1, opacity: 1 }}
-                            transition={{ delay: 0.04 * i + 0.018 * n, duration: 0.18 }}
+                            transition={{
+                              delay: 0.04 * i + 0.018 * n,
+                              duration: 0.18,
+                            }}
                             className={`h-3.5 w-[4px] origin-bottom rounded-[1.5px] ${n < s.level ? 'bg-accent shadow-[0_0_6px_-1px_var(--accent)]' : 'bg-fg/12'}`}
                           />
                         ))}

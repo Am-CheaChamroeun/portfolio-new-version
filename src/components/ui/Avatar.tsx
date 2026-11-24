@@ -10,7 +10,9 @@ export function Avatar({ className = '' }: { className?: string }) {
       ) : (
         <span
           className="flex h-full w-full items-center justify-center font-display text-[48cqh] font-semibold leading-none text-neon"
-          style={{ background: 'linear-gradient(135deg, var(--graphite-2), var(--graphite))' }}
+          style={{
+            background: 'linear-gradient(135deg, var(--graphite-2), var(--graphite))',
+          }}
           aria-label={profile.name}
         >
           {profile.initials}

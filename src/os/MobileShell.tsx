@@ -1,4 +1,4 @@
-import { ArrowLeft, House, Moon, Sun } from 'lucide-react'
+import { ArrowLeft, House, Moon, Search, Sun } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Suspense, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,6 +6,8 @@ import { LanguageSwitcher } from '../components/layout/LanguageSwitcher'
 import { profile } from '../data/portfolio'
 import { useTheme } from '../hooks/useTheme'
 import { easeOut } from '../lib/motion'
+import { AppSkeleton } from './apps/shared'
+import { CommandPalette } from './CommandPalette'
 import { useOSActions, useOSState } from './hooks'
 import { OSLogo } from './OSLogo'
 import { appById, apps, dockApps, type AppId } from './registry'
@@ -14,6 +16,7 @@ import { Wallpaper } from './Wallpaper'
 
 function StatusBar() {
   const { t } = useTranslation()
+  const { setPalette } = useOSActions()
   const now = useNow()
   const { theme, toggle } = useTheme()
   const dark = theme === 'dark'
@@ -30,6 +33,15 @@ function StatusBar() {
         {t('os.name')}
       </span>
       <div className="flex items-center">
+        <button
+          type="button"
+          onClick={() => setPalette(true)}
+          aria-label={t('os.palette.label')}
+          aria-haspopup="dialog"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-warm/90 transition-colors hover:bg-warm/10 hover:text-neon"
+        >
+          <Search size={17} />
+        </button>
         <LanguageSwitcher placement="down" align="right" />
         <button
           type="button"
@@ -88,7 +100,7 @@ function Dock({ active }: { active: AppId | null }) {
 export function MobileShell() {
   const { t } = useTranslation()
   const { mobileApp } = useOSState()
-  const { openApp, closeMobile } = useOSActions()
+  const { openApp, closeMobile, setPalette } = useOSActions()
 
   // Browser / hardware Back closes the open app instead of leaving the site.
   useEffect(() => {
@@ -109,6 +121,7 @@ export function MobileShell() {
   }, [mobileApp])
 
   const back = () => (history.state?.osApp ? history.back() : closeMobile())
+  const { palette } = useOSState()
   const def = mobileApp ? appById[mobileApp] : null
 
   return (
@@ -180,16 +193,19 @@ export function MobileShell() {
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-graphite text-neon ring-1 ring-neon/40">
                 <def.icon size={15} strokeWidth={1.9} />
               </span>
-              <h2 className="truncate text-[15px] font-semibold">{t(`os.titles.${mobileApp}`)}</h2>
+              <h2 className="min-w-0 flex-1 truncate text-[15px] font-semibold">{t(`os.titles.${mobileApp}`)}</h2>
+              <button
+                type="button"
+                onClick={() => setPalette(true)}
+                aria-label={t('os.palette.label')}
+                aria-haspopup="dialog"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-fg transition-colors hover:bg-fg/10 hover:text-primary"
+              >
+                <Search size={18} />
+              </button>
             </header>
             <div className="relative min-h-0 flex-1">
-              <Suspense
-                fallback={
-                  <div role="status" className="flex h-full items-center justify-center font-mono text-xs text-faint">
-                    {t('os.window.loading')}
-                  </div>
-                }
-              >
+              <Suspense fallback={<AppSkeleton label={t('os.window.loading')} />}>
                 <def.Component />
               </Suspense>
             </div>
@@ -197,6 +213,7 @@ export function MobileShell() {
           </motion.div>
         )}
       </AnimatePresence>
+      <AnimatePresence>{palette && <CommandPalette key="palette" />}</AnimatePresence>
     </main>
   )
 }

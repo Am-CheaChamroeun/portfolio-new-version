@@ -15,10 +15,19 @@ export type NarrationHooks = {
   onError: () => void
 }
 
-export type Engine = { start: () => void; pause: () => void; resume: () => void; stop: () => void }
+export type Engine = {
+  start: () => void
+  pause: () => void
+  resume: () => void
+  stop: () => void
+}
 
 /** UI language → BCP-47 tag used for voice lookup and online TTS */
-const speechLang: Record<string, string> = { en: 'en', km: 'km', 'zh-CN': 'zh-CN' }
+const speechLang: Record<string, string> = {
+  en: 'en',
+  km: 'km',
+  'zh-CN': 'zh-CN',
+}
 /** rough speaking speed (characters / second), only used when a voice reports no word boundaries */
 const charsPerSecond: Record<string, number> = { en: 14, km: 10, 'zh-CN': 4.5 }
 
@@ -180,6 +189,7 @@ function audioEngine(tracks: Track[], hooks: NarrationHooks): Engine {
   const total = tracks.reduce((n, t) => n + t.weight, 0)
   const audio = new Audio()
   audio.preload = 'auto'
+  audio.setAttribute('referrerpolicy', 'no-referrer')
   let index = 0
   let before = 0
   let started = false
@@ -254,7 +264,10 @@ export async function createEngine(text: string, appLang: string, hooks: Narrati
   if (recorded) return audioEngine([{ url: recorded, weight: 1 }], hooks)
   if (typeof Audio === 'undefined') return null
   return audioEngine(
-    chunkText(text, 180).map((c) => ({ url: onlineTts(c, lang), weight: c.length })),
+    chunkText(text, 180).map((c) => ({
+      url: onlineTts(c, lang),
+      weight: c.length,
+    })),
     hooks,
   )
 }

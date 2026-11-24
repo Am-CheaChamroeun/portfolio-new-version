@@ -1,5 +1,5 @@
 import { Search, X } from 'lucide-react'
-import type { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type InputHTMLAttributes, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TechIcon } from '../../lib/icons'
 import { techIcons, type TechKey } from '../../lib/tech'
@@ -43,9 +43,7 @@ export function Toolbar({ children, className = '' }: { children: ReactNode; cla
 
 /** Bottom status strip, like a file manager's */
 export function StatusBar({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex shrink-0 items-center gap-2 border-t border-card-border bg-titlebar px-3 py-1.5 font-mono text-[11px] text-faint">{children}</div>
-  )
+  return <div className="flex shrink-0 items-center gap-2 border-t border-card-border bg-titlebar px-3 py-1.5 font-mono text-[11px] text-faint">{children}</div>
 }
 
 export function SearchField({ label, className = '', ...props }: { label: string } & InputHTMLAttributes<HTMLInputElement>) {
@@ -62,8 +60,13 @@ export function SearchField({ label, className = '', ...props }: { label: string
       {props.value && (
         <button
           type="button"
-          onClick={() => props.onChange?.({ target: { value: '' } } as ChangeEvent<HTMLInputElement>)}
-          aria-label={t('os.search.clear')} title={t('os.search.clear')}
+          onClick={() =>
+            props.onChange?.({
+              target: { value: '' },
+            } as ChangeEvent<HTMLInputElement>)
+          }
+          aria-label={t('os.search.clear')}
+          title={t('os.search.clear')}
           className="absolute right-1.5 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded text-faint hover:text-fg"
         >
           <X size={12} />
@@ -93,5 +96,62 @@ export function Pill({ children, tone = 'neon' }: { children: ReactNode; tone?: 
       <span className="h-1.5 w-1.5 rounded-full bg-faint" />
       {children}
     </span>
+  )
+}
+
+/** Shimmering placeholder block shown while something is really loading. */
+export const Skeleton = ({ className = '' }: { className?: string }) => <div aria-hidden="true" className={`skeleton ${className}`} />
+
+/** An image that shows a skeleton until it has loaded, then fades in. */
+export function SmartImage({ src, alt, className = '', imgClassName = '' }: { src: string; alt: string; className?: string; imgClassName?: string }) {
+  const [loaded, setLoaded] = useState(false)
+  const ref = useRef<HTMLImageElement>(null)
+  useEffect(() => {
+    if (ref.current?.complete) setLoaded(true) // already in the cache
+  }, [src])
+  return (
+    <div className={`relative ${className}`}>
+      {!loaded && <Skeleton className="absolute inset-0" />}
+      <img
+        ref={ref}
+        src={src}
+        alt={alt}
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        className={`h-full w-full transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
+      />
+    </div>
+  )
+}
+
+/** A slim browser window around a screenshot — a "device mockup" for previews. */
+export function BrowserFrame({ children, label, className = '' }: { children: ReactNode; label?: string; className?: string }) {
+  return (
+    <div className={`overflow-hidden rounded-xl border border-edge bg-graphite shadow-[0_24px_60px_-24px_rgba(0,0,0,0.9)] ${className}`}>
+      <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-edge bg-graphite-2 px-3 py-1.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-edge" />
+        <span className="h-1.5 w-1.5 rounded-full bg-edge" />
+        <span className="h-1.5 w-1.5 rounded-full bg-edge" />
+        {label && <span className="ml-2 min-w-0 flex-1 truncate rounded bg-graphite px-2 py-0.5 font-mono text-[10px] text-steel">{label}</span>}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+/** Loading placeholder for a lazy app — a faint outline of toolbar, list and content. */
+export function AppSkeleton({ label }: { label: string }) {
+  return (
+    <div role="status" aria-label={label} className="flex h-full flex-col gap-3 p-4">
+      <span className="sr-only">{label}</span>
+      <Skeleton className="h-8 w-full rounded-lg" />
+      <div className="grid flex-1 gap-3 @md:grid-cols-3" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))' }}>
+        <Skeleton className="h-32 rounded-xl" />
+        <Skeleton className="h-32 rounded-xl" />
+        <Skeleton className="hidden h-32 rounded-xl sm:block" />
+      </div>
+      <Skeleton className="h-3 w-2/3 rounded" />
+      <Skeleton className="h-3 w-1/2 rounded" />
+    </div>
   )
 }
