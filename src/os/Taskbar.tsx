@@ -7,7 +7,7 @@ import { useTheme } from '../hooks/useTheme'
 import { useOSActions, useOSState } from './hooks'
 import { TASKBAR_H } from './layout'
 import { OSLogo } from './OSLogo'
-import { appById } from './registry'
+import { apps } from './registry'
 import { formatTime, useNow } from './useNow'
 
 function Clock() {
@@ -24,12 +24,12 @@ function Clock() {
 }
 
 /**
- * Bottom taskbar: launcher, running apps (neon = active), then the tray with
- * language, theme, clock and "show desktop". Always dark, like the desktop.
+ * Bottom taskbar: launcher, every app (neon = the active one), then the tray with
+ * language, theme and clock. Always dark, like the desktop.
  */
 export const Taskbar = memo(function Taskbar() {
   const { t } = useTranslation()
-  const { windows, focusedId, launcher } = useOSState()
+  const { activeApp, launcher } = useOSState()
   const actions = useOSActions()
   const { theme, toggle } = useTheme()
   const dark = theme === 'dark'
@@ -56,31 +56,27 @@ export const Taskbar = memo(function Taskbar() {
       <span className="mx-0.5 h-6 w-px bg-edge" aria-hidden="true" />
 
       <ul aria-label={t('os.taskbar.running')} className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto [scrollbar-width:none]">
-        {windows.map((w) => {
-          const def = appById[w.id]
+        {apps.map((def) => {
           const Icon = def.icon
-          const active = focusedId === w.id && !w.minimized
-          const name = t(`os.apps.${w.id}`)
-          const state = t(`os.taskbar.state.${active ? 'active' : w.minimized ? 'minimized' : 'open'}`)
+          const active = activeApp === def.id
+          const name = t(`os.apps.${def.id}`)
           return (
-            <li key={w.id} className="shrink-0">
+            <li key={def.id} className="shrink-0">
               <button
                 type="button"
-                data-task={w.id}
-                onClick={() => actions.taskbarToggle(w.id)}
-                aria-label={t('os.taskbar.item', { app: name, state })}
+                data-task={def.id}
+                onClick={() => actions.openApp(def.id)}
+                aria-label={name}
                 title={name}
-                aria-current={active ? 'true' : undefined}
-                className={`relative flex h-10 items-center gap-2 rounded-lg px-2.5 transition-colors hover:bg-warm/10 ${
-                  active ? 'bg-neon/10 text-neon' : w.minimized ? 'text-steel' : 'text-warm'
-                }`}
+                aria-current={active ? 'page' : undefined}
+                className={`relative flex h-10 items-center gap-2 rounded-lg px-2.5 transition-colors hover:bg-warm/10 ${active ? 'bg-neon/10 text-neon' : 'text-warm/80'}`}
               >
                 <Icon size={18} strokeWidth={1.8} />
-                <span className="hidden max-w-[7.5rem] truncate text-[12.5px] font-medium xl:inline">{name}</span>
+                {active && <span className="hidden max-w-[7.5rem] truncate text-[12.5px] font-medium xl:inline">{name}</span>}
                 <span
                   aria-hidden="true"
                   className={`absolute bottom-0.5 left-1/2 h-[3px] -translate-x-1/2 rounded-full transition-all duration-200 ${
-                    active ? 'w-5 bg-neon shadow-[0_0_8px_#efff00]' : w.minimized ? 'w-1.5 bg-steel/60' : 'w-1.5 bg-warm/70'
+                    active ? 'w-5 bg-neon shadow-[0_0_8px_#efff00]' : 'w-0 bg-transparent'
                   }`}
                 />
               </button>
@@ -101,13 +97,6 @@ export const Taskbar = memo(function Taskbar() {
           {dark ? <Sun size={17} strokeWidth={1.8} /> : <Moon size={17} strokeWidth={1.8} />}
         </button>
         <Clock />
-        <button
-          type="button"
-          onClick={actions.showDesktop}
-          aria-label={t('os.taskbar.showDesktop')}
-          title={t('os.taskbar.showDesktop')}
-          className="ml-1 h-10 w-3.5 rounded-md border-l border-edge transition-colors hover:bg-neon/20 focus-visible:bg-neon/20"
-        />
       </div>
     </nav>
   )

@@ -1,0 +1,5 @@
+Delete these 3 files from your portfolio folder (they are replaced by src/os/Workspace.tsx):
+src/os/AppWindow.tsx
+src/os/WindowManager.tsx
+src/os/WelcomeWidget.tsx
+(src/App.css and src/index.css are also unused and can be deleted.)

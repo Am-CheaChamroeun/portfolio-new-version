@@ -14,17 +14,17 @@ npm run build    # type-check + production build
 
 | Screen | Experience |
 | --- | --- |
-| Desktop (≥ 1024 px) | Icons, welcome widget, draggable / resizable / minimizable / maximizable windows, taskbar, launcher, right-click menu |
-| Tablet (768–1023 px) | Same desktop, windows open full-size, touch-friendly (a single tap opens an icon) |
-| Phone (< 768 px) | Home-screen icon grid, full-screen apps, bottom dock, browser Back closes the app |
+| Desktop (≥ 1024 px) | Icons on the left, the active app filling the main workspace (About Me by default), taskbar, launcher, right-click menu. One click switches apps — no popup windows |
+| Tablet (768–1023 px) | Same desktop and workspace, touch-friendly (a single tap switches app) |
+| Phone (< 768 px) | Full-screen apps (About Me first), home-screen icon grid, bottom dock, browser Back closes the app |
 
 ```
 src/os/
-  registry.ts        ← the app list (icon, default size, lazy component)
-  store.ts           ← central window state (reducer)
-  OSProvider.tsx     ← state + actions (open, focus, minimize, …)
-  AppWindow.tsx      ← one reusable window (drag, resize, controls)
-  WindowManager.tsx  Desktop.tsx  DesktopIcon.tsx  DesktopMenu.tsx
+  registry.ts        ← the app list (icon, lazy component)
+  store.ts           ← central state: the one active app (reducer)
+  OSProvider.tsx     ← state + actions (openApp, launcher)
+  Workspace.tsx      ← renders the active app in the main desktop area
+  Desktop.tsx  DesktopIcon.tsx  DesktopMenu.tsx
   Taskbar.tsx  AppLauncher.tsx  BootScreen.tsx  MobileShell.tsx
   apps/              ← About, Projects, Skills, Education, Certificates, Services, Monitor, Contact
 ```
@@ -34,13 +34,16 @@ src/os/
 2. Register it in `src/os/registry.ts`.
 3. Add `os.apps.<id>` and `os.titles.<id>` to the three files in `src/i18n/locales/`.
 
+## Voice narration
+The About Me app has a play button that reads your bio aloud in the current language (never autoplays). It uses the browser's native voice when one exists, then `public/audio/about-<en|km|zh-CN>.mp3` if you add one, then an online text-to-speech fallback (this is what Khmer uses on most browsers). To make the three MP3s for free with Edge TTS: `pip install edge-tts`, then `python3 scripts/generate-narration.py` (it reads your bio from the translation files; re-run after editing it). Logic: `src/lib/narration.ts`, UI: `src/os/apps/NarrationPlayer.tsx`.
+
 ## Content
 - Language-independent data (names, links, skill levels, images): `src/data/portfolio.ts`
 - All visible text, per language: `src/i18n/locales/{en,km,zh-CN}.json` (the `content` key is your bio, projects, etc.; `os` is the interface)
 - Placeholders in `[SQUARE BRACKETS]` are yours to replace.
 
 ## Theme
-Neon Yellow + Dark Graphite. Every colour is a token in `src/styles/index.css`. The desktop, taskbar and icons stay graphite in both themes; windows switch between dark and light.
+Neon Yellow + Dark Graphite. Every colour is a token in `src/styles/index.css`. The desktop, taskbar and icons stay graphite in both themes; the workspace switches between dark and light.
 
 ## Images
 Illustrations in `src/assets/mock/` are labelled placeholders. Swap them in `src/data/images.ts`, or set real images in `portfolio.ts` (`profile.photo`, `project.image`, `certificate.image`, education `logo`) — a real image always wins. The wallpaper is CSS (`src/os/Wallpaper.tsx`).

@@ -5,18 +5,16 @@ import { AppLauncher } from './AppLauncher'
 import { DesktopIcon } from './DesktopIcon'
 import { DesktopMenu } from './DesktopMenu'
 import { useOSState } from './hooks'
-import { TASKBAR_H, type LayoutMode } from './layout'
-import { apps, type AppId } from './registry'
+import { TASKBAR_H } from './layout'
+import { apps } from './registry'
 import { Taskbar } from './Taskbar'
 import { Wallpaper } from './Wallpaper'
-import { WelcomeWidget } from './WelcomeWidget'
-import { WindowManager } from './WindowManager'
+import { Workspace } from './Workspace'
 
-/** The full desktop (tablet + desktop): wallpaper, icons, welcome card, windows, taskbar. */
-export function Desktop({ mode }: { mode: Exclude<LayoutMode, 'mobile'> }) {
+/** The full desktop (tablet + desktop): wallpaper, icons, the active app's workspace, taskbar. */
+export function Desktop() {
   const { t } = useTranslation()
-  const { windows, launcher } = useOSState()
-  const [selected, setSelected] = useState<AppId | null>(null)
+  const { activeApp, launcher } = useOSState()
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null)
   const closeMenu = useCallback(() => setMenu(null), [])
 
@@ -27,22 +25,21 @@ export function Desktop({ mode }: { mode: Exclude<LayoutMode, 'mobile'> }) {
   }
 
   return (
-    <main
-      aria-label={t('os.desktop.aria')}
-      className="os-chrome fixed inset-0 overflow-hidden"
-      onClick={() => setSelected(null)}
-      onContextMenu={onContextMenu}
-    >
+    <main aria-label={t('os.desktop.aria')} className="os-chrome fixed inset-0 overflow-hidden" onContextMenu={onContextMenu}>
       <Wallpaper />
 
-      <div className="absolute left-3 top-3 flex flex-col flex-wrap content-start gap-1" style={{ bottom: TASKBAR_H + 12 }} role="group" aria-label={t('os.desktop.icons')}>
+      <div
+        className="absolute left-3 top-3 flex flex-col flex-wrap content-start gap-1"
+        style={{ bottom: TASKBAR_H + 12 }}
+        role="group"
+        aria-label={t('os.desktop.icons')}
+      >
         {apps.map((def) => (
-          <DesktopIcon key={def.id} def={def} selected={selected === def.id} running={windows.some((w) => w.id === def.id)} onSelect={setSelected} />
+          <DesktopIcon key={def.id} def={def} active={activeApp === def.id} />
         ))}
       </div>
 
-      <WelcomeWidget />
-      <WindowManager mode={mode} />
+      <Workspace />
       <Taskbar />
 
       <AnimatePresence>{launcher && <AppLauncher key="launcher" />}</AnimatePresence>

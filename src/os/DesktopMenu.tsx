@@ -1,9 +1,9 @@
-import { Check, LayoutGrid, MonitorUp, Moon, Sun, X } from 'lucide-react'
+import { Check, LayoutGrid, Moon, Sun } from 'lucide-react'
 import { useEffect, useRef, type ButtonHTMLAttributes, type KeyboardEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { languages } from '../i18n'
 import { useTheme } from '../hooks/useTheme'
-import { useOSActions, useOSState } from './hooks'
+import { useOSActions } from './hooks'
 
 type Props = { x: number; y: number; onClose: () => void }
 
@@ -21,7 +21,6 @@ const Row = ({ icon, children, ...rest }: { icon: ReactNode; children: ReactNode
 /** Right-click menu for the desktop — every entry does something real. */
 export function DesktopMenu({ x, y, onClose }: Props) {
   const { t, i18n } = useTranslation()
-  const { windows } = useOSState()
   const actions = useOSActions()
   const { theme, toggle } = useTheme()
   const ref = useRef<HTMLDivElement>(null)
@@ -69,12 +68,6 @@ export function DesktopMenu({ x, y, onClose }: Props) {
     >
       <Row icon={<LayoutGrid size={15} />} onClick={run(() => actions.setLauncher(true))}>
         {t('os.menu.launcher')}
-      </Row>
-      <Row icon={<MonitorUp size={15} />} onClick={run(actions.showDesktop)} disabled={windows.every((w) => w.minimized)}>
-        {t('os.menu.showDesktop')}
-      </Row>
-      <Row icon={<X size={15} />} onClick={run(actions.closeAll)} disabled={windows.length === 0}>
-        {t('os.menu.closeAll')}
       </Row>
       <Sep />
       <Row

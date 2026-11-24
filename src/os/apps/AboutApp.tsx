@@ -1,18 +1,20 @@
 import { Download, Mail, Send } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { narrationText } from '../../lib/narration'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { about, profile, socials } from '../../data/portfolio'
 import { GithubIcon, LinkedinIcon, TechIcon, TelegramIcon } from '../../lib/icons'
 import { techIcons, type TechKey } from '../../lib/tech'
 import { useOSActions } from '../hooks'
+import { NarrationPlayer } from './NarrationPlayer'
 import { Eyebrow } from './shared'
 
 const tools: TechKey[] = [...about.orbitInner, ...about.orbitOuter]
 
 /** About Me → a profile app: portrait, bio, personal info, socials and CV. */
 export default function AboutApp() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { openApp } = useOSActions()
   const photo = pickImage(profile.photo, mockImages.profile)
   const paragraphs = t('content.about.paragraphs', { returnObjects: true })
@@ -95,6 +97,9 @@ export default function AboutApp() {
         <div className="space-y-7 p-5 @2xl:overflow-y-auto @2xl:p-7">
           <section>
             <Eyebrow>{t('os.about.bio')}</Eyebrow>
+            <div className="mt-3">
+              <NarrationPlayer key={i18n.language} lang={i18n.language} text={narrationText(paragraphs)} />
+            </div>
             <div className="mt-2 space-y-3 text-[14.5px] leading-7 text-muted">
               {paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>

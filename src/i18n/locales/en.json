@@ -382,7 +382,17 @@
       "toolbox": "Toolbox",
       "links": "Find me online",
       "cv": "Download CV",
-      "hello": "Say hello"
+      "hello": "Say hello",
+      "narration": {
+        "label": "Voice narration of my introduction",
+        "play": "Play narration",
+        "pause": "Pause narration",
+        "resume": "Resume narration",
+        "replay": "Replay narration",
+        "progress": "Narration progress",
+        "loading": "Preparing the voice…",
+        "unavailable": "Voice narration isn't available for this language in your browser right now. Try again, or switch language."
+      }
     },
     "projects": {
       "path": "Projects",

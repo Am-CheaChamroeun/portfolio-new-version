@@ -17,12 +17,9 @@ const subscribe = (notify: () => void) => {
   }
 }
 
-const read = (): LayoutMode => (mqDesktop.matches ? 'desktop' : mqTablet.matches ? 'tablet' : 'mobile')
+export const readLayoutMode = (): LayoutMode => (mqDesktop.matches ? 'desktop' : mqTablet.matches ? 'tablet' : 'mobile')
 
 /** mobile < 768 ≤ tablet < 1024 ≤ desktop */
 export function useLayoutMode() {
-  return useSyncExternalStore(subscribe, read, () => 'desktop' as LayoutMode)
+  return useSyncExternalStore(subscribe, readLayoutMode, () => 'desktop' as LayoutMode)
 }
-
-/** Usable desktop area (everything above the taskbar) */
-export const desktopArea = () => ({ w: window.innerWidth, h: Math.max(240, window.innerHeight - TASKBAR_H) })

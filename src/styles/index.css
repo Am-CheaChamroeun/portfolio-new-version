@@ -314,13 +314,6 @@ html[lang='zh-CN'] {
 }
 
 /* Window geometry animates (maximize / restore) except while it is being dragged */
-@utility win-geom {
-  transition:
-    left 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    top 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-}
 
 @utility cursor-blink {
   animation: blink 1s step-end infinite;
@@ -332,6 +325,21 @@ html[lang='zh-CN'] {
 
 @utility animate-boot {
   animation: boot-bar var(--boot-ms, 1.6s) cubic-bezier(0.45, 0, 0.25, 1) forwards;
+}
+
+@utility animate-wave {
+  animation: wave 0.9s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1);
+  }
 }
 
 @keyframes blink {

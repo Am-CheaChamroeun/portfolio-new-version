@@ -2,8 +2,8 @@ import { Desktop } from './Desktop'
 import { useLayoutMode } from './layout'
 import { MobileShell } from './MobileShell'
 
-/** Picks the shell for the screen size: phone home screen, or the windowed desktop. */
+/** Picks the shell for the screen size: phone home screen, or the desktop with its workspace. */
 export function OS() {
   const mode = useLayoutMode()
-  return mode === 'mobile' ? <MobileShell /> : <Desktop mode={mode} />
+  return mode === 'mobile' ? <MobileShell /> : <Desktop />
 }

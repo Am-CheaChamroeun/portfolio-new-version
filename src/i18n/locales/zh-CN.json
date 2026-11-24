@@ -382,7 +382,17 @@
       "toolbox": "工具箱",
       "links": "在线找到我",
       "cv": "下载简历",
-      "hello": "打个招呼"
+      "hello": "打个招呼",
+      "narration": {
+        "label": "自我介绍语音讲解",
+        "play": "播放讲解",
+        "pause": "暂停讲解",
+        "resume": "继续讲解",
+        "replay": "重新播放讲解",
+        "progress": "讲解进度",
+        "loading": "正在准备语音…",
+        "unavailable": "您的浏览器目前无法朗读该语言。请重试，或切换语言。"
+      }
     },
     "projects": {
       "path": "项目",
