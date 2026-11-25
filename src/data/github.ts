@@ -5,8 +5,8 @@ import { isReal } from '../lib/links'
  * ─────────────────────────────────────────────────────────────
  *  GITHUB ACTIVITY (System Monitor → GitHub)
  *
- *  The username is taken from `socials.github.url` in portfolio.ts as soon as
- *  you replace the [YOUR GITHUB] placeholder — nothing else to configure.
+ *  The username is taken from `socials.github.url` in portfolio.ts (already set —
+ *  nothing else to configure).
  *  (To override it, set `username` below, or VITE_GITHUB_USERNAME at build time.)
  *
  *  Data comes from GitHub's official public REST API, called straight from the

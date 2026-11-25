@@ -126,7 +126,7 @@
       "badgeRole": "Frontend · Full-Stack",
       "preloaderRole": "Frontend Developer • Full-Stack Learner",
       "tagline": "Frontend developer building fast, accessible web apps with React, TypeScript and Next.js — and growing into the backend.",
-      "location": "[YOUR LOCATION]",
+      "location": "Phnom Penh, Cambodia",
       "flightPlan": "[YOUR CURRENT GOAL]",
       "availability": "I'm currently open to new opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.",
       "footerBlurb": "Frontend developer building fast, reliable web experiences.",
@@ -158,7 +158,8 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "data": "APIs & CMS",
-      "tools": "Tools"
+      "tools": "Tools",
+      "databases": "Databases"
     },
     "projects": {
       "featured-project": {

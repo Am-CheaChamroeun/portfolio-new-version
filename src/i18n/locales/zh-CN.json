@@ -126,7 +126,7 @@
       "badgeRole": "前端 · 全栈",
       "preloaderRole": "前端开发工程师 • 正在学习全栈",
       "tagline": "前端开发者，使用 React、TypeScript 和 Next.js 打造快速、无障碍的 Web 应用——同时也在不断拓展后端能力。",
-      "location": "[你的所在地]",
+      "location": "柬埔寨 金边",
       "flightPlan": "[你当前的目标]",
       "availability": "我目前正在寻找新的机会。无论你已有项目构想，还是只想认识一下——我的收件箱随时为你敞开。",
       "footerBlurb": "一名前端开发者，致力于打造快速、可靠的 Web 体验。",
@@ -158,7 +158,8 @@
       "frontend": "前端",
       "backend": "后端",
       "data": "API 与 CMS",
-      "tools": "工具"
+      "tools": "工具",
+      "databases": "数据库"
     },
     "projects": {
       "featured-project": {

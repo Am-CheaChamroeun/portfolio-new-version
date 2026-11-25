@@ -271,6 +271,9 @@ export default function MonitorApp() {
               <div className="relative mx-auto aspect-square w-full max-w-[220px] p-3">
                 <Globe marker={profile.globeMarker} />
               </div>
+              <p className="pb-3 text-center text-[12.5px] font-medium">
+                {profile.locationFlag} {t('content.profile.location')}
+              </p>
             </Panel>
           </div>
         </div>

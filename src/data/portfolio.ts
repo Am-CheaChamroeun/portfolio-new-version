@@ -44,9 +44,9 @@ export const profile = {
   /** Shown in the logo as `${handle}${handleSuffix}` → "roeun.dev" */
   handle: 'roeun',
   handleSuffix: '.dev',
-  locationFlag: '🌏', // e.g. your country's flag emoji
+  locationFlag: '🇰🇭',
   /** [lat, lng] for the marker on the globe — null hides the marker */
-  globeMarker: null as [number, number] | null,
+  globeMarker: [11.5564, 104.9282] as [number, number] | null, // Phnom Penh
   photo: '', // e.g. '/profile.jpg' (portrait, 4:5 works best)
   logo: '', // small round avatar in the header — falls back to `photo`, then initials
   cvUrl: '/cv.pdf', // drop your CV at public/cv.pdf
@@ -56,13 +56,13 @@ export const profile = {
 }
 
 export const socials = {
-  email: '[YOUR EMAIL]',
-  github: { url: 'https://github.com/[YOUR GITHUB]', label: '@[YOUR GITHUB]' },
+  email: 'amcheachamroeun87@gmail.com',
+  github: { url: 'https://github.com/Am-CheaChamroeun', label: '@Am-CheaChamroeun' },
   linkedin: {
-    url: 'https://www.linkedin.com/in/[YOUR LINKEDIN]',
-    label: '/in/[YOUR LINKEDIN]',
+    url: 'https://www.linkedin.com/in/am-cheachamroeun-430406234/',
+    label: '/in/am-cheachamroeun-430406234',
   },
-  telegram: { url: 'https://t.me/[YOUR TELEGRAM]', label: '@[YOUR TELEGRAM]' },
+  telegram: { url: 'https://t.me/Am_Cheachamroeun', label: '@Am_Cheachamroeun' },
 }
 
 /**
@@ -98,7 +98,7 @@ export const terminalCommands = ['$ npm run deploy', 'vite build --mode producti
 export const terminalInfoLines = [3]
 
 export const heroTelemetry = {
-  region: 'EARTH-1',
+  region: 'PHNOM-PENH-KH',
   deploys: 128,
   uptime: '99.98%',
 }
@@ -155,16 +155,20 @@ export const skillGroups: SkillGroup[] = [
     icon: PanelsTopLeft,
     skills: [
       { name: 'React', icon: 'react', level: 11 },
-      { name: 'TypeScript', icon: 'typescript', level: 10 },
+      { name: 'Vue', icon: 'vue', level: 6 }, // TODO: set your own level
+      { name: 'Angular', icon: 'angular', level: 5 }, // TODO: set your own level
       { name: 'Next.js', icon: 'nextjs', level: 10 },
-      { name: 'Vite', icon: 'vite', level: 9 },
+      { name: 'Nuxt.js', icon: 'nuxt', level: 6 }, // TODO: set your own level
+      { name: 'TypeScript', icon: 'typescript', level: 10 },
       { name: 'JavaScript', icon: 'javascript', level: 11 },
+      { name: 'TanStack Query', icon: 'tanstack', level: 7 }, // TODO: set your own level
     ],
   },
   {
     key: 'backend',
     icon: Server,
     skills: [
+      { name: 'Express.js', icon: 'express', level: 7 }, // TODO: set your own level
       { name: 'NestJS', icon: 'nestjs', level: 8 },
       { name: 'Node.js', icon: 'nodejs', level: 8 },
       { name: 'Spring Boot', icon: 'springboot', level: 5 },
@@ -172,11 +176,21 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     key: 'data',
-    icon: Database,
+    icon: Network,
     skills: [
       { name: 'GraphQL', icon: 'graphql', level: 7 },
       { name: 'Headless WordPress', icon: 'wordpress', level: 7 },
+    ],
+  },
+  {
+    key: 'databases',
+    icon: Database,
+    skills: [
       { name: 'PostgreSQL', icon: 'postgresql', level: 6 },
+      { name: 'MySQL', icon: 'mysql', level: 6 }, // TODO: set your own level
+      { name: 'Supabase', icon: 'supabase', level: 6 }, // TODO: set your own level
+      { name: 'Firebase', icon: 'firebase', level: 6 }, // TODO: set your own level
+      { name: 'MongoDB', icon: 'mongodb', level: 6 }, // TODO: set your own level
     ],
   },
   {

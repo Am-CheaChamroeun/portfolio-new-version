@@ -29,16 +29,18 @@ export function projectCategory(p: Project): 'frontend' | 'fullstack' | 'backend
   if (p.category) return p.category
   const tech = p.tech.map((x) => x.toLowerCase())
   if (tech.includes('wordpress')) return 'cms'
-  const back = tech.some((x) => ['nestjs', 'node.js', 'spring boot', 'postgresql', 'docker', 'mongodb', 'mysql'].includes(x))
-  const front = tech.some((x) => ['react', 'next.js', 'vite', 'tailwind'].includes(x))
+  const back = tech.some((x) =>
+    ['nestjs', 'node.js', 'express.js', 'spring boot', 'postgresql', 'docker', 'mongodb', 'mysql', 'supabase', 'firebase'].includes(x),
+  )
+  const front = tech.some((x) => ['react', 'next.js', 'vite', 'tailwind', 'vue', 'angular', 'nuxt.js'].includes(x))
   return back && front ? 'fullstack' : back ? 'backend' : 'frontend'
 }
 
 const layerOf = (name: string): 'client' | 'server' | 'data' | 'infra' => {
   const n = name.toLowerCase()
-  if (['react', 'next.js', 'vite', 'typescript', 'javascript', 'tailwind', 'redux'].includes(n)) return 'client'
-  if (['nestjs', 'node.js', 'spring boot', 'graphql', 'postman'].includes(n)) return 'server'
-  if (['postgresql', 'mongodb', 'mysql', 'wordpress'].includes(n)) return 'data'
+  if (['react', 'next.js', 'vite', 'typescript', 'javascript', 'tailwind', 'redux', 'vue', 'angular', 'nuxt.js', 'tanstack query'].includes(n)) return 'client'
+  if (['nestjs', 'node.js', 'express.js', 'spring boot', 'graphql', 'postman'].includes(n)) return 'server'
+  if (['postgresql', 'mongodb', 'mysql', 'supabase', 'firebase', 'wordpress'].includes(n)) return 'data'
   return 'infra'
 }
 
