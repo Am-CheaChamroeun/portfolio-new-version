@@ -71,8 +71,8 @@ function ProjectCard({
     <div
       className={`group relative flex h-full flex-col rounded-2xl border p-2.5 transition-all duration-200 hover:-translate-y-1 ${
         selected
-          ? 'border-neon/70 bg-glow shadow-[0_0_28px_-10px_rgba(239,255,0,0.55)]'
-          : 'border-card-border bg-sheet hover:border-neon/50 hover:shadow-[0_14px_36px_-16px_rgba(239,255,0,0.4)]'
+          ? 'border-neon/70 bg-glow shadow-[0_0_28px_-10px_rgb(var(--neon-rgb)/0.55)]'
+          : 'border-card-border bg-sheet hover:border-neon/50 hover:shadow-[0_14px_36px_-16px_rgb(var(--neon-rgb)/0.4)]'
       }`}
     >
       <button type="button" onClick={onSelect} aria-pressed={selected} aria-label={p.name} className="rounded-xl text-left">

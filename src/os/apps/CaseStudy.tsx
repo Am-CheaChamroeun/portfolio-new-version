@@ -1,3 +1,4 @@
+import { isReducedMotion } from '../../lib/settings'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Globe, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useMemo, useState, type ReactNode } from 'react'
@@ -142,7 +143,7 @@ export function CaseStudy({
     ['gallery', t('os.projects.study.gallery')],
   ] as const
   const go = (id: string) => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduce = isReducedMotion()
     document.getElementById(`cs-${id}`)?.scrollIntoView({
       behavior: reduce ? 'auto' : 'smooth',
       block: 'start',
@@ -365,7 +366,7 @@ export function CaseStudy({
                 aria-label={t('os.projects.study.viewShot', { n: i + 1 })}
                 title={t('os.projects.study.viewShot', { n: i + 1 })}
                 className={`h-14 w-24 overflow-hidden rounded-lg border bg-graphite transition-all @md:h-16 @md:w-28 ${
-                  i === shot ? 'border-neon shadow-[0_0_16px_-4px_rgba(239,255,0,0.6)]' : 'border-card-border opacity-70 hover:opacity-100'
+                  i === shot ? 'border-neon shadow-[0_0_16px_-4px_rgb(var(--neon-rgb)/0.6)]' : 'border-card-border opacity-70 hover:opacity-100'
                 }`}
               >
                 <img src={g.src} alt="" aria-hidden="true" loading="lazy" className="h-full w-full object-cover object-top" />

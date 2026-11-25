@@ -1,3 +1,4 @@
+import { isReducedMotion } from '../../lib/settings'
 import createGlobe from 'cobe'
 import { useEffect, useRef, useState } from 'react'
 import { useIsDark } from '../../hooks/useIsDark'
@@ -14,7 +15,7 @@ export function Globe({ marker, className = '' }: Props) {
     const canvas = canvasRef.current
     if (!canvas) return
     const size = canvas.offsetWidth || 200
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduce = isReducedMotion()
     let phi = marker ? ((-marker[1] - 90) * Math.PI) / 180 : 0
     const globe = createGlobe(canvas, {
       devicePixelRatio: Math.min(2, window.devicePixelRatio || 1),

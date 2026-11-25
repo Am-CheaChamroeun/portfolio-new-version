@@ -1,7 +1,19 @@
-import { Activity, BadgeCheck, FolderKanban, GraduationCap, Layers, MessagesSquare, SquareTerminal, UserRound, Wrench, type LucideIcon } from 'lucide-react'
+import {
+  Activity,
+  BadgeCheck,
+  FolderKanban,
+  GraduationCap,
+  Layers,
+  MessagesSquare,
+  Settings,
+  SquareTerminal,
+  UserRound,
+  Wrench,
+  type LucideIcon,
+} from 'lucide-react'
 import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
 
-export type AppId = 'about' | 'projects' | 'skills' | 'education' | 'certificates' | 'services' | 'monitor' | 'terminal' | 'contact'
+export type AppId = 'about' | 'projects' | 'skills' | 'education' | 'certificates' | 'services' | 'monitor' | 'terminal' | 'contact' | 'settings'
 
 export type AppDef = {
   id: AppId
@@ -62,6 +74,11 @@ export const apps: AppDef[] = [
     id: 'contact',
     icon: MessagesSquare,
     Component: lazy(() => import('./apps/ContactApp')),
+  },
+  {
+    id: 'settings',
+    icon: Settings,
+    Component: lazy(() => import('./apps/SettingsApp')),
   },
 ]
 

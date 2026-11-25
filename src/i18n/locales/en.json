@@ -236,7 +236,8 @@
       "services": "Specializations",
       "monitor": "System Monitor",
       "contact": "Contact",
-      "terminal": "Terminal"
+      "terminal": "Terminal",
+      "settings": "Settings"
     },
     "titles": {
       "about": "Profile",
@@ -247,7 +248,8 @@
       "services": "Developer Tools",
       "monitor": "System Monitor",
       "contact": "Messages",
-      "terminal": "Terminal"
+      "terminal": "Terminal",
+      "settings": "System Settings"
     },
     "window": {
       "minimize": "Minimize",
@@ -454,7 +456,69 @@
       "log": "Deploy log",
       "globe": "Location",
       "live": "live",
-      "system": "System"
+      "system": "System",
+      "tabs": {
+        "label": "Monitor sections",
+        "overview": "Overview",
+        "github": "GitHub"
+      },
+      "github": {
+        "title": "GitHub activity",
+        "loading": "Loading GitHub data",
+        "notConfigured": "GitHub username not set yet",
+        "notConfiguredHint": "Replace [YOUR GITHUB] in src/data/portfolio.ts (socials.github) and this panel fills itself with your real public data.",
+        "openProfile": "Open GitHub profile",
+        "viewProfile": "View profile",
+        "repos": "Repositories",
+        "followers": "Followers",
+        "following": "Following",
+        "updated": "Updated {{when}}",
+        "refresh": "Refresh",
+        "refreshing": "Refreshing…",
+        "stale": "Showing saved data from {{when}} — GitHub could not be reached just now.",
+        "rate": "GitHub's rate limit was reached, so this data may be out of date. It refreshes automatically later.",
+        "rateNone": "GitHub's rate limit was reached and there is no saved copy yet. Please try again later.",
+        "network": "GitHub could not be reached, and there is no saved copy yet.",
+        "notfound": "That GitHub user was not found. Check the username in portfolio.ts.",
+        "heat": {
+          "title": "Contribution activity",
+          "events": "Public events from the last ~90 days. GitHub's full yearly calendar needs a private token, so it is not shown here.",
+          "calendar": "Contributions over the last year.",
+          "total_one": "{{count}} contribution in this period",
+          "total_other": "{{count}} contributions in this period",
+          "less": "Less",
+          "more": "More",
+          "day_one": "{{count}} contribution on {{date}}",
+          "day_other": "{{count}} contributions on {{date}}",
+          "none": "No activity on {{date}}",
+          "hint": "Hover or tap a day for details.",
+          "aria": "Activity heatmap, {{total}} in this period"
+        },
+        "langs": {
+          "title": "Languages",
+          "note": "Share of public repositories by primary language. This is not coding time or a measure of skill.",
+          "repos_one": "{{count}} repo",
+          "repos_other": "{{count}} repos",
+          "none": "No language data available."
+        },
+        "reposTitle": "Repositories",
+        "reposEmpty": "No public repositories to show yet.",
+        "noDescription": "No description",
+        "stars": "Stars",
+        "forks": "Forks",
+        "pushed": "Updated {{when}}",
+        "open": "Open {{name}} on GitHub",
+        "activity": {
+          "title": "Recent activity",
+          "empty": "No recent public activity.",
+          "push_one": "Pushed {{count}} commit to {{repo}}",
+          "push_other": "Pushed {{count}} commits to {{repo}}",
+          "pr": "Pull request {{action}} in {{repo}}",
+          "create": "Created repository {{repo}}",
+          "release": "Released {{tag}} in {{repo}}",
+          "fork": "Forked {{repo}}"
+        }
+      }
     },
     "contact": {
       "inbox": "Inbox",
@@ -565,6 +629,66 @@
         "themeValue": "Neon Yellow / Dark Graphite",
         "uptimeValue": "{{m}} min {{s}} s"
       }
+    },
+    "settings": {
+      "subtitle": "Make DeveloperOS yours. Changes apply instantly and are saved in this browser.",
+      "nav": "Settings categories",
+      "cat": {
+        "appearance": "Appearance",
+        "language": "Language",
+        "animation": "Animation",
+        "sound": "Sound",
+        "reset": "Reset"
+      },
+      "wallpaper": {
+        "label": "Wallpaper",
+        "hint": "Choose the desktop background. All wallpapers are lightweight and static.",
+        "grid": "Technical Grid",
+        "wave": "Neon Wave",
+        "geometric": "Geometric",
+        "topo": "Topographic",
+        "selected": "Selected"
+      },
+      "accent": {
+        "label": "Accent colour",
+        "hint": "Recolours buttons, icons, highlights and focus rings. Logos and project images keep their own colours.",
+        "yellow": "Neon Yellow",
+        "blue": "Electric Blue",
+        "emerald": "Emerald Green",
+        "purple": "Neon Purple",
+        "orange": "Sunset Orange",
+        "white": "Minimal White",
+        "default": "Default"
+      },
+      "language": {
+        "label": "Interface language",
+        "hint": "The same language used everywhere on the site, including the About Me narration."
+      },
+      "motion": {
+        "label": "Animations",
+        "hint": "Full animations feel lively; reduced animations remove movement and transitions.",
+        "system": "Match system",
+        "full": "Full",
+        "reduced": "Reduced",
+        "systemNow": "Your system currently prefers {{value}} motion.",
+        "less": "reduced",
+        "more": "full"
+      },
+      "sound": {
+        "label": "Interaction sounds",
+        "hint": "Soft sounds when switching apps, pressing buttons, opening search and finishing terminal commands. Off by default; nothing ever plays on its own.",
+        "toggle": "Enable interaction sounds",
+        "test": "Play a test sound"
+      },
+      "reset": {
+        "label": "Restore defaults",
+        "hint": "Resets wallpaper, accent colour, animations, sound and language to their defaults.",
+        "button": "Restore default settings",
+        "done": "Settings restored to defaults."
+      },
+      "preview": "Preview {{name}}",
+      "on": "On",
+      "off": "Off"
     }
   }
 }

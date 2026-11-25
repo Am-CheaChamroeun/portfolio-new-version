@@ -82,7 +82,7 @@ export const Taskbar = memo(function Taskbar() {
                     layoutId="dock-indicator"
                     aria-hidden="true"
                     transition={{ type: 'spring', stiffness: 520, damping: 38 }}
-                    className="absolute bottom-0.5 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-neon shadow-[0_0_8px_#efff00]"
+                    className="absolute bottom-0.5 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-neon shadow-[0_0_8px_var(--neon)]"
                   />
                 )}
               </button>

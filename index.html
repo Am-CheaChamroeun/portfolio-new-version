@@ -23,6 +23,17 @@
           document.documentElement.style.colorScheme = 'light'
         }
       } catch (e) {}
+      // Saved Settings (accent, wallpaper, motion) — applied before first paint too.
+      try {
+        const el = document.documentElement
+        const prefs = JSON.parse(localStorage.getItem('devos-settings') || 'null') || {}
+        const accents = ['yellow', 'blue', 'emerald', 'purple', 'orange', 'white']
+        const walls = ['grid', 'wave', 'geometric', 'topo']
+        el.dataset.accent = accents.indexOf(prefs.accent) > -1 ? prefs.accent : 'yellow'
+        el.dataset.wallpaper = walls.indexOf(prefs.wallpaper) > -1 ? prefs.wallpaper : 'grid'
+        const os = matchMedia('(prefers-reduced-motion: reduce)').matches
+        el.dataset.motion = prefs.motion === 'reduced' || (prefs.motion !== 'full' && os) ? 'reduced' : 'full'
+      } catch (e) {}
     </script>
   </head>
   <body class="antialiased">

@@ -1,3 +1,4 @@
+import { isReducedMotion } from '../lib/settings'
 import { useCallback, useSyncExternalStore } from 'react'
 
 type Theme = 'dark' | 'light'
@@ -31,7 +32,7 @@ export function useTheme() {
 
   const toggle = useCallback((event?: { clientX: number; clientY: number }) => {
     const next: Theme = read() === 'dark' ? 'light' : 'dark'
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduce = isReducedMotion()
     if (!document.startViewTransition || reduce || !event) {
       apply(next)
       return

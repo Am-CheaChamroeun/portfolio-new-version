@@ -42,6 +42,22 @@ The About Me app has a play button that reads your bio aloud in the current lang
 - All visible text, per language: `src/i18n/locales/{en,km,zh-CN}.json` (the `content` key is your bio, projects, etc.; `os` is the interface)
 - Placeholders in `[SQUARE BRACKETS]` are yours to replace.
 
+## Settings (System Settings app)
+
+Visitors can change the wallpaper (Technical Grid, Neon Wave, Geometric, Topographic), the accent colour,
+the language, animations (match system / full / reduced) and optional interaction sounds (off by default).
+Choices are saved in `localStorage` (`devos-settings`) and applied before first paint by a small script in
+`index.html`. The accent colours live in `src/styles/index.css` (`html[data-accent='…']`); the logic is in
+`src/lib/settings.ts`; sounds are synthesised in `src/lib/sound.ts` (no audio files).
+
+## GitHub activity (System Monitor → GitHub)
+
+Set your real GitHub URL in `socials.github` (`src/data/portfolio.ts`); the username is read from it.
+Data comes from GitHub's public REST API (no token, nothing secret in the bundle), cached for an hour.
+GitHub's official API has no contribution calendar without a private token, so the heatmap shows your real
+public events from the last ~90 days. For the full year, host a small server-side proxy and put its URL in
+`githubConfig.contributionsUrl` (`src/data/github.ts`). Never put a token in the frontend.
+
 ## Theme
 Neon Yellow + Dark Graphite. Every colour is a token in `src/styles/index.css`. The desktop, taskbar and icons stay graphite in both themes; the workspace switches between dark and light.
 

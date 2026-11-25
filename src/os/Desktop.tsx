@@ -30,7 +30,7 @@ export function Desktop() {
       <Wallpaper />
 
       <div
-        className="absolute left-3 top-3 flex flex-col flex-wrap content-start gap-1"
+        className="absolute left-3 top-3 z-[5] flex flex-col justify-between gap-1 overflow-y-auto [scrollbar-width:none]"
         style={{ bottom: TASKBAR_H + 12 }}
         role="group"
         aria-label={t('os.desktop.icons')}

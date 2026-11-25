@@ -1,10 +1,13 @@
+import { isReducedMotion } from '../../lib/settings'
 import { animate } from 'motion/react'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GithubIcon } from '../../lib/icons'
 import { Globe } from '../../components/effects/Globe'
 import { heroTelemetry, profile, skillGroups, stats, terminalCommands, terminalInfoLines } from '../../data/portfolio'
 import { useInterval } from '../../hooks/useInterval'
 import { Eyebrow } from './shared'
+import GithubActivity from './GithubActivity'
 
 const STARTED = Date.now()
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -89,7 +92,7 @@ function DeployLog() {
 
   useEffect(() => {
     setShown(lines.map((l) => ({ ...l, typing: false })))
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (isReducedMotion()) return
     let cancelled = false
     ;(async () => {
       await sleep(500)
@@ -165,85 +168,113 @@ export default function MonitorApp() {
     return () => cancelAnimationFrame(id)
   }, [])
 
+  const [tab, setTab] = useState<'overview' | 'github'>('overview')
+
   return (
     <div className="@container h-full overflow-y-auto p-4">
-      <Eyebrow className="mb-2">{t('os.monitor.metrics')}</Eyebrow>
-      <ul className="grid grid-cols-2 gap-2.5 @2xl:grid-cols-4">
-        {stats.map((s) => (
-          <li key={s.id} className="rounded-xl border border-card-border bg-bg-subtle/60 px-4 py-3.5">
-            <p className="text-3xl font-semibold tracking-tight @2xl:text-4xl">
-              <Counter value={s.value} suffix={s.suffix} />
-            </p>
-            <p className="mt-1 text-[12px] text-muted">{t(`content.stats.${s.id}` as 'content.stats.projects')}</p>
-            <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-fg/10" aria-hidden="true">
-              <div
-                className="h-full origin-left rounded-full bg-accent transition-transform duration-[1400ms] ease-out"
-                style={{ transform: `scaleX(${grow ? 1 : 0})` }}
-              />
-            </div>
-          </li>
+      <div role="tablist" aria-label={t('os.monitor.tabs.label')} className="mb-4 inline-flex rounded-lg border border-card-border bg-bg-subtle p-0.5">
+        {(['overview', 'github'] as const).map((id) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            id={`mon-tab-${id}`}
+            aria-selected={tab === id}
+            aria-controls={`mon-panel-${id}`}
+            data-monitor-tab={id}
+            onClick={() => setTab(id)}
+            className={`inline-flex items-center gap-1.5 rounded-md px-3.5 py-1.5 text-[12.5px] font-medium transition-colors ${tab === id ? 'bg-graphite text-neon' : 'text-muted hover:text-fg'}`}
+          >
+            {id === 'github' && <GithubIcon size={13} />}
+            {t(`os.monitor.tabs.${id}`)}
+          </button>
         ))}
-      </ul>
-
-      <div className="mt-4 grid gap-3 @3xl:grid-cols-[1.3fr_1fr]">
-        <Panel title={t('os.monitor.skillLoad')}>
-          <div className="flex items-center gap-5 p-4">
-            <div className="relative shrink-0 text-fg">
-              <Gauge percent={overall} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-lg font-semibold tabular-nums">{overall}%</span>
-                <span className="text-[9.5px] uppercase tracking-wider text-faint">{t('os.monitor.overall')}</span>
-              </div>
-            </div>
-            <ul className="min-w-0 flex-1 space-y-2.5">
-              {load.map((g) => (
-                <li key={g.key}>
-                  <div className="mb-1 flex justify-between text-[12px]">
-                    <span className="truncate font-medium">{t(`content.skills.${g.key}` as 'content.skills.frontend')}</span>
-                    <span className="font-mono text-faint">{g.percent}%</span>
-                  </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-fg/10">
-                    <div
-                      className="h-full origin-left rounded-full bg-accent shadow-[0_0_8px_-1px_var(--accent)] transition-transform duration-[1200ms] ease-out"
-                      style={{
-                        width: `${g.percent}%`,
-                        transform: `scaleX(${grow ? 1 : 0})`,
-                      }}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Panel>
-
-        <Panel title={t('os.monitor.system')}>
-          <dl className="grid grid-cols-2 gap-px bg-card-border">
-            {[
-              [t('os.monitor.session'), <SessionClock key="s" />],
-              [t('os.monitor.region'), heroTelemetry.region],
-              [t('os.monitor.deploys'), String(heroTelemetry.deploys)],
-              [t('os.monitor.uptime'), heroTelemetry.uptime],
-            ].map(([k, v], i) => (
-              <div key={i} className="bg-sheet px-3.5 py-3">
-                <dt className="truncate text-[11px] text-faint">{k}</dt>
-                <dd className="mt-0.5 font-mono text-[15px] font-medium">{v}</dd>
-              </div>
+      </div>
+      {tab === 'github' ? (
+        <div role="tabpanel" id="mon-panel-github" aria-labelledby="mon-tab-github">
+          <GithubActivity />
+        </div>
+      ) : (
+        <div role="tabpanel" id="mon-panel-overview" aria-labelledby="mon-tab-overview">
+          <Eyebrow className="mb-2">{t('os.monitor.metrics')}</Eyebrow>
+          <ul className="grid grid-cols-2 gap-2.5 @2xl:grid-cols-4">
+            {stats.map((s) => (
+              <li key={s.id} className="rounded-xl border border-card-border bg-bg-subtle/60 px-4 py-3.5">
+                <p className="text-3xl font-semibold tracking-tight @2xl:text-4xl">
+                  <Counter value={s.value} suffix={s.suffix} />
+                </p>
+                <p className="mt-1 text-[12px] text-muted">{t(`content.stats.${s.id}` as 'content.stats.projects')}</p>
+                <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-fg/10" aria-hidden="true">
+                  <div
+                    className="h-full origin-left rounded-full bg-accent transition-transform duration-[1400ms] ease-out"
+                    style={{ transform: `scaleX(${grow ? 1 : 0})` }}
+                  />
+                </div>
+              </li>
             ))}
-          </dl>
-        </Panel>
-      </div>
+          </ul>
 
-      <div className="mt-3 grid gap-3 @3xl:grid-cols-[1.3fr_1fr]">
-        <Panel title={t('os.monitor.log')}>
-          <DeployLog />
-        </Panel>
-        <Panel title={t('os.monitor.globe')}>
-          <div className="relative mx-auto aspect-square w-full max-w-[220px] p-3">
-            <Globe marker={profile.globeMarker} />
+          <div className="mt-4 grid gap-3 @3xl:grid-cols-[1.3fr_1fr]">
+            <Panel title={t('os.monitor.skillLoad')}>
+              <div className="flex items-center gap-5 p-4">
+                <div className="relative shrink-0 text-fg">
+                  <Gauge percent={overall} />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-lg font-semibold tabular-nums">{overall}%</span>
+                    <span className="text-[9.5px] uppercase tracking-wider text-faint">{t('os.monitor.overall')}</span>
+                  </div>
+                </div>
+                <ul className="min-w-0 flex-1 space-y-2.5">
+                  {load.map((g) => (
+                    <li key={g.key}>
+                      <div className="mb-1 flex justify-between text-[12px]">
+                        <span className="truncate font-medium">{t(`content.skills.${g.key}` as 'content.skills.frontend')}</span>
+                        <span className="font-mono text-faint">{g.percent}%</span>
+                      </div>
+                      <div className="h-1.5 overflow-hidden rounded-full bg-fg/10">
+                        <div
+                          className="h-full origin-left rounded-full bg-accent shadow-[0_0_8px_-1px_var(--accent)] transition-transform duration-[1200ms] ease-out"
+                          style={{
+                            width: `${g.percent}%`,
+                            transform: `scaleX(${grow ? 1 : 0})`,
+                          }}
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Panel>
+
+            <Panel title={t('os.monitor.system')}>
+              <dl className="grid grid-cols-2 gap-px bg-card-border">
+                {[
+                  [t('os.monitor.session'), <SessionClock key="s" />],
+                  [t('os.monitor.region'), heroTelemetry.region],
+                  [t('os.monitor.deploys'), String(heroTelemetry.deploys)],
+                  [t('os.monitor.uptime'), heroTelemetry.uptime],
+                ].map(([k, v], i) => (
+                  <div key={i} className="bg-sheet px-3.5 py-3">
+                    <dt className="truncate text-[11px] text-faint">{k}</dt>
+                    <dd className="mt-0.5 font-mono text-[15px] font-medium">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Panel>
           </div>
-        </Panel>
-      </div>
+
+          <div className="mt-3 grid gap-3 @3xl:grid-cols-[1.3fr_1fr]">
+            <Panel title={t('os.monitor.log')}>
+              <DeployLog />
+            </Panel>
+            <Panel title={t('os.monitor.globe')}>
+              <div className="relative mx-auto aspect-square w-full max-w-[220px] p-3">
+                <Globe marker={profile.globeMarker} />
+              </div>
+            </Panel>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

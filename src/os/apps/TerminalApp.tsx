@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent }
 import { useTranslation } from 'react-i18next'
 import { profile } from '../../data/portfolio'
 import { useOSActions } from '../hooks'
+import { playSound } from '../../lib/sound'
 import { COMMANDS, runCommand, type Line } from '../terminal'
 
 const LOGO = String.raw` ____  _______     __   ___  ____
@@ -97,6 +98,7 @@ export default function TerminalApp() {
         result.after?.().then((more) => more.length && append(id, more))
       }
       result.effect?.()
+      playSound('done')
     },
     [tr, list, i18n.language, openApp, append],
   )
@@ -232,7 +234,7 @@ export default function TerminalApp() {
     <div className="os-chrome @container flex h-full min-h-0 flex-col bg-graphite font-mono text-[13px] leading-[1.7] text-warm">
       {/* minimal header — no window controls */}
       <div className="flex shrink-0 items-center gap-2 border-b border-edge bg-graphite-2/70 px-4 py-2 text-[12px] text-steel">
-        <span className="h-1.5 w-1.5 rounded-full bg-neon shadow-[0_0_8px_#efff00]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-neon shadow-[0_0_8px_var(--neon)]" />
         <span className="truncate">
           {prompt}
           <span className="text-steel/60">@developeros</span>: ~

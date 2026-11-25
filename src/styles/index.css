@@ -10,11 +10,60 @@
  * Brand palette: Graphite #0B0D0F · Graphite 2 #191C20 · Neon #EFFF00
  *                Gold #FFD600 · Warm White #F5F5E9 · Steel #A8ADB5 · Edge #34383E
  */
+
+/*
+ * Accent colours (Settings → Appearance). <html data-accent="…"> swaps these five tokens;
+ * everything else — buttons, icons, borders, focus rings, glows — reads them, so the whole
+ * interface follows. Neon Yellow is the default brand identity.
+ */
+:root {
+  --neon: #efff00; /* the accent on dark surfaces */
+  --neon-hover: #ffd600;
+  --neon-rgb: 239 255 0;
+  --on-neon: #0b0d0f; /* text on an accent-filled surface */
+  --acc-l-primary: #5e5600; /* readable accent text on light windows */
+  --acc-l-accent: #b8a400; /* decorative accent on light windows */
+}
+html[data-accent='blue'] {
+  --neon: #2d9cff;
+  --neon-hover: #6cc0ff;
+  --neon-rgb: 45 156 255;
+  --acc-l-primary: #0b4f99;
+  --acc-l-accent: #1f7ad6;
+}
+html[data-accent='emerald'] {
+  --neon: #2ee59d;
+  --neon-hover: #6ef0be;
+  --neon-rgb: 46 229 157;
+  --acc-l-primary: #0a6b47;
+  --acc-l-accent: #12a56f;
+}
+html[data-accent='purple'] {
+  --neon: #b36bff;
+  --neon-hover: #cf9aff;
+  --neon-rgb: 179 107 255;
+  --acc-l-primary: #5b21b6;
+  --acc-l-accent: #8b3df0;
+}
+html[data-accent='orange'] {
+  --neon: #ff8a2b;
+  --neon-hover: #ffb066;
+  --neon-rgb: 255 138 43;
+  --acc-l-primary: #9a4300;
+  --acc-l-accent: #e06a00;
+}
+html[data-accent='white'] {
+  --neon: #ffffff;
+  --neon-hover: #d4d6da;
+  --neon-rgb: 255 255 255;
+  --acc-l-primary: #30343a;
+  --acc-l-accent: #6b7078;
+}
+
 :root {
   --graphite: #0b0d0f;
   --graphite-2: #191c20;
-  --neon: #efff00;
-  --gold: #ffd600;
+  --gold: var(--neon-hover);
   --warm: #f5f5e9;
   --steel: #a8adb5;
   --edge: #34383e;
@@ -28,20 +77,20 @@
   --text: #0b0d0f;
   --text-muted: #4a4e55;
   --text-faint: #63676d;
-  --primary: #5e5600; /* readable olive-gold for text/icons on light windows */
+  --primary: var(--acc-l-primary);
   --primary-hover: #0b0d0f;
-  --primary-glow: rgba(239, 255, 0, 0.35);
-  --accent: #b8a400; /* decorative dots, underlines, meters */
-  --highlight: rgba(239, 255, 0, 0.85); /* highlighter-pen marks */
+  --primary-glow: rgb(var(--neon-rgb) / 0.35);
+  --accent: var(--acc-l-accent);
+  --highlight: rgb(var(--neon-rgb) / 0.85); /* highlighter-pen marks */
   --cta: #0b0d0f; /* filled buttons */
   --cta-hover: #2a2e33;
-  --on-cta: #efff00;
+  --on-cta: var(--neon);
   --focus: #0b0d0f;
   --card: #fbfbf4;
   --card-border: #d9d9c8;
   --grid-line: rgba(11, 13, 15, 0.055);
   --rule: rgba(11, 13, 15, 0.1);
-  --margin-line: rgba(201, 180, 0, 0.6);
+  --margin-line: color-mix(in srgb, var(--acc-l-accent) 60%, transparent);
   --sheet: #fbfbf4; /* window surface */
   --titlebar: #ececdd;
   --shadow-window: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 24px 60px -18px rgba(0, 0, 0, 0.55);
@@ -58,24 +107,24 @@
   --text: #f5f5e9;
   --text-muted: #a8adb5;
   --text-faint: #868b93;
-  --primary: #efff00;
-  --primary-hover: #ffd600;
-  --primary-glow: rgba(239, 255, 0, 0.12);
-  --accent: #efff00;
-  --highlight: rgba(239, 255, 0, 0.22);
-  --cta: #efff00;
-  --cta-hover: #ffd600;
-  --on-cta: #0b0d0f;
-  --focus: #efff00;
+  --primary: var(--neon);
+  --primary-hover: var(--neon-hover);
+  --primary-glow: rgb(var(--neon-rgb) / 0.12);
+  --accent: var(--neon);
+  --highlight: rgb(var(--neon-rgb) / 0.22);
+  --cta: var(--neon);
+  --cta-hover: var(--neon-hover);
+  --on-cta: var(--on-neon);
+  --focus: var(--neon);
   --card: #191c20;
   --card-border: #34383e;
   --grid-line: rgba(245, 245, 233, 0.04);
   --rule: rgba(245, 245, 233, 0.07);
-  --margin-line: rgba(239, 255, 0, 0.35);
+  --margin-line: rgb(var(--neon-rgb) / 0.35);
   --sheet: #191c20;
   --titlebar: #14171a;
   --shadow-window: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
-  --shadow-window-active: 0 34px 90px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(239, 255, 0, 0.22), 0 0 50px -20px rgba(239, 255, 0, 0.35);
+  --shadow-window-active: 0 34px 90px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgb(var(--neon-rgb) / 0.22), 0 0 50px -20px rgb(var(--neon-rgb) / 0.35);
 }
 
 @theme inline {
@@ -104,8 +153,8 @@
      such as the hero, specializations band and footer */
   --color-graphite: #0b0d0f;
   --color-graphite-2: #191c20;
-  --color-neon: #efff00;
-  --color-gold: #ffd600;
+  --color-neon: var(--neon);
+  --color-gold: var(--neon-hover);
   --color-warm: #f5f5e9;
   --color-steel: #a8adb5;
   --color-edge: #34383e;
@@ -113,8 +162,8 @@
 
 /* Subtle neon glow — used sparingly on key elements only */
 @theme {
-  --shadow-neon: 0 0 0 1px rgba(239, 255, 0, 0.35), 0 0 22px -4px rgba(239, 255, 0, 0.35);
-  --shadow-neon-sm: 0 0 14px -4px rgba(239, 255, 0, 0.45);
+  --shadow-neon: 0 0 0 1px rgb(var(--neon-rgb) / 0.35), 0 0 22px -4px rgb(var(--neon-rgb) / 0.35);
+  --shadow-neon-sm: 0 0 14px -4px rgb(var(--neon-rgb) / 0.45);
 }
 
 /* Fonts are a separate (non-inline) theme block so utilities read the CSS
@@ -212,7 +261,7 @@ html[lang='zh-CN'] {
 
   ::selection {
     background: var(--neon);
-    color: var(--graphite);
+    color: var(--on-neon);
   }
 
   :focus-visible {
@@ -368,15 +417,14 @@ html[lang='zh-CN'] {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
+/* Reduced motion — set by Settings, or by the OS preference when Settings says "match system" */
+html[data-motion='reduced'] *,
+html[data-motion='reduced'] ::before,
+html[data-motion='reduced'] ::after {
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
 }
 
 /* ── terminal ── */
@@ -397,15 +445,13 @@ html[lang='zh-CN'] {
     transform: none;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .term-line {
-    animation: none;
-  }
+html[data-motion='reduced'] .term-line {
+  animation: none;
 }
 
 /* ── skeleton loading ── */
 .skeleton {
-  background: linear-gradient(100deg, rgba(128, 128, 128, 0.1) 30%, rgba(239, 255, 0, 0.12) 50%, rgba(128, 128, 128, 0.1) 70%);
+  background: linear-gradient(100deg, rgba(128, 128, 128, 0.1) 30%, rgb(var(--neon-rgb) / 0.12) 50%, rgba(128, 128, 128, 0.1) 70%);
   background-size: 220% 100%;
   animation: skeleton 1.3s ease-in-out infinite;
 }
@@ -417,10 +463,8 @@ html[lang='zh-CN'] {
     background-position: -120% 0;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .skeleton {
-    animation: none;
-  }
+html[data-motion='reduced'] .skeleton {
+  animation: none;
 }
 
 /* ── micro-interactions ── */
@@ -452,7 +496,7 @@ html[lang='zh-CN'] {
   transition-delay: 0.25s;
 }
 .btn-glow:hover {
-  box-shadow: 0 0 18px -6px rgba(239, 255, 0, 0.55);
+  box-shadow: 0 0 18px -6px rgb(var(--neon-rgb) / 0.55);
 }
 .btn-glow:active {
   scale: 0.97;
@@ -461,17 +505,45 @@ html[lang='zh-CN'] {
   transition: scale 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   transform-origin: 50% 80%;
 }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .dock-list li:hover .dock-ico {
+@media (hover: hover) and (pointer: fine) {
+  html[data-motion='full'] .dock-list li:hover .dock-ico {
     scale: 1.4;
   }
-  .dock-list li:hover + li .dock-ico,
-  .dock-list li:has(+ li:hover) .dock-ico {
+  html[data-motion='full'] .dock-list li:hover + li .dock-ico,
+  html[data-motion='full'] .dock-list li:has(+ li:hover) .dock-ico {
     scale: 1.18;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .btn-glow:active {
-    scale: 1;
+html[data-motion='reduced'] .btn-glow:active {
+  scale: 1;
+}
+
+/* tooltip to the right of an element (desktop icons) */
+.tip-r::after {
+  bottom: auto;
+  left: calc(100% + 8px);
+  top: 50%;
+  translate: -4px -50%;
+}
+.tip-r:hover::after,
+.tip-r:focus-visible::after {
+  translate: 0 -50%;
+}
+/* touch screens have no hover: never show tooltips there */
+@media (hover: none) {
+  .tip::after {
+    display: none;
   }
+}
+/* press feedback + consistent disabled state for every button */
+@layer base {
+  button:not(:disabled):active {
+    scale: 0.97;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+html[data-motion='reduced'] button:not(:disabled):active {
+  scale: 1;
 }

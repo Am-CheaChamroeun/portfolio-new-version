@@ -236,7 +236,8 @@
       "services": "专长",
       "monitor": "系统监视器",
       "contact": "联系",
-      "terminal": "终端"
+      "terminal": "终端",
+      "settings": "设置"
     },
     "titles": {
       "about": "个人资料",
@@ -247,7 +248,8 @@
       "services": "开发者工具",
       "monitor": "系统监视器",
       "contact": "信息",
-      "terminal": "终端"
+      "terminal": "终端",
+      "settings": "系统设置"
     },
     "window": {
       "minimize": "最小化",
@@ -454,7 +456,65 @@
       "log": "部署日志",
       "globe": "位置",
       "live": "实时",
-      "system": "系统"
+      "system": "系统",
+      "tabs": {
+        "label": "监视器分区",
+        "overview": "概览",
+        "github": "GitHub"
+      },
+      "github": {
+        "title": "GitHub 动态",
+        "loading": "正在加载 GitHub 数据",
+        "notConfigured": "尚未设置 GitHub 用户名",
+        "notConfiguredHint": "在 src/data/portfolio.ts（socials.github）中替换 [YOUR GITHUB]，此面板就会自动显示你真实的公开数据。",
+        "openProfile": "打开 GitHub 主页",
+        "viewProfile": "查看主页",
+        "repos": "仓库",
+        "followers": "关注者",
+        "following": "正在关注",
+        "updated": "更新于 {{when}}",
+        "refresh": "刷新",
+        "refreshing": "刷新中…",
+        "stale": "正在显示 {{when}} 保存的数据 — 暂时无法连接 GitHub。",
+        "rate": "已达到 GitHub 的请求频率限制，数据可能已过期，稍后会自动刷新。",
+        "rateNone": "已达到 GitHub 的请求频率限制，且暂无已保存的数据。请稍后再试。",
+        "network": "无法连接 GitHub，且暂无已保存的数据。",
+        "notfound": "未找到该 GitHub 用户，请检查 portfolio.ts 中的用户名。",
+        "heat": {
+          "title": "贡献活动",
+          "events": "最近约 90 天的公开事件。GitHub 完整的年度日历需要私有令牌，因此此处不显示。",
+          "calendar": "过去一年的贡献。",
+          "total_other": "此期间共 {{count}} 次贡献",
+          "less": "少",
+          "more": "多",
+          "day_other": "{{date}}：{{count}} 次贡献",
+          "none": "{{date}}：无活动",
+          "hint": "悬停或点按某一天查看详情。",
+          "aria": "活动热力图，此期间{{total}}"
+        },
+        "langs": {
+          "title": "编程语言",
+          "note": "按主要语言统计的公开仓库占比。这不代表编码时长或技能水平。",
+          "repos_other": "{{count}} 个仓库",
+          "none": "暂无语言数据。"
+        },
+        "reposTitle": "仓库",
+        "reposEmpty": "暂无可显示的公开仓库。",
+        "noDescription": "暂无描述",
+        "stars": "星标",
+        "forks": "复刻",
+        "pushed": "更新于 {{when}}",
+        "open": "在 GitHub 上打开 {{name}}",
+        "activity": {
+          "title": "近期动态",
+          "empty": "暂无近期公开动态。",
+          "push_other": "向 {{repo}} 推送了 {{count}} 次提交",
+          "pr": "{{repo}} 中的拉取请求 {{action}}",
+          "create": "创建了仓库 {{repo}}",
+          "release": "在 {{repo}} 发布了 {{tag}}",
+          "fork": "复刻了 {{repo}}"
+        }
+      }
     },
     "contact": {
       "inbox": "收件箱",
@@ -565,6 +625,66 @@
         "themeValue": "荧光黄 / 深石墨",
         "uptimeValue": "{{m}} 分 {{s}} 秒"
       }
+    },
+    "settings": {
+      "subtitle": "让 DeveloperOS 更像你的风格。更改立即生效，并保存在此浏览器中。",
+      "nav": "设置分类",
+      "cat": {
+        "appearance": "外观",
+        "language": "语言",
+        "animation": "动画",
+        "sound": "声音",
+        "reset": "重置"
+      },
+      "wallpaper": {
+        "label": "壁纸",
+        "hint": "选择桌面背景。所有壁纸都轻量且静态。",
+        "grid": "技术网格",
+        "wave": "霓虹波浪",
+        "geometric": "几何",
+        "topo": "等高线",
+        "selected": "已选择"
+      },
+      "accent": {
+        "label": "强调色",
+        "hint": "更改按钮、图标、高亮和焦点框的颜色。技术图标和项目图片保持原色。",
+        "yellow": "霓虹黄",
+        "blue": "电光蓝",
+        "emerald": "翡翠绿",
+        "purple": "霓虹紫",
+        "orange": "日落橙",
+        "white": "极简白",
+        "default": "默认"
+      },
+      "language": {
+        "label": "界面语言",
+        "hint": "全站使用同一种语言，包括“关于我”的语音朗读。"
+      },
+      "motion": {
+        "label": "动画",
+        "hint": "完整动画更生动；减少动画会去除动效和过渡。",
+        "system": "跟随系统",
+        "full": "完整",
+        "reduced": "减少",
+        "systemNow": "你的系统当前偏好{{value}}动画。",
+        "less": "减少",
+        "more": "完整"
+      },
+      "sound": {
+        "label": "交互音效",
+        "hint": "切换应用、点击按钮、打开搜索和完成终端命令时的轻柔提示音。默认关闭，不会自动播放。",
+        "toggle": "启用交互音效",
+        "test": "播放测试音"
+      },
+      "reset": {
+        "label": "恢复默认",
+        "hint": "将壁纸、强调色、动画、声音和语言恢复为默认值。",
+        "button": "恢复默认设置",
+        "done": "已恢复默认设置。"
+      },
+      "preview": "预览 {{name}}",
+      "on": "开",
+      "off": "关"
     }
   }
 }

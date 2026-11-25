@@ -245,7 +245,7 @@ export function CommandPalette() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -8, scale: 0.98 }}
         transition={{ duration: 0.18, ease: easeOut }}
-        className="glass-dark relative flex max-h-[min(540px,72vh)] w-[min(640px,100%)] flex-col overflow-hidden rounded-2xl border border-neon/25 text-warm shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95),0_0_0_1px_rgba(239,255,0,0.06),0_0_60px_-24px_rgba(239,255,0,0.35)]"
+        className="glass-dark relative flex max-h-[min(540px,72vh)] w-[min(640px,100%)] flex-col overflow-hidden rounded-2xl border border-neon/25 text-warm shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95),0_0_0_1px_rgb(var(--neon-rgb)/0.06),0_0_60px_-24px_rgb(var(--neon-rgb)/0.35)]"
       >
         <div className="flex items-center gap-3 border-b border-edge px-4">
           <Search size={18} className="shrink-0 text-neon" />

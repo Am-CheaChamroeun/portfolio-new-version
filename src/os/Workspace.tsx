@@ -22,7 +22,7 @@ export function Workspace() {
       aria-label={t(`os.titles.${activeApp}`)}
       data-workspace
       style={{ bottom: TASKBAR_H + 12 }}
-      className="absolute right-3 top-3 left-[140px] [@media(max-height:845px)]:left-[240px] overflow-hidden rounded-2xl border border-card-border bg-sheet text-fg shadow-window"
+      className="absolute right-3 top-3 left-[140px] overflow-hidden rounded-2xl border border-card-border bg-sheet text-fg shadow-window"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div

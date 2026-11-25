@@ -85,7 +85,7 @@ export const NarrationPlayer = memo(function NarrationPlayer({ text, lang }: { t
           aria-label={label}
           title={label}
           aria-busy={status === 'loading'}
-          className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neon text-graphite shadow-[0_0_22px_-6px_rgba(239,255,0,0.55)] transition-transform duration-150 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon @md:h-12 @md:w-12"
+          className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neon text-graphite shadow-[0_0_22px_-6px_rgb(var(--neon-rgb)/0.55)] transition-transform duration-150 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon @md:h-12 @md:w-12"
         >
           {status === 'loading' ? (
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-graphite/30 border-t-graphite motion-reduce:animate-none" />
@@ -114,7 +114,7 @@ export const NarrationPlayer = memo(function NarrationPlayer({ text, lang }: { t
                   animationDelay: `${(i * 53) % 700}ms`,
                 }}
                 className={`min-w-[2px] max-w-[7px] flex-1 rounded-full transition-colors duration-200 ${
-                  done ? 'bg-neon' : head ? 'bg-neon shadow-[0_0_10px_#efff00]' : 'bg-warm/30'
+                  done ? 'bg-neon' : head ? 'bg-neon shadow-[0_0_10px_var(--neon)]' : 'bg-warm/30'
                 } ${playing ? 'animate-wave motion-reduce:animate-none' : ''}`}
               />
             )

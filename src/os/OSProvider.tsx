@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useReducer, useRef, type ReactNode } from 'react'
+import { playSound } from '../lib/sound'
 import { useLayoutMode } from './layout'
 import { ActionsContext, RECENT_KEY, StateContext, createInitialState, reducer, type OSActions } from './store'
 
@@ -17,7 +18,10 @@ export function OSProvider({ children }: { children: ReactNode }) {
 
   const actions = useMemo<OSActions>(
     () => ({
-      openApp: (id) => dispatch({ type: 'open', id, mobile: modeRef.current === 'mobile' }),
+      openApp: (id) => {
+        if (stateRef.current.activeApp !== id || modeRef.current === 'mobile') playSound('switch')
+        dispatch({ type: 'open', id, mobile: modeRef.current === 'mobile' })
+      },
       openProject: (slug) =>
         dispatch({
           type: 'openProject',
@@ -25,7 +29,10 @@ export function OSProvider({ children }: { children: ReactNode }) {
           mobile: modeRef.current === 'mobile',
         }),
       setLauncher: (open) => dispatch({ type: 'launcher', open }),
-      setPalette: (open) => dispatch({ type: 'palette', open }),
+      setPalette: (open) => {
+        if (open) playSound('open')
+        dispatch({ type: 'palette', open })
+      },
       closeMobile: () => dispatch({ type: 'mobileHome' }),
     }),
     [],
@@ -36,6 +43,7 @@ export function OSProvider({ children }: { children: ReactNode }) {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'k') {
         e.preventDefault()
+        if (!stateRef.current.palette) playSound('open')
         dispatch({ type: 'palette', open: !stateRef.current.palette })
       }
     }
