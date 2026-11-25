@@ -1,5 +1,7 @@
-import { about, certificates, education, profile, skillGroups, socials } from '../data/portfolio'
+import { about, education, profile, skillGroups, socials } from '../data/portfolio'
 import { formatDate, languages } from '../i18n'
+import { formatDuration, formatMonth, monthsBetween } from '../lib/experience'
+import { visibleExperience } from '../data/visible'
 import { isReal, downloadCv, openExternal } from '../lib/links'
 import { techIcons } from '../lib/tech'
 import { apps, type AppId } from './registry'
@@ -16,7 +18,6 @@ export const COMMANDS = [
   'projects',
   'skills',
   'education',
-  'certifications',
   'experience',
   'contact',
   'github',
@@ -148,29 +149,39 @@ export function runCommand(raw: string, ctx: Context): Result {
         lines.push({ kind: 'accent', text: e.school })
         lines.push({
           kind: 'muted',
-          text: `${e.period}${e.current ? ` · ${t('os.terminal.current')}` : ''}`,
+          text: `${(t as unknown as (k: string, o?: object) => string)(`content.education.${e.id}.degree`)} · ${
+            e.graduation ? (t as unknown as (k: string, o?: object) => string)('education.graduated', { year: e.period }) : e.period
+          }${e.current ? ` · ${t('os.terminal.current')}` : ''}`,
         })
         ctx.list(`content.education.${e.id}.details`).forEach((d) => lines.push({ kind: isPlaceholder(d) ? 'muted' : 'text', text: d }))
       })
       return { lines }
     }
-    case 'certifications': {
-      const lines: Line[] = [{ kind: 'heading', text: t('os.terminal.sections.certifications') }]
-      if (!certificates.length) lines.push({ kind: 'muted', text: t('os.terminal.empty') })
-      certificates.forEach((c) => {
-        lines.push({ kind: 'accent', text: c.title })
+    case 'experience': {
+      const lines: Line[] = [{ kind: 'heading', text: t('os.terminal.sections.experience') }]
+      // only real entries — nothing is invented while the list is empty
+      if (!visibleExperience.length) return { lines: [{ kind: 'muted', text: t('os.terminal.noExperience') }] }
+      visibleExperience.forEach((e) => {
+        const months = monthsBetween(e.start, e.end)
+        lines.push({ kind: 'accent', text: `${t(`content.experience.${e.id}.title`)} — ${e.company}` })
         lines.push({
           kind: 'muted',
-          text: `${c.issuerFull || c.issuer} · ${c.date}`,
+          text: [
+            `${formatMonth(e.start, ctx.lang)} – ${e.end ? formatMonth(e.end, ctx.lang) : t('experience.present')}`,
+            months !== null ? formatDuration(months, ctx.lang) : '',
+            e.employmentType ? t(`experience.types.${e.employmentType}`) : '',
+          ]
+            .filter(Boolean)
+            .join(' · '),
         })
+        const description = t(`content.experience.${e.id}.description`)
+        if (description && !isPlaceholder(description)) lines.push({ kind: 'text', text: description })
+        // a missing list comes back as the key text, not an array — only print real lists
+        const achievements = ctx.list(`content.experience.${e.id}.achievements`)
+        if (Array.isArray(achievements)) achievements.forEach((a) => lines.push({ kind: isPlaceholder(a) ? 'muted' : 'text', text: `• ${a}` }))
       })
       return { lines }
     }
-    case 'experience':
-      // there is no experience data in the portfolio yet — say so instead of inventing any
-      return {
-        lines: [{ kind: 'muted', text: t('os.terminal.noExperience') }],
-      }
     case 'contact':
       return {
         lines: [

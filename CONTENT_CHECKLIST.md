@@ -15,7 +15,8 @@ Text lives in `src/i18n/locales/{en,km,zh-CN}.json` under `content.*`. Everythin
 | 4 | **Projects** — name, slug, tech, `liveUrl`, `repoUrl`, `image` (+ optional `gallery`) | `featuredProject` / `projects` in `portfolio.ts` | The Projects app shows a "coming soon" panel |
 | 5 | **Project text** — `tagline`, `description`, `highlights`, and the optional `study` (objectives, problem, solution, role, architecture, challenges) per slug | `content.projects.<slug>` in each locale | Case-study sections without real text are hidden |
 | 6 | **Education** — school, period, details | `education` in `portfolio.ts` + `content.education.<id>` | Education shows "coming soon" |
-| 7 | **Certificates** — title, issuer, date, image | `certificates` in `portfolio.ts` | Certificates shows "no certificates yet" |
+| 7 | **Work experience** — company, job title, type, dates, location, description, responsibilities, achievements, technologies, logo, website | `workExperience` in `portfolio.ts` (logos in `src/assets/experience/`, wording in `content.experience.<id>` in the 3 locale files — see the how-to comment above `workExperience`) | Work Experience shows "coming soon" |
+|  | *Certificates (hidden for now)* | `certificates` in `portfolio.ts`, `CertificatesApp.tsx` | Kept for later — re-enable by adding `certificates` back to `src/os/registry.ts` and `routes.ts` |
 
 ## Strongly recommended
 

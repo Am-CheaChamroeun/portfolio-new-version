@@ -4,7 +4,7 @@ import type { AppId } from './registry'
  * URL ⇄ app mapping. The URL is a *mirror* of the OS store (activeApp + projectSlug) —
  * there is no second navigation state. '/' is About Me.
  */
-export const APP_IDS: AppId[] = ['about', 'projects', 'skills', 'education', 'certificates', 'services', 'monitor', 'terminal', 'contact', 'settings']
+export const APP_IDS: AppId[] = ['about', 'projects', 'skills', 'education', 'experience', 'services', 'monitor', 'terminal', 'contact', 'settings']
 
 /** Phone home screen (the icon grid) — has its own address so Back/Forward work there too */
 export const HOME_PATH = '/home'

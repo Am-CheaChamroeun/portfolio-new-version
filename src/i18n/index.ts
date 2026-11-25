@@ -87,4 +87,13 @@ export function formatDate(date: Date, lng: string, variant: 'short' | 'long' | 
   })
 }
 
+/** "Jan 2023", "មករា 2023", "2023年1月" */
+export function formatMonthYear(date: Date, lng: string) {
+  const locale = languages.find((l) => l.code === lng)?.dateLocale ?? 'en-GB'
+  if (lng === 'km' && Intl.DateTimeFormat.supportedLocalesOf([locale]).length === 0) {
+    return `${KHMER_MONTHS[date.getMonth()]} ${date.getFullYear()}`
+  }
+  return date.toLocaleDateString(locale, { month: 'short', year: 'numeric' })
+}
+
 export default i18n

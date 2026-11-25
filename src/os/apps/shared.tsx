@@ -1,48 +1,17 @@
 import { Search, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useRef, useState, type ChangeEvent, type InputHTMLAttributes, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TechIcon } from '../../lib/icons'
-import { techIcons, type TechKey } from '../../lib/tech'
+import { TechTile } from '../../lib/icons'
 
-/** Project tech names ("Next.js") → icon keys, so badges can show a logo when we have one. */
-const techByName: Record<string, TechKey> = {
-  react: 'react',
-  'next.js': 'nextjs',
-  typescript: 'typescript',
-  javascript: 'javascript',
-  vite: 'vite',
-  vue: 'vue',
-  'vue.js': 'vue',
-  angular: 'angular',
-  'nuxt.js': 'nuxt',
-  nuxt: 'nuxt',
-  'tanstack query': 'tanstack',
-  express: 'express',
-  'express.js': 'express',
-  mysql: 'mysql',
-  mongodb: 'mongodb',
-  supabase: 'supabase',
-  firebase: 'firebase',
-  nestjs: 'nestjs',
-  'node.js': 'nodejs',
-  graphql: 'graphql',
-  wordpress: 'wordpress',
-  postgresql: 'postgresql',
-  docker: 'docker',
-  tailwind: 'tailwind',
-  git: 'git',
-}
-
-/** Small pill for a technology, with its logo when available. */
-export function TechBadge({ name }: { name: string }) {
-  const key = techByName[name.toLowerCase()]
+/** Small pill for a technology: its official logo (or a neutral fallback) beside the name. */
+export function TechBadge({ name, compact = false }: { name: string; compact?: boolean }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md border border-card-border bg-bg-subtle px-2 py-1 font-mono text-[11px] text-muted">
-      {key && techIcons[key] && (
-        <span className="flex h-4 w-4 items-center justify-center rounded-[4px] bg-warm">
-          <TechIcon name={key} size={11} />
-        </span>
-      )}
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-md border border-card-border text-muted ${
+        compact ? 'px-1.5 py-0.5 font-mono text-[10.5px]' : 'bg-bg-subtle px-2 py-1 font-mono text-[11px]'
+      }`}
+    >
+      <TechTile tech={name} size="sm" />
       {name}
     </span>
   )

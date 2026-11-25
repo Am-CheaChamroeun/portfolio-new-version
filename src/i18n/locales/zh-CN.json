@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "{{name}} — 前端开发工程师 | 作品集",
-    "description": "{{name}} 的作品集——一名使用 React、TypeScript 和 Next.js 打造快速、无障碍 Web 应用的前端开发者。",
+    "title": "{{name}} — 全栈开发工程师 | 作品集",
+    "description": "{{name}} 的作品集——一名使用 React、Next.js、TypeScript 和 NestJS 构建可扩展、高性能 Web 应用的全栈开发者。",
     "pages": {
       "about": {
         "title": "关于我",
-        "description": "Roeun 是一名位于柬埔寨金边的前端开发者，使用 React、TypeScript 和 Next.js 打造快速、无障碍的 Web 应用。"
+        "description": "Roeun 是一名位于柬埔寨金边的全栈开发者，使用 React、Next.js、TypeScript 和 NestJS 构建可扩展、高性能的 Web 应用。"
       },
       "projects": {
         "title": "项目",
@@ -19,13 +19,17 @@
         "title": "教育背景",
         "description": "Roeun 的教育与学习背景。"
       },
+      "experience": {
+        "title": "工作经历",
+        "description": "Roeun 的工作经历：职位、职责、成就与使用的技术。"
+      },
       "certificates": {
         "title": "证书",
         "description": "Roeun 获得的证书与资质。"
       },
       "services": {
         "title": "服务",
-        "description": "Roeun 可以为你构建：前端应用、Next.js 网站、无头 CMS、API 与无障碍界面。"
+        "description": "Roeun 的专长：全栈开发、后端与 API 开发、前端工程、金融科技、企业应用、实时应用、安全与测试。"
       },
       "monitor": {
         "title": "系统监视器",
@@ -61,7 +65,39 @@
     "current": "在读",
     "visit": "访问网站",
     "visitAria": "{{school}} —— 访问网站",
-    "logoAlt": "{{school}} 标志"
+    "logoAlt": "{{school}} 标志",
+    "batch": "第 {{n}} 届",
+    "graduated": "{{year}} 年毕业",
+    "provisional": "日期待确认"
+  },
+  "experience": {
+    "eyebrow": "职业历程",
+    "title": "工作经历",
+    "current": "在职",
+    "present": "至今",
+    "visit": "访问网站",
+    "visitAria": "{{company}} — 访问网站",
+    "logoAlt": "{{company}} 标志",
+    "responsibilities": "主要职责",
+    "achievements": "工作成就",
+    "technologies": "使用的技术",
+    "period": "任职时间",
+    "duration": "任职时长",
+    "location": "地点",
+    "types": {
+      "full-time": "全职",
+      "part-time": "兼职",
+      "contract": "合同制",
+      "freelance": "自由职业",
+      "internship": "实习"
+    },
+    "workplace": {
+      "on-site": "现场办公",
+      "remote": "远程",
+      "hybrid": "混合办公"
+    },
+    "projects": "主要项目",
+    "role": "职位"
   },
   "skills": {
     "eyebrow": "我常用的技术",
@@ -73,9 +109,9 @@
       "expert": "精通",
       "advanced": "熟练",
       "proficient": "掌握",
+      "intermediate": "中级",
       "learning": "学习中"
     },
-    "meterAria": "{{level}} / {{max}}",
     "verified": "所有条目均已核实",
     "revised": "—— 最后修订于 {{date}}",
     "drawnBy": "绘制者：{{name}}",
@@ -173,16 +209,16 @@
   },
   "content": {
     "profile": {
-      "role": "前端开发工程师",
-      "badgeRole": "前端 · 全栈",
-      "preloaderRole": "前端开发工程师 • 正在学习全栈",
-      "tagline": "前端开发者，使用 React、TypeScript 和 Next.js 打造快速、无障碍的 Web 应用——同时也在不断拓展后端能力。",
+      "role": "全栈开发工程师",
+      "badgeRole": "全栈开发工程师",
+      "preloaderRole": "全栈开发工程师",
+      "tagline": "热衷于构建可扩展、高性能 Web 应用的全栈开发者，将现代前端体验与稳健的后端架构相结合。",
       "location": "柬埔寨 金边",
-      "flightPlan": "[你当前的目标]",
       "availability": "我目前正在寻找新的机会。无论你已有项目构想，还是只想认识一下——我的收件箱随时为你敞开。",
-      "footerBlurb": "一名前端开发者，致力于打造快速、可靠的 Web 体验。",
+      "footerBlurb": "一名全栈开发者，致力于打造快速、可靠的 Web 体验。",
       "status": "已部署",
-      "payload": "1 名工程师"
+      "payload": "1 名工程师",
+      "motto": "不止于界面——从流畅直观的体验，到强大可靠的后端系统。"
     },
     "terminal": [
       "",
@@ -192,38 +228,60 @@
     ],
     "about": {
       "paragraphs": [
-        "我是一名前端开发者，拥有约三年使用 React、TypeScript 和 Next.js 构建 Web 应用的经验。我注重清晰的组件架构、无障碍的界面，以及那些让产品用起来更快的细节。",
-        "最近，我也在后端方面不断成长——使用 NestJS 构建 API，研究基于角色的访问控制（RBAC），并在学习 Spring Boot。我也很喜欢 headless 架构，例如结合 REST 和 GraphQL 的 WordPress + Next.js。",
-        "[添加一句话，说明你在寻找什么，或是什么在驱动着你。]"
+        "我是一名拥有约三年经验的全栈开发工程师，热衷于打造现代、可扩展且以用户为中心的数字化解决方案。",
+        "我擅长使用 React、Next.js 和 TypeScript 构建响应式、交互丰富的 Web 应用，并使用 NestJS、Spring Boot、REST API 和 GraphQL 开发后端服务。我也喜欢基于无头 CMS 架构，打造灵活且易于维护的应用。",
+        "我的开发理念注重清晰的架构、性能、无障碍体验和可维护的代码。我乐于解决复杂问题、探索新兴技术，并把想法转化为有意义的数字体验。",
+        "在好奇心与持续学习的驱动下，我始终在寻找成长与协作的机会，致力于打造真正创造价值的软件。"
       ],
       "chips": [
-        "前端开发者",
-        "React 与 Next.js",
-        "TypeScript",
-        "终身学习者"
+        "全栈开发者",
+        "前端与后端",
+        "API 开发",
+        "整洁架构",
+        "持续学习者"
       ],
       "features": [
-        "清晰的架构",
-        "默认类型安全",
-        "注重性能",
-        "高质量交付"
+        {
+          "title": "全栈开发",
+          "description": "端到端的数字化解决方案。"
+        },
+        {
+          "title": "整洁架构",
+          "description": "可扩展、易维护的代码。"
+        },
+        {
+          "title": "性能优先",
+          "description": "快速且经过优化的应用。"
+        },
+        {
+          "title": "品质与可靠",
+          "description": "安全可靠的解决方案。"
+        }
       ]
     },
     "education": {
-      "edu-1": {
+      "kit": {
+        "degree": "软件工程学士",
+        "type": "大学",
+        "location": "柬埔寨 磅士卑省 Kirirom",
         "details": [
-          "[学位或专业，例如：计算机科学学士]"
+          "学习软件工程专业，重点涵盖软件开发、编程、问题解决和实践性技术项目，为现代软件工程打下扎实基础。"
         ]
       },
-      "edu-2": {
+      "tgi": {
+        "degree": "全栈开发——应用与网页开发",
+        "type": "专项技术培训",
+        "location": "柬埔寨 金边",
         "details": [
-          "[你学习的内容]",
-          "[可选的第二行]"
+          "参加全栈开发专项培训，重点学习前端与后端技术、Web 应用开发以及实用的软件开发技能。"
         ]
       },
-      "edu-3": {
+      "chea-sim": {
+        "degree": "高中毕业证书",
+        "type": "中等教育",
+        "location": "柬埔寨 金边",
         "details": [
-          "[文凭 / 考试]"
+          "完成中等教育，为继续攻读软件工程与技术方向的高等教育奠定学业基础。"
         ]
       }
     },
@@ -270,41 +328,77 @@
       }
     },
     "services": {
+      "fullstack": {
+        "title": "全栈开发",
+        "description": "通过将现代前端框架与可扩展、易维护的后端系统相结合，构建端到端的 Web 应用。"
+      },
+      "backend": {
+        "title": "后端与 API 开发",
+        "description": "为现代软件应用开发结构清晰的 API、业务逻辑和易于维护的后端架构。"
+      },
       "frontend": {
-        "title": "前端开发",
-        "description": "使用可复用、类型安全的 React 组件，构建响应式、无障碍的界面。"
+        "title": "前端工程",
+        "description": "为复杂的业务应用和数字平台打造响应式、交互丰富且易于维护的用户界面。"
       },
-      "nextjs": {
-        "title": "Next.js 应用",
-        "description": "基于 App Router、ISR 和清晰的数据获取方式，构建服务端渲染与静态生成的应用。"
+      "fintech": {
+        "title": "金融科技与银行解决方案",
+        "description": "开发金融科技平台和银行应用，包括银行卡申请系统、数字钱包、投资平台和商户服务集成。",
+        "tags": [
+          "数字钱包",
+          "银行卡申请系统",
+          "KYC",
+          "投资平台",
+          "商户集成"
+        ]
       },
-      "cms": {
-        "title": "Headless CMS",
-        "description": "编辑人员继续使用熟悉的 CMS，而前端依然保持快速且可完全定制。"
-      },
-      "api": {
-        "title": "API 开发",
-        "description": "结构清晰、文档完善的 REST API，包含数据校验、模块划分和合理的错误处理。"
-      },
-      "auth": {
-        "title": "身份验证与访问控制",
-        "description": "通过 guard 和 decorator 实现基于角色和权限的访问控制——默认即安全。"
-      },
-      "performance": {
-        "title": "性能优化",
-        "description": "通过代码分割、图片优化和减少不必要的重新渲染，让页面加载更快。"
-      },
-      "a11y": {
-        "title": "无障碍设计",
-        "description": "语义化标记、键盘操作支持和清晰易读的对比度，让每个人都能使用产品。"
+      "enterprise": {
+        "title": "企业应用",
+        "description": "构建内部业务应用、劳动力管理平台、薪酬系统和运营仪表板，支撑组织的工作流程。",
+        "tags": [
+          "人力资源管理",
+          "薪酬系统",
+          "考勤管理",
+          "员工管理",
+          "业务运营",
+          "管理后台"
+        ]
       },
       "integration": {
-        "title": "API 集成",
-        "description": "使用类型明确、稳健可靠的客户端，将前端与第三方服务和后端连接起来。"
+        "title": "API 与系统集成",
+        "description": "将应用与后端服务、外部平台和第三方服务提供商连接，以支持可靠的业务流程。",
+        "tags": [
+          "EDC 集成",
+          "PPWSA 集成",
+          "商户 API"
+        ]
       },
-      "ai": {
-        "title": "AI 辅助工作流",
-        "description": "借助 AI 编程工具提升效率，同时确保代码经过审查、测试且易于维护。"
+      "realtime": {
+        "title": "实时应用",
+        "description": "开发实时通信系统、消息应用、实时数据更新和跨平台软件体验。",
+        "tags": [
+          "Chat SDK"
+        ]
+      },
+      "security": {
+        "title": "安全与访问控制",
+        "description": "为业务和金融平台实现受保护的应用流程、基于角色的界面和加密的 API 通信。",
+        "tags": [
+          "RBAC",
+          "KYC",
+          "API 加密",
+          "基于角色的仪表板",
+          "访问控制"
+        ]
+      },
+      "quality": {
+        "title": "软件质量与测试",
+        "description": "通过自动化测试、系统化调试、代码评审和技术文档，提升软件的可靠性与可维护性。",
+        "tags": [
+          "单元测试",
+          "端到端测试",
+          "负载测试",
+          "代码评审"
+        ]
       }
     },
     "stats": {
@@ -312,6 +406,76 @@
       "years": "编程年限",
       "areas": "技能领域",
       "languages": "网站语言"
+    },
+    "experience": {
+      "ibank-cambodia": {
+        "title": "前端开发工程师",
+        "location": "柬埔寨金边",
+        "description": "开发内部业务与员工管理系统，支持运营工作流程，并将外部服务门户集成到银行应用中。",
+        "responsibilities": [
+          "开发和维护支持员工与业务运营的内部应用。",
+          "为内部用户构建直观且易于维护的界面。",
+          "支持业务工作流程和运营流程的数字化。",
+          "集成外部服务门户，包括柬埔寨电力公司（EDC）、金边供水局（PPWSA）及其他商户服务。",
+          "注重应用的可靠性、易用性、性能和可维护性。",
+          "支持内部业务应用和服务集成的持续改进。"
+        ]
+      },
+      "aibodia": {
+        "title": "全栈开发工程师",
+        "location": "柬埔寨金边",
+        "description": "负责金融科技、劳动力管理、实时通信、投资和电子商务平台的端到端软件解决方案开发，同时参与前端和后端开发。",
+        "projects": {
+          "card-request": {
+            "name": "银行卡申请平台",
+            "role": "前端负责人",
+            "bullets": [
+              "主导一个支持 KYC 的平台的前端开发，该平台支持虚拟卡和实体卡申请、转账、充值、提现及 eSIM 购买。",
+              "为多种用户角色设计了管理员、代理和客户端仪表板的架构。",
+              "为 API 请求和响应数据实现了端到端加密。",
+              "使用 WebSocket 集成实时更新。",
+              "通过单元测试、端到端测试和负载测试保障软件质量。"
+            ]
+          },
+          "hr-management": {
+            "name": "人力资源管理平台",
+            "role": "全栈开发工程师",
+            "bullets": [
+              "开发了内部人力资源与薪酬管理系统，包含独立的员工模块和管理员模块。",
+              "实现了基于 GPS 和设备的考勤打卡。",
+              "支持实时员工监控和自动化人力资源工作流程。"
+            ]
+          },
+          "chat-sdk": {
+            "name": "Chat SDK",
+            "role": "全栈开发工程师",
+            "bullets": [
+              "开发了支持文字、语音和表情消息的实时通信 SDK。",
+              "支持渐进式 Web 应用（PWA）并兼容桌面应用。"
+            ]
+          },
+          "investment-ecommerce": {
+            "name": "投资与电商平台",
+            "role": "全栈开发工程师",
+            "bullets": [
+              "开发了基于钱包的统一平台，支持投资、在线购物和推荐奖励。"
+            ]
+          }
+        }
+      },
+      "isb-vietnam": {
+        "title": "全栈开发工程师",
+        "location": "越南胡志明市",
+        "description": "与越南的国际工程团队协作，开发和维护软件应用，提升系统稳定性，交付可靠且易于维护的软件解决方案。",
+        "responsibilities": [
+          "在多个软件项目中开发新功能。",
+          "维护并改进现有的遗留代码库。",
+          "通过系统化调试发现并修复软件缺陷。",
+          "进行代码评审，以保持工程质量并遵循最佳实践。",
+          "编写技术文档、测试用例设计和测试证据报告，以支持质量保证流程。",
+          "在整个软件开发生命周期中与国际团队成员协作。"
+        ]
+      }
     }
   },
   "os": {
@@ -321,6 +485,7 @@
       "projects": "项目",
       "skills": "技能",
       "education": "教育经历",
+      "experience": "工作经历",
       "certificates": "证书",
       "services": "专长",
       "monitor": "系统监视器",
@@ -333,6 +498,7 @@
       "projects": "文件资源管理器",
       "skills": "技术栈",
       "education": "教育资源管理器",
+      "experience": "职业历程",
       "certificates": "证书查看器",
       "services": "开发者工具",
       "monitor": "系统监视器",
@@ -529,7 +695,10 @@
       "back": "返回记录",
       "details": "详细信息",
       "period": "时间",
-      "institution": "院校"
+      "institution": "院校",
+      "type": "机构类型",
+      "location": "地点",
+      "batchLabel": "届别"
     },
     "certificates": {
       "documents": "文档",
@@ -692,7 +861,6 @@
         "projects": "打开“项目”",
         "skills": "列出我的技术技能",
         "education": "列出我的教育经历",
-        "certifications": "列出我的证书",
         "experience": "显示我的工作经历",
         "contact": "显示联系方式",
         "github": "打开我的 GitHub 主页",
@@ -716,6 +884,7 @@
       "sections": {
         "skills": "技术技能",
         "education": "教育经历",
+        "experience": "工作经历",
         "certifications": "证书",
         "contact": "联系方式"
       },
@@ -803,6 +972,10 @@
         "title": "教育信息即将补充",
         "text": "此部分很快会更新。"
       },
+      "experience": {
+        "title": "工作经历即将上线",
+        "text": "我的工作经历将很快在此发布。"
+      },
       "certificates": {
         "title": "暂无已发布的证书",
         "text": "添加后将显示在这里。"
@@ -812,6 +985,9 @@
       "title": "页面未找到",
       "text": "{{path}} 没有内容。它可能已被移动，或地址输入有误。",
       "home": "返回关于我"
+    },
+    "experience": {
+      "count": "{{n}} 个职位"
     }
   }
 }

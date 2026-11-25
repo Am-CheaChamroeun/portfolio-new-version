@@ -5,7 +5,7 @@
  */
 import en from '../i18n/locales/en.json'
 import { profile, services, skillGroups, socials } from '../data/portfolio'
-import { visibleProjects, visibleCertificates, visibleEducation } from '../data/visible'
+import { visibleProjects, visibleExperience, visibleEducation } from '../data/visible'
 import { isPlaceholder } from '../lib/placeholder'
 
 type Dict = Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -23,7 +23,7 @@ const nav = `<nav aria-label="Primary"><ul>${[
   ['/projects', 'Projects'],
   ['/skills', 'Skills'],
   ['/education', 'Education'],
-  ['/certificates', 'Certificates'],
+  ['/experience', 'Experience'],
   ['/services', 'Services'],
   ['/contact', 'Contact'],
 ]
@@ -106,12 +106,27 @@ export function buildPages(): PageDef[] {
     body: shell(pages.education.title, visibleEducation.length ? li(visibleEducation.map((e) => `${esc(e.school)} (${esc(e.period)})`)) : `<p>${esc(en.os.empty.education.text)}</p>`),
   })
   out.push({
-    path: '/certificates',
-    ...meta('certificates'),
-    noindex: visibleCertificates.length === 0,
+    path: '/experience',
+    ...meta('experience'),
+    noindex: visibleExperience.length === 0,
     body: shell(
-      pages.certificates.title,
-      visibleCertificates.length ? li(visibleCertificates.map((x) => `${esc(x.title)} — ${esc(x.issuer)}`)) : `<p>${esc(en.os.empty.certificates.text)}</p>`,
+      pages.experience.title,
+      visibleExperience.length
+        ? visibleExperience
+            .map((x) => {
+              const t = (c.experience as Dict)[x.id] ?? {}
+              const when = `${x.start} – ${x.end ?? 'Present'}`
+              const projectNames = Object.values((t.projects as Dict) ?? {}).map((x) => (x as Dict).name as string)
+              const bullets = [...((t.responsibilities as string[]) ?? []), ...((t.achievements as string[]) ?? []), ...projectNames].filter(real)
+              return (
+                `<section><h2>${esc(real(t.title) ? t.title : x.company)} — ${esc(x.company)}</h2><p>${esc(when)}</p>` +
+                (real(t.description) ? `<p>${esc(t.description)}</p>` : '') +
+                li(bullets.map(esc)) +
+                `</section>`
+              )
+            })
+            .join('')
+        : `<p>${esc(en.os.empty.experience.text)}</p>`,
     ),
   })
   out.push({

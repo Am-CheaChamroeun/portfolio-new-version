@@ -10,7 +10,7 @@ function Logo({ item, size }: { item: EducationItem; size: string }) {
   const { t } = useTranslation()
   const logo = pickImage(item.logo, mockImages.education[item.id])
   return (
-    <span className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-card-border bg-warm ${size}`}>
+    <span className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-card-border bg-white ${size}`}>
       {logo ? (
         <img
           src={logo.src}
@@ -18,7 +18,7 @@ function Logo({ item, size }: { item: EducationItem; size: string }) {
           alt={logo.isMock ? '' : t('education.logoAlt', { school: item.school })}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-contain p-1"
+          className="h-full w-full object-contain p-1.5"
         />
       ) : (
         <GraduationCap size={20} strokeWidth={1.6} className="text-graphite" />
@@ -33,7 +33,9 @@ export default function EducationApp() {
   const [selected, setSelected] = useState<number | null>(null)
   const item = education[selected ?? 0]
   if (!item) return <EmptyState icon={GraduationCap} title={t('os.empty.education.title')} text={t('os.empty.education.text')} />
-  const details = t(`content.education.${item.id}.details` as 'content.education.edu-1.details', { returnObjects: true, defaultValue: [] }) as string[]
+  const tx = (k: string) => t(`content.education.${item.id}.${k}` as 'content.education.kit.degree')
+  const periodLabel = (e: EducationItem) => (e.graduation ? t('education.graduated', { year: e.period }) : e.period)
+  const details = t(`content.education.${item.id}.details` as 'content.education.kit.details', { returnObjects: true, defaultValue: [] }) as string[]
 
   return (
     <div className="@container flex h-full min-h-0 flex-col">
@@ -76,7 +78,7 @@ export default function EducationApp() {
                     <Logo item={e} size="h-10 w-10" />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-[13.5px] font-semibold">{e.school}</span>
-                      <span className="block truncate font-mono text-[11px] text-faint">{e.period}</span>
+                      <span className="block truncate font-mono text-[11px] text-faint">{periodLabel(e)}</span>
                     </span>
                     {e.current && (
                       <span className="h-2 w-2 shrink-0 rounded-full bg-accent shadow-[0_0_8px_var(--accent)]" aria-label={t('education.current')} />
@@ -90,18 +92,35 @@ export default function EducationApp() {
 
         <article aria-label={item.school} className={`min-h-0 flex-1 overflow-y-auto p-5 @2xl:block @2xl:p-7 ${selected === null ? 'hidden' : 'block'}`}>
           <div className="flex items-start gap-4">
-            <Logo item={item} size="h-16 w-16" />
+            <Logo item={item} size="h-20 w-20" />
             <div className="min-w-0">
               <h3 className="text-xl font-semibold leading-snug tracking-tight">{item.school}</h3>
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-1.5 rounded-md border border-card-border bg-bg-subtle px-2.5 py-1 font-mono text-[11.5px] text-muted">
                   <Calendar size={12} />
-                  {item.period}
+                  {periodLabel(item)}
                 </span>
+                {item.batch && <Pill>{t('education.batch', { n: item.batch })}</Pill>}
+                {item.provisional && <Pill>{t('education.provisional')}</Pill>}
                 {item.current && <Pill>{t('education.current')}</Pill>}
               </div>
             </div>
           </div>
+          <p className="mt-4 text-[15px] font-medium leading-6">{tx('degree')}</p>
+
+          <dl className="mt-4 grid gap-px overflow-hidden rounded-xl border border-card-border bg-card-border @lg:grid-cols-2">
+            {(
+              [
+                [t('os.education.type'), tx('type')],
+                [t('os.education.location'), tx('location')],
+              ] as [string, string][]
+            ).map(([k, v]) => (
+              <div key={k} className="bg-sheet px-4 py-2.5">
+                <dt className="text-[12px] text-faint">{k}</dt>
+                <dd className="mt-0.5 text-[13.5px] text-fg">{v}</dd>
+              </div>
+            ))}
+          </dl>
 
           <Eyebrow className="mt-6">{t('os.education.details')}</Eyebrow>
           <ul className="mt-2 divide-y divide-card-border overflow-hidden rounded-xl border border-card-border">

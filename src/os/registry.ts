@@ -1,6 +1,6 @@
 import {
   Activity,
-  BadgeCheck,
+  Briefcase,
   FolderKanban,
   GraduationCap,
   Layers,
@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
 
-export type AppId = 'about' | 'projects' | 'skills' | 'education' | 'certificates' | 'services' | 'monitor' | 'terminal' | 'contact' | 'settings'
+export type AppId = 'about' | 'projects' | 'skills' | 'education' | 'experience' | 'services' | 'monitor' | 'terminal' | 'contact' | 'settings'
 
 export type AppDef = {
   id: AppId
@@ -51,9 +51,9 @@ export const apps: AppDef[] = [
     Component: lazy(() => import('./apps/EducationApp')),
   },
   {
-    id: 'certificates',
-    icon: BadgeCheck,
-    Component: lazy(() => import('./apps/CertificatesApp')),
+    id: 'experience',
+    icon: Briefcase,
+    Component: lazy(() => import('./apps/ExperienceApp')),
   },
   {
     id: 'services',

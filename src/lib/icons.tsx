@@ -1,16 +1,35 @@
+import { Braces } from 'lucide-react'
 import type { SVGProps } from 'react'
 import { siGithub, siTelegram } from 'simple-icons'
-import { techIcons, type TechKey } from './tech'
+import { resolveTech, techIcons } from './tech'
 
 type IconProps = SVGProps<SVGSVGElement> & { size?: number }
 
-/** Full-colour tech logo, meant to sit on a white tile. */
-export function TechIcon({ name, size = 24, ...props }: IconProps & { name: TechKey }) {
-  const icon = techIcons[name]
+const TILE = {
+  sm: { box: 'h-4 w-4 rounded-[4px]', icon: 11 },
+  md: { box: 'h-7 w-7 rounded-md', icon: 17 },
+  lg: { box: 'h-8 w-8 rounded-lg ring-1 ring-black/5', icon: 18 },
+} as const
+
+/**
+ * The one way a technology logo is drawn everywhere: the official full-colour logo (brand colours, never the
+ * theme accent) on a light tile so dark logos such as Next.js or Express stay visible on the dark background.
+ * Technologies without an official icon get a neutral { } fallback. The name is always shown beside it,
+ * so the tile itself is decorative (aria-hidden).
+ */
+export function TechTile({ tech, size = 'md' }: { tech: string; size?: keyof typeof TILE }) {
+  const key = resolveTech(tech)
+  const { box, icon } = TILE[size]
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} role="img" aria-label={icon.title} {...props}>
-      <path d={icon.path} fill={`#${icon.hex}`} />
-    </svg>
+    <span aria-hidden="true" className={`flex shrink-0 items-center justify-center bg-warm ${box}`}>
+      {key ? (
+        <svg viewBox="0 0 24 24" width={icon} height={icon}>
+          <path d={techIcons[key].path} fill={`#${techIcons[key].hex}`} />
+        </svg>
+      ) : (
+        <Braces size={icon - 1} strokeWidth={2} className="text-graphite" />
+      )}
+    </span>
   )
 }
 

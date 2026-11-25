@@ -6,7 +6,7 @@ export function Avatar({ className = '' }: { className?: string }) {
   return (
     <span className={`relative flex items-center justify-center overflow-hidden rounded-full [container-type:size] ${className}`}>
       {src ? (
-        <img src={src} alt={profile.name} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={src} alt={profile.name} className="absolute inset-0 h-full w-full object-cover object-[50%_18%]" />
       ) : (
         <span
           className="flex h-full w-full items-center justify-center font-display text-[48cqh] font-semibold leading-none text-neon"

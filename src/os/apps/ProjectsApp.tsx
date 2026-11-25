@@ -8,7 +8,7 @@ import { visibleProjects } from '../../data/visible'
 import { GithubIcon } from '../../lib/icons'
 import { useOSActions, useOSState } from '../hooks'
 import { CaseStudy, projectCategory, type ProjectText } from './CaseStudy'
-import { BrowserFrame, EmptyState, Eyebrow, Pill, StatusBar, Toolbar } from './shared'
+import { BrowserFrame, EmptyState, Eyebrow, Pill, StatusBar, TechBadge, Toolbar } from './shared'
 
 const all: Project[] = visibleProjects
 
@@ -90,8 +90,8 @@ function ProjectCard({
         {text.tagline && <p className="mt-0.5 line-clamp-2 text-[12.5px] leading-5 text-muted">{text.tagline}</p>}
         <ul className="mt-2.5 flex flex-wrap gap-1">
           {shown.map((n) => (
-            <li key={n} className="rounded-md border border-card-border px-1.5 py-0.5 font-mono text-[10.5px] text-muted">
-              {n}
+            <li key={n}>
+              <TechBadge name={n} compact />
             </li>
           ))}
           {p.tech.length > shown.length && <li className="px-1 py-0.5 font-mono text-[10.5px] text-faint">+{p.tech.length - shown.length}</li>}

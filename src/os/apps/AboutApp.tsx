@@ -5,7 +5,7 @@ import { narrationText } from '../../lib/narration'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { about, profile, socials } from '../../data/portfolio'
-import { GithubIcon, LinkedinIcon, TechIcon, TelegramIcon } from '../../lib/icons'
+import { GithubIcon, LinkedinIcon, TechTile, TelegramIcon } from '../../lib/icons'
 import { cvAvailable, downloadCv } from '../../lib/links'
 import { SHOW_PLACEHOLDERS, shown } from '../../lib/placeholder'
 import { techIcons, type TechKey } from '../../lib/tech'
@@ -34,7 +34,7 @@ export default function AboutApp() {
     }
   }, [])
   const chips = t('content.about.chips', { returnObjects: true })
-  const features = t('content.about.features', { returnObjects: true })
+  const features = t('content.about.features', { returnObjects: true }) as unknown as { title: string; description: string }[]
 
   const info: [string, string][] = [
     [t('os.about.role'), t('content.profile.role')],
@@ -69,10 +69,10 @@ export default function AboutApp() {
     <div className="@container h-full">
       <div className="h-full overflow-y-auto @2xl:grid @2xl:grid-cols-[260px_1fr] @2xl:overflow-hidden">
         <aside className="border-b border-card-border bg-bg-subtle/60 p-5 @2xl:overflow-y-auto @2xl:border-b-0 @2xl:border-r">
-          <div className="mx-auto w-24 @2xl:w-full">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-card-border bg-graphite">
+          <div className="mx-auto w-28 @2xl:w-full">
+            <div className="relative aspect-square overflow-hidden rounded-xl border border-card-border bg-graphite">
               {photo && (!photo.isMock || SHOW_PLACEHOLDERS) ? (
-                <img src={photo.src} alt={photo.isMock ? t('images.alt.profile') : profile.name} decoding="async" className="h-full w-full object-cover" />
+                <img src={photo.src} alt={photo.isMock ? t('images.alt.profile') : profile.name} width={800} height={800} decoding="async" className="h-full w-full object-cover object-top" />
               ) : (
                 <div className="flex h-full w-full items-center justify-center font-mono text-6xl font-semibold text-neon" aria-hidden="true">
                   {profile.initials}
@@ -112,6 +112,7 @@ export default function AboutApp() {
               {profile.name}
             </h1>
             <p className="mt-2 max-w-xl text-[15px] leading-7 text-muted">{t('content.profile.tagline')}</p>
+            <p className="mt-3 max-w-xl border-l-2 border-primary/60 pl-3 text-[14px] italic leading-6 text-fg/90">{t('content.profile.motto')}</p>
             <div className="mt-4 flex flex-wrap gap-2">
               <button
                 type="button"
@@ -143,7 +144,7 @@ export default function AboutApp() {
             <p className="mt-3 text-[12px] text-faint">{mobile ? t('os.about.hintMobile') : t('os.about.hint', { key: shortcutLabel() })}</p>
           </section>
 
-0          <section>
+          <section>
             <Eyebrow>{t('os.about.bio')}</Eyebrow>
             <div className="mt-3">
               <NarrationPlayer key={i18n.language} lang={i18n.language} text={narrationText(paragraphs)} />
@@ -177,14 +178,17 @@ export default function AboutApp() {
           <section>
             <Eyebrow>{t('os.about.highlights')}</Eyebrow>
             <ul className="mt-2 grid gap-2.5 @md:grid-cols-2">
-              {features.map((label, i) => {
+              {features.map((f, i) => {
                 const Icon = about.featureIcons[i] ?? about.featureIcons[0]
                 return (
                   <li key={i} className="flex items-center gap-3 rounded-xl border border-card-border bg-bg-subtle/60 px-3.5 py-3">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-graphite text-neon ring-1 ring-neon/30">
                       <Icon size={16} strokeWidth={1.7} />
                     </span>
-                    <span className="text-[13.5px] font-medium">{label}</span>
+                    <span className="min-w-0">
+                      <span className="block text-[13.5px] font-medium">{f.title}</span>
+                      <span className="block text-[12.5px] leading-5 text-muted">{f.description}</span>
+                    </span>
                   </li>
                 )
               })}
@@ -196,9 +200,7 @@ export default function AboutApp() {
             <ul className="mt-2 flex flex-wrap gap-2">
               {tools.map((k) => (
                 <li key={k} title={techIcons[k].title} className="flex items-center gap-2 rounded-lg border border-card-border bg-sheet py-1.5 pl-1.5 pr-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-md bg-warm">
-                    <TechIcon name={k} size={17} />
-                  </span>
+                  <TechTile tech={k} size="md" />
                   <span className="text-[12.5px] font-medium">{techIcons[k].title}</span>
                 </li>
               ))}

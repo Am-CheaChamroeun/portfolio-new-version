@@ -155,13 +155,13 @@ const Panel = ({ title, children, className = '' }: { title: string; children: R
 /** Statistics → System Monitor: counters, skill load, session telemetry, globe and the deploy log. */
 export default function MonitorApp() {
   const { t, i18n } = useTranslation()
-  // derived from the skill levels in portfolio.ts — nothing is invented
+  // derived from the skill percentages in portfolio.ts — nothing is invented
   const load = skillGroups.map((g) => ({
     key: g.key,
-    percent: Math.round((g.skills.reduce((n, s) => n + s.level, 0) / (g.skills.length * 12)) * 100),
+    percent: Math.round(g.skills.reduce((n, s) => n + s.percent, 0) / g.skills.length),
   }))
   const all = skillGroups.flatMap((g) => g.skills)
-  const overall = Math.round((all.reduce((n, s) => n + s.level, 0) / (all.length * 12)) * 100)
+  const overall = Math.round(all.reduce((n, s) => n + s.percent, 0) / all.length)
   const [grow, setGrow] = useState(false)
   useEffect(() => {
     const id = requestAnimationFrame(() => setGrow(true))

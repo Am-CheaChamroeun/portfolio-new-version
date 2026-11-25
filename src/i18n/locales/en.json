@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "{{name}} — Frontend Developer | Portfolio",
-    "description": "Portfolio of {{name}} — frontend developer building fast, accessible web apps with React, TypeScript and Next.js.",
+    "title": "{{name}} — Full-Stack Developer | Portfolio",
+    "description": "Portfolio of {{name}} — full-stack developer building scalable, high-performance web applications with React, Next.js, TypeScript and NestJS.",
     "pages": {
       "about": {
         "title": "About",
-        "description": "Roeun is a frontend developer in Phnom Penh, Cambodia, building fast, accessible web apps with React, TypeScript and Next.js."
+        "description": "Roeun is a full-stack developer in Phnom Penh, Cambodia, building scalable, high-performance web applications with React, Next.js, TypeScript and NestJS."
       },
       "projects": {
         "title": "Projects",
@@ -19,13 +19,17 @@
         "title": "Education",
         "description": "Roeun's education and learning background."
       },
+      "experience": {
+        "title": "Work Experience",
+        "description": "Roeun's professional experience: positions, responsibilities, achievements and technologies."
+      },
       "certificates": {
         "title": "Certificates",
         "description": "Certificates and credentials earned by Roeun."
       },
       "services": {
         "title": "Services",
-        "description": "What Roeun can build for you: frontend apps, Next.js sites, headless CMS, APIs and accessible interfaces."
+        "description": "Roeun's specializations: full-stack development, backend and API development, frontend engineering, FinTech, enterprise applications, real-time apps, security and testing."
       },
       "monitor": {
         "title": "System Monitor",
@@ -61,7 +65,39 @@
     "current": "Current",
     "visit": "Visit site",
     "visitAria": "{{school}} — visit website",
-    "logoAlt": "{{school}} logo"
+    "logoAlt": "{{school}} logo",
+    "batch": "Batch {{n}}",
+    "graduated": "Graduated {{year}}",
+    "provisional": "Dates provisional"
+  },
+  "experience": {
+    "eyebrow": "Professional journey",
+    "title": "Work Experience",
+    "current": "Current",
+    "present": "Present",
+    "visit": "Visit website",
+    "visitAria": "{{company}} — visit website",
+    "logoAlt": "{{company}} logo",
+    "responsibilities": "Key responsibilities",
+    "achievements": "Achievements",
+    "technologies": "Technologies used",
+    "period": "Period",
+    "duration": "Duration",
+    "location": "Location",
+    "types": {
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance",
+      "internship": "Internship"
+    },
+    "workplace": {
+      "on-site": "On-site",
+      "remote": "Remote",
+      "hybrid": "Hybrid"
+    },
+    "projects": "Key projects",
+    "role": "Role"
   },
   "skills": {
     "eyebrow": "What I work with",
@@ -73,9 +109,9 @@
       "expert": "expert",
       "advanced": "advanced",
       "proficient": "proficient",
+      "intermediate": "intermediate",
       "learning": "learning"
     },
-    "meterAria": "{{level}} of {{max}}",
     "verified": "all entries verified",
     "revised": "— last revised {{date}}",
     "drawnBy": "Drawn by {{name}}",
@@ -173,16 +209,16 @@
   },
   "content": {
     "profile": {
-      "role": "Frontend Developer",
-      "badgeRole": "Frontend · Full-Stack",
-      "preloaderRole": "Frontend Developer • Full-Stack Learner",
-      "tagline": "Frontend developer building fast, accessible web apps with React, TypeScript and Next.js — and growing into the backend.",
+      "role": "Full-Stack Developer",
+      "badgeRole": "Full-Stack Developer",
+      "preloaderRole": "Full-Stack Developer",
+      "tagline": "Full-stack developer passionate about building scalable, high-performance web applications, combining modern frontend experiences with robust backend architecture.",
       "location": "Phnom Penh, Cambodia",
-      "flightPlan": "[YOUR CURRENT GOAL]",
       "availability": "I'm currently open to new opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.",
-      "footerBlurb": "Frontend developer building fast, reliable web experiences.",
+      "footerBlurb": "Full-stack developer building fast, reliable web experiences.",
       "status": "Deployed",
-      "payload": "1 Engineer"
+      "payload": "1 Engineer",
+      "motto": "Building beyond the interface — from intuitive experiences to powerful backend systems."
     },
     "terminal": [
       "",
@@ -192,38 +228,60 @@
     ],
     "about": {
       "paragraphs": [
-        "I'm a frontend developer with around three years of experience building web applications in React, TypeScript and Next.js. I care about clean component architecture, accessible interfaces and the small details that make a product feel fast.",
-        "Lately I have been growing on the backend side — building APIs with NestJS, exploring role-based access control, and learning Spring Boot. I also enjoy headless setups like WordPress + Next.js with REST and GraphQL.",
-        "[ADD A LINE ABOUT WHAT YOU ARE LOOKING FOR OR WHAT DRIVES YOU.]"
+        "I'm a Full-Stack Developer with around three years of experience in web development, passionate about creating modern, scalable, and user-focused digital solutions.",
+        "I specialize in building responsive and interactive web applications using React, Next.js, and TypeScript, while developing backend solutions with NestJS, Spring Boot, REST APIs, and GraphQL. I also enjoy working with headless CMS architectures to create flexible and maintainable applications.",
+        "My approach to development focuses on clean architecture, performance, accessibility, and maintainable code. I enjoy solving complex problems, exploring emerging technologies, and transforming ideas into meaningful digital experiences.",
+        "Driven by curiosity and continuous learning, I'm always looking for opportunities to grow, collaborate, and build impactful software that delivers real value."
       ],
       "chips": [
-        "Frontend Developer",
-        "React & Next.js",
-        "TypeScript",
-        "Lifelong Learner"
+        "Full-Stack Developer",
+        "Frontend & Backend",
+        "API Development",
+        "Clean Architecture",
+        "Continuous Learner"
       ],
       "features": [
-        "Clean Architecture",
-        "Type-safe by Default",
-        "Performance Minded",
-        "Quality Delivery"
+        {
+          "title": "Full-Stack Development",
+          "description": "End-to-end digital solutions."
+        },
+        {
+          "title": "Clean Architecture",
+          "description": "Scalable and maintainable code."
+        },
+        {
+          "title": "Performance Driven",
+          "description": "Fast and optimized applications."
+        },
+        {
+          "title": "Quality & Reliability",
+          "description": "Secure and dependable solutions."
+        }
       ]
     },
     "education": {
-      "edu-1": {
+      "kit": {
+        "degree": "Bachelor of Software Engineering",
+        "type": "University",
+        "location": "Kirirom, Kampong Speu, Cambodia",
         "details": [
-          "[DEGREE OR PROGRAM, e.g. Bachelor's Degree in Computer Science]"
+          "Studied software engineering with a focus on software development, programming, problem-solving, and practical technology projects, building a strong foundation in modern software engineering."
         ]
       },
-      "edu-2": {
+      "tgi": {
+        "degree": "Full-Stack Development — App & Web Development",
+        "type": "Specialized Technology Training",
+        "location": "Phnom Penh, Cambodia",
         "details": [
-          "[WHAT YOU STUDIED]",
-          "[OPTIONAL SECOND LINE]"
+          "Pursued specialized training in full-stack development, focusing on frontend and backend technologies, web application development, and practical software development skills."
         ]
       },
-      "edu-3": {
+      "chea-sim": {
+        "degree": "High School Diploma",
+        "type": "Secondary Education",
+        "location": "Phnom Penh, Cambodia",
         "details": [
-          "[DIPLOMA / EXAM]"
+          "Completed secondary education, establishing an academic foundation for pursuing higher education in software engineering and technology."
         ]
       }
     },
@@ -270,41 +328,77 @@
       }
     },
     "services": {
+      "fullstack": {
+        "title": "Full-Stack Development",
+        "description": "Building end-to-end web applications by combining modern frontend frameworks with scalable and maintainable backend systems."
+      },
+      "backend": {
+        "title": "Backend & API Development",
+        "description": "Developing structured APIs, business logic, and maintainable backend architectures for modern software applications."
+      },
       "frontend": {
-        "title": "Frontend Development",
-        "description": "Responsive, accessible interfaces built from reusable, type-safe React components."
+        "title": "Frontend Engineering",
+        "description": "Creating responsive, interactive, and maintainable user interfaces for complex business applications and digital platforms."
       },
-      "nextjs": {
-        "title": "Next.js Applications",
-        "description": "Server-rendered and statically generated apps with the App Router, ISR and clean data fetching."
+      "fintech": {
+        "title": "FinTech & Banking Solutions",
+        "description": "Developing financial technology platforms and banking applications, including card request systems, digital wallets, investment platforms, and merchant service integrations.",
+        "tags": [
+          "Digital Wallets",
+          "Card Request Systems",
+          "KYC",
+          "Investment Platforms",
+          "Merchant Integration"
+        ]
       },
-      "cms": {
-        "title": "Headless CMS",
-        "description": "Editors keep their familiar CMS while the frontend stays fast and fully custom."
-      },
-      "api": {
-        "title": "API Development",
-        "description": "Structured, documented REST APIs with validation, modules and sensible error handling."
-      },
-      "auth": {
-        "title": "Auth & Access Control",
-        "description": "Role- and permission-based access with guards and decorators — locked down by default."
-      },
-      "performance": {
-        "title": "Performance Tuning",
-        "description": "Faster loads through code-splitting, image optimisation and fewer unnecessary re-renders."
-      },
-      "a11y": {
-        "title": "Accessibility",
-        "description": "Semantic markup, keyboard support and readable contrast so everyone can use the product."
+      "enterprise": {
+        "title": "Enterprise Applications",
+        "description": "Building internal business applications, workforce management platforms, payroll systems, and operational dashboards that support organizational workflows.",
+        "tags": [
+          "HR Management",
+          "Payroll Systems",
+          "Attendance Tracking",
+          "Staff Management",
+          "Business Operations",
+          "Admin Dashboards"
+        ]
       },
       "integration": {
-        "title": "API Integration",
-        "description": "Connecting frontends to third-party services and backends with typed, resilient clients."
+        "title": "API & System Integration",
+        "description": "Connecting applications with backend services, external platforms, and third-party service providers to support reliable business workflows.",
+        "tags": [
+          "EDC Integration",
+          "PPWSA Integration",
+          "Merchant APIs"
+        ]
       },
-      "ai": {
-        "title": "AI-Assisted Workflow",
-        "description": "Using AI coding tools to move faster while keeping code reviewed, tested and maintainable."
+      "realtime": {
+        "title": "Real-Time Applications",
+        "description": "Developing real-time communication systems, messaging applications, live data updates, and cross-platform software experiences.",
+        "tags": [
+          "Chat SDK"
+        ]
+      },
+      "security": {
+        "title": "Security & Access Control",
+        "description": "Implementing protected application workflows, role-based interfaces, and encrypted API communication for business and financial platforms.",
+        "tags": [
+          "RBAC",
+          "KYC",
+          "API Encryption",
+          "Role-Based Dashboards",
+          "Access Control"
+        ]
+      },
+      "quality": {
+        "title": "Software Quality & Testing",
+        "description": "Improving software reliability and maintainability through automated testing, systematic debugging, code reviews, and technical documentation.",
+        "tags": [
+          "Unit Testing",
+          "End-to-End Testing",
+          "Load Testing",
+          "Code Review"
+        ]
       }
     },
     "stats": {
@@ -312,6 +406,76 @@
       "years": "Years Coding",
       "areas": "Skill Areas",
       "languages": "Site Languages"
+    },
+    "experience": {
+      "ibank-cambodia": {
+        "title": "Frontend Developer",
+        "location": "Phnom Penh, Cambodia",
+        "description": "Developing internal business and staff management systems, supporting operational workflows and integrating external service portals into banking applications.",
+        "responsibilities": [
+          "Develop and maintain internal applications supporting staff and business operations.",
+          "Build intuitive and maintainable interfaces for internal users.",
+          "Support the digitization of business workflows and operational processes.",
+          "Integrate external service portals, including Electricité du Cambodge (EDC), Phnom Penh Water Supply Authority (PPWSA), and other merchant services.",
+          "Focus on application reliability, usability, performance, and maintainability.",
+          "Support ongoing improvements to internal business applications and service integrations."
+        ]
+      },
+      "aibodia": {
+        "title": "Full-Stack Developer",
+        "location": "Phnom Penh, Cambodia",
+        "description": "Developed end-to-end software solutions across financial technology, workforce management, real-time communication, investment, and e-commerce platforms, contributing to both frontend and backend development.",
+        "projects": {
+          "card-request": {
+            "name": "Card Request Platform",
+            "role": "Frontend Lead",
+            "bullets": [
+              "Led frontend development of a KYC-enabled platform supporting virtual and physical card requests, transfers, top-ups, withdrawals, and eSIM purchases.",
+              "Architected admin, agent, and client-facing dashboards for multiple user roles.",
+              "Implemented end-to-end encryption for API request and response data.",
+              "Integrated real-time updates using WebSocket.",
+              "Maintained software quality through unit, end-to-end, and load testing."
+            ]
+          },
+          "hr-management": {
+            "name": "HR Management Platform",
+            "role": "Full-Stack Developer",
+            "bullets": [
+              "Developed an internal HR and payroll management system with dedicated employee and administrator modules.",
+              "Implemented GPS and device-based attendance tracking.",
+              "Supported real-time workforce monitoring and automated HR workflows."
+            ]
+          },
+          "chat-sdk": {
+            "name": "Chat SDK",
+            "role": "Full-Stack Developer",
+            "bullets": [
+              "Developed a real-time communication SDK supporting text, voice, and emoji messaging.",
+              "Supported progressive web applications and desktop application compatibility."
+            ]
+          },
+          "investment-ecommerce": {
+            "name": "Investment & E-commerce Platform",
+            "role": "Full-Stack Developer",
+            "bullets": [
+              "Developed a unified wallet-based platform supporting investment, online shopping, and referral rewards."
+            ]
+          }
+        }
+      },
+      "isb-vietnam": {
+        "title": "Full-Stack Developer",
+        "location": "Ho Chi Minh City, Vietnam",
+        "description": "Collaborated with international engineering teams in Vietnam to develop and maintain software applications, improve system stability, and deliver reliable and maintainable software solutions.",
+        "responsibilities": [
+          "Developed new features across multiple software projects.",
+          "Maintained and improved existing legacy codebases.",
+          "Identified and resolved software defects through systematic debugging.",
+          "Conducted code reviews to maintain engineering quality and best practices.",
+          "Prepared technical documentation, test case designs, and test evidence reports to support quality assurance processes.",
+          "Collaborated with international team members throughout the software development lifecycle."
+        ]
+      }
     }
   },
   "os": {
@@ -321,6 +485,7 @@
       "projects": "Projects",
       "skills": "Skills",
       "education": "Education",
+      "experience": "Work Experience",
       "certificates": "Certifications",
       "services": "Specializations",
       "monitor": "System Monitor",
@@ -333,6 +498,7 @@
       "projects": "File Explorer",
       "skills": "Tech Stack",
       "education": "Education Explorer",
+      "experience": "Career Timeline",
       "certificates": "Certificate Viewer",
       "services": "Developer Tools",
       "monitor": "System Monitor",
@@ -529,7 +695,10 @@
       "back": "Back to records",
       "details": "Details",
       "period": "Period",
-      "institution": "Institution"
+      "institution": "Institution",
+      "type": "Institution type",
+      "location": "Location",
+      "batchLabel": "Batch"
     },
     "certificates": {
       "documents": "Documents",
@@ -696,8 +865,7 @@
         "projects": "Open Projects",
         "skills": "List my technical skills",
         "education": "List my education",
-        "certifications": "List my certifications",
-        "experience": "Show my experience",
+        "experience": "Show my work experience",
         "contact": "Show contact information",
         "github": "Open my GitHub profile",
         "linkedin": "Open my LinkedIn profile",
@@ -720,6 +888,7 @@
       "sections": {
         "skills": "Technical skills",
         "education": "Education",
+        "experience": "Work experience",
         "certifications": "Certifications",
         "contact": "Contact"
       },
@@ -807,6 +976,10 @@
         "title": "Education details coming soon",
         "text": "This section will be filled in shortly."
       },
+      "experience": {
+        "title": "Work experience coming soon",
+        "text": "My professional experience will be published here shortly."
+      },
       "certificates": {
         "title": "No certificates published yet",
         "text": "Credentials will appear here once they are added."
@@ -816,6 +989,9 @@
       "title": "Page not found",
       "text": "There is nothing at {{path}}. It may have been moved, or the address is mistyped.",
       "home": "Back to About"
+    },
+    "experience": {
+      "count": "{{n}} positions"
     }
   }
 }

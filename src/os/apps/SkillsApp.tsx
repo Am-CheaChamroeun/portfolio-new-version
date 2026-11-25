@@ -3,13 +3,11 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { mockImages } from '../../data/images'
 import { skillGroups } from '../../data/portfolio'
-import { TechIcon } from '../../lib/icons'
+import { TechTile } from '../../lib/icons'
+import { PROFICIENCY_LEVELS, SKILL_SEGMENTS, proficiencyOf, segmentsOf } from '../../lib/proficiency'
 import { Eyebrow, SearchField, StatusBar, Toolbar } from './shared'
 
-const SEGMENTS = 12
-const LEVELS = ['expert', 'advanced', 'proficient', 'learning'] as const
-type Level = (typeof LEVELS)[number]
-const levelKey = (l: number): Level => (l >= 11 ? 'expert' : l >= 9 ? 'advanced' : l >= 7 ? 'proficient' : 'learning')
+type Level = (typeof PROFICIENCY_LEVELS)[number]
 const pad = (n: number) => String(n).padStart(2, '0')
 
 /** Skills → a developer-tools panel: categories, search + level filter, meters per tool. */
@@ -27,7 +25,7 @@ export default function SkillsApp() {
       .filter((g) => group === 'all' || g.key === group)
       .map((g) => ({
         ...g,
-        skills: g.skills.filter((s) => (level === 'all' || levelKey(s.level) === level) && (!q || s.name.toLowerCase().includes(q))),
+        skills: g.skills.filter((s) => (level === 'all' || proficiencyOf(s.percent) === level) && (!q || s.name.toLowerCase().includes(q))),
       }))
       .filter((g) => g.skills.length > 0)
     // label() only depends on i18n via t
@@ -54,7 +52,7 @@ export default function SkillsApp() {
           <button type="button" aria-pressed={level === 'all'} onClick={() => setLevel('all')} className={chip(level === 'all')}>
             {t('os.skills.all')}
           </button>
-          {LEVELS.map((l) => (
+          {PROFICIENCY_LEVELS.map((l) => (
             <button key={l} type="button" aria-pressed={level === l} onClick={() => setLevel(l)} className={chip(level === l)}>
               {t(`skills.levels.${l}`)}
             </button>
@@ -122,19 +120,14 @@ export default function SkillsApp() {
                 <ul className="divide-y divide-card-border">
                   {g.skills.map((s, i) => (
                     <li key={s.name} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 px-3.5 py-2.5 @lg:grid-cols-[auto_1fr_auto_5.5rem]">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-warm ring-1 ring-black/5">
-                        <TechIcon name={s.icon} size={18} />
-                      </span>
+                      <TechTile tech={s.icon} size="lg" />
                       <span className="truncate text-[14px] font-medium">{s.name}</span>
                       <span
                         className="flex gap-[3px]"
                         role="img"
-                        aria-label={t('skills.meterAria', {
-                          level: s.level,
-                          max: SEGMENTS,
-                        })}
+                        aria-label={t(`skills.levels.${proficiencyOf(s.percent)}`)}
                       >
-                        {Array.from({ length: SEGMENTS }, (_, n) => (
+                        {Array.from({ length: SKILL_SEGMENTS }, (_, n) => (
                           <motion.span
                             key={n}
                             initial={{ scaleY: 0.2, opacity: 0 }}
@@ -143,11 +136,11 @@ export default function SkillsApp() {
                               delay: 0.04 * i + 0.018 * n,
                               duration: 0.18,
                             }}
-                            className={`h-3.5 w-[4px] origin-bottom rounded-[1.5px] ${n < s.level ? 'bg-accent shadow-[0_0_6px_-1px_var(--accent)]' : 'bg-fg/12'}`}
+                            className={`h-3.5 w-[4px] origin-bottom rounded-[1.5px] ${n < segmentsOf(s.percent) ? 'bg-accent shadow-[0_0_6px_-1px_var(--accent)]' : 'bg-fg/12'}`}
                           />
                         ))}
                       </span>
-                      <span className="hidden text-right font-mono text-[11px] text-faint @lg:block">{t(`skills.levels.${levelKey(s.level)}`)}</span>
+                      <span className="hidden text-right font-mono text-[11px] text-faint @lg:block">{t(`skills.levels.${proficiencyOf(s.percent)}`)}</span>
                     </li>
                   ))}
                 </ul>

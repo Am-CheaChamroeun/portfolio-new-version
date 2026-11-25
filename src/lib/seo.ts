@@ -3,7 +3,7 @@ import { profile } from '../data/portfolio'
 import type { Route } from '../os/routes'
 import { pathFor } from '../os/routes'
 
-type PageKey = 'about' | 'projects' | 'skills' | 'education' | 'certificates' | 'services' | 'monitor' | 'terminal' | 'contact' | 'settings' | 'notFound'
+type PageKey = 'about' | 'projects' | 'skills' | 'education' | 'experience' | 'services' | 'monitor' | 'terminal' | 'contact' | 'settings' | 'notFound'
 
 const setMeta = (selector: string, attr: 'name' | 'property', key: string, value: string) => {
   let el = document.head.querySelector<HTMLMetaElement>(selector)

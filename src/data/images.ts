@@ -35,14 +35,14 @@ import emblemSchool from '../assets/mock/education/emblem-school.svg'
 import certClassic from '../assets/mock/certifications/certificate-preview-classic.svg'
 import certModern from '../assets/mock/certifications/certificate-preview-modern.svg'
 import specFrontend from '../assets/mock/specializations/frontend-components.svg'
-import specNext from '../assets/mock/specializations/nextjs-pages.svg'
-import specCms from '../assets/mock/specializations/headless-cms.svg'
 import specApi from '../assets/mock/specializations/api-endpoints.svg'
 import specAuth from '../assets/mock/specializations/auth-access.svg'
-import specPerformance from '../assets/mock/specializations/performance-gauge.svg'
-import specA11y from '../assets/mock/specializations/accessibility.svg'
 import specIntegration from '../assets/mock/specializations/integration-network.svg'
-import specAi from '../assets/mock/specializations/ai-assisted.svg'
+import specFullStack from '../assets/mock/specializations/full-stack-layers.svg'
+import specFintech from '../assets/mock/specializations/fintech-card.svg'
+import specEnterprise from '../assets/mock/specializations/enterprise-dashboard.svg'
+import specRealtime from '../assets/mock/specializations/realtime-chat.svg'
+import specQuality from '../assets/mock/specializations/quality-testing.svg'
 import contactMessages from '../assets/mock/contact/messages-window.svg'
 import skillsCodeWindow from '../assets/mock/skills/code-window.svg'
 
@@ -70,15 +70,15 @@ export const mockImages = {
   certificates: [certClassic, certModern],
   /** Illustrations for the Specializations cards, by service id */
   specializations: {
+    fullstack: specFullStack,
+    backend: specApi,
     frontend: specFrontend,
-    nextjs: specNext,
-    cms: specCms,
-    api: specApi,
-    auth: specAuth,
-    performance: specPerformance,
-    a11y: specA11y,
+    fintech: specFintech,
+    enterprise: specEnterprise,
     integration: specIntegration,
-    ai: specAi,
+    realtime: specRealtime,
+    security: specAuth,
+    quality: specQuality,
   } as Record<string, string>,
   /** Messages app illustration */
   contact: contactMessages,

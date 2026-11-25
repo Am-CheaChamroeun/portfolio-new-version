@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { mockImages } from '../../data/images'
-import { highlightedServices, services, skillGroups } from '../../data/portfolio'
-import { SearchField, StatusBar, Toolbar } from './shared'
+import { highlightedServices, services } from '../../data/portfolio'
+import { uniqueTechnologies } from '../../lib/specializations'
+import { SearchField, StatusBar, TechBadge, Toolbar } from './shared'
 
-const techCount = skillGroups.reduce((n, g) => n + g.skills.length, 0)
+/** i18n returns the key text when a list is missing — only accept a real list */
+const tagsOf = (v: unknown): string[] => (Array.isArray(v) ? (v as string[]) : [])
 
 /** Specializations → a technical dashboard: KPI tiles and a card per practice, with a live filter. */
 export default function ServicesApp() {
@@ -16,15 +18,17 @@ export default function ServicesApp() {
       .map((s, i) => ({
         s,
         i,
-        title: t(`content.services.${s.id}.title` as 'content.services.frontend.title'),
-        description: t(`content.services.${s.id}.description` as 'content.services.frontend.description'),
+        title: t(`content.services.${s.id}.title` as 'content.services.fullstack.title'),
+        description: t(`content.services.${s.id}.description` as 'content.services.fullstack.description'),
+        // domain / practice badges (translated) — the programming technologies come from the data
+        tags: tagsOf(t(`content.services.${s.id}.tags` as 'content.about.paragraphs', { returnObjects: true, defaultValue: [] })),
       }))
-      .filter(({ s, title, description }) => !q || `${title} ${description} ${s.stack}`.toLowerCase().includes(q))
+      .filter(({ s, title, description, tags }) => !q || `${title} ${description} ${(s.technologies ?? []).join(' ')} ${tags.join(' ')}`.toLowerCase().includes(q))
   }, [query, t])
 
   const kpis = [
     { label: t('os.services.kpiPractices'), value: services.length },
-    { label: t('os.services.kpiTech'), value: techCount },
+    { label: t('os.services.kpiTech'), value: uniqueTechnologies.length },
     { label: t('os.services.kpiCore'), value: highlightedServices },
   ]
 
@@ -52,8 +56,8 @@ export default function ServicesApp() {
 
         {list.length === 0 && <p className="py-12 text-center text-sm text-faint">{t('os.services.none')}</p>}
         <ul className="mt-4 grid gap-3 @2xl:grid-cols-2 @5xl:grid-cols-3" aria-live="polite">
-          {list.map(({ s, i, title, description }) => {
-            const hot = i < highlightedServices
+          {list.map(({ s, i, title, description, tags }) => {
+            const hot = !!s.core
             const Icon = s.icon
             const art = mockImages.specializations[s.id]
             return (
@@ -91,9 +95,14 @@ export default function ServicesApp() {
                   <div className="mt-auto pt-3">
                     <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-faint">{t('services.spec')}</p>
                     <ul className="mt-1.5 flex flex-wrap gap-1">
-                      {s.stack.split('·').map((tok) => (
-                        <li key={tok} className="rounded border border-card-border bg-bg-subtle px-1.5 py-0.5 font-mono text-[10.5px] text-muted">
-                          {tok.trim()}
+                      {(s.technologies ?? []).map((name) => (
+                        <li key={name}>
+                          <TechBadge name={name} compact />
+                        </li>
+                      ))}
+                      {tags.map((tag) => (
+                        <li key={tag} className="rounded-md border border-card-border bg-bg-subtle px-1.5 py-0.5 font-mono text-[10.5px] text-muted">
+                          {tag}
                         </li>
                       ))}
                     </ul>
