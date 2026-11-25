@@ -97,10 +97,9 @@ export const terminalCommands = ['$ npm run deploy', 'vite build --mode producti
 /** Which output lines are "info" (neon) rather than "success" — by index */
 export const terminalInfoLines = [3]
 
+/** Location label shown in the System Monitor (a real location, not a server region). */
 export const heroTelemetry = {
   region: 'PHNOM-PENH-KH',
-  deploys: 128,
-  uptime: '99.98%',
 }
 
 /* ───────────── About ───────────── */
@@ -314,10 +313,10 @@ export const highlightedServices = 2
 
 /* ───────────── Stats band ───────────── */
 
-// TODO: replace with your real numbers. Labels: content.stats.<id>
+// Counts are derived from the real data above. `years` is the only hand-written number — keep it truthful.
 export const stats = [
-  { id: 'projects', value: 10, suffix: '+' },
-  { id: 'technologies', value: 12, suffix: '+' },
+  { id: 'technologies', value: skillGroups.reduce((n, g) => n + g.skills.length, 0), suffix: '' },
+  { id: 'areas', value: skillGroups.length, suffix: '' },
   { id: 'years', value: 3, suffix: '+' },
-  { id: 'hours', value: 1000, suffix: '+' },
+  { id: 'languages', value: 3, suffix: '' },
 ]

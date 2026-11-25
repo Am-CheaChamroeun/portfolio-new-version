@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0B0D0F" />
+    <!--seo:start-->
     <title>Roeun — Frontend Developer | Portfolio</title>
-    <meta
-      name="description"
-      content="Portfolio of Roeun — frontend developer building fast, accessible web apps with React, TypeScript and Next.js."
-    />
+    <meta name="description" content="Portfolio of Roeun — frontend developer building fast, accessible web apps with React, TypeScript and Next.js." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Roeun — Frontend Developer | Portfolio" />
+    <meta property="og:description" content="Portfolio of Roeun — frontend developer building fast, accessible web apps with React, TypeScript and Next.js." />
+    <meta name="twitter:card" content="summary" />
+    <!--seo:end-->
+    <style>
+      /* Crawler-readable copy that the app replaces on load — visually hidden, still available to assistive tech and bots */
+      #prerender { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      html { background: #0b0d0f; }
+    </style>
     <script>
       // Apply the saved theme before first paint to avoid a flash.
       // Graphite (dark) is the default; warm paper is the light theme.

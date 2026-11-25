@@ -95,7 +95,7 @@ export const Taskbar = memo(function Taskbar() {
         <button
           type="button"
           onClick={() => actions.setPalette(!palette)}
-          aria-label={t('os.palette.label')}
+          aria-label={`${t('os.palette.label')} (${shortcutLabel()})`}
           aria-haspopup="dialog"
           aria-expanded={palette}
           data-tip={t('os.taskbar.search')}

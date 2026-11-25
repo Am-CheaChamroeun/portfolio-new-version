@@ -94,7 +94,6 @@ html[data-accent='white'] {
   --sheet: #fbfbf4; /* window surface */
   --titlebar: #ececdd;
   --shadow-window: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 24px 60px -18px rgba(0, 0, 0, 0.55);
-  --shadow-window-active: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 34px 90px -18px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(11, 13, 15, 0.18);
 }
 
 .dark {
@@ -124,7 +123,6 @@ html[data-accent='white'] {
   --sheet: #191c20;
   --titlebar: #14171a;
   --shadow-window: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
-  --shadow-window-active: 0 34px 90px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgb(var(--neon-rgb) / 0.22), 0 0 50px -20px rgb(var(--neon-rgb) / 0.35);
 }
 
 @theme inline {
@@ -336,36 +334,12 @@ html[lang='zh-CN'] {
   background-size: 24px 24px;
 }
 
-/* Graphite surface with a fine + major grid (always dark) */
-@utility drafting-grid {
-  background-color: var(--graphite);
-  background-image:
-    linear-gradient(rgba(245, 245, 233, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 245, 233, 0.07) 1px, transparent 1px),
-    linear-gradient(rgba(245, 245, 233, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 245, 233, 0.03) 1px, transparent 1px);
-  background-size:
-    100px 100px,
-    100px 100px,
-    20px 20px,
-    20px 20px;
-  background-position: -1px -1px;
-}
-
 @utility shadow-window {
   box-shadow: var(--shadow-window);
 }
 
-@utility shadow-window-active {
-  box-shadow: var(--shadow-window-active);
-}
-
-/* Window geometry animates (maximize / restore) except while it is being dragged */
-
 @utility cursor-blink {
   animation: blink 1s step-end infinite;
-}
-
-@utility animate-float {
-  animation: float 6s ease-in-out infinite;
 }
 
 @utility animate-boot {
@@ -395,16 +369,6 @@ html[lang='zh-CN'] {
   50%,
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
   }
 }
 

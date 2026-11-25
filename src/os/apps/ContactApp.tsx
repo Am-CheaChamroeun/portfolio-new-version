@@ -1,16 +1,17 @@
 import { ArrowUpRight, CheckCircle2, Download, Mail, Send } from 'lucide-react'
-import { useId, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from '../../components/ui/Avatar'
 import { mockImages } from '../../data/images'
 import { contactFormEndpoint, profile, socials } from '../../data/portfolio'
 import { GithubIcon, LinkedinIcon, TelegramIcon } from '../../lib/icons'
+import { cvAvailable } from '../../lib/links'
 import { Eyebrow } from './shared'
 
-type Status = 'idle' | 'sending' | 'sent' | 'error'
+type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error'
 
 const field =
-  'w-full rounded-lg border border-card-border bg-sheet px-3 py-2 text-[14px] text-fg outline-none transition-colors placeholder:text-faint focus:border-primary'
+  'w-full rounded-lg border border-card-border bg-sheet px-3 py-2 text-[14px] text-fg outline-none max-md:min-h-11 max-md:text-[16px] transition-colors placeholder:text-faint focus:border-primary'
 
 function Channel({ href, icon, label, value }: { href: string; icon: ReactNode; label: string; value: string }) {
   const external = href.startsWith('http')
@@ -38,6 +39,14 @@ export default function ContactApp() {
   const { t } = useTranslation()
   const [status, setStatus] = useState<Status>('idle')
   const id = useId()
+  const [hasCv, setHasCv] = useState(false)
+  useEffect(() => {
+    let on = true
+    cvAvailable().then((ok) => on && setHasCv(ok))
+    return () => {
+      on = false
+    }
+  }, [])
 
   /** Replace the browser's built-in validation bubble text with the current language. */
   const validation = {
@@ -57,7 +66,8 @@ export default function ContactApp() {
       const subject = encodeURIComponent(t('contact.mailSubject', { name: data.name }))
       const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`)
       window.location.href = `mailto:${socials.email}?subject=${subject}&body=${body}`
-      setStatus('sent')
+      // we cannot know whether the visitor's email app opened or the mail was sent — so this is never shown as "sent"
+      setStatus('mailto')
       return
     }
     setStatus('sending')
@@ -97,7 +107,7 @@ export default function ContactApp() {
           <Channel href={socials.linkedin.url} icon={<LinkedinIcon size={15} />} label={t('contact.linkedin')} value={socials.linkedin.label} />
           <Channel href={socials.github.url} icon={<GithubIcon size={15} />} label={t('contact.github')} value={socials.github.label} />
           <Channel href={socials.telegram.url} icon={<TelegramIcon size={15} />} label={t('contact.telegram')} value={socials.telegram.label} />
-          {profile.cvUrl && (
+          {hasCv && (
             <a
               href={profile.cvUrl}
               download
@@ -188,11 +198,12 @@ export default function ContactApp() {
                 disabled={status === 'sending'}
                 className="inline-flex items-center gap-2 rounded-lg bg-cta px-5 py-2.5 text-[13px] font-semibold text-on-cta transition-colors hover:bg-cta-hover disabled:opacity-70"
               >
-                {status === 'sent' ? <CheckCircle2 size={15} /> : <Send size={15} />}
-                {status === 'sending' ? t('contact.sending') : status === 'sent' ? t('contact.sent') : t('contact.submit')}
+                {status === 'sent' ? <CheckCircle2 size={15} /> : contactFormEndpoint ? <Send size={15} /> : <Mail size={15} />}
+                {status === 'sending' ? t('contact.sending') : status === 'sent' ? t('contact.sent') : contactFormEndpoint ? t('contact.submit') : t('contact.submitMail')}
               </button>
-              <p role="status" className="min-h-4 text-[12px] text-faint">
+              <p role="status" aria-live="polite" className={`min-h-4 text-[12px] ${status === 'error' ? 'text-red-400' : 'text-faint'}`}>
                 {status === 'error' && t('contact.error')}
+                {status === 'mailto' && t('contact.mailtoHint', { email: socials.email })}
               </p>
             </div>
           </form>

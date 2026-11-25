@@ -1,7 +1,53 @@
 {
   "meta": {
     "title": "{{name}} — 前端开发工程师 | 作品集",
-    "description": "{{name}} 的作品集——一名使用 React、TypeScript 和 Next.js 打造快速、无障碍 Web 应用的前端开发者。"
+    "description": "{{name}} 的作品集——一名使用 React、TypeScript 和 Next.js 打造快速、无障碍 Web 应用的前端开发者。",
+    "pages": {
+      "about": {
+        "title": "关于我",
+        "description": "Roeun 是一名位于柬埔寨金边的前端开发者，使用 React、TypeScript 和 Next.js 打造快速、无障碍的 Web 应用。"
+      },
+      "projects": {
+        "title": "项目",
+        "description": "Roeun 的精选项目与案例研究——使用 React、Next.js 和 NestJS 完成的前端与全栈工作。"
+      },
+      "skills": {
+        "title": "技能与技术栈",
+        "description": "Roeun 使用的技术：React、Vue、Angular、Next.js、TypeScript、Node.js、NestJS、GraphQL 和数据库。"
+      },
+      "education": {
+        "title": "教育背景",
+        "description": "Roeun 的教育与学习背景。"
+      },
+      "certificates": {
+        "title": "证书",
+        "description": "Roeun 获得的证书与资质。"
+      },
+      "services": {
+        "title": "服务",
+        "description": "Roeun 可以为你构建：前端应用、Next.js 网站、无头 CMS、API 与无障碍界面。"
+      },
+      "monitor": {
+        "title": "系统监视器",
+        "description": "按领域查看 Roeun 的技能与公开的 GitHub 活动。"
+      },
+      "terminal": {
+        "title": "终端",
+        "description": "通过简单命令探索 Roeun 作品集的交互式终端。"
+      },
+      "contact": {
+        "title": "联系",
+        "description": "通过邮箱、LinkedIn、Telegram 或 GitHub 联系 Roeun。"
+      },
+      "settings": {
+        "title": "设置",
+        "description": "选择本作品集的强调色、壁纸、动效、声音和语言。"
+      },
+      "notFound": {
+        "title": "页面未找到",
+        "description": "该地址没有对应的作品集页面。"
+      }
+    }
   },
   "language": {
     "label": "语言",
@@ -38,14 +84,7 @@
     "online": "在线"
   },
   "certifications": {
-    "eyebrow": "已认证的资质",
-    "title": "证书",
-    "view": "查看证书",
     "viewAria": "查看证书：{{title}}",
-    "previewAlt": "证书预览：{{title}}",
-    "hint": "↑ 点击任意文件即可查看完整证书",
-    "close": "关闭证书查看器",
-    "dialog": "证书：{{title}}",
     "issuedBy": "{{title}} —— 颁发机构：{{issuer}}",
     "placeholder": {
       "heading": "结业证书",
@@ -71,7 +110,21 @@
     "eyebrow": "我能提供的帮助",
     "title": "专长领域",
     "subline": "{{count}}项实践 · 按实际交付工作中的使用频率排序。",
-    "numbers": ["零", "一", "两", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],
+    "numbers": [
+      "零",
+      "一",
+      "两",
+      "三",
+      "四",
+      "五",
+      "六",
+      "七",
+      "八",
+      "九",
+      "十",
+      "十一",
+      "十二"
+    ],
     "fig": "图 {{n}}",
     "spec": "规格",
     "cta": "你的项目不属于以上任何一类？",
@@ -81,15 +134,11 @@
     "aria": "统计数据"
   },
   "contact": {
-    "eyebrow": "保持联系",
-    "title": "一起书写下一章。",
-    "addressBook": "通讯录",
     "email": "电子邮件",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "telegram": "Telegram",
     "cv": "下载简历",
-    "dear": "亲爱的 {{name}}：",
     "labels": {
       "name": "我的名字是",
       "email": "你可以通过这个邮箱联系我",
@@ -106,9 +155,11 @@
     },
     "submit": "发送消息",
     "sending": "发送中…",
-    "sent": "消息已准备好——谢谢！",
+    "sent": "消息已发送——谢谢！",
     "error": "出了点问题，请直接给我发邮件。",
-    "mailSubject": "来自 {{name}} 的作品集咨询"
+    "mailSubject": "来自 {{name}} 的作品集咨询",
+    "submitMail": "在邮件应用中打开",
+    "mailtoHint": "你的邮件应用应已打开并准备好邮件。如果没有打开，请直接写信到 {{email}}。"
   },
   "images": {
     "conceptPreview": "概念预览",
@@ -133,25 +184,47 @@
       "status": "已部署",
       "payload": "1 名工程师"
     },
-    "terminal": ["", "✓ 构建完成，用时 1.84s", "✓ 就绪 · 生产环境", "200 OK · {\"status\":\"live\"}"],
+    "terminal": [
+      "",
+      "✓ 构建完成，用时 1.84s",
+      "✓ 就绪 · 生产环境",
+      "200 OK · {\"status\":\"live\"}"
+    ],
     "about": {
       "paragraphs": [
         "我是一名前端开发者，拥有约三年使用 React、TypeScript 和 Next.js 构建 Web 应用的经验。我注重清晰的组件架构、无障碍的界面，以及那些让产品用起来更快的细节。",
         "最近，我也在后端方面不断成长——使用 NestJS 构建 API，研究基于角色的访问控制（RBAC），并在学习 Spring Boot。我也很喜欢 headless 架构，例如结合 REST 和 GraphQL 的 WordPress + Next.js。",
         "[添加一句话，说明你在寻找什么，或是什么在驱动着你。]"
       ],
-      "chips": ["前端开发者", "React 与 Next.js", "TypeScript", "终身学习者"],
-      "features": ["清晰的架构", "默认类型安全", "注重性能", "高质量交付"]
+      "chips": [
+        "前端开发者",
+        "React 与 Next.js",
+        "TypeScript",
+        "终身学习者"
+      ],
+      "features": [
+        "清晰的架构",
+        "默认类型安全",
+        "注重性能",
+        "高质量交付"
+      ]
     },
     "education": {
       "edu-1": {
-        "details": ["[学位或专业，例如：计算机科学学士]"]
+        "details": [
+          "[学位或专业，例如：计算机科学学士]"
+        ]
       },
       "edu-2": {
-        "details": ["[你学习的内容]", "[可选的第二行]"]
+        "details": [
+          "[你学习的内容]",
+          "[可选的第二行]"
+        ]
       },
       "edu-3": {
-        "details": ["[文凭 / 考试]"]
+        "details": [
+          "[文凭 / 考试]"
+        ]
       }
     },
     "skills": {
@@ -165,19 +238,35 @@
       "featured-project": {
         "tagline": "[一句话介绍这个项目]",
         "description": "[用两到三句话说明它的功能、面向的用户，以及你在其中的角色。]",
-        "highlights": ["[核心功能]", "[核心功能]", "[核心功能]"]
+        "highlights": [
+          "[核心功能]",
+          "[核心功能]",
+          "[核心功能]"
+        ]
       },
       "project-one": {
         "description": "[简短描述]",
-        "highlights": ["[功能]", "[功能]", "[功能]"]
+        "highlights": [
+          "[功能]",
+          "[功能]",
+          "[功能]"
+        ]
       },
       "project-two": {
         "description": "[简短描述]",
-        "highlights": ["[功能]", "[功能]", "[功能]"]
+        "highlights": [
+          "[功能]",
+          "[功能]",
+          "[功能]"
+        ]
       },
       "project-three": {
         "description": "[简短描述]",
-        "highlights": ["[功能]", "[功能]", "[功能]"]
+        "highlights": [
+          "[功能]",
+          "[功能]",
+          "[功能]"
+        ]
       }
     },
     "services": {
@@ -219,15 +308,14 @@
       }
     },
     "stats": {
-      "projects": "已完成项目",
       "technologies": "使用过的技术",
       "years": "编程年限",
-      "hours": "编程小时数"
+      "areas": "技能领域",
+      "languages": "网站语言"
     }
   },
   "os": {
     "name": "DeveloperOS",
-    "tagline": "我的数字工作空间",
     "apps": {
       "about": "关于我",
       "projects": "项目",
@@ -287,7 +375,12 @@
     },
     "boot": {
       "aria": "正在启动 DeveloperOS",
-      "steps": ["正在启动 DeveloperOS…", "正在加载工作空间…", "正在挂载项目…", "准备就绪"],
+      "steps": [
+        "正在启动 DeveloperOS…",
+        "正在加载工作空间…",
+        "正在挂载项目…",
+        "准备就绪"
+      ],
       "skip": "点击或按任意键跳过"
     },
     "welcome": {
@@ -341,7 +434,10 @@
         "progress": "讲解进度",
         "loading": "正在准备语音…",
         "unavailable": "您的浏览器目前无法朗读该语言。请重试，或切换语言。"
-      }
+      },
+      "projectsCta": "查看项目",
+      "hint": "探索：从侧边栏选择应用，或按 {{key}} 搜索全部内容。",
+      "hintMobile": "探索：使用下方的程序坞，或点击搜索查找内容。"
     },
     "projects": {
       "path": "项目",
@@ -398,12 +494,23 @@
         "stackNote": "根据此项目的技术列表生成。",
         "placeholderNote": "占位内容——请在 content.projects.{{slug}}.study 中替换",
         "placeholder": {
-          "objectives": ["[描述项目的第一个目标]", "[描述第二个目标]", "[描述第三个目标]"],
+          "objectives": [
+            "[描述项目的第一个目标]",
+            "[描述第二个目标]",
+            "[描述第三个目标]"
+          ],
           "problem": "[描述该项目要解决的问题。]",
           "solution": "[描述项目如何解决该问题。]",
-          "role": ["[你的主要职责]", "[另一项职责]", "[另一项职责]"],
+          "role": [
+            "[你的主要职责]",
+            "[另一项职责]",
+            "[另一项职责]"
+          ],
           "architecture": "[说明各部分如何协同：前端、API、数据库、托管。]",
-          "challenges": ["[你遇到的一个挑战以及如何解决]", "[另一个挑战]"]
+          "challenges": [
+            "[你遇到的一个挑战以及如何解决]",
+            "[另一个挑战]"
+          ]
         }
       }
     },
@@ -452,9 +559,7 @@
       "overall": "总体",
       "session": "会话运行时间",
       "region": "区域",
-      "deploys": "部署次数",
-      "uptime": "正常运行时间",
-      "log": "部署日志",
+      "log": "示例部署(模拟)",
       "globe": "位置",
       "live": "实时",
       "system": "系统",
@@ -515,7 +620,9 @@
           "release": "在 {{repo}} 发布了 {{tag}}",
           "fork": "复刻了 {{repo}}"
         }
-      }
+      },
+      "timezone": "时区",
+      "language": "语言"
     },
     "contact": {
       "inbox": "收件箱",
@@ -686,6 +793,25 @@
       "preview": "预览 {{name}}",
       "on": "开",
       "off": "关"
+    },
+    "empty": {
+      "projects": {
+        "title": "项目即将上线",
+        "text": "案例研究正在准备中。在此之前，可在系统监视器的 GitHub 标签中查看公开仓库。"
+      },
+      "education": {
+        "title": "教育信息即将补充",
+        "text": "此部分很快会更新。"
+      },
+      "certificates": {
+        "title": "暂无已发布的证书",
+        "text": "添加后将显示在这里。"
+      }
+    },
+    "notFound": {
+      "title": "页面未找到",
+      "text": "{{path}} 没有内容。它可能已被移动，或地址输入有误。",
+      "home": "返回关于我"
     }
   }
 }

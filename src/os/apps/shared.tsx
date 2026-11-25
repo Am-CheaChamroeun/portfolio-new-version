@@ -1,4 +1,4 @@
-import { Search, X } from 'lucide-react'
+import { Search, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useRef, useState, type ChangeEvent, type InputHTMLAttributes, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TechIcon } from '../../lib/icons'
@@ -67,7 +67,7 @@ export function SearchField({ label, className = '', ...props }: { label: string
         type="search"
         aria-label={label}
         {...props}
-        className="h-8 w-full rounded-md border border-card-border bg-sheet pl-8 pr-8 text-[13px] text-fg outline-none transition-colors [appearance:none] placeholder:text-faint focus:border-primary [&::-webkit-search-cancel-button]:hidden"
+        className="h-8 w-full rounded-md border border-card-border bg-sheet pl-8 pr-8 text-[13px] max-md:h-10 max-md:text-[16px] text-fg outline-none transition-colors [appearance:none] placeholder:text-faint focus:border-primary [&::-webkit-search-cancel-button]:hidden"
       />
       {props.value && (
         <button
@@ -79,7 +79,7 @@ export function SearchField({ label, className = '', ...props }: { label: string
           }
           aria-label={t('os.search.clear')}
           title={t('os.search.clear')}
-          className="absolute right-1.5 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded text-faint hover:text-fg"
+          className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded text-faint hover:text-fg"
         >
           <X size={12} />
         </button>
@@ -164,6 +164,19 @@ export function AppSkeleton({ label }: { label: string }) {
       </div>
       <Skeleton className="h-3 w-2/3 rounded" />
       <Skeleton className="h-3 w-1/2 rounded" />
+    </div>
+  )
+}
+
+/** A calm, professional "nothing here yet" panel for sections without content. */
+export function EmptyState({ icon: Icon, title, text }: { icon: LucideIcon; title: string; text: string }) {
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
+      <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-card-border bg-bg-subtle text-muted">
+        <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
+      </span>
+      <h3 className="text-[15px] font-semibold">{title}</h3>
+      <p className="max-w-sm text-[13.5px] leading-6 text-muted">{text}</p>
     </div>
   )
 }

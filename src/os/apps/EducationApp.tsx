@@ -2,8 +2,9 @@ import { ArrowLeft, ArrowUpRight, Calendar, GraduationCap } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { mockImages, pickImage } from '../../data/images'
-import { education, type EducationItem } from '../../data/portfolio'
-import { Eyebrow, Pill, StatusBar, Toolbar } from './shared'
+import { type EducationItem } from '../../data/portfolio'
+import { visibleEducation as education } from '../../data/visible'
+import { EmptyState, Eyebrow, Pill, StatusBar, Toolbar } from './shared'
 
 function Logo({ item, size }: { item: EducationItem; size: string }) {
   const { t } = useTranslation()
@@ -31,6 +32,7 @@ export default function EducationApp() {
   const { t } = useTranslation()
   const [selected, setSelected] = useState<number | null>(null)
   const item = education[selected ?? 0]
+  if (!item) return <EmptyState icon={GraduationCap} title={t('os.empty.education.title')} text={t('os.empty.education.text')} />
   const details = t(`content.education.${item.id}.details` as 'content.education.edu-1.details', { returnObjects: true, defaultValue: [] }) as string[]
 
   return (

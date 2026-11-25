@@ -108,7 +108,7 @@ export function LanguageSwitcher({ placement = 'up', align = 'right' }: Props) {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={open ? menuId : undefined}
-        aria-label={t('language.choose', { language: current.name })}
+        aria-label={`${current.short} — ${t('language.choose', { language: current.name })}`}
         title={t('language.label')}
         className={`group flex h-9 items-center gap-1.5 rounded-lg px-2 text-sm text-warm/90 transition-colors hover:bg-warm/10 hover:text-neon ${
           open ? 'bg-warm/10 text-neon' : ''

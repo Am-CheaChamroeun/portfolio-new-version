@@ -2,12 +2,14 @@ import { Award, ChevronLeft, ChevronRight, ExternalLink, RotateCcw, ZoomIn, Zoom
 import { useState, type KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
+import { SHOW_PLACEHOLDERS } from '../../lib/placeholder'
 import { mockImages, pickImage } from '../../data/images'
-import { certificates, profile, type Certificate } from '../../data/portfolio'
-import { Eyebrow, StatusBar, Toolbar } from './shared'
+import { certificates as allCertificates, profile, type Certificate } from '../../data/portfolio'
+import { visibleCertificates as certificates } from '../../data/visible'
+import { EmptyState, Eyebrow, StatusBar, Toolbar } from './shared'
 
 /** Real certificate scan, or a sample layout until you add one. */
-const certImage = (cert: Certificate) => pickImage(cert.image, mockImages.certificates[certificates.indexOf(cert)])
+const certImage = (cert: Certificate) => pickImage(cert.image, mockImages.certificates[allCertificates.indexOf(cert)])
 
 /** Stand-in document shown until you add a real certificate image. */
 function Placeholder({ cert }: { cert: Certificate }) {
@@ -20,7 +22,7 @@ function Placeholder({ cert }: { cert: Certificate }) {
         <div className="mt-1 text-sm text-muted">{t('certifications.placeholder.awarded')}</div>
         <div className="mt-1 text-3xl font-semibold text-primary">{profile.name}</div>
         <div className="mt-1 text-sm text-muted">{cert.title}</div>
-        <div className="absolute bottom-3 font-mono text-[9px] uppercase tracking-[0.2em] text-faint">{t('certifications.placeholder.add')}</div>
+        {SHOW_PLACEHOLDERS && <div className="absolute bottom-3 font-mono text-[9px] uppercase tracking-[0.2em] text-faint">{t('certifications.placeholder.add')}</div>}
       </div>
     </div>
   )
@@ -34,6 +36,7 @@ export default function CertificatesApp() {
   const [index, setIndex] = useState(0)
   const [zoom, setZoom] = useState(2) // index into ZOOMS → 100 %
   const cert = certificates[index]
+  if (!cert) return <EmptyState icon={Award} title={t('os.empty.certificates.title')} text={t('os.empty.certificates.text')} />
   const image = certImage(cert)
   const go = (i: number) => {
     setIndex((i + certificates.length) % certificates.length)

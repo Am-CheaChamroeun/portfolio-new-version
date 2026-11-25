@@ -67,3 +67,11 @@ Illustrations in `src/assets/mock/` are labelled placeholders. Swap them in `src
 ## Notes
 - The language and theme choices keep the storage keys `notebook-lang` and `notebook-theme-v2`, so returning visitors keep their settings.
 - `@fontsource-variable/fraunces` and `@fontsource-variable/caveat` are no longer used and can be removed with `npm uninstall` (then commit the updated lockfile).
+
+## URLs, SEO and deployment
+
+* **Routes:** `/` (About), `/about`, `/projects`, `/projects/:slug`, `/skills`, `/education`, `/certificates`, `/services`, `/monitor`, `/terminal`, `/contact`, `/settings`. The address bar mirrors the OS store (`src/os/routes.ts` + `OSProvider`) — there is no second navigation state. Unknown addresses show a DeveloperOS 404 inside the workspace.
+* **Build:** `npm run build` = type-check → Vite build → `scripts/prerender.mjs`, which writes a static HTML file per route (own title, description, canonical, Open Graph / Twitter tags, JSON-LD, readable content), plus `sitemap.xml`, `robots.txt` and `404.html`.
+* **Domain:** set `VITE_SITE_URL=https://your-domain` (see `.env.example`). Without it the build warns and skips absolute URLs / sitemap rather than guessing.
+* **Vercel:** `vercel.json` enables clean URLs and cache headers. No catch-all rewrite is used on purpose: every real route is a prerendered file and anything else gets `404.html` with a real 404 status.
+* **Placeholders:** `[BRACKETED]` content is shown in `npm run dev` and hidden in production — see `CONTENT_CHECKLIST.md`.

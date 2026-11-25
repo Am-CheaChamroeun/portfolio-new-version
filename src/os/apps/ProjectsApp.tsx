@@ -3,13 +3,14 @@ import { useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
-import { featuredProject, projects, socials, type Project } from '../../data/portfolio'
+import { socials, type Project } from '../../data/portfolio'
+import { visibleProjects } from '../../data/visible'
 import { GithubIcon } from '../../lib/icons'
 import { useOSActions, useOSState } from '../hooks'
 import { CaseStudy, projectCategory, type ProjectText } from './CaseStudy'
-import { BrowserFrame, Eyebrow, Pill, StatusBar, Toolbar } from './shared'
+import { BrowserFrame, EmptyState, Eyebrow, Pill, StatusBar, Toolbar } from './shared'
 
-const all: Project[] = [featuredProject, ...projects]
+const all: Project[] = visibleProjects
 
 /** A project's translated text (content.projects.<slug> in the locale files). */
 function useProjectText(slug: string): ProjectText {
@@ -128,6 +129,8 @@ export default function ProjectsApp() {
     if (e.detail === 0 || e.detail >= 2 || coarse()) open(slug)
   }
 
+  if (all.length === 0) return <EmptyState icon={FolderOpen} title={t('os.empty.projects.title')} text={t('os.empty.projects.text')} />
+
   const crumb = 'rounded px-1.5 py-0.5 hover:bg-fg/10'
   return (
     <div className="@container flex h-full min-h-0 flex-col">
@@ -196,7 +199,7 @@ export default function ProjectsApp() {
               type="button"
               onClick={() => open(p.slug)}
               aria-current={openSlug === p.slug ? 'page' : undefined}
-              className={`mt-0.5 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[13px] transition-colors ${
+              className={`mt-1.5 flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-[13px] transition-colors ${
                 openSlug === p.slug ? 'bg-graphite text-neon' : 'text-muted hover:bg-fg/10 hover:text-fg'
               }`}
             >

@@ -1,7 +1,53 @@
 {
   "meta": {
     "title": "{{name}} — Frontend Developer | Portfolio",
-    "description": "Portfolio of {{name}} — frontend developer building fast, accessible web apps with React, TypeScript and Next.js."
+    "description": "Portfolio of {{name}} — frontend developer building fast, accessible web apps with React, TypeScript and Next.js.",
+    "pages": {
+      "about": {
+        "title": "About",
+        "description": "Roeun is a frontend developer in Phnom Penh, Cambodia, building fast, accessible web apps with React, TypeScript and Next.js."
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "Selected projects and case studies by Roeun — frontend and full-stack work built with React, Next.js and NestJS."
+      },
+      "skills": {
+        "title": "Skills & Tech Stack",
+        "description": "The technologies Roeun works with: React, Vue, Angular, Next.js, TypeScript, Node.js, NestJS, GraphQL and databases."
+      },
+      "education": {
+        "title": "Education",
+        "description": "Roeun's education and learning background."
+      },
+      "certificates": {
+        "title": "Certificates",
+        "description": "Certificates and credentials earned by Roeun."
+      },
+      "services": {
+        "title": "Services",
+        "description": "What Roeun can build for you: frontend apps, Next.js sites, headless CMS, APIs and accessible interfaces."
+      },
+      "monitor": {
+        "title": "System Monitor",
+        "description": "A live look at Roeun's skills by area and public GitHub activity."
+      },
+      "terminal": {
+        "title": "Terminal",
+        "description": "An interactive terminal to explore Roeun's portfolio with simple commands."
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Get in touch with Roeun by email, LinkedIn, Telegram or GitHub."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Choose the accent colour, wallpaper, motion, sound and language of this portfolio."
+      },
+      "notFound": {
+        "title": "Page not found",
+        "description": "This address does not match any page of the portfolio."
+      }
+    }
   },
   "language": {
     "label": "Language",
@@ -38,14 +84,7 @@
     "online": "online"
   },
   "certifications": {
-    "eyebrow": "Verified credentials",
-    "title": "Certifications",
-    "view": "View certificate",
     "viewAria": "View {{title}} certificate",
-    "previewAlt": "{{title}} certificate preview",
-    "hint": "↑ click any document to view the full certificate",
-    "close": "Close certificate viewer",
-    "dialog": "{{title}} certificate",
     "issuedBy": "{{title}} — issued by {{issuer}}",
     "placeholder": {
       "heading": "Certificate of Completion",
@@ -71,7 +110,21 @@
     "eyebrow": "How I can help",
     "title": "Specializations",
     "subline": "{{count}} practices · ordered by frequency in shipped work.",
-    "numbers": ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"],
+    "numbers": [
+      "Zero",
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+      "Eleven",
+      "Twelve"
+    ],
     "fig": "Fig. {{n}}",
     "spec": "Spec",
     "cta": "Have a project that doesn't fit a box?",
@@ -81,15 +134,11 @@
     "aria": "Stats"
   },
   "contact": {
-    "eyebrow": "Let's connect",
-    "title": "Write the Next Chapter.",
-    "addressBook": "Address book",
     "email": "Email",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "telegram": "Telegram",
     "cv": "Download CV",
-    "dear": "Dear {{name}},",
     "labels": {
       "name": "my name is",
       "email": "you can reach me at",
@@ -106,9 +155,11 @@
     },
     "submit": "Send Message",
     "sending": "Sending…",
-    "sent": "Message ready — thank you!",
+    "sent": "Message sent — thank you!",
     "error": "Something went wrong. Please email me directly instead.",
-    "mailSubject": "Portfolio enquiry from {{name}}"
+    "mailSubject": "Portfolio enquiry from {{name}}",
+    "submitMail": "Open in email app",
+    "mailtoHint": "Your email app should open with the message ready. If nothing opened, write to {{email}} directly."
   },
   "images": {
     "conceptPreview": "Concept preview",
@@ -133,25 +184,47 @@
       "status": "Deployed",
       "payload": "1 Engineer"
     },
-    "terminal": ["", "✓ built in 1.84s", "✓ Ready · Production", "200 OK · {\"status\":\"live\"}"],
+    "terminal": [
+      "",
+      "✓ built in 1.84s",
+      "✓ Ready · Production",
+      "200 OK · {\"status\":\"live\"}"
+    ],
     "about": {
       "paragraphs": [
         "I'm a frontend developer with around three years of experience building web applications in React, TypeScript and Next.js. I care about clean component architecture, accessible interfaces and the small details that make a product feel fast.",
         "Lately I have been growing on the backend side — building APIs with NestJS, exploring role-based access control, and learning Spring Boot. I also enjoy headless setups like WordPress + Next.js with REST and GraphQL.",
         "[ADD A LINE ABOUT WHAT YOU ARE LOOKING FOR OR WHAT DRIVES YOU.]"
       ],
-      "chips": ["Frontend Developer", "React & Next.js", "TypeScript", "Lifelong Learner"],
-      "features": ["Clean Architecture", "Type-safe by Default", "Performance Minded", "Quality Delivery"]
+      "chips": [
+        "Frontend Developer",
+        "React & Next.js",
+        "TypeScript",
+        "Lifelong Learner"
+      ],
+      "features": [
+        "Clean Architecture",
+        "Type-safe by Default",
+        "Performance Minded",
+        "Quality Delivery"
+      ]
     },
     "education": {
       "edu-1": {
-        "details": ["[DEGREE OR PROGRAM, e.g. Bachelor's Degree in Computer Science]"]
+        "details": [
+          "[DEGREE OR PROGRAM, e.g. Bachelor's Degree in Computer Science]"
+        ]
       },
       "edu-2": {
-        "details": ["[WHAT YOU STUDIED]", "[OPTIONAL SECOND LINE]"]
+        "details": [
+          "[WHAT YOU STUDIED]",
+          "[OPTIONAL SECOND LINE]"
+        ]
       },
       "edu-3": {
-        "details": ["[DIPLOMA / EXAM]"]
+        "details": [
+          "[DIPLOMA / EXAM]"
+        ]
       }
     },
     "skills": {
@@ -165,19 +238,35 @@
       "featured-project": {
         "tagline": "[ONE-LINE PITCH OF THE PROJECT]",
         "description": "[TWO OR THREE SENTENCES ABOUT WHAT IT DOES, WHO IT IS FOR, AND YOUR ROLE.]",
-        "highlights": ["[KEY FEATURE]", "[KEY FEATURE]", "[KEY FEATURE]"]
+        "highlights": [
+          "[KEY FEATURE]",
+          "[KEY FEATURE]",
+          "[KEY FEATURE]"
+        ]
       },
       "project-one": {
         "description": "[SHORT DESCRIPTION]",
-        "highlights": ["[FEATURE]", "[FEATURE]", "[FEATURE]"]
+        "highlights": [
+          "[FEATURE]",
+          "[FEATURE]",
+          "[FEATURE]"
+        ]
       },
       "project-two": {
         "description": "[SHORT DESCRIPTION]",
-        "highlights": ["[FEATURE]", "[FEATURE]", "[FEATURE]"]
+        "highlights": [
+          "[FEATURE]",
+          "[FEATURE]",
+          "[FEATURE]"
+        ]
       },
       "project-three": {
         "description": "[SHORT DESCRIPTION]",
-        "highlights": ["[FEATURE]", "[FEATURE]", "[FEATURE]"]
+        "highlights": [
+          "[FEATURE]",
+          "[FEATURE]",
+          "[FEATURE]"
+        ]
       }
     },
     "services": {
@@ -219,15 +308,14 @@
       }
     },
     "stats": {
-      "projects": "Projects Completed",
       "technologies": "Technologies Used",
       "years": "Years Coding",
-      "hours": "Hours Coding"
+      "areas": "Skill Areas",
+      "languages": "Site Languages"
     }
   },
   "os": {
     "name": "DeveloperOS",
-    "tagline": "My Digital Workspace",
     "apps": {
       "about": "About Me",
       "projects": "Projects",
@@ -287,7 +375,12 @@
     },
     "boot": {
       "aria": "Starting DeveloperOS",
-      "steps": ["Starting DeveloperOS…", "Loading workspace…", "Mounting projects…", "Ready"],
+      "steps": [
+        "Starting DeveloperOS…",
+        "Loading workspace…",
+        "Mounting projects…",
+        "Ready"
+      ],
       "skip": "Click or press any key to skip"
     },
     "welcome": {
@@ -341,7 +434,10 @@
         "progress": "Narration progress",
         "loading": "Preparing the voice…",
         "unavailable": "Voice narration isn't available for this language in your browser right now. Try again, or switch language."
-      }
+      },
+      "projectsCta": "View projects",
+      "hint": "Explore: pick an app from the sidebar, or press {{key}} to search everything.",
+      "hintMobile": "Explore: use the dock below, or tap search to find anything."
     },
     "projects": {
       "path": "Projects",
@@ -398,12 +494,23 @@
         "stackNote": "Built from this project’s technology list.",
         "placeholderNote": "Placeholder — replace in content.projects.{{slug}}.study",
         "placeholder": {
-          "objectives": ["[DESCRIBE THE FIRST GOAL OF THE PROJECT]", "[DESCRIBE THE SECOND GOAL]", "[DESCRIBE THE THIRD GOAL]"],
+          "objectives": [
+            "[DESCRIBE THE FIRST GOAL OF THE PROJECT]",
+            "[DESCRIBE THE SECOND GOAL]",
+            "[DESCRIBE THE THIRD GOAL]"
+          ],
           "problem": "[DESCRIBE THE PROBLEM THIS PROJECT SETS OUT TO SOLVE.]",
           "solution": "[DESCRIBE HOW THE PROJECT SOLVES IT.]",
-          "role": ["[YOUR MAIN RESPONSIBILITY]", "[ANOTHER RESPONSIBILITY]", "[ANOTHER RESPONSIBILITY]"],
+          "role": [
+            "[YOUR MAIN RESPONSIBILITY]",
+            "[ANOTHER RESPONSIBILITY]",
+            "[ANOTHER RESPONSIBILITY]"
+          ],
           "architecture": "[EXPLAIN HOW THE PIECES FIT TOGETHER: FRONTEND, API, DATABASE, HOSTING.]",
-          "challenges": ["[A CHALLENGE YOU FACED AND HOW YOU SOLVED IT]", "[ANOTHER CHALLENGE]"]
+          "challenges": [
+            "[A CHALLENGE YOU FACED AND HOW YOU SOLVED IT]",
+            "[ANOTHER CHALLENGE]"
+          ]
         }
       }
     },
@@ -452,9 +559,7 @@
       "overall": "Overall",
       "session": "Session uptime",
       "region": "Region",
-      "deploys": "Deploys",
-      "uptime": "Uptime",
-      "log": "Deploy log",
+      "log": "Sample deploy (simulated)",
       "globe": "Location",
       "live": "live",
       "system": "System",
@@ -519,7 +624,9 @@
           "release": "Released {{tag}} in {{repo}}",
           "fork": "Forked {{repo}}"
         }
-      }
+      },
+      "timezone": "Time zone",
+      "language": "Language"
     },
     "contact": {
       "inbox": "Inbox",
@@ -690,6 +797,25 @@
       "preview": "Preview {{name}}",
       "on": "On",
       "off": "Off"
+    },
+    "empty": {
+      "projects": {
+        "title": "Projects are coming soon",
+        "text": "Case studies are being prepared. In the meantime, the GitHub tab in System Monitor shows public repositories."
+      },
+      "education": {
+        "title": "Education details coming soon",
+        "text": "This section will be filled in shortly."
+      },
+      "certificates": {
+        "title": "No certificates published yet",
+        "text": "Credentials will appear here once they are added."
+      }
+    },
+    "notFound": {
+      "title": "Page not found",
+      "text": "There is nothing at {{path}}. It may have been moved, or the address is mistyped.",
+      "home": "Back to About"
     }
   }
 }

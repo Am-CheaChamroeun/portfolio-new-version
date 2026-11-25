@@ -2,7 +2,8 @@ import { ArrowUpRight, CornerDownLeft, Download, Languages, Search, Sparkles, Su
 import { motion } from 'motion/react'
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { featuredProject, projects, services, skillGroups, socials } from '../data/portfolio'
+import { services, skillGroups, socials } from '../data/portfolio'
+import { visibleProjects } from '../data/visible'
 import { useTheme } from '../hooks/useTheme'
 import { languages } from '../i18n'
 import { easeOut } from '../lib/motion'
@@ -26,7 +27,7 @@ type Item = {
   current?: boolean
 }
 
-const allProjects = [featuredProject, ...projects]
+const allProjects = visibleProjects
 const groupOrder: Group[] = ['recent', 'apps', 'projects', 'skills', 'specializations', 'actions', 'language']
 
 /** Better matches first: starts-with, then word-start, then anywhere. -1 = no match. */

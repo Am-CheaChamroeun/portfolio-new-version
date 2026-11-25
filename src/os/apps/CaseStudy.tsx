@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { featuredProject, socials, type Project } from '../../data/portfolio'
+import { SHOW_PLACEHOLDERS } from '../../lib/placeholder'
 import { GithubIcon } from '../../lib/icons'
 import { easeOut } from '../../lib/motion'
 import { BrowserFrame, Eyebrow, Pill, SmartImage, TechBadge } from './shared'
@@ -133,6 +134,20 @@ export function CaseStudy({
     }))
     .filter((l) => l.items.length)
 
+  // sections whose real text has not been written yet stay hidden in production (visible in dev, with a placeholder tag)
+  const vis: Record<string, boolean> = {
+    overview: true,
+    objectives: !!real.objectives || SHOW_PLACEHOLDERS,
+    problem: (!!real.problem && !!real.solution) || SHOW_PLACEHOLDERS,
+    role: !!real.role || SHOW_PLACEHOLDERS,
+    stack: true,
+    features: true,
+    architecture: !!real.architecture || SHOW_PLACEHOLDERS,
+    challenges: !!real.challenges || SHOW_PLACEHOLDERS,
+    gallery: gallery.some((g) => !g.isMock) || SHOW_PLACEHOLDERS,
+  }
+  const order = Object.keys(vis).filter((k) => vis[k])
+  const num = (id: string) => order.indexOf(id) + 1
   const sections = [
     ['overview', t('os.projects.study.overview')],
     ['objectives', t('os.projects.study.objectives')],
@@ -144,6 +159,7 @@ export function CaseStudy({
     ['challenges', t('os.projects.study.challenges')],
     ['gallery', t('os.projects.study.gallery')],
   ] as const
+  const shownSections = sections.filter(([id]) => vis[id])
   const go = (id: string) => {
     const reduce = isReducedMotion()
     document.getElementById(`cs-${id}`)?.scrollIntoView({
@@ -235,7 +251,7 @@ export function CaseStudy({
         aria-label={t('os.projects.study.sections')}
         className="sticky top-0 z-10 flex gap-1 overflow-x-auto border-b border-card-border bg-sheet/90 px-4 py-2 backdrop-blur [scrollbar-width:none] @2xl:px-8"
       >
-        {sections.map(([id, label]) => (
+        {shownSections.map(([id, label]) => (
           <button
             key={id}
             type="button"
@@ -248,7 +264,7 @@ export function CaseStudy({
       </nav>
 
       <div className="px-5 pb-8 @2xl:px-8">
-        <Section id="cs-overview" n={1} title={t('os.projects.study.overview')}>
+        <Section id="cs-overview" n={num('overview')} title={t('os.projects.study.overview')}>
           <p className="max-w-3xl text-[15px] leading-8 text-muted">{text.description}</p>
           <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-card-border bg-card-border @2xl:grid-cols-4">
             {[
@@ -265,11 +281,14 @@ export function CaseStudy({
           </dl>
         </Section>
 
-        <Section id="cs-objectives" n={2} title={t('os.projects.study.objectives')} tag={tag(!!real.objectives)}>
+        {vis.objectives && (
+        <Section id="cs-objectives" n={num('objectives')} title={t('os.projects.study.objectives')} tag={tag(!!real.objectives)}>
           {bullets(study.objectives)}
         </Section>
+        )}
 
-        <Section id="cs-problem" n={3} title={t('os.projects.study.problemSolution')} tag={tag(!!real.problem && !!real.solution)}>
+        {vis.problem && (
+        <Section id="cs-problem" n={num('problem')} title={t('os.projects.study.problemSolution')} tag={tag(!!real.problem && !!real.solution)}>
           <div className="grid gap-3 @2xl:grid-cols-2">
             {[
               [t('os.projects.study.problem'), study.problem],
@@ -282,12 +301,15 @@ export function CaseStudy({
             ))}
           </div>
         </Section>
+        )}
 
-        <Section id="cs-role" n={4} title={t('os.projects.study.role')} tag={tag(!!real.role)}>
+        {vis.role && (
+        <Section id="cs-role" n={num('role')} title={t('os.projects.study.role')} tag={tag(!!real.role)}>
           {bullets(study.role)}
         </Section>
+        )}
 
-        <Section id="cs-stack" n={5} title={t('os.projects.study.stack')}>
+        <Section id="cs-stack" n={num('stack')} title={t('os.projects.study.stack')}>
           <ul className="flex flex-wrap gap-2">
             {project.tech.map((n) => (
               <li key={n}>
@@ -297,7 +319,7 @@ export function CaseStudy({
           </ul>
         </Section>
 
-        <Section id="cs-features" n={6} title={t('os.projects.study.features')}>
+        <Section id="cs-features" n={num('features')} title={t('os.projects.study.features')}>
           <ol className="grid gap-3 @2xl:grid-cols-2">
             {text.highlights.map((h, i) => (
               <li
@@ -313,7 +335,8 @@ export function CaseStudy({
           </ol>
         </Section>
 
-        <Section id="cs-architecture" n={7} title={t('os.projects.study.architecture')} tag={tag(!!real.architecture)}>
+        {vis.architecture && (
+        <Section id="cs-architecture" n={num('architecture')} title={t('os.projects.study.architecture')} tag={tag(!!real.architecture)}>
           <p className="max-w-3xl text-[14px] leading-7 text-muted">{study.architecture}</p>
           <figure className="mt-5">
             <div className="os-chrome rounded-xl border border-edge bg-graphite p-4 text-warm">
@@ -338,12 +361,16 @@ export function CaseStudy({
             <figcaption className="mt-2 font-mono text-[10.5px] text-faint">{t('os.projects.study.stackNote')}</figcaption>
           </figure>
         </Section>
+        )}
 
-        <Section id="cs-challenges" n={8} title={t('os.projects.study.challenges')} tag={tag(!!real.challenges)}>
+        {vis.challenges && (
+        <Section id="cs-challenges" n={num('challenges')} title={t('os.projects.study.challenges')} tag={tag(!!real.challenges)}>
           {bullets(study.challenges)}
         </Section>
+        )}
 
-        <Section id="cs-gallery" n={9} title={t('os.projects.study.gallery')}>
+        {vis.gallery && (
+        <Section id="cs-gallery" n={num('gallery')} title={t('os.projects.study.gallery')}>
           <div className="relative overflow-hidden rounded-xl border border-card-border bg-graphite">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
@@ -382,6 +409,7 @@ export function CaseStudy({
             </span>
           </div>
         </Section>
+        )}
 
         {/* ── footer: links + next project ── */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-card-border pt-7">

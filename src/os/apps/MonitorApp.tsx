@@ -154,7 +154,7 @@ const Panel = ({ title, children, className = '' }: { title: string; children: R
 
 /** Statistics → System Monitor: counters, skill load, session telemetry, globe and the deploy log. */
 export default function MonitorApp() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   // derived from the skill levels in portfolio.ts — nothing is invented
   const load = skillGroups.map((g) => ({
     key: g.key,
@@ -203,7 +203,7 @@ export default function MonitorApp() {
                 <p className="text-3xl font-semibold tracking-tight @2xl:text-4xl">
                   <Counter value={s.value} suffix={s.suffix} />
                 </p>
-                <p className="mt-1 text-[12px] text-muted">{t(`content.stats.${s.id}` as 'content.stats.projects')}</p>
+                <p className="mt-1 text-[12px] text-muted">{t(`content.stats.${s.id}` as 'content.stats.areas')}</p>
                 <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-fg/10" aria-hidden="true">
                   <div
                     className="h-full origin-left rounded-full bg-accent transition-transform duration-[1400ms] ease-out"
@@ -251,8 +251,8 @@ export default function MonitorApp() {
                 {[
                   [t('os.monitor.session'), <SessionClock key="s" />],
                   [t('os.monitor.region'), heroTelemetry.region],
-                  [t('os.monitor.deploys'), String(heroTelemetry.deploys)],
-                  [t('os.monitor.uptime'), heroTelemetry.uptime],
+                  [t('os.monitor.timezone'), Intl.DateTimeFormat().resolvedOptions().timeZone || '—'],
+                  [t('os.monitor.language'), i18n.language.toUpperCase()],
                 ].map(([k, v], i) => (
                   <div key={i} className="bg-sheet px-3.5 py-3">
                     <dt className="truncate text-[11px] text-faint">{k}</dt>

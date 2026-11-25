@@ -1,15 +1,14 @@
 import { ArrowLeft, House, Moon, Search, Sun } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Suspense, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '../components/layout/LanguageSwitcher'
 import { profile } from '../data/portfolio'
 import { useTheme } from '../hooks/useTheme'
 import { easeOut } from '../lib/motion'
-import { AppSkeleton } from './apps/shared'
 import { CommandPalette } from './CommandPalette'
 import { useOSActions, useOSState } from './hooks'
 import { OSLogo } from './OSLogo'
+import { AppView } from './AppView'
 import { appById, apps, dockApps, type AppId } from './registry'
 import { formatTime, useNow } from './useNow'
 import { Wallpaper } from './Wallpaper'
@@ -102,25 +101,8 @@ export function MobileShell() {
   const { mobileApp } = useOSState()
   const { openApp, closeMobile, setPalette } = useOSActions()
 
-  // Browser / hardware Back closes the open app instead of leaving the site.
-  useEffect(() => {
-    if (history.state?.osApp) history.replaceState(null, '')
-    const onPop = () => {
-      const id = history.state?.osApp as AppId | undefined
-      if (id) openApp(id)
-      else closeMobile()
-    }
-    window.addEventListener('popstate', onPop)
-    return () => window.removeEventListener('popstate', onPop)
-  }, [openApp, closeMobile])
-
-  useEffect(() => {
-    if (!mobileApp || history.state?.osApp === mobileApp) return
-    if (history.state?.osApp) history.replaceState({ osApp: mobileApp }, '')
-    else history.pushState({ osApp: mobileApp }, '')
-  }, [mobileApp])
-
-  const back = () => (history.state?.osApp ? history.back() : closeMobile())
+  // Back returns through the address history (the URL mirrors the open app); closes to the home screen when there is none
+  const back = () => (history.state?.os ? history.back() : closeMobile())
   const { palette } = useOSState()
   const def = mobileApp ? appById[mobileApp] : null
 
@@ -205,9 +187,7 @@ export function MobileShell() {
               </button>
             </header>
             <div className="relative min-h-0 flex-1">
-              <Suspense fallback={<AppSkeleton label={t('os.window.loading')} />}>
-                <def.Component />
-              </Suspense>
+              <AppView id={mobileApp} />
             </div>
             <Dock active={mobileApp} />
           </motion.div>
