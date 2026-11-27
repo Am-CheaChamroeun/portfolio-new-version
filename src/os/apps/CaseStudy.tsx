@@ -1,14 +1,17 @@
 import { isReducedMotion } from '../../lib/settings'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Globe, Sparkles } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
-import { useMemo, useState, type ReactNode } from 'react'
+import { motion } from 'motion/react'
+import { useMemo, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { featuredProject, socials, type Project } from '../../data/portfolio'
+import { coverFor, getProjectMedia, type MediaShot } from '../../data/projectMedia'
+import { useIsDark } from '../../hooks/useIsDark'
 import { SHOW_PLACEHOLDERS } from '../../lib/placeholder'
 import { GithubIcon } from '../../lib/icons'
 import { easeOut } from '../../lib/motion'
+import { MediaGallery, ProjectVideo, type GalleryItem, type GallerySet } from './MediaGallery'
 import { BrowserFrame, Eyebrow, Pill, SmartImage, TechBadge } from './shared'
 
 export type ProjectText = {
@@ -87,7 +90,6 @@ export function CaseStudy({
   onOpen: (slug: string) => void
 }) {
   const { t, i18n } = useTranslation()
-  const [shot, setShot] = useState(0)
   const featured = project.slug === featuredProject.slug
   const category = projectCategory(project)
   const next = all[(all.findIndex((p) => p.slug === project.slug) + 1) % all.length]
@@ -117,15 +119,33 @@ export function CaseStudy({
       </div>
     )
 
-  /* gallery: the project's own screenshots, or its preview + mock frames until real ones are added */
-  const gallery = useMemo(() => {
+  /* media: theme-matched local cover, Cloudinary/local screenshots (desktop + mobile), demo video. Config: data/projectMedia.ts */
+  const dark = useIsDark()
+  const media = getProjectMedia(project.slug)
+  const cover = coverFor(project.slug, dark)
+  const alt = (n: number) => t('os.projects.study.shotAlt', { n, name: project.name })
+  const shotItem = (s: MediaShot): GalleryItem => {
+    const key = `content.projects.${project.slug}.media.${s.id}`
+    const caption = i18n.exists(key) ? (t(key as 'content.projects.featured-project.tagline')) : s.caption
+    return { id: s.id, caption, alt: t('os.projects.study.shotAltReal', { caption, name: project.name }), local: s.local, remote: s.remote }
+  }
+  const sets: GallerySet[] = []
+  if (media?.desktop.length) sets.push({ id: 'desktop', label: t('os.projects.study.sets.desktop'), items: media.desktop.map(shotItem) })
+  if (media?.mobile.length) sets.push({ id: 'mobile', label: t('os.projects.study.sets.mobile'), portrait: true, items: media.mobile.map(shotItem) })
+  /* nothing configured: the project's own `gallery` paths, or its preview + labelled mock frames */
+  const legacy = useMemo(() => {
     if (project.gallery?.length) return project.gallery.map((src) => ({ src, isMock: false }))
     const main = pickImage(project.image, mockImages.projects[project.slug])
     return [...(main ? [main] : []), ...mockImages.projectGallery.map((src) => ({ src, isMock: true }))]
   }, [project])
-  const hero = gallery[0]
-  const current = gallery[Math.min(shot, gallery.length - 1)]
-  const alt = (n: number) => t('os.projects.study.shotAlt', { n, name: project.name })
+  if (!sets.length)
+    sets.push({
+      id: 'desktop',
+      label: t('os.projects.study.gallery'),
+      items: legacy.map((g, n) => ({ id: g.src, local: g.src, isMock: g.isMock, alt: g.isMock ? alt(n + 1) : t('projects.previewAlt', { name: project.name }) })),
+    })
+  const hero = cover ? { src: cover, isMock: false } : legacy[0]
+  const hasDemo = !!(media?.video || media?.gif)
 
   const layers = (['client', 'server', 'data', 'infra'] as const)
     .map((l) => ({
@@ -144,7 +164,8 @@ export function CaseStudy({
     features: true,
     architecture: !!real.architecture || SHOW_PLACEHOLDERS,
     challenges: !!real.challenges || SHOW_PLACEHOLDERS,
-    gallery: gallery.some((g) => !g.isMock) || SHOW_PLACEHOLDERS,
+    demo: hasDemo,
+    gallery: sets.some((x) => x.items.some((g) => !g.isMock)) || SHOW_PLACEHOLDERS,
   }
   const order = Object.keys(vis).filter((k) => vis[k])
   const num = (id: string) => order.indexOf(id) + 1
@@ -157,6 +178,7 @@ export function CaseStudy({
     ['features', t('os.projects.study.features')],
     ['architecture', t('os.projects.study.architecture')],
     ['challenges', t('os.projects.study.challenges')],
+    ['demo', t('os.projects.study.demo')],
     ['gallery', t('os.projects.study.gallery')],
   ] as const
   const shownSections = sections.filter(([id]) => vis[id])
@@ -235,6 +257,7 @@ export function CaseStudy({
           >
             <BrowserFrame label={`${project.slug}.app`} className="relative mx-auto max-w-4xl rounded-b-none border-b-0">
               <SmartImage
+                key={hero.src}
                 src={hero.src}
                 alt={hero.isMock ? alt(1) : t('projects.previewAlt', { name: project.name })}
                 className="aspect-[16/9] bg-graphite"
@@ -369,46 +392,16 @@ export function CaseStudy({
         </Section>
         )}
 
+        {vis.demo && (
+          <Section id="cs-demo" n={num('demo')} title={t('os.projects.study.demo')}>
+            <ProjectVideo src={media?.video} gif={media?.gif} poster={media?.poster} title={t('os.projects.study.demoLabel', { name: project.name })} />
+          </Section>
+        )}
+
         {vis.gallery && (
-        <Section id="cs-gallery" n={num('gallery')} title={t('os.projects.study.gallery')}>
-          <div className="relative overflow-hidden rounded-xl border border-card-border bg-graphite">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={current.src}
-                initial={{ opacity: 0, scale: 1.015 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.22, ease: easeOut }}
-              >
-                <SmartImage src={current.src} alt={alt(shot + 1)} className="aspect-[16/10]" imgClassName="object-cover" />
-              </motion.div>
-            </AnimatePresence>
-            {current.isMock && <MockBadge kind="sample" className="absolute right-3 top-3" />}
-          </div>
-          <div className="mt-3 flex items-center gap-2" role="group" aria-label={t('os.projects.study.gallery')}>
-            {gallery.map((g, i) => (
-              <button
-                key={g.src}
-                type="button"
-                onClick={() => setShot(i)}
-                aria-pressed={i === shot}
-                aria-label={t('os.projects.study.viewShot', { n: i + 1 })}
-                title={t('os.projects.study.viewShot', { n: i + 1 })}
-                className={`h-14 w-24 overflow-hidden rounded-lg border bg-graphite transition-all @md:h-16 @md:w-28 ${
-                  i === shot ? 'border-neon shadow-[0_0_16px_-4px_rgb(var(--neon-rgb)/0.6)]' : 'border-card-border opacity-70 hover:opacity-100'
-                }`}
-              >
-                <img src={g.src} alt="" aria-hidden="true" loading="lazy" className="h-full w-full object-cover object-top" />
-              </button>
-            ))}
-            <span className="ml-auto font-mono text-[11px] text-faint">
-              {t('os.projects.study.shot', {
-                n: shot + 1,
-                total: gallery.length,
-              })}
-            </span>
-          </div>
-        </Section>
+          <Section id="cs-gallery" n={num('gallery')} title={t('os.projects.study.gallery')}>
+            <MediaGallery title={t('os.projects.study.gallery')} sets={sets} />
+          </Section>
         )}
 
         {/* ── footer: links + next project ── */}

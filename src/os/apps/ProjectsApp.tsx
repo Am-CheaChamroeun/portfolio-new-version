@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { socials, type Project } from '../../data/portfolio'
+import { coverFor } from '../../data/projectMedia'
 import { visibleProjects } from '../../data/visible'
+import { useIsDark } from '../../hooks/useIsDark'
 import { GithubIcon } from '../../lib/icons'
 import { useOSActions, useOSState } from '../hooks'
 import { CaseStudy, projectCategory, type ProjectText } from './CaseStudy'
@@ -24,7 +26,8 @@ const coarse = () => window.matchMedia('(pointer: coarse)').matches
 /** Screenshot (real one first, labelled concept art until then), or a lettered tile. */
 function Thumb({ project, className = '' }: { project: Project; className?: string }) {
   const { t } = useTranslation()
-  const image = pickImage(project.image, mockImages.projects[project.slug])
+  const cover = coverFor(project.slug, useIsDark()) // the theme-matched local cover wins over `project.image`
+  const image = cover ? { src: cover, isMock: false } : pickImage(project.image, mockImages.projects[project.slug])
   return (
     <div className={`relative overflow-hidden bg-graphite ${className}`} style={{ boxShadow: `inset 0 0 0 1px ${project.accent}22` }}>
       {image ? (
@@ -34,7 +37,7 @@ function Thumb({ project, className = '' }: { project: Project; className?: stri
             alt={image.isMock ? t('images.alt.project', { name: project.name }) : t('projects.previewAlt', { name: project.name })}
             loading="lazy"
             decoding="async"
-            className={`absolute inset-0 h-full w-full ${!image.isMock && project.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover object-top'}`}
+            className={`absolute inset-0 h-full w-full ${!image.isMock && !cover && project.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover object-top'}`}
           />
           {image.isMock && <MockBadge kind="concept" className="absolute right-2 top-2" />}
         </>

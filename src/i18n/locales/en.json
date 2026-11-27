@@ -677,7 +677,21 @@
             "[A CHALLENGE YOU FACED AND HOW YOU SOLVED IT]",
             "[ANOTHER CHALLENGE]"
           ]
-        }
+        },
+        "demo": "Demo video",
+        "demoLabel": "{{name}} demo video",
+        "shotAltReal": "{{caption}} — {{name}}",
+        "sets": {
+          "desktop": "Desktop",
+          "mobile": "Mobile"
+        },
+        "openFull": "Open full-size preview",
+        "closeViewer": "Close preview",
+        "mediaError": "This image couldn’t be loaded.",
+        "videoError": "The video couldn’t be loaded.",
+        "playPreview": "Play animated preview",
+        "prevShot": "Previous screenshot",
+        "nextShot": "Next screenshot"
       }
     },
     "skills": {

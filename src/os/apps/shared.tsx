@@ -1,4 +1,4 @@
-import { Search, X, type LucideIcon } from 'lucide-react'
+import { ImageOff, Search, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useRef, useState, type ChangeEvent, type InputHTMLAttributes, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TechTile } from '../../lib/icons'
@@ -84,23 +84,66 @@ export function Pill({ children, tone = 'neon' }: { children: ReactNode; tone?: 
 export const Skeleton = ({ className = '' }: { className?: string }) => <div aria-hidden="true" className={`skeleton ${className}`} />
 
 /** An image that shows a skeleton until it has loaded, then fades in. */
-export function SmartImage({ src, alt, className = '', imgClassName = '' }: { src: string; alt: string; className?: string; imgClassName?: string }) {
+export function SmartImage({
+  src,
+  alt,
+  className = '',
+  imgClassName = '',
+  srcSet,
+  sizes,
+  fallback,
+  lazy = false,
+}: {
+  src: string
+  alt: string
+  className?: string
+  imgClassName?: string
+  /** responsive sources for `src` (used while `src` is shown, not for the fallback) */
+  srcSet?: string
+  sizes?: string
+  /** a second URL to try (the local copy) if `src` fails to load. Give the component a `key` that changes with `src`. */
+  fallback?: string
+  lazy?: boolean
+}) {
+  const { t } = useTranslation()
   const [loaded, setLoaded] = useState(false)
+  const [useFallback, setUseFallback] = useState(false)
+  const [failed, setFailed] = useState(false)
   const ref = useRef<HTMLImageElement>(null)
+  const shown = useFallback && fallback ? fallback : src
   useEffect(() => {
-    if (ref.current?.complete) setLoaded(true) // already in the cache
-  }, [src])
+    if (ref.current?.complete && ref.current.naturalWidth > 0) setLoaded(true) // already in the cache
+  }, [shown])
+  const onError = () => {
+    if (fallback && !useFallback) {
+      setUseFallback(true)
+      setLoaded(false)
+    } else setFailed(true)
+  }
   return (
     <div className={`relative ${className}`}>
-      {!loaded && <Skeleton className="absolute inset-0" />}
-      <img
-        ref={ref}
-        src={src}
-        alt={alt}
-        decoding="async"
-        onLoad={() => setLoaded(true)}
-        className={`h-full w-full transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
-      />
+      {failed ? (
+        <div role="img" aria-label={alt} className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-graphite-2 p-3 text-center text-steel">
+          <ImageOff size={22} aria-hidden="true" />
+          <span className="text-[11.5px]">{t('os.projects.study.mediaError')}</span>
+        </div>
+      ) : (
+        <>
+          {!loaded && <Skeleton className="absolute inset-0" />}
+          <img
+            ref={ref}
+            src={shown}
+            srcSet={useFallback ? undefined : srcSet}
+            sizes={useFallback ? undefined : sizes}
+            alt={alt}
+            decoding="async"
+            loading={lazy ? 'lazy' : undefined}
+            onLoad={() => setLoaded(true)}
+            onError={onError}
+            className={`h-full w-full transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
+          />
+        </>
+      )}
     </div>
   )
 }

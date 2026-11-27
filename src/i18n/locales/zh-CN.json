@@ -677,7 +677,21 @@
             "[你遇到的一个挑战以及如何解决]",
             "[另一个挑战]"
           ]
-        }
+        },
+        "demo": "演示视频",
+        "demoLabel": "{{name}} 演示视频",
+        "shotAltReal": "{{caption}} — {{name}}",
+        "sets": {
+          "desktop": "桌面端",
+          "mobile": "移动端"
+        },
+        "openFull": "查看大图",
+        "closeViewer": "关闭预览",
+        "mediaError": "无法加载此图片。",
+        "videoError": "无法加载此视频。",
+        "playPreview": "播放动画预览",
+        "prevShot": "上一张截图",
+        "nextShot": "下一张截图"
       }
     },
     "skills": {

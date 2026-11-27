@@ -64,6 +64,9 @@ Neon Yellow + Dark Graphite. Every colour is a token in `src/styles/index.css`. 
 ## Images
 Illustrations in `src/assets/mock/` are labelled placeholders. Swap them in `src/data/images.ts`, or set real images in `portfolio.ts` (`profile.photo`, `project.image`, `certificate.image`, education `logo`) — a real image always wins. The wallpaper is CSS (`src/os/Wallpaper.tsx`).
 
+### Project media (local + Cloudinary)
+Project covers (light/dark) and video posters stay in the repo under `src/assets/projects/<dir>/`; the heavy files (desktop and mobile screenshots, demo MP4, GIF preview) are served from Cloudinary. Everything is configured in one place, `src/data/projectMedia.ts`, and the site works without any Cloudinary setup (it falls back to local copies and hides the demo section). Optional env: `VITE_CLOUDINARY_CLOUD_NAME` (a public name, never a key). Full guide and migration checklist: [`docs/CLOUDINARY_MEDIA.md`](docs/CLOUDINARY_MEDIA.md).
+
 ## Notes
 - The language and theme choices keep the storage keys `notebook-lang` and `notebook-theme-v2`, so returning visitors keep their settings.
 - `@fontsource-variable/fraunces` and `@fontsource-variable/caveat` are no longer used and can be removed with `npm uninstall` (then commit the updated lockfile).
