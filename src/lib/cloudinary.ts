@@ -85,3 +85,17 @@ export function responsiveImage(ref: string | undefined, sizes: string, base = 9
   if (new Set(urls).size < IMAGE_WIDTHS.length) return { src } // the URL had its own fixed transformations
   return { src, srcSet: urls.map((u, i) => `${u} ${IMAGE_WIDTHS[i]}w`).join(', '), sizes }
 }
+
+/**
+ * Animated GIF preview, delivered exactly as uploaded (no transformations): Cloudinary refuses f_auto/resize
+ * on large animated GIFs (HTTP 400), so this one URL is deliberately plain `/image/upload/<public-id>.gif`.
+ */
+export function gifUrl(ref: string | undefined): string | undefined {
+  if (isPlaceholder(ref)) return undefined
+  const v = ref!.trim()
+  if (/^https?:\/\//i.test(v)) return v.startsWith('https://') ? v : undefined
+  if (!CLOUD_NAME) return undefined
+  const clean = v.replace(/^\/+/, '').replace(/\.gif$/i, '')
+  if (!clean || clean.includes('..') || /[?#\\]/.test(clean)) return undefined
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${clean.split('/').map(encodeURIComponent).join('/')}.gif`
+}

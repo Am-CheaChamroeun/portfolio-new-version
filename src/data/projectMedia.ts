@@ -5,19 +5,20 @@
  *  LOCAL (in this repo, src/assets/projects/<dir>/): light + dark covers and the video poster. Nothing else.
  *  CLOUDINARY: desktop screenshots, mobile screenshots, the demo MP4 and the optional GIF preview.
  *
- *  Every Cloudinary reference below is a placeholder named  TODO_CLOUDINARY_<file name without extension>.
- *  File names are unique across projects ({slug}-desktop-NN-feature, {slug}-mobile-NN-feature, {slug}-demo …), so
- *  the recommended public ID is simply the file name without its extension. See docs/CLOUDINARY_MEDIA.md.
- *  Replace each one with that file's real public ID (needs VITE_CLOUDINARY_CLOUD_NAME) or its full
- *  https://res.cloudinary.com/… URL. With Dynamic folders the public ID may not include the folder, so copy it from Cloudinary.
- *  The first value in each row is the local file name (a label for you, not loaded by the site).
- *  A placeholder is never rendered: that screenshot is simply left out, and the video section stays hidden.
+ *  Every Cloudinary reference below is a public ID (= the file name without its extension; with Dynamic folders the
+ *  folder is NOT part of it). URLs are built by src/lib/cloudinary.ts from VITE_CLOUDINARY_CLOUD_NAME (df3cyznc):
+ *    screenshots  /image/upload/f_auto,q_auto,c_limit,w_N/<id>   (original format kept, responsive widths)
+ *    MP4          /video/upload/f_auto,q_auto/<id>               (resource type video)
+ *    GIF          /image/upload/<id>.gif                         (untransformed; large GIFs are rejected when transformed)
+ *  All 41 were checked against Cloudinary; results are in docs/CLOUDINARY_MEDIA.md.
+ *  The first value in each row is the original file name (a label, not loaded by the site).
+ *  A reference that cannot be resolved is never rendered: that screenshot is left out and the video section stays hidden.
  *
  *  `dir` is the folder under src/assets/projects/. The key (`cashcompass`, `resumecraft`) must match the slug in portfolio.ts.
  *  Captions and alt text come from content.projects.<slug>.media.<file name without extension> in the locale files.
  * ─────────────────────────────────────────────────────────────
  */
-import { mediaUrl, responsiveImage, type ResponsiveSrc } from '../lib/cloudinary'
+import { gifUrl, mediaUrl, responsiveImage, type ResponsiveSrc } from '../lib/cloudinary'
 
 /** [original file name, Cloudinary public ID or URL] */
 type Row = readonly [file: string, remote: string]
@@ -41,31 +42,31 @@ const configs: Record<string, Config> = {
     coverDark: 'cashcompass-cover-dark.webp',
     coverLight: 'cashcompass-cover-light.webp',
     poster: 'cashcompass-demo-poster.webp',
-    video: 'TODO_CLOUDINARY_cashcompass-demo-mp4', // cashcompass-demo.mp4 (Cloudinary resource type: video)
-    gif: 'TODO_CLOUDINARY_cashcompass-demo-gif', // optional: cashcompass-demo.gif (resource type: image); only used when there is no working MP4
+    video: 'cashcompass-demo', // cashcompass-demo.mp4 (Cloudinary resource type: video)
+    gif: 'cashcompass-demo', // optional: cashcompass-demo.gif (resource type: image); only used when there is no working MP4
     desktop: [
-      ['cashcompass-desktop-01-landing-page.webp', 'TODO_CLOUDINARY_cashcompass-desktop-01-landing-page'],
-      ['cashcompass-desktop-02-dashboard.webp', 'TODO_CLOUDINARY_cashcompass-desktop-02-dashboard'],
-      ['cashcompass-desktop-03-transactions.webp', 'TODO_CLOUDINARY_cashcompass-desktop-03-transactions'],
-      ['cashcompass-desktop-04-accounts.webp', 'TODO_CLOUDINARY_cashcompass-desktop-04-accounts'],
-      ['cashcompass-desktop-05-budgets.webp', 'TODO_CLOUDINARY_cashcompass-desktop-05-budgets'],
-      ['cashcompass-desktop-06-savings-goals.webp', 'TODO_CLOUDINARY_cashcompass-desktop-06-savings-goals'],
-      ['cashcompass-desktop-07-analytics.webp', 'TODO_CLOUDINARY_cashcompass-desktop-07-analytics'],
-      ['cashcompass-desktop-08-recurring-payments.webp', 'TODO_CLOUDINARY_cashcompass-desktop-08-recurring-payments'],
-      ['cashcompass-desktop-09-cash-flow-forecast.webp', 'TODO_CLOUDINARY_cashcompass-desktop-09-cash-flow-forecast'],
-      ['cashcompass-desktop-10-financial-calendar.webp', 'TODO_CLOUDINARY_cashcompass-desktop-10-financial-calendar'],
-      ['cashcompass-desktop-11-financial-reports.webp', 'TODO_CLOUDINARY_cashcompass-desktop-11-financial-reports'],
-      ['cashcompass-desktop-12-notifications.webp', 'TODO_CLOUDINARY_cashcompass-desktop-12-notifications'],
-      ['cashcompass-desktop-13-dark-dashboard.webp', 'TODO_CLOUDINARY_cashcompass-desktop-13-dark-dashboard'],
-      ['cashcompass-desktop-14-khmer-dashboard.webp', 'TODO_CLOUDINARY_cashcompass-desktop-14-khmer-dashboard'],
-      ['cashcompass-desktop-15-pdf-export.webp', 'TODO_CLOUDINARY_cashcompass-desktop-15-pdf-export'],
+      ['cashcompass-desktop-01-landing-page.webp', 'cashcompass-desktop-01-landing-page'],
+      ['cashcompass-desktop-02-dashboard.webp', 'cashcompass-desktop-02-dashboard'],
+      ['cashcompass-desktop-03-transactions.webp', 'cashcompass-desktop-03-transactions'],
+      ['cashcompass-desktop-04-accounts.webp', 'cashcompass-desktop-04-accounts'],
+      ['cashcompass-desktop-05-budgets.webp', 'cashcompass-desktop-05-budgets'],
+      ['cashcompass-desktop-06-savings-goals.webp', 'cashcompass-desktop-06-savings-goals'],
+      ['cashcompass-desktop-07-analytics.webp', 'cashcompass-desktop-07-analytics'],
+      ['cashcompass-desktop-08-recurring-payments.webp', 'cashcompass-desktop-08-recurring-payments'],
+      ['cashcompass-desktop-09-cash-flow-forecast.webp', 'cashcompass-desktop-09-cash-flow-forecast'],
+      ['cashcompass-desktop-10-financial-calendar.webp', 'cashcompass-desktop-10-financial-calendar'],
+      ['cashcompass-desktop-11-financial-reports.webp', 'cashcompass-desktop-11-financial-reports'],
+      ['cashcompass-desktop-12-notifications.webp', 'cashcompass-desktop-12-notifications'],
+      ['cashcompass-desktop-13-dark-dashboard.webp', 'cashcompass-desktop-13-dark-dashboard'],
+      ['cashcompass-desktop-14-khmer-dashboard.webp', 'cashcompass-desktop-14-khmer-dashboard'],
+      ['cashcompass-desktop-15-pdf-export.webp', 'cashcompass-desktop-15-pdf-export'],
     ],
     mobile: [
-      ['cashcompass-mobile-01-home.png', 'TODO_CLOUDINARY_cashcompass-mobile-01-home'],
-      ['cashcompass-mobile-02-dashboard.png', 'TODO_CLOUDINARY_cashcompass-mobile-02-dashboard'],
-      ['cashcompass-mobile-03-transactions.png', 'TODO_CLOUDINARY_cashcompass-mobile-03-transactions'],
-      ['cashcompass-mobile-04-budgets.png', 'TODO_CLOUDINARY_cashcompass-mobile-04-budgets'],
-      ['cashcompass-mobile-05-calendar.png', 'TODO_CLOUDINARY_cashcompass-mobile-05-calendar'],
+      ['cashcompass-mobile-01-home.png', 'cashcompass-mobile-01-home'],
+      ['cashcompass-mobile-02-dashboard.png', 'cashcompass-mobile-02-dashboard'],
+      ['cashcompass-mobile-03-transactions.png', 'cashcompass-mobile-03-transactions'],
+      ['cashcompass-mobile-04-budgets.png', 'cashcompass-mobile-04-budgets'],
+      ['cashcompass-mobile-05-calendar.png', 'cashcompass-mobile-05-calendar'],
     ],
   },
   resumecraft: {
@@ -73,28 +74,28 @@ const configs: Record<string, Config> = {
     coverDark: 'resumecraft-cover-dark.webp',
     coverLight: 'resumecraft-cover-light.webp',
     poster: 'resumecraft-demo-poster.webp',
-    video: 'TODO_CLOUDINARY_resumecraft-demo-mp4', // resumecraft-demo.mp4 (Cloudinary resource type: video)
-    gif: 'TODO_CLOUDINARY_resumecraft-demo-gif', // optional: resumecraft-demo.gif (resource type: image); only used when there is no working MP4
+    video: 'resumecraft-demo', // resumecraft-demo.mp4 (Cloudinary resource type: video)
+    gif: 'resumecraft-demo', // optional: resumecraft-demo.gif (resource type: image); only used when there is no working MP4
     desktop: [
-      ['resumecraft-desktop-01-landing-page.webp', 'TODO_CLOUDINARY_resumecraft-desktop-01-landing-page'],
-      ['resumecraft-desktop-02-template-gallery.webp', 'TODO_CLOUDINARY_resumecraft-desktop-02-template-gallery'],
-      ['resumecraft-desktop-03-resume-editor.webp', 'TODO_CLOUDINARY_resumecraft-desktop-03-resume-editor'],
-      ['resumecraft-desktop-04-editor-dark.webp', 'TODO_CLOUDINARY_resumecraft-desktop-04-editor-dark'],
-      ['resumecraft-desktop-05-customization.webp', 'TODO_CLOUDINARY_resumecraft-desktop-05-customization'],
-      ['resumecraft-desktop-06-ai-assistant.webp', 'TODO_CLOUDINARY_resumecraft-desktop-06-ai-assistant'],
-      ['resumecraft-desktop-07-ats-analysis.webp', 'TODO_CLOUDINARY_resumecraft-desktop-07-ats-analysis'],
-      ['resumecraft-desktop-08-my-resumes.webp', 'TODO_CLOUDINARY_resumecraft-desktop-08-my-resumes'],
-      ['resumecraft-desktop-09-cover-letter.webp', 'TODO_CLOUDINARY_resumecraft-desktop-09-cover-letter'],
-      ['resumecraft-desktop-10-cover-letter-templates.webp', 'TODO_CLOUDINARY_resumecraft-desktop-10-cover-letter-templates'],
-      ['resumecraft-desktop-11-khmer-resume.webp', 'TODO_CLOUDINARY_resumecraft-desktop-11-khmer-resume'],
-      ['resumecraft-desktop-12-pdf-export.webp', 'TODO_CLOUDINARY_resumecraft-desktop-12-pdf-export'],
-      ['resumecraft-desktop-13-version-history.webp', 'TODO_CLOUDINARY_resumecraft-desktop-13-version-history'],
+      ['resumecraft-desktop-01-landing-page.webp', 'resumecraft-desktop-01-landing-page'],
+      ['resumecraft-desktop-02-template-gallery.webp', 'resumecraft-desktop-02-template-gallery'],
+      ['resumecraft-desktop-03-resume-editor.webp', 'resumecraft-desktop-03-resume-editor'],
+      ['resumecraft-desktop-04-editor-dark.webp', 'resumecraft-desktop-04-editor-dark'],
+      ['resumecraft-desktop-05-customization.webp', 'resumecraft-desktop-05-customization'],
+      ['resumecraft-desktop-06-ai-assistant.webp', 'resumecraft-desktop-06-ai-assistant'],
+      ['resumecraft-desktop-07-ats-analysis.webp', 'resumecraft-desktop-07-ats-analysis'],
+      ['resumecraft-desktop-08-my-resumes.webp', 'resumecraft-desktop-08-my-resumes'],
+      ['resumecraft-desktop-09-cover-letter.webp', 'resumecraft-desktop-09-cover-letter'],
+      ['resumecraft-desktop-10-cover-letter-templates.webp', 'resumecraft-desktop-10-cover-letter-templates'],
+      ['resumecraft-desktop-11-khmer-resume.webp', 'resumecraft-desktop-11-khmer-resume'],
+      ['resumecraft-desktop-12-pdf-export.webp', 'resumecraft-desktop-12-pdf-export'],
+      ['resumecraft-desktop-13-version-history.webp', 'resumecraft-desktop-13-version-history'],
     ],
     mobile: [
-      ['resumecraft-mobile-01-home.png', 'TODO_CLOUDINARY_resumecraft-mobile-01-home'],
-      ['resumecraft-mobile-02-templates.png', 'TODO_CLOUDINARY_resumecraft-mobile-02-templates'],
-      ['resumecraft-mobile-03-editor.png', 'TODO_CLOUDINARY_resumecraft-mobile-03-editor'],
-      ['resumecraft-mobile-04-preview.png', 'TODO_CLOUDINARY_resumecraft-mobile-04-preview'],
+      ['resumecraft-mobile-01-home.png', 'resumecraft-mobile-01-home'],
+      ['resumecraft-mobile-02-templates.png', 'resumecraft-mobile-02-templates'],
+      ['resumecraft-mobile-03-editor.png', 'resumecraft-mobile-03-editor'],
+      ['resumecraft-mobile-04-preview.png', 'resumecraft-mobile-04-preview'],
     ],
   },
 }
@@ -162,7 +163,7 @@ export function getProjectMedia(slug: string): ProjectMedia | undefined {
     desktop: shots(c.desktop, false),
     mobile: shots(c.mobile, true),
     video: mediaUrl(c.video, 'video'),
-    gif: mediaUrl(c.gif, 'image', 960),
+    gif: gifUrl(c.gif),
   }
   cache.set(slug, media)
   return media
