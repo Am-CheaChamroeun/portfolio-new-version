@@ -47,6 +47,7 @@ src/os/
 The CV is a normal file in the repository: `public/documents/am-cheachamroeun-cv.pdf` (served at `/documents/am-cheachamroeun-cv.pdf`, copied into `dist/` by the build; it is not stored on Cloudinary). The URL and the saved file name (`Am-Cheachamroeun-CV.pdf`) are set once in `profile.cvUrl` / `profile.cvFilename` in `src/data/portfolio.ts`. To update the CV, replace that one file.
 
 * **Download CV** (saves the PDF) and **View CV** (opens the browser's own PDF viewer in a new tab) are in About Me; a compact Download CV is in the Work Experience toolbar and the Contact sidebar; both commands are in the command palette (`Ctrl/⌘ K` → "cv"), and `cv` works in the Terminal. Component: `src/os/apps/CvActions.tsx`.
+* **Contact form** sends through [Web3Forms](https://web3forms.com) with the native `fetch` (no backend, no extra dependency). Set `VITE_WEB3FORMS_ACCESS_KEY`: locally in `.env.local`, and in Vercel under Project → Settings → Environment Variables (then redeploy, because Vite bakes the value in at build time). The key is public by design, so restrict it to your domain in the Web3Forms dashboard. Without a key the form falls back to opening the visitor's email app and never says "sent". Code: `src/lib/web3forms.ts`, `src/os/apps/ContactApp.tsx`.
 * The buttons only appear when the file is really being served, so there is never a dead download.
 
 ## Projects

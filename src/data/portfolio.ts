@@ -74,12 +74,6 @@ export const socials = {
   telegram: { url: 'https://t.me/Am_Cheachamroeun', label: '@Am_Cheachamroeun' },
 }
 
-/**
- * Optional: a form endpoint (e.g. Formspree) that accepts POSTed JSON.
- * Leave empty to have the contact form open the visitor's email app instead.
- */
-export const contactFormEndpoint = ''
-
 /* ───────────── Navigation ───────────── */
 
 /** Labels come from `nav.<key>` in the locale files */

@@ -11,7 +11,7 @@ Text lives in `src/i18n/locales/{en,km,zh-CN}.json` under `content.*`. Everythin
 |---|------|-------|----------------|
 | 1 | **Production domain** → `VITE_SITE_URL=https://your-domain` | Vercel env vars / `.env.local` (see `.env.example`) | No canonical URLs, `og:url`, `og:image`, or `sitemap.xml` are generated |
 | 2 | **CV file** → `public/documents/am-cheachamroeun-cv.pdf` (already in place) | `profile.cvUrl` / `profile.cvFilename` in `portfolio.ts` | The CV buttons are hidden automatically if the file is missing |
-| 3 | **Contact form endpoint** (e.g. Formspree URL) → `contactFormEndpoint` | `portfolio.ts` | The form opens the visitor's email app instead ("Open in email app"); it never claims a message was sent |
+| 3 | **Web3Forms access key** → `VITE_WEB3FORMS_ACCESS_KEY` (local `.env.local` and Vercel) | environment | Without it the form opens the visitor's email app ("Open in email app") and never claims a message was sent |
 | 4 | **Projects** — name, slug, tech, `liveUrl`, `repoUrl`, `image` (+ optional `gallery`) | `featuredProject` / `projects` in `portfolio.ts` | The Projects app shows a "coming soon" panel |
 | 5 | **Project text** — `tagline`, `description`, `highlights`, and the optional `study` (objectives, problem, solution, role, architecture, challenges) per slug | `content.projects.<slug>` in each locale | Case-study sections without real text are hidden |
 | 6 | **Education** — school, period, details | `education` in `portfolio.ts` + `content.education.<id>` | Education shows "coming soon" |
@@ -37,4 +37,4 @@ System Monitor counts (derived from your skills; "Years coding: 3+" is a hand-wr
 
 * The simulated "Sample deploy" animation in System Monitor is decoration and is labelled as such.
 * Khmer / Chinese are chosen in the app (saved in the browser); each page has one URL, so search engines index the English version.
-* Without a configured form endpoint there is no way to know whether the visitor actually sent the email.
+* Without a Web3Forms access key there is no way to know whether the visitor actually sent the email.

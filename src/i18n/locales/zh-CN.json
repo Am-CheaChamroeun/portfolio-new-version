@@ -180,11 +180,13 @@
     "telegram": "Telegram",
     "cv": "下载简历",
     "labels": {
+      "subject": "主题（可选）",
       "name": "我的名字是",
       "email": "你可以通过这个邮箱联系我",
       "message": "我想聊聊"
     },
     "placeholders": {
+      "subject": "想聊些什么？",
       "name": "你的名字",
       "email": "you@example.com",
       "message": "说说你的项目或工作机会……"
@@ -196,7 +198,16 @@
     "submit": "发送消息",
     "sending": "发送中…",
     "sent": "消息已发送——谢谢！",
-    "error": "出了点问题，请直接给我发邮件。",
+    "sentNote": "我会回复到你填写的邮箱。",
+    "fallbackNote": "目前尚未启用直接发送，此按钮会改为打开你的邮件应用。",
+    "errorFallback": "改用邮件发送（打开你的邮件应用）",
+    "errors": {
+      "spam": "这条消息无法发送。如果你是真人，请直接发邮件到 {{email}}。",
+      "rate": "短时间内消息过多。请稍等一分钟后重试，或发邮件到 {{email}}。",
+      "network": "无法连接服务器。请检查网络后重试，你的内容仍保留在表单中。",
+      "timeout": "请求超时，请重试，你的内容仍保留在表单中。",
+      "server": "出现问题，消息未能发送。请重试，或直接发邮件到 {{email}}。"
+    },
     "mailSubject": "来自 {{name}} 的作品集咨询",
     "submitMail": "在邮件应用中打开",
     "mailtoHint": "你的邮件应用应已打开并准备好邮件。如果没有打开，请直接写信到 {{email}}。"

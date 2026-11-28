@@ -1,9 +1,10 @@
 import { ArrowUpRight, Check, CheckCircle2, Copy, Download, Mail, Send } from 'lucide-react'
-import { useId, useState, type FormEvent, type ReactNode } from 'react'
+import { useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from '../../components/ui/Avatar'
 import { mockImages } from '../../data/images'
-import { contactFormEndpoint, profile, socials } from '../../data/portfolio'
+import { profile, socials } from '../../data/portfolio'
+import { sendContact, web3formsKey, type SendResult } from '../../lib/web3forms'
 import { GithubIcon, LinkedinIcon, TelegramIcon } from '../../lib/icons'
 import { useCvAvailable } from '../../hooks/useCvAvailable'
 import { Eyebrow } from './shared'
@@ -75,33 +76,46 @@ export default function ContactApp() {
     onInput: (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => e.currentTarget.setCustomValidity(''),
   }
 
+  const configured = web3formsKey !== ''
+  const busy = useRef(false)
+  const [reason, setReason] = useState<Extract<SendResult, { ok: false }>['reason']>('server')
+
+  const formRef = useRef<HTMLFormElement>(null)
+  const openEmailApp = (data: Record<string, string>) => {
+    const subject = data.subject?.trim() || t('contact.mailSubject', { name: data.name })
+    const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`)
+    window.location.href = `mailto:${socials.email}?subject=${encodeURIComponent(subject)}&body=${body}`
+  }
+  /** After a failed send: hand the same, still-filled-in message to the visitor's email app. */
+  const sendByEmailInstead = () => {
+    if (formRef.current) openEmailApp(Object.fromEntries(new FormData(formRef.current)) as Record<string, string>)
+  }
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (busy.current) return // a second click or Enter press while sending is ignored
     const form = e.currentTarget
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>
-    if (!contactFormEndpoint) {
-      // No backend configured: hand the message to the visitor's email app.
-      const subject = encodeURIComponent(t('contact.mailSubject', { name: data.name }))
-      const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`)
-      window.location.href = `mailto:${socials.email}?subject=${subject}&body=${body}`
+    const subject = data.subject?.trim() || t('contact.mailSubject', { name: data.name })
+    if (!configured) {
+      // Not configured: hand the message to the visitor's email app.
+      openEmailApp(data)
       // we cannot know whether the visitor's email app opened or the mail was sent — so this is never shown as "sent"
       setStatus('mailto')
       return
     }
+    busy.current = true
     setStatus('sending')
-    try {
-      const res = await fetch(contactFormEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) throw new Error(String(res.status))
-      form.reset()
+    const result = await sendContact(
+      { name: data.name.trim(), email: data.email.trim(), subject, message: data.message.trim(), botcheck: data.botcheck },
+      web3formsKey,
+    )
+    busy.current = false
+    if (result.ok) {
+      form.reset() // cleared only after the service confirmed delivery
       setStatus('sent')
-    } catch {
+    } else {
+      setReason(result.reason) // the form keeps what the visitor typed
       setStatus('error')
     }
   }
@@ -158,6 +172,7 @@ export default function ContactApp() {
           </div>
 
           <form
+            ref={formRef}
             onSubmit={onSubmit}
             aria-label={t('os.contact.composeAria')}
             className="shrink-0 space-y-3 border-t border-card-border bg-bg-subtle/60 p-4 @2xl:p-5"
@@ -198,6 +213,20 @@ export default function ContactApp() {
               </div>
             </div>
             <div>
+              <label htmlFor={`${id}-subject`} className="mb-1 block text-[12px] font-medium text-muted">
+                {t('contact.labels.subject')}
+              </label>
+              <input
+                id={`${id}-subject`}
+                name="subject"
+                type="text"
+                maxLength={120}
+                autoComplete="off"
+                placeholder={t('contact.placeholders.subject')}
+                className={field}
+              />
+            </div>
+            <div>
               <label htmlFor={`${id}-message`} className="mb-1 block text-[12px] font-medium text-muted">
                 {t('contact.labels.message')}
               </label>
@@ -211,19 +240,33 @@ export default function ContactApp() {
                 className={`${field} resize-none leading-6`}
               />
             </div>
+            {/* honeypot: hidden from people and screen readers; bots that fill it are dropped */}
+            <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+              <label>
+                Leave this empty
+                <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" />
+              </label>
+            </div>
             <div className="flex flex-wrap items-center gap-3">
               <button
                 type="submit"
                 disabled={status === 'sending'}
                 className="inline-flex items-center gap-2 rounded-lg bg-cta px-5 py-2.5 text-[13px] font-semibold text-on-cta transition-colors hover:bg-cta-hover disabled:opacity-70"
               >
-                {status === 'sent' ? <CheckCircle2 size={15} /> : contactFormEndpoint ? <Send size={15} /> : <Mail size={15} />}
-                {status === 'sending' ? t('contact.sending') : status === 'sent' ? t('contact.sent') : contactFormEndpoint ? t('contact.submit') : t('contact.submitMail')}
+                {status === 'sent' ? <CheckCircle2 size={15} /> : configured ? <Send size={15} /> : <Mail size={15} />}
+                {status === 'sending' ? t('contact.sending') : status === 'sent' ? t('contact.sent') : configured ? t('contact.submit') : t('contact.submitMail')}
               </button>
               <p role="status" aria-live="polite" className={`min-h-4 text-[12px] ${status === 'error' ? 'text-red-400' : 'text-faint'}`}>
-                {status === 'error' && t('contact.error')}
+                {status === 'sent' && t('contact.sentNote')}
+                {status === 'error' && t(`contact.errors.${reason}`, { email: socials.email })}
                 {status === 'mailto' && t('contact.mailtoHint', { email: socials.email })}
               </p>
+              {status === 'error' && reason !== 'spam' && (
+                <button type="button" onClick={sendByEmailInstead} className="basis-full text-left text-[12px] font-medium text-primary underline-offset-2 hover:underline">
+                  {t('contact.errorFallback')}
+                </button>
+              )}
+              {!configured && status === 'idle' && <p className="basis-full text-[12px] text-faint">{t('contact.fallbackNote')}</p>}
             </div>
           </form>
         </div>
