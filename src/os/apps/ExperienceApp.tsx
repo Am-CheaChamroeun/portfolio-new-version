@@ -5,6 +5,7 @@ import { type ExperienceProject, type WorkExperience } from '../../data/portfoli
 import { visibleExperience as experience } from '../../data/visible'
 import { formatDuration, formatMonth, monthsBetween } from '../../lib/experience'
 import { shown } from '../../lib/placeholder'
+import { CvActions } from './CvActions'
 import { EmptyState, Eyebrow, StatusBar, TechBadge, Toolbar } from './shared'
 
 const isLink = (url?: string): url is string => !!url && /^https?:\/\//.test(url)
@@ -260,6 +261,7 @@ export default function ExperienceApp() {
     <div className="@container flex h-full min-h-0 flex-col">
       <Toolbar>
         <p className="font-mono text-[12px] text-muted">~/{t('experience.title').toLowerCase()}</p>
+        <CvActions variant="compact" />
       </Toolbar>
 
       <div className="min-h-0 flex-1 overflow-y-auto p-4 @2xl:p-7">

@@ -54,7 +54,7 @@ What a visitor's browser does: the Projects list loads only the local cover; a c
 
 ## 3. Environment
 
-Your cloud name is already in `.env.local`:
+The cloud name `df3cyznc` is the built-in default in `src/lib/cloudinary.ts` (a public value), so production builds keep their media even if the variable is not set on Vercel. To override it, set it in `.env.local` / Vercel:
 
 ```
 VITE_CLOUDINARY_CLOUD_NAME=df3cyznc

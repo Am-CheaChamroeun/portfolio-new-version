@@ -29,3 +29,7 @@ CLAUDE.md
 CLAUDE.local.md
 Claude outputs/
 .impeccable/
+
+# Test output
+test-results/
+playwright-report/

@@ -552,6 +552,12 @@
     }
   },
   "os": {
+    "cv": {
+      "download": "下载简历",
+      "view": "查看简历",
+      "downloadAria": "以 PDF 格式下载简历",
+      "viewAria": "在新标签页中查看简历（PDF）"
+    },
     "name": "DeveloperOS",
     "apps": {
       "about": "关于我",
@@ -922,7 +928,8 @@
       },
       "actions": {
         "cv": "下载简历",
-        "cvMissing": "尚未找到简历文件——请将其放在 public/cv.pdf",
+        "cvView": "查看简历",
+        "cvMissing": "目前无法获取简历。",
         "github": "打开 GitHub 主页",
         "linkMissing": "此链接尚未设置",
         "linkedin": "打开 LinkedIn 主页",
@@ -963,7 +970,7 @@
       "opening": "正在新标签页中打开 {{name}}…",
       "linkMissing": "{{name}} 链接尚未设置。",
       "cvDownloading": "正在下载简历…",
-      "cvMissing": "尚未找到简历文件——请将其放在 public/cv.pdf。",
+      "cvMissing": "目前无法获取简历。",
       "noExperience": "尚未添加任何工作经历。",
       "empty": "尚未添加任何内容。",
       "historyEmpty": "历史记录中还没有命令。",

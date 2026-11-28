@@ -552,6 +552,12 @@
     }
   },
   "os": {
+    "cv": {
+      "download": "Download CV",
+      "view": "View CV",
+      "downloadAria": "Download CV as a PDF",
+      "viewAria": "View CV in a new tab (PDF)"
+    },
     "name": "DeveloperOS",
     "apps": {
       "about": "About Me",
@@ -926,7 +932,8 @@
       },
       "actions": {
         "cv": "Download CV",
-        "cvMissing": "CV file not found yet — add it as public/cv.pdf",
+        "cvView": "View CV",
+        "cvMissing": "The CV is not available right now.",
         "github": "Open GitHub profile",
         "linkMissing": "This link hasn’t been set yet",
         "linkedin": "Open LinkedIn profile",
@@ -967,7 +974,7 @@
       "opening": "Opening {{name}} in a new tab…",
       "linkMissing": "The {{name}} link hasn’t been set yet.",
       "cvDownloading": "Downloading CV…",
-      "cvMissing": "CV file not found yet — add it as public/cv.pdf.",
+      "cvMissing": "The CV is not available right now.",
       "noExperience": "No experience entries have been added yet.",
       "empty": "Nothing added yet.",
       "historyEmpty": "No commands in history yet.",

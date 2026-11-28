@@ -1,11 +1,11 @@
 import { ArrowUpRight, CheckCircle2, Download, Mail, Send } from 'lucide-react'
-import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react'
+import { useId, useState, type FormEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from '../../components/ui/Avatar'
 import { mockImages } from '../../data/images'
 import { contactFormEndpoint, profile, socials } from '../../data/portfolio'
 import { GithubIcon, LinkedinIcon, TelegramIcon } from '../../lib/icons'
-import { cvAvailable } from '../../lib/links'
+import { useCvAvailable } from '../../hooks/useCvAvailable'
 import { Eyebrow } from './shared'
 
 type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error'
@@ -39,14 +39,7 @@ export default function ContactApp() {
   const { t } = useTranslation()
   const [status, setStatus] = useState<Status>('idle')
   const id = useId()
-  const [hasCv, setHasCv] = useState(false)
-  useEffect(() => {
-    let on = true
-    cvAvailable().then((ok) => on && setHasCv(ok))
-    return () => {
-      on = false
-    }
-  }, [])
+  const hasCv = useCvAvailable()
 
   /** Replace the browser's built-in validation bubble text with the current language. */
   const validation = {
@@ -110,7 +103,7 @@ export default function ContactApp() {
           {hasCv && (
             <a
               href={profile.cvUrl}
-              download
+              download={profile.cvFilename}
               className="mx-2.5 mt-3 inline-flex items-center gap-2 rounded-lg border border-card-border bg-sheet px-3 py-2 text-[12.5px] font-semibold transition-colors hover:border-primary hover:text-primary"
             >
               <Download size={14} />

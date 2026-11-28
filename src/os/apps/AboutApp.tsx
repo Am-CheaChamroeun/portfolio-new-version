@@ -1,12 +1,11 @@
-import { ArrowRight, Download, Mail, Send } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { ArrowRight, Mail, Send } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { narrationText } from '../../lib/narration'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
 import { about, profile, socials } from '../../data/portfolio'
 import { GithubIcon, LinkedinIcon, TechTile, TelegramIcon } from '../../lib/icons'
-import { cvAvailable, downloadCv } from '../../lib/links'
+import { CvActions } from './CvActions'
 import { SHOW_PLACEHOLDERS, shown } from '../../lib/placeholder'
 import { techIcons, type TechKey } from '../../lib/tech'
 import { shortcutLabel } from '../CommandPalette'
@@ -24,15 +23,6 @@ export default function AboutApp() {
   const photo = pickImage(profile.photo, mockImages.profile)
   const paragraphs = (t('content.about.paragraphs', { returnObjects: true }) as string[]).filter(shown)
   const mobile = useLayoutMode() === 'mobile'
-  // the CV button only appears once a real file is deployed — never a dead download
-  const [hasCv, setHasCv] = useState(false)
-  useEffect(() => {
-    let on = true
-    cvAvailable().then((ok) => on && setHasCv(ok))
-    return () => {
-      on = false
-    }
-  }, [])
   const chips = t('content.about.chips', { returnObjects: true })
   const features = t('content.about.features', { returnObjects: true }) as unknown as { title: string; description: string }[]
 
@@ -113,25 +103,16 @@ export default function AboutApp() {
             </h1>
             <p className="mt-2 max-w-xl text-[15px] leading-7 text-muted">{t('content.profile.tagline')}</p>
             <p className="mt-3 max-w-xl border-l-2 border-primary/60 pl-3 text-[14px] italic leading-6 text-fg/90">{t('content.profile.motto')}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-4 grid grid-cols-2 gap-2 @md:flex @md:flex-wrap [&>*]:min-h-10 [&>*]:justify-center [&>*]:whitespace-nowrap">
+              <CvActions />
               <button
                 type="button"
                 onClick={() => openApp('projects')}
-                className="inline-flex items-center gap-2 rounded-lg bg-cta px-4 py-2 text-[13px] font-semibold text-on-cta transition-colors hover:bg-cta-hover"
+                className="inline-flex items-center gap-2 rounded-lg border border-card-border bg-sheet px-4 py-2 text-[13px] font-medium transition-colors hover:border-primary hover:text-primary"
               >
                 {t('os.about.projectsCta')}
                 <ArrowRight size={15} />
               </button>
-              {hasCv && (
-                <button
-                  type="button"
-                  onClick={() => void downloadCv()}
-                  className="inline-flex items-center gap-2 rounded-lg border border-card-border bg-sheet px-4 py-2 text-[13px] font-medium transition-colors hover:border-primary hover:text-primary"
-                >
-                  <Download size={15} />
-                  {t('os.about.cv')}
-                </button>
-              )}
               <button
                 type="button"
                 onClick={() => openApp('contact')}

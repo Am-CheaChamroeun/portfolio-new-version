@@ -10,7 +10,7 @@ Text lives in `src/i18n/locales/{en,km,zh-CN}.json` under `content.*`. Everythin
 | # | What | Where | If you skip it |
 |---|------|-------|----------------|
 | 1 | **Production domain** → `VITE_SITE_URL=https://your-domain` | Vercel env vars / `.env.local` (see `.env.example`) | No canonical URLs, `og:url`, `og:image`, or `sitemap.xml` are generated |
-| 2 | **CV file** → `public/cv.pdf` | `profile.cvUrl` in `portfolio.ts` | The "Download CV" buttons are hidden automatically |
+| 2 | **CV file** → `public/documents/am-cheachamroeun-cv.pdf` (already in place) | `profile.cvUrl` / `profile.cvFilename` in `portfolio.ts` | The CV buttons are hidden automatically if the file is missing |
 | 3 | **Contact form endpoint** (e.g. Formspree URL) → `contactFormEndpoint` | `portfolio.ts` | The form opens the visitor's email app instead ("Open in email app"); it never claims a message was sent |
 | 4 | **Projects** — name, slug, tech, `liveUrl`, `repoUrl`, `image` (+ optional `gallery`) | `featuredProject` / `projects` in `portfolio.ts` | The Projects app shows a "coming soon" panel |
 | 5 | **Project text** — `tagline`, `description`, `highlights`, and the optional `study` (objectives, problem, solution, role, architecture, challenges) per slug | `content.projects.<slug>` in each locale | Case-study sections without real text are hidden |
@@ -22,7 +22,7 @@ Text lives in `src/i18n/locales/{en,km,zh-CN}.json` under `content.*`. Everythin
 
 | What | Where |
 |------|-------|
-| Profile photo (`/profile.jpg`, 4:5) and logo | `profile.photo`, `profile.logo` — until then an initial "R" tile is shown |
+| Profile photo and logo | `profile.photo` (`src/assets/profile/`), `profile.logo` — until then an initial "R" tile is shown |
 | Last bio paragraph (what you are looking for) | `content.about.paragraphs[2]` — hidden until replaced |
 | Real skill levels (marked `// TODO` for newer skills) | `skillGroups` in `portfolio.ts` |
 | Khmer and Chinese translations of any text you add in English | the other two locale files |

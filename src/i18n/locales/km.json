@@ -552,6 +552,12 @@
     }
   },
   "os": {
+    "cv": {
+      "download": "ទាញយក CV",
+      "view": "មើល CV",
+      "downloadAria": "ទាញយក CV ជា PDF",
+      "viewAria": "មើល CV ក្នុងផ្ទាំងថ្មី (PDF)"
+    },
     "name": "DeveloperOS",
     "apps": {
       "about": "អំពីខ្ញុំ",
@@ -922,7 +928,8 @@
       },
       "actions": {
         "cv": "ទាញយក CV",
-        "cvMissing": "មិនទាន់មានឯកសារ CV ទេ — សូមដាក់វាជា public/cv.pdf",
+        "cvView": "មើល CV",
+        "cvMissing": "មិនអាចរកឃើញ CV នៅពេលនេះទេ។",
         "github": "បើកប្រវត្តិរូប GitHub",
         "linkMissing": "តំណនេះមិនទាន់បានកំណត់ទេ",
         "linkedin": "បើកប្រវត្តិរូប LinkedIn",
@@ -963,7 +970,7 @@
       "opening": "កំពុងបើក {{name}} ក្នុងផ្ទាំងថ្មី…",
       "linkMissing": "តំណ {{name}} មិនទាន់បានកំណត់ទេ។",
       "cvDownloading": "កំពុងទាញយក CV…",
-      "cvMissing": "មិនទាន់មានឯកសារ CV ទេ — សូមដាក់វាជា public/cv.pdf។",
+      "cvMissing": "មិនអាចរកឃើញ CV នៅពេលនេះទេ។",
       "noExperience": "មិនទាន់មានបទពិសោធន៍ត្រូវបានបន្ថែមនៅឡើយទេ។",
       "empty": "មិនទាន់មានអ្វីត្រូវបានបន្ថែមទេ។",
       "historyEmpty": "មិនទាន់មានពាក្យបញ្ជាក្នុងប្រវត្តិទេ។",

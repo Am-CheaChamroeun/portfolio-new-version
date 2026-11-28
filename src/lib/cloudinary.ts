@@ -8,14 +8,21 @@
  * Anything that is empty, still a placeholder (TODO_…, REPLACE_…, [..]) or invalid resolves to `undefined`,
  * so callers can fall back to the local copy or hide the section. Nothing here ever throws.
  *
- * Only the cloud NAME is read from the environment. It is public (it is part of every delivery URL), but API keys,
+ * Only the cloud NAME is configurable (env or default). It is public (it is part of every delivery URL), but API keys,
  * secrets and upload presets must never be put in a VITE_ variable.
  */
 
 const RAW_CLOUD = String(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? '').trim()
 
-/** The configured cloud name, or '' when it is missing or still the `.env.example` placeholder. */
-export const CLOUD_NAME = /^[a-z0-9_-]+$/i.test(RAW_CLOUD) && !/^your_/i.test(RAW_CLOUD) ? RAW_CLOUD : ''
+/**
+ * The public cloud name of this portfolio's Cloudinary account (it is part of every delivery URL, not a secret).
+ * It is the built-in default so a deployment never silently loses its media when the env var is forgotten;
+ * set VITE_CLOUDINARY_CLOUD_NAME to point at a different account.
+ */
+const DEFAULT_CLOUD_NAME = 'df3cyznc'
+
+/** The cloud name in use: the env value when it is valid, otherwise the default. */
+export const CLOUD_NAME = /^[a-z0-9_-]+$/i.test(RAW_CLOUD) && !/^your_/i.test(RAW_CLOUD) ? RAW_CLOUD : DEFAULT_CLOUD_NAME
 
 /** Widths we ask Cloudinary for. A short, fixed list keeps the number of cached variants (and transformations) small. */
 export const IMAGE_WIDTHS = [480, 960, 1600] as const

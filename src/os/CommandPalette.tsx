@@ -1,4 +1,4 @@
-import { ArrowUpRight, CornerDownLeft, Download, Languages, Search, Sparkles, SunMoon, type LucideIcon } from 'lucide-react'
+import { ArrowUpRight, CornerDownLeft, Download, Eye, Languages, Search, Sparkles, SunMoon, type LucideIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +7,7 @@ import { visibleProjects } from '../data/visible'
 import { useTheme } from '../hooks/useTheme'
 import { languages } from '../i18n'
 import { easeOut } from '../lib/motion'
-import { downloadCv, isReal, openExternal } from '../lib/links'
+import { downloadCv, isReal, openExternal, viewCv } from '../lib/links'
 import { GithubIcon, LinkedinIcon } from '../lib/icons'
 import { useOSActions, useOSState } from './hooks'
 import { appById, apps, type AppId } from './registry'
@@ -122,12 +122,23 @@ export function CommandPalette() {
       group: 'actions',
       kind: 'action',
       label: t('os.palette.actions.cv'),
-      keywords: 'cv resume download pdf',
+      keywords: 'cv resume curriculum vitae download save pdf',
       icon: Download,
       run: async () => {
         if (await downloadCv()) return true
         setNotice(t('os.palette.actions.cvMissing'))
         return false
+      },
+    })
+    out.push({
+      id: 'action-cv-view',
+      group: 'actions',
+      kind: 'action',
+      label: t('os.palette.actions.cvView'),
+      keywords: 'cv resume curriculum vitae view open read preview pdf',
+      icon: Eye,
+      run: () => {
+        viewCv()
       },
     })
     ;(

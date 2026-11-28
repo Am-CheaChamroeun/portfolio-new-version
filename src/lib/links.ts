@@ -18,12 +18,15 @@ export async function downloadCv() {
   if (!(await cvAvailable())) return false
   const a = document.createElement('a')
   a.href = profile.cvUrl
-  a.download = ''
+  a.download = profile.cvFilename
   document.body.appendChild(a)
   a.click()
   a.remove()
   return true
 }
+
+/** Open the CV in the browser's own PDF viewer (new tab). Call straight from a click so pop-up blockers allow it. */
+export const viewCv = () => window.open(profile.cvUrl, '_blank', 'noopener,noreferrer')
 
 /** Open an external link in a new tab, safely. */
 export const openExternal = (url: string) => window.open(url, '_blank', 'noopener,noreferrer')

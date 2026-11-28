@@ -1,13 +1,16 @@
 {
-  "name": "portfolio",
+  "name": "amcheachamroeun-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/prerender.mjs",
+    "preview": "vite preview",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -24,6 +27,7 @@
     "simple-icons": "^16.38.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
@@ -32,6 +36,12 @@
     "oxlint": "^1.90.0",
     "tailwindcss": "^4.3.5",
     "typescript": "~7.0.2",
-    "vite": "^8.3.6"
+    "vite": "^8.3.6",
+    "vitest": "^5.1.2"
+  },
+  "description": "DeveloperOS \u2014 the portfolio of Roeun (Am Cheachamroeun), a full-stack developer.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmCheachamroeun-Portfolio/amcheachamroeun-portfolio.git"
   }
 }

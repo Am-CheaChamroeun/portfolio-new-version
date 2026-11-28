@@ -55,7 +55,10 @@ export const profile = {
   globeMarker: [11.5564, 104.9282] as [number, number] | null, // Phnom Penh
   photo: profilePhoto, // src/assets/profile/profile-photo.png (square, 800×800)
   logo: '', // small round avatar in the header — falls back to `photo`, then initials
-  cvUrl: '/cv.pdf', // drop your CV at public/cv.pdf
+  /** The CV lives in the repository at public/documents/ (served as-is, copied into dist/ by the build). */
+  cvUrl: '/documents/am-cheachamroeun-cv.pdf',
+  /** File name the browser saves the download as */
+  cvFilename: 'Am-Cheachamroeun-CV.pdf',
   /** Entry number printed on the journal page */
   badgeId: 'RN · 2026 · 001',
   missionCode: 'RN-2026', // entry code in the hero's page header
