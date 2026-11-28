@@ -8,6 +8,8 @@ import { coverFor } from '../../data/projectMedia'
 import { visibleProjects } from '../../data/visible'
 import { useIsDark } from '../../hooks/useIsDark'
 import { GithubIcon } from '../../lib/icons'
+import { publicLiveUrl } from '../../lib/url'
+import { ProjectActions } from './ProjectActions'
 import { useOSActions, useOSState } from '../hooks'
 import { CaseStudy, projectCategory, type ProjectText } from './CaseStudy'
 import { BrowserFrame, EmptyState, Eyebrow, Pill, StatusBar, TechBadge, Toolbar } from './shared'
@@ -52,7 +54,7 @@ function Thumb({ project, className = '' }: { project: Project; className?: stri
 
 function Status({ project }: { project: Project }) {
   const { t } = useTranslation()
-  return project.liveUrl ? <Pill>{t('projects.live')}</Pill> : <Pill tone="muted">{t('projects.repoOnly')}</Pill>
+  return publicLiveUrl(project.liveUrl) ? <Pill>{t('projects.live')}</Pill> : <Pill tone="muted">{t('projects.repoOnly')}</Pill>
 }
 
 /** Premium project card: browser-frame preview, category, tech badges and a neon-lit hover. */
@@ -99,10 +101,11 @@ function ProjectCard({
           ))}
           {p.tech.length > shown.length && <li className="px-1 py-0.5 font-mono text-[10.5px] text-faint">+{p.tech.length - shown.length}</li>}
         </ul>
+        <ProjectActions project={p} size="sm" className="mt-3.5 [&>a]:flex-1" />
         <button
           type="button"
           onClick={onPreview}
-          className="btn-glow mt-3.5 inline-flex items-center justify-center gap-1.5 rounded-lg border border-edge bg-graphite px-3 py-2 text-[12.5px] font-semibold text-neon transition-all hover:border-neon hover:bg-neon hover:text-graphite"
+          className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-[12.5px] font-medium text-muted transition-colors hover:text-primary"
         >
           {t('os.projects.preview')}
           <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />

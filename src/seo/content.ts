@@ -7,6 +7,7 @@ import en from '../i18n/locales/en.json'
 import { profile, services, skillGroups, socials } from '../data/portfolio'
 import { visibleProjects, visibleExperience, visibleEducation } from '../data/visible'
 import { isPlaceholder } from '../lib/placeholder'
+import { publicLiveUrl } from '../lib/url'
 
 type Dict = Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 const c = en.content as Dict
@@ -83,7 +84,7 @@ export function buildPages(): PageDef[] {
           `<p>Technologies: ${esc(p.tech.join(', '))}</p>` +
           li(highlights.map(esc)) +
           li(
-            [p.liveUrl && `<a href="${esc(p.liveUrl)}" rel="noopener">Live site</a>`, p.repoUrl && `<a href="${esc(p.repoUrl)}" rel="noopener">Source code</a>`].filter(
+            [publicLiveUrl(p.liveUrl) && `<a href="${esc(publicLiveUrl(p.liveUrl)!)}" rel="noopener">Live demo</a>`, p.repoUrl && `<a href="${esc(p.repoUrl)}" rel="noopener">Source code</a>`].filter(
               (x): x is string => !!x && !x.includes('['),
             ),
           ),

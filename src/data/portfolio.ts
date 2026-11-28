@@ -367,8 +367,8 @@ export const featuredProject: Project = {
   tech: ['Nuxt.js', 'Vue', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind', 'Node.js', 'Pinia', 'ECharts', 'Zod', 'Vitest', 'PWA'],
   accent: '#5cb5a0',
   category: 'fullstack',
-  repoUrl: 'https://github.com/Am-CheaChamroeun/cash-compass',
-  liveUrl: '', // not deployed yet: add the live demo URL after deployment
+  repoUrl: 'https://github.com/AmCheachamroeun-Portfolio/cash-compass',
+  liveUrl: 'https://cash-compass-nine.vercel.app', // public Vercel deployment (listed on the GitHub repo); leave '' to hide the Live Demo button
 }
 
 export const projects: Project[] = [
@@ -378,8 +378,8 @@ export const projects: Project[] = [
     tech: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Gemini API', 'Zustand', 'Dexie', 'Zod', 'Vitest', 'Playwright'],
     accent: '#6ea8f7',
     category: 'fullstack',
-    repoUrl: 'https://github.com/Am-CheaChamroeun/resume-builder', // the GitHub repository keeps its original name
-    liveUrl: '', // not deployed yet: add the live demo URL after deployment
+    repoUrl: 'https://github.com/AmCheachamroeun-Portfolio/resume-craft',
+    liveUrl: 'https://resume-builder-eight-amber-93.vercel.app', // public Vercel deployment (listed on the GitHub repo); leave '' to hide the Live Demo button
   },
 ]
 

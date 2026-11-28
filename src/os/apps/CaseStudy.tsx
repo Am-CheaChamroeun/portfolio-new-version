@@ -1,5 +1,5 @@
 import { isReducedMotion } from '../../lib/settings'
-import { ArrowLeft, ArrowRight, ArrowUpRight, Globe, Sparkles } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useMemo, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,8 @@ import { featuredProject, socials, type Project } from '../../data/portfolio'
 import { coverFor, getProjectMedia, type MediaShot } from '../../data/projectMedia'
 import { useIsDark } from '../../hooks/useIsDark'
 import { SHOW_PLACEHOLDERS } from '../../lib/placeholder'
-import { GithubIcon } from '../../lib/icons'
+import { publicLiveUrl } from '../../lib/url'
+import { ProjectActions } from './ProjectActions'
 import { easeOut } from '../../lib/motion'
 import { MediaGallery, ProjectVideo, type GalleryItem, type GallerySet } from './MediaGallery'
 import { BrowserFrame, Eyebrow, Pill, SmartImage, TechBadge } from './shared'
@@ -190,27 +191,7 @@ export function CaseStudy({
     })
   }
 
-  const btn = 'btn-glow inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-semibold transition-all'
-  const links = (
-    <div className="flex flex-wrap gap-2">
-      {project.liveUrl && (
-        <a href={project.liveUrl} target="_blank" rel="noreferrer" className={`${btn} bg-neon text-graphite hover:bg-gold`}>
-          <Globe size={15} />
-          {t('projects.visitLive')}
-          <ArrowUpRight size={14} />
-        </a>
-      )}
-      <a
-        href={project.repoUrl || socials.github.url}
-        target="_blank"
-        rel="noreferrer"
-        className={`${btn} border border-edge bg-graphite-2 text-warm hover:border-neon/60 hover:text-neon`}
-      >
-        <GithubIcon size={15} />
-        {t('projects.viewRepo')}
-      </a>
-    </div>
-  )
+  const links = <ProjectActions project={project} fallbackRepo={socials.github.url} />
 
   return (
     <div className="@container h-full overflow-y-auto scroll-smooth motion-reduce:scroll-auto">
@@ -241,7 +222,7 @@ export function CaseStudy({
             <span className="rounded-full border border-edge px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-steel">
               {t(`os.projects.category.${category}`)}
             </span>
-            {project.liveUrl ? <Pill>{t('projects.live')}</Pill> : <Pill tone="muted">{t('projects.repoOnly')}</Pill>}
+            {publicLiveUrl(project.liveUrl) ? <Pill>{t('projects.live')}</Pill> : <Pill tone="muted">{t('projects.repoOnly')}</Pill>}
           </div>
           <h1 className="mt-3 text-[clamp(1.75rem,4.2cqw,2.9rem)] font-semibold leading-[1.05] tracking-tight">{project.name}</h1>
           {text.tagline && <p className="mt-2 max-w-2xl text-[15px] text-neon">{text.tagline}</p>}
@@ -292,7 +273,7 @@ export function CaseStudy({
           <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-card-border bg-card-border @2xl:grid-cols-4">
             {[
               [t('os.projects.study.facts.category'), t(`os.projects.category.${category}`)],
-              [t('os.projects.study.facts.status'), project.liveUrl ? t('projects.live') : t('projects.repoOnly')],
+              [t('os.projects.study.facts.status'), publicLiveUrl(project.liveUrl) ? t('projects.live') : t('projects.repoOnly')],
               [t('os.projects.study.facts.stack'), String(project.tech.length)],
               [t('os.projects.study.facts.repo'), project.repoUrl ? 'GitHub' : socials.github.label],
             ].map(([k, v]) => (
