@@ -4,7 +4,7 @@
  * still [PLACEHOLDERS] are left out, so crawlers only ever see real information.
  */
 import en from '../i18n/locales/en.json'
-import { profile, services, skillGroups, socials } from '../data/portfolio'
+import { fullName, profile, services, siteUrl, skillGroups, socials } from '../data/portfolio'
 import { visibleProjects, visibleExperience, visibleEducation } from '../data/visible'
 import { isPlaceholder } from '../lib/placeholder'
 import { publicLiveUrl } from '../lib/url'
@@ -16,7 +16,7 @@ const real = (s: unknown): s is string => typeof s === 'string' && s.trim() !== 
 
 export const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
-export type PageDef = { path: string; title: string; description: string; body: string; noindex?: boolean }
+export type PageDef = { path: string; title: string; description: string; body: string; noindex?: boolean; ld?: unknown }
 
 const li = (items: string[]) => (items.length ? `<ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>` : '')
 const nav = `<nav aria-label="Primary"><ul>${[
@@ -25,7 +25,7 @@ const nav = `<nav aria-label="Primary"><ul>${[
   ['/skills', 'Skills'],
   ['/education', 'Education'],
   ['/experience', 'Experience'],
-  ['/services', 'Services'],
+  ['/services', 'Specializations'],
   ['/contact', 'Contact'],
 ]
   .map(([h, l]) => `<li><a href="${h}">${l}</a></li>`)
@@ -40,14 +40,15 @@ const links = [
   ['Telegram', socials.telegram.url],
 ]
 
-export function buildPages(): PageDef[] {
+export function buildPages(site: string = siteUrl, image: string | null = null): PageDef[] {
   const out: PageDef[] = []
-  const meta = (k: string) => ({ title: `${pages[k].title} — ${profile.name}`, description: pages[k].description as string })
+  const meta = (k: string) => ({ title: `${pages[k].title} | ${fullName}`, description: pages[k].description as string })
 
   out.push({
     path: '/',
-    title: en.meta.title.replace('{{name}}', profile.name),
-    description: en.meta.description.replace('{{name}}', profile.name),
+    title: en.meta.title,
+    description: en.meta.description,
+    ld: jsonLd(site, image),
     body: shell(
       `${profile.name} — ${c.profile.role}`,
       `<p>${esc(c.profile.tagline)}</p>` +
@@ -76,8 +77,9 @@ export function buildPages(): PageDef[] {
     const text = [tagline, description].filter(Boolean)
     out.push({
       path: `/projects/${p.slug}`,
-      title: `${p.name} — ${pages.projects.title} — ${profile.name}`,
+      title: `${p.name} — ${pages.projects.title} | ${fullName}`,
       description: summary || description || tagline || pages.projects.description,
+      ld: projectLd(site, p, summary || description || tagline || pages.projects.description),
       body: shell(
         p.name,
         text.map((t) => `<p>${esc(t)}</p>`).join('') +
@@ -144,18 +146,19 @@ export function buildPages(): PageDef[] {
     ),
   })
   out.push({ path: '/monitor', ...meta('monitor'), body: shell(pages.monitor.title, `<p>${esc(pages.monitor.description)}</p>`) })
-  out.push({ path: '/terminal', ...meta('terminal'), body: shell(pages.terminal.title, `<p>${esc(pages.terminal.description)}</p>`) })
+  // interactive tools with no readable content of their own: kept out of search results and the sitemap
+  out.push({ path: '/terminal', ...meta('terminal'), noindex: true, body: shell(pages.terminal.title, `<p>${esc(pages.terminal.description)}</p>`) })
   out.push({
     path: '/contact',
     ...meta('contact'),
     body: shell(pages.contact.title, `<p>${esc(c.profile.availability)}</p>` + li([`<a href="mailto:${esc(socials.email)}">${esc(socials.email)}</a>`, ...links.map(([l, u]) => `<a href="${esc(u)}" rel="noopener">${l}</a>`)])),
   })
-  out.push({ path: '/settings', ...meta('settings'), body: shell(pages.settings.title, `<p>${esc(pages.settings.description)}</p>`) })
+  out.push({ path: '/settings', ...meta('settings'), noindex: true, body: shell(pages.settings.title, `<p>${esc(pages.settings.description)}</p>`) })
   // the phone home screen shares the About content; it is not listed in the sitemap
   out.push({ path: '/home', title: out[0].title, description: out[0].description, body: out[0].body, noindex: true })
   out.push({
     path: '/404',
-    title: `${pages.notFound.title} — ${profile.name}`,
+    title: `${pages.notFound.title} | ${fullName}`,
     description: pages.notFound.description,
     body: shell(pages.notFound.title, `<p>${esc(pages.notFound.description)}</p><p><a href="/">Back to About</a></p>`),
     noindex: true,
@@ -163,24 +166,66 @@ export function buildPages(): PageDef[] {
   return out
 }
 
-/** Person + ProfilePage structured data — only facts that are already public on the site. */
-export function jsonLd(siteUrl: string | null, image: string | null) {
-  const person: Record<string, unknown> = {
-    '@type': 'Person',
-    '@id': siteUrl ? `${siteUrl}/#person` : undefined,
-    name: profile.name,
-    jobTitle: c.profile.role,
-    description: c.profile.tagline,
-    address: { '@type': 'PostalAddress', addressLocality: 'Phnom Penh', addressCountry: 'KH' },
-    url: siteUrl ?? undefined,
-    image: image ?? undefined,
-    sameAs: [socials.github.url, socials.linkedin.url, socials.telegram.url],
-    knowsAbout: [...new Set(skillGroups.flatMap((g) => g.skills.map((s) => s.name)))],
-  }
+const person = (site: string, image: string | null) => ({
+  '@type': 'Person',
+  '@id': `${site}/#person`,
+  name: fullName,
+  alternateName: profile.name,
+  jobTitle: c.profile.role,
+  description: c.profile.tagline,
+  address: { '@type': 'PostalAddress', addressLocality: 'Phnom Penh', addressCountry: 'KH' },
+  url: site,
+  ...(image && { image }),
+  sameAs: [socials.github.url, socials.linkedin.url, socials.telegram.url],
+  knowsAbout: [...new Set(skillGroups.flatMap((g) => g.skills.map((s) => s.name)))],
+})
+
+/** Home page: WebSite + ProfilePage + Person — only facts that are already public on the site. */
+export function jsonLd(site: string, image: string | null) {
   return {
     '@context': 'https://schema.org',
-    '@graph': [{ '@type': 'ProfilePage', ...(siteUrl && { url: siteUrl }), name: en.meta.title.replace('{{name}}', profile.name), mainEntity: person }],
+    '@graph': [
+      { '@type': 'WebSite', '@id': `${site}/#website`, url: site, name: `${fullName} — Portfolio`, inLanguage: ['en', 'km', 'zh-CN'], publisher: { '@id': `${site}/#person` } },
+      {
+        '@type': 'ProfilePage',
+        '@id': `${site}/#profilepage`,
+        url: site,
+        name: en.meta.title,
+        isPartOf: { '@id': `${site}/#website` },
+        mainEntity: { '@id': `${site}/#person` },
+        ...(image && { primaryImageOfPage: image }),
+      },
+      person(site, image),
+    ],
   }
 }
 
-export const siteName = profile.name
+/** Case-study page: breadcrumb + the project as a piece of software the author built. No ratings, reviews or claims. */
+export function projectLd(site: string, p: { slug: string; name: string; tech: string[]; repoUrl?: string }, description: string) {
+  const url = `${site}/projects/${p.slug}`
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: site },
+          { '@type': 'ListItem', position: 2, name: pages.projects.title, item: `${site}/projects` },
+          { '@type': 'ListItem', position: 3, name: p.name, item: url },
+        ],
+      },
+      {
+        '@type': 'SoftwareSourceCode',
+        name: p.name,
+        description,
+        url,
+        author: { '@type': 'Person', '@id': `${site}/#person`, name: fullName },
+        keywords: p.tech.join(', '),
+        ...(p.repoUrl && !p.repoUrl.includes('[') && { codeRepository: p.repoUrl }),
+      },
+    ],
+  }
+}
+
+export { siteUrl }
+export const siteName = fullName

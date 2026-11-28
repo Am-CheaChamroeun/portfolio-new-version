@@ -6,8 +6,8 @@
  * canonical URL, Open Graph / Twitter tags, JSON-LD and readable content. React replaces that content as soon as it loads.
  * It also writes sitemap.xml, robots.txt and 404.html (served with a real 404 status by Vercel).
  *
- * The production domain is read from VITE_SITE_URL (or Vercel's VERCEL_PROJECT_PRODUCTION_URL). Without it, absolute URLs
- * (canonical, og:url, og:image, sitemap) are skipped rather than guessed.
+ * The production domain is the single `siteUrl` in src/data/portfolio.ts; VITE_SITE_URL overrides it (for a custom domain).
+ * If VITE_GOOGLE_SITE_VERIFICATION is set, the Google Search Console meta tag is written into every page's static HTML.
  */
 import { mkdir, readFile, writeFile, access } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
@@ -19,12 +19,10 @@ const { createServer } = await import('vite')
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
 
-const fromEnv = process.env.VITE_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')
-const siteUrl = fromEnv ? fromEnv.replace(/\/+$/, '') : null
-if (!siteUrl) console.warn('\n[prerender] ⚠ No site URL — set VITE_SITE_URL=https://your-domain (canonical, og:url, og:image and sitemap.xml are skipped until then).\n')
-
 const exists = (p) => access(p).then(() => true, () => false)
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+const verification = (process.env.VITE_GOOGLE_SITE_VERIFICATION ?? '').trim()
+if (verification && !/^[A-Za-z0-9_-]{20,100}$/.test(verification)) throw new Error('VITE_GOOGLE_SITE_VERIFICATION does not look like a Google verification token (expected only letters, digits, "-" and "_").')
 
 const vite = await createServer({ root, appType: 'custom', server: { middlewareMode: true }, logLevel: 'error', configFile: false, plugins: [] })
 let mod
@@ -36,35 +34,37 @@ try {
 
 const template = await readFile(join(dist, 'index.html'), 'utf8')
 const hasOg = await exists(join(dist, 'og-image.png'))
-const image = siteUrl && hasOg ? `${siteUrl}/og-image.png` : null
-const ld = JSON.stringify(mod.jsonLd(siteUrl, null)).replace(/</g, '\\u003c')
+const siteUrl = (process.env.VITE_SITE_URL || mod.siteUrl).replace(/\/+$/, '')
+if (!/^https:\/\/[^/\s]+$/.test(siteUrl)) throw new Error(`Site URL must be an https origin with no path, got "${siteUrl}"`)
+const image = hasOg ? `${siteUrl}/og-image.png` : null
 
-const pages = mod.buildPages()
+const pages = mod.buildPages(siteUrl, image)
 const about = pages.find((p) => p.path === '/')
 pages.push({ ...about, path: '/about', canonical: '/' }) // same page, canonical points at "/"
 
 const headFor = (page) => {
-  const canonical = page.noindex || !siteUrl ? null : siteUrl + (page.canonical ?? page.path)
+  const canonical = page.noindex ? null : siteUrl + (page.canonical ?? page.path)
   const t = []
   t.push(`<title>${esc(page.title)}</title>`)
   t.push(`<meta name="description" content="${esc(page.description)}" />`)
   t.push(`<meta name="robots" content="${page.noindex ? 'noindex' : 'index, follow'}" />`)
   if (canonical) t.push(`<link rel="canonical" href="${esc(canonical)}" />`)
   t.push(`<meta property="og:type" content="${page.path === '/' ? 'profile' : 'website'}" />`)
-  t.push(`<meta property="og:site_name" content="${esc(mod.siteName ?? 'Roeun')}" />`)
+  t.push(`<meta property="og:site_name" content="${esc(mod.siteName)}" />`)
   t.push(`<meta property="og:title" content="${esc(page.title)}" />`)
   t.push(`<meta property="og:description" content="${esc(page.description)}" />`)
   t.push(`<meta property="og:locale" content="en_US" /><meta property="og:locale:alternate" content="km_KH" /><meta property="og:locale:alternate" content="zh_CN" />`)
   if (canonical) t.push(`<meta property="og:url" content="${esc(canonical)}" />`)
   if (image) {
     t.push(`<meta property="og:image" content="${esc(image)}" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />`)
-    t.push(`<meta property="og:image:alt" content="${esc(page.title)}" />`)
+    t.push(`<meta property="og:image:type" content="image/png" /><meta property="og:image:alt" content="${esc(page.title)}" />`)
   }
   t.push(`<meta name="twitter:card" content="${image ? 'summary_large_image' : 'summary'}" />`)
   t.push(`<meta name="twitter:title" content="${esc(page.title)}" />`)
   t.push(`<meta name="twitter:description" content="${esc(page.description)}" />`)
-  if (image) t.push(`<meta name="twitter:image" content="${esc(image)}" />`)
-  if (page.path === '/' || page.path === '/about') t.push(`<script type="application/ld+json">${ld}</script>`)
+  if (image) t.push(`<meta name="twitter:image" content="${esc(image)}" /><meta name="twitter:image:alt" content="${esc(page.title)}" />`)
+  if (verification) t.push(`<meta name="google-site-verification" content="${esc(verification)}" />`)
+  if (page.ld) t.push(`<script type="application/ld+json">${JSON.stringify(page.ld).replace(/</g, '\\u003c')}</script>`)
   return t.join('\n    ')
 }
 
@@ -80,11 +80,9 @@ for (const page of pages) {
   await writeFile(file, html)
 }
 
-if (siteUrl) {
-  const day = new Date().toISOString().slice(0, 10)
-  const urls = pages.filter((p) => !p.noindex && p.path !== '/about').map((p) => `  <url><loc>${siteUrl}${p.path === '/' ? '/' : p.path}</loc><lastmod>${day}</lastmod></url>`)
-  await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`)
-}
-await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /home\n${siteUrl ? `\nSitemap: ${siteUrl}/sitemap.xml\n` : ''}`)
+// only real, indexable pages (no lastmod: the build date would claim a freshness the content does not have)
+const urls = pages.filter((p) => !p.noindex && p.path !== '/about').map((p) => `  <url><loc>${siteUrl}${p.path === '/' ? '/' : p.path}</loc></url>`)
+await writeFile(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`)
+await writeFile(join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /home\n\nSitemap: ${siteUrl}/sitemap.xml\n`)
 
-console.log(`[prerender] ${pages.length} pages written${siteUrl ? ` for ${siteUrl}` : ' (no site URL)'}${hasOg ? '' : ' — no og-image.png found'}`)
+console.log(`[prerender] ${pages.length} pages written for ${siteUrl}${verification ? ' (with Google verification tag)' : ''}${hasOg ? '' : ' — no og-image.png found'}`)

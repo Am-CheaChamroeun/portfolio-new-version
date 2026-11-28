@@ -9,7 +9,7 @@ Text lives in `src/i18n/locales/{en,km,zh-CN}.json` under `content.*`. Everythin
 
 | # | What | Where | If you skip it |
 |---|------|-------|----------------|
-| 1 | **Production domain** → `VITE_SITE_URL=https://your-domain` | Vercel env vars / `.env.local` (see `.env.example`) | No canonical URLs, `og:url`, `og:image`, or `sitemap.xml` are generated |
+| 1 | **Production domain** is set to `https://amcheachamroeun.vercel.app` (`siteUrl` in `portfolio.ts`); only set `VITE_SITE_URL` for a custom domain | `portfolio.ts` / Vercel env vars | Nothing to do unless you move to a custom domain |
 | 2 | **CV file** → `public/documents/am-cheachamroeun-cv.pdf` (already in place) | `profile.cvUrl` / `profile.cvFilename` in `portfolio.ts` | The CV buttons are hidden automatically if the file is missing |
 | 3 | **Web3Forms access key** → `VITE_WEB3FORMS_ACCESS_KEY` (local `.env.local` and Vercel) | environment | Without it the form opens the visitor's email app ("Open in email app") and never claims a message was sent |
 | 4 | **Projects** — name, slug, tech, `liveUrl`, `repoUrl`, `image` (+ optional `gallery`) | `featuredProject` / `projects` in `portfolio.ts` | The Projects app shows a "coming soon" panel |

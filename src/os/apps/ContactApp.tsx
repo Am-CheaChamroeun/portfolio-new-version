@@ -96,6 +96,15 @@ export default function ContactApp() {
     if (busy.current) return // a second click or Enter press while sending is ignored
     const form = e.currentTarget
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>
+    // "required" accepts a field that holds only spaces; treat that as empty
+    for (const field of ['name', 'message'] as const) {
+      if (data[field].trim() === '') {
+        const el = form.elements.namedItem(field) as HTMLInputElement | HTMLTextAreaElement
+        el.setCustomValidity(t('contact.validation.required'))
+        el.reportValidity()
+        return
+      }
+    }
     const subject = data.subject?.trim() || t('contact.mailSubject', { name: data.name })
     if (!configured) {
       // Not configured: hand the message to the visitor's email app.
@@ -190,6 +199,7 @@ export default function ContactApp() {
                   name="name"
                   type="text"
                   required
+                  maxLength={80}
                   autoComplete="name"
                   placeholder={t('contact.placeholders.name')}
                   className={field}
@@ -205,6 +215,7 @@ export default function ContactApp() {
                   name="email"
                   type="email"
                   required
+                  maxLength={254}
                   autoComplete="email"
                   placeholder={t('contact.placeholders.email')}
                   className={field}
@@ -234,6 +245,7 @@ export default function ContactApp() {
                 id={`${id}-message`}
                 name="message"
                 required
+                maxLength={5000}
                 rows={4}
                 placeholder={t('contact.placeholders.message')}
                 {...validation}
@@ -266,6 +278,7 @@ export default function ContactApp() {
                   {t('contact.errorFallback')}
                 </button>
               )}
+              {configured && <p id={`${id}-privacy`} className="basis-full text-[11.5px] leading-5 text-faint">{t('contact.privacy')}</p>}
               {!configured && status === 'idle' && <p className="basis-full text-[12px] text-faint">{t('contact.fallbackNote')}</p>}
             </div>
           </form>

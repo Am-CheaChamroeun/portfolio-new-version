@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{name}} — Full-Stack Developer | Portfolio",
-    "description": "Portfolio of {{name}} — full-stack developer building scalable, high-performance web applications with React, Next.js, TypeScript and NestJS.",
+    "title": "Am Cheachamroeun | Full-Stack Developer Portfolio",
+    "description": "Full-Stack Developer based in Cambodia, building modern, scalable web applications. Explore my professional experience, technical skills, and software projects.",
     "pages": {
       "about": {
         "title": "About",
@@ -200,6 +200,7 @@
     "sent": "Message sent — thank you!",
     "sentNote": "I'll reply to the email address you gave.",
     "fallbackNote": "Direct sending isn't set up yet. This button opens your email app instead.",
+    "privacy": "Your name, email and message are sent through Web3Forms so I can reply to your enquiry.",
     "errorFallback": "Send by email instead (opens your email app)",
     "errors": {
       "spam": "This message couldn't be sent. If you're a real person, please email {{email}} directly.",

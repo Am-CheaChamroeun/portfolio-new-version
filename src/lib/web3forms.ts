@@ -25,12 +25,12 @@ export async function sendContact(payload: ContactPayload, accessKey: string, fe
       signal: controller.signal,
       body: JSON.stringify({
         access_key: accessKey,
-        name: payload.name,
-        email: payload.email,
-        replyto: payload.email,
-        from_name: payload.name,
-        subject: payload.subject,
-        message: payload.message,
+        name: payload.name.slice(0, 80),
+        email: payload.email.slice(0, 254),
+        replyto: payload.email.slice(0, 254),
+        from_name: payload.name.slice(0, 80),
+        subject: payload.subject.slice(0, 120),
+        message: payload.message.slice(0, 5000),
         botcheck: '',
       }),
     })

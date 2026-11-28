@@ -14,9 +14,11 @@
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-8QWawiUBttiW1E17+h/PokWmEvQwzZ9rzhj6YNkYcfg='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://res.cloudinary.com https://avatars.githubusercontent.com; media-src 'self' blob: https://res.cloudinary.com https://translate.google.com; font-src 'self' data:; connect-src 'self' https://api.github.com https://api.web3forms.com https://github-contributions-api.jogruber.de; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=()" }
       ]
     }
   ]

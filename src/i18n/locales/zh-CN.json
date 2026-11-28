@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "{{name}} — 全栈开发工程师 | 作品集",
-    "description": "{{name}} 的作品集——一名使用 React、Next.js、TypeScript 和 NestJS 构建可扩展、高性能 Web 应用的全栈开发者。",
+    "title": "Am Cheachamroeun | 全栈开发工程师作品集",
+    "description": "常驻柬埔寨的全栈开发工程师，构建现代、可扩展的 Web 应用。欢迎查看我的工作经历、技术技能和软件项目。",
     "pages": {
       "about": {
         "title": "关于我",
@@ -200,6 +200,7 @@
     "sent": "消息已发送——谢谢！",
     "sentNote": "我会回复到你填写的邮箱。",
     "fallbackNote": "目前尚未启用直接发送，此按钮会改为打开你的邮件应用。",
+    "privacy": "你的姓名、邮箱和留言将通过 Web3Forms 发送，以便我回复你的咨询。",
     "errorFallback": "改用邮件发送（打开你的邮件应用）",
     "errors": {
       "spam": "这条消息无法发送。如果你是真人，请直接发邮件到 {{email}}。",

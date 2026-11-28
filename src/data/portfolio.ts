@@ -23,7 +23,7 @@ import isbLogo from '../assets/experience/isb-vietnam-logo.png'
 import cheaSimLogo from '../assets/education/chea-sim-santhor-mok-high-school-logo.png'
 import kitLogo from '../assets/education/kirirom-institute-of-technology-logo.png'
 import tgiLogo from '../assets/education/tux-global-institute-logo.png'
-import profilePhoto from '../assets/profile/profile-photo.png'
+import profilePhoto from '../assets/profile/profile-photo.webp'
 import type { LucideIcon } from 'lucide-react'
 import {
   Building2,
@@ -44,6 +44,15 @@ import type { TechKey } from '../lib/tech'
 
 /* ───────────── Identity ───────────── */
 
+/**
+ * The one canonical public URL of this site (no trailing slash). Canonical links, Open Graph, the sitemap,
+ * robots.txt and structured data are all built from it at build time (scripts/prerender.mjs).
+ * Set VITE_SITE_URL only to override it (for example when a custom domain replaces the Vercel one).
+ */
+export const siteUrl = 'https://amcheachamroeun.vercel.app'
+/** Full name used in page titles, Open Graph and structured data (`profile.name` is the short display name). */
+export const fullName = 'Am Cheachamroeun'
+
 export const profile = {
   name: 'Roeun', // [YOUR FULL NAME]
   initials: 'R',
@@ -53,7 +62,7 @@ export const profile = {
   locationFlag: '🇰🇭',
   /** [lat, lng] for the marker on the globe — null hides the marker */
   globeMarker: [11.5564, 104.9282] as [number, number] | null, // Phnom Penh
-  photo: profilePhoto, // src/assets/profile/profile-photo.png (square, 800×800)
+  photo: profilePhoto, // src/assets/profile/profile-photo.webp (square, 800×800; the original PNG is kept beside it)
   logo: '', // small round avatar in the header — falls back to `photo`, then initials
   /** The CV lives in the repository at public/documents/ (served as-is, copied into dist/ by the build). */
   cvUrl: '/documents/am-cheachamroeun-cv.pdf',
