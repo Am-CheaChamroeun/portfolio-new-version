@@ -1,26 +1,26 @@
 /**
  * ─────────────────────────────────────────────────────────────
- *  PROJECT MEDIA  (hybrid: small files local, heavy files on Cloudinary)
+ *  PROJECT MEDIA  (hybrid: covers + posters local, everything heavy on Cloudinary)
  *
- *  LOCAL (in this repo, src/assets/projects/<dir>/): covers (light + dark) and the video poster.
+ *  LOCAL (in this repo, src/assets/projects/<dir>/): light + dark covers and the video poster. Nothing else.
  *  CLOUDINARY: desktop screenshots, mobile screenshots, the demo MP4 and the optional GIF preview.
  *
- *  Each Cloudinary reference below is `TODO_CLOUDINARY_PUBLIC_ID_OR_URL` until you upload the file. Replace it with
- *  the file's real public ID or its full https://res.cloudinary.com/… URL (see docs/CLOUDINARY_MEDIA.md).
- *  While a value is still a placeholder (or VITE_CLOUDINARY_CLOUD_NAME is missing), the portfolio simply uses the
- *  local copy of that screenshot if one exists, and hides the video section. No broken images, no errors.
+ *  Every Cloudinary reference below is a placeholder named  TODO_CLOUDINARY_<file name without extension>.
+ *  File names are unique across projects ({slug}-desktop-NN-feature, {slug}-mobile-NN-feature, {slug}-demo …), so
+ *  the recommended public ID is simply the file name without its extension. See docs/CLOUDINARY_MEDIA.md.
+ *  Replace each one with that file's real public ID (needs VITE_CLOUDINARY_CLOUD_NAME) or its full
+ *  https://res.cloudinary.com/… URL. With Dynamic folders the public ID may not include the folder, so copy it from Cloudinary.
+ *  The first value in each row is the local file name (a label for you, not loaded by the site).
+ *  A placeholder is never rendered: that screenshot is simply left out, and the video section stays hidden.
  *
- *  `dir` is the folder under src/assets/projects/. `slug` (the key) must match the project's slug in portfolio.ts.
- *  Captions are English; add `content.projects.<slug>.media.<id>` to a locale file to translate one.
+ *  `dir` is the folder under src/assets/projects/. The key (`cashcompass`, `resumecraft`) must match the slug in portfolio.ts.
+ *  Captions and alt text come from content.projects.<slug>.media.<file name without extension> in the locale files.
  * ─────────────────────────────────────────────────────────────
  */
 import { mediaUrl, responsiveImage, type ResponsiveSrc } from '../lib/cloudinary'
 
-/** Not a real reference. Replace it after uploading (the site ignores it until then). */
-const TODO = 'TODO_CLOUDINARY_PUBLIC_ID_OR_URL'
-
-/** [file name in src/assets/projects/<dir>/<folder>/, caption, Cloudinary public ID or URL] */
-type Row = readonly [file: string, caption: string, remote: string]
+/** [original file name, Cloudinary public ID or URL] */
+type Row = readonly [file: string, remote: string]
 
 type Config = {
   dir: string
@@ -41,86 +41,81 @@ const configs: Record<string, Config> = {
     coverDark: 'cashcompass-cover-dark.webp',
     coverLight: 'cashcompass-cover-light.webp',
     poster: 'cashcompass-demo-poster.webp',
-    video: TODO, // cashcompass-demo.mp4  → portfolio/cashcompass/demo/
-    gif: undefined, // optional: cashcompass-demo.gif → set a public ID/URL to offer a GIF when there is no MP4
+    video: 'TODO_CLOUDINARY_cashcompass-demo-mp4', // cashcompass-demo.mp4 (Cloudinary resource type: video)
+    gif: 'TODO_CLOUDINARY_cashcompass-demo-gif', // optional: cashcompass-demo.gif (resource type: image); only used when there is no working MP4
     desktop: [
-      ['01-landing-page.webp', 'Landing page', TODO],
-      ['02-dashboard.webp', 'Dashboard', TODO],
-      ['03-transactions.webp', 'Transactions', TODO],
-      ['04-accounts.webp', 'Accounts', TODO],
-      ['05-budgets.webp', 'Budgets', TODO],
-      ['06-savings-goals.webp', 'Savings goals', TODO],
-      ['07-analytics.webp', 'Analytics', TODO],
-      ['08-recurring-payments.webp', 'Recurring payments', TODO],
-      ['09-cash-flow-forecast.webp', 'Cash flow forecast', TODO],
-      ['10-financial-calendar.webp', 'Financial calendar', TODO],
-      ['11-financial-reports.webp', 'Financial reports', TODO],
-      ['12-notifications.webp', 'Notifications', TODO],
-      ['13-dark-dashboard.webp', 'Dashboard in dark mode', TODO],
-      ['14-khmer-dashboard.webp', 'Dashboard in Khmer', TODO],
-      ['15-pdf-export.webp', 'PDF export', TODO],
+      ['cashcompass-desktop-01-landing-page.webp', 'TODO_CLOUDINARY_cashcompass-desktop-01-landing-page'],
+      ['cashcompass-desktop-02-dashboard.webp', 'TODO_CLOUDINARY_cashcompass-desktop-02-dashboard'],
+      ['cashcompass-desktop-03-transactions.webp', 'TODO_CLOUDINARY_cashcompass-desktop-03-transactions'],
+      ['cashcompass-desktop-04-accounts.webp', 'TODO_CLOUDINARY_cashcompass-desktop-04-accounts'],
+      ['cashcompass-desktop-05-budgets.webp', 'TODO_CLOUDINARY_cashcompass-desktop-05-budgets'],
+      ['cashcompass-desktop-06-savings-goals.webp', 'TODO_CLOUDINARY_cashcompass-desktop-06-savings-goals'],
+      ['cashcompass-desktop-07-analytics.webp', 'TODO_CLOUDINARY_cashcompass-desktop-07-analytics'],
+      ['cashcompass-desktop-08-recurring-payments.webp', 'TODO_CLOUDINARY_cashcompass-desktop-08-recurring-payments'],
+      ['cashcompass-desktop-09-cash-flow-forecast.webp', 'TODO_CLOUDINARY_cashcompass-desktop-09-cash-flow-forecast'],
+      ['cashcompass-desktop-10-financial-calendar.webp', 'TODO_CLOUDINARY_cashcompass-desktop-10-financial-calendar'],
+      ['cashcompass-desktop-11-financial-reports.webp', 'TODO_CLOUDINARY_cashcompass-desktop-11-financial-reports'],
+      ['cashcompass-desktop-12-notifications.webp', 'TODO_CLOUDINARY_cashcompass-desktop-12-notifications'],
+      ['cashcompass-desktop-13-dark-dashboard.webp', 'TODO_CLOUDINARY_cashcompass-desktop-13-dark-dashboard'],
+      ['cashcompass-desktop-14-khmer-dashboard.webp', 'TODO_CLOUDINARY_cashcompass-desktop-14-khmer-dashboard'],
+      ['cashcompass-desktop-15-pdf-export.webp', 'TODO_CLOUDINARY_cashcompass-desktop-15-pdf-export'],
     ],
     mobile: [
-      ['01-mobile-home.png', 'Home', TODO],
-      ['02-mobile-dashboard.png', 'Dashboard', TODO],
-      ['03-mobile-transactions.png', 'Transactions', TODO],
-      ['04-mobile-budgets.png', 'Budgets', TODO],
-      ['05-mobile-calendar.png', 'Calendar', TODO],
+      ['cashcompass-mobile-01-home.png', 'TODO_CLOUDINARY_cashcompass-mobile-01-home'],
+      ['cashcompass-mobile-02-dashboard.png', 'TODO_CLOUDINARY_cashcompass-mobile-02-dashboard'],
+      ['cashcompass-mobile-03-transactions.png', 'TODO_CLOUDINARY_cashcompass-mobile-03-transactions'],
+      ['cashcompass-mobile-04-budgets.png', 'TODO_CLOUDINARY_cashcompass-mobile-04-budgets'],
+      ['cashcompass-mobile-05-calendar.png', 'TODO_CLOUDINARY_cashcompass-mobile-05-calendar'],
     ],
   },
   resumecraft: {
-    dir: 'resume-builder',
+    dir: 'resume-craft',
     coverDark: 'resumecraft-cover-dark.webp',
     coverLight: 'resumecraft-cover-light.webp',
     poster: 'resumecraft-demo-poster.webp',
-    video: TODO, // resumecraft-demo.mp4 → portfolio/resumecraft/demo/
-    gif: undefined,
+    video: 'TODO_CLOUDINARY_resumecraft-demo-mp4', // resumecraft-demo.mp4 (Cloudinary resource type: video)
+    gif: 'TODO_CLOUDINARY_resumecraft-demo-gif', // optional: resumecraft-demo.gif (resource type: image); only used when there is no working MP4
     desktop: [
-      ['01-landing-page.webp', 'Landing page', TODO],
-      ['02-template-gallery.webp', 'Template gallery', TODO],
-      ['03-resume-editor.webp', 'Resume editor', TODO],
-      ['04-editor-dark.webp', 'Editor in dark mode', TODO],
-      ['05-customization.webp', 'Customization', TODO],
-      ['06-ai-assistant.webp', 'AI assistant', TODO],
-      ['07-ats-analysis.webp', 'ATS analysis', TODO],
-      ['08-my-resumes.webp', 'My resumes', TODO],
-      ['09-cover-letter.webp', 'Cover letter', TODO],
-      ['10-cover-letter-templates.webp', 'Cover letter templates', TODO],
-      ['11-khmer-resume.webp', 'Resume in Khmer', TODO],
-      ['12-pdf-export.webp', 'PDF export', TODO],
-      ['13-version-history.webp', 'Version history', TODO],
+      ['resumecraft-desktop-01-landing-page.webp', 'TODO_CLOUDINARY_resumecraft-desktop-01-landing-page'],
+      ['resumecraft-desktop-02-template-gallery.webp', 'TODO_CLOUDINARY_resumecraft-desktop-02-template-gallery'],
+      ['resumecraft-desktop-03-resume-editor.webp', 'TODO_CLOUDINARY_resumecraft-desktop-03-resume-editor'],
+      ['resumecraft-desktop-04-editor-dark.webp', 'TODO_CLOUDINARY_resumecraft-desktop-04-editor-dark'],
+      ['resumecraft-desktop-05-customization.webp', 'TODO_CLOUDINARY_resumecraft-desktop-05-customization'],
+      ['resumecraft-desktop-06-ai-assistant.webp', 'TODO_CLOUDINARY_resumecraft-desktop-06-ai-assistant'],
+      ['resumecraft-desktop-07-ats-analysis.webp', 'TODO_CLOUDINARY_resumecraft-desktop-07-ats-analysis'],
+      ['resumecraft-desktop-08-my-resumes.webp', 'TODO_CLOUDINARY_resumecraft-desktop-08-my-resumes'],
+      ['resumecraft-desktop-09-cover-letter.webp', 'TODO_CLOUDINARY_resumecraft-desktop-09-cover-letter'],
+      ['resumecraft-desktop-10-cover-letter-templates.webp', 'TODO_CLOUDINARY_resumecraft-desktop-10-cover-letter-templates'],
+      ['resumecraft-desktop-11-khmer-resume.webp', 'TODO_CLOUDINARY_resumecraft-desktop-11-khmer-resume'],
+      ['resumecraft-desktop-12-pdf-export.webp', 'TODO_CLOUDINARY_resumecraft-desktop-12-pdf-export'],
+      ['resumecraft-desktop-13-version-history.webp', 'TODO_CLOUDINARY_resumecraft-desktop-13-version-history'],
     ],
     mobile: [
-      ['01-mobile-home.png', 'Home', TODO],
-      ['02-mobile-templates.png', 'Templates', TODO],
-      ['03-mobile-editor.png', 'Editor', TODO],
-      ['04-mobile-preview.png', 'Preview', TODO],
+      ['resumecraft-mobile-01-home.png', 'TODO_CLOUDINARY_resumecraft-mobile-01-home'],
+      ['resumecraft-mobile-02-templates.png', 'TODO_CLOUDINARY_resumecraft-mobile-02-templates'],
+      ['resumecraft-mobile-03-editor.png', 'TODO_CLOUDINARY_resumecraft-mobile-03-editor'],
+      ['resumecraft-mobile-04-preview.png', 'TODO_CLOUDINARY_resumecraft-mobile-04-preview'],
     ],
   },
 }
 
 /* ── local files: Vite turns each into a hashed URL string (the image itself is only downloaded when shown) ── */
-const local = import.meta.glob(
-  [
-    '../assets/projects/*/covers/*.webp',
-    '../assets/projects/*/demo/*-poster.webp',
-    '../assets/projects/*/screenshots/*.webp',
-    '../assets/projects/*/mobile/*.{png,webp}',
-  ],
-  { eager: true, query: '?url', import: 'default' },
-) as Record<string, string>
+const local = import.meta.glob(['../assets/projects/*/covers/*.webp', '../assets/projects/*/demo/*-poster.webp'], {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>
 
-const localUrl = (dir: string, folder: string, file?: string) => (file ? local[`../assets/projects/${dir}/${folder}/${file}`] : undefined)
+const localUrl = (dir: string, folder: 'covers' | 'demo', file?: string) => (file ? local[`../assets/projects/${dir}/${folder}/${file}`] : undefined)
 
 /* ── what the UI receives ── */
 
 export type MediaShot = {
   id: string
+  /** English fallback caption (from the file name); the real, translated one is content.projects.<slug>.media.<id> */
   caption: string
-  /** Cloudinary delivery sources (undefined until configured) */
-  remote?: { thumb: ResponsiveSrc; full: ResponsiveSrc }
-  /** the bundled copy: used when there is no (working) Cloudinary source */
-  local?: string
+  /** Cloudinary delivery sources */
+  remote: { thumb: ResponsiveSrc; full: ResponsiveSrc }
 }
 
 export type ProjectMedia = {
@@ -134,17 +129,24 @@ export type ProjectMedia = {
 }
 
 const stem = (file: string) => file.replace(/\.[a-z]+$/i, '')
+/** `cashcompass-desktop-02-dashboard.webp` → `desktop-02-dashboard` (the key of its caption in the locale files) */
+const shotId = (file: string) => stem(file).replace(/^[a-z0-9]+-(?=(?:desktop|mobile)-)/, '')
+/** "desktop-02-dashboard" → "Dashboard" */
+const humanize = (id: string) => {
+  const w = id.replace(/^(?:desktop|mobile)-\d+-/, '').replace(/-/g, ' ')
+  return w.charAt(0).toUpperCase() + w.slice(1)
+}
 
-function shots(rows: readonly Row[], dir: string, folder: 'screenshots' | 'mobile', portrait: boolean): MediaShot[] {
+/** Rows whose reference is still a placeholder (or invalid) are left out: nothing broken is ever shown. */
+function shots(rows: readonly Row[], portrait: boolean): MediaShot[] {
   const thumbSizes = portrait ? '96px' : '112px'
   const fullSizes = portrait ? '(min-width: 768px) 320px, 90vw' : '(min-width: 1024px) 860px, 100vw'
-  return rows
-    .map(([file, caption, ref]): MediaShot => {
-      const thumb = responsiveImage(ref, thumbSizes, 480)
-      const full = responsiveImage(ref, fullSizes, 960)
-      return { id: stem(file), caption, remote: thumb && full ? { thumb: { src: thumb.src }, full } : undefined, local: localUrl(dir, folder, file) }
-    })
-    .filter((s) => s.remote || s.local) // nothing to show for this file → leave it out
+  return rows.flatMap(([file, ref]) => {
+    const thumb = responsiveImage(ref, thumbSizes, 480)
+    const full = responsiveImage(ref, fullSizes, 960)
+    const id = shotId(file)
+    return thumb && full ? [{ id, caption: humanize(id), remote: { thumb: { src: thumb.src }, full } }] : []
+  })
 }
 
 const cache = new Map<string, ProjectMedia | undefined>()
@@ -157,8 +159,8 @@ export function getProjectMedia(slug: string): ProjectMedia | undefined {
     coverDark: localUrl(c.dir, 'covers', c.coverDark),
     coverLight: localUrl(c.dir, 'covers', c.coverLight),
     poster: localUrl(c.dir, 'demo', c.poster),
-    desktop: shots(c.desktop, c.dir, 'screenshots', false),
-    mobile: shots(c.mobile, c.dir, 'mobile', true),
+    desktop: shots(c.desktop, false),
+    mobile: shots(c.mobile, true),
     video: mediaUrl(c.video, 'video'),
     gif: mediaUrl(c.gif, 'image', 960),
   }

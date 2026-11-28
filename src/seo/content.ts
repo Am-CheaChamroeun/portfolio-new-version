@@ -58,7 +58,7 @@ export function buildPages(): PageDef[] {
 
   const projectList = visibleProjects.map((p) => {
     const text = (c.projects as Dict)[p.slug] ?? {}
-    return { p, tagline: real(text.tagline) ? text.tagline : '', description: real(text.description) ? text.description : '', highlights: ((text.highlights ?? []) as string[]).filter(real) }
+    return { p, tagline: real(text.tagline) ? text.tagline : '', summary: real(text.summary) ? text.summary : '', description: real(text.description) ? text.description : '', highlights: ((text.highlights ?? []) as string[]).filter(real) }
   })
   out.push({
     path: '/projects',
@@ -71,12 +71,12 @@ export function buildPages(): PageDef[] {
         : `<p>${esc(en.os.empty.projects.text)}</p>`,
     ),
   })
-  for (const { p, tagline, description, highlights } of projectList) {
+  for (const { p, tagline, summary, description, highlights } of projectList) {
     const text = [tagline, description].filter(Boolean)
     out.push({
       path: `/projects/${p.slug}`,
       title: `${p.name} — ${pages.projects.title} — ${profile.name}`,
-      description: description || tagline || pages.projects.description,
+      description: summary || description || tagline || pages.projects.description,
       body: shell(
         p.name,
         text.map((t) => `<p>${esc(t)}</p>`).join('') +

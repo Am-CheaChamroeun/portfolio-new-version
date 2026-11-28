@@ -9,6 +9,8 @@ Everything needed to add CashCompass to a developer portfolio. Paths are relativ
 [Integration](#adding-it-to-the-portfolio) · [Gallery](#recommended-gallery) ·
 [Media index](#media-index) · [How these files were made](#how-these-files-were-made)
 
+> **File names:** every media file starts with the project prefix `cashcompass-` (`cashcompass-desktop-NN-feature.webp`, `cashcompass-mobile-NN-feature.png`, `cashcompass-original-…`, `cashcompass-demo.mp4`, …) so Cloudinary public IDs are unique across projects. Standard and full old-to-new mapping: `docs/CLOUDINARY_MEDIA.md`. Screenshots, mobile images, the video, GIF and originals are no longer imported by the portfolio (covers and posters are); the code snippets below that copy images into `public/` are historical.
+
 ## Before you publish
 
 - **Account mode has never run against a real Supabase project.** Sign-up, sign-in, file storage and
@@ -213,13 +215,13 @@ const cashcompass: Project = {
   // The first image is also the large picture at the top of the case study.
   gallery: [
     'cashcompass-cover-dark',
-    '02-dashboard',
-    '09-cash-flow-forecast',
-    '03-transactions',
-    '05-budgets',
-    '10-financial-calendar',
-    '11-financial-reports',
-    '14-khmer-dashboard',
+    'cashcompass-desktop-02-dashboard',
+    'cashcompass-desktop-09-cash-flow-forecast',
+    'cashcompass-desktop-03-transactions',
+    'cashcompass-desktop-05-budgets',
+    'cashcompass-desktop-10-financial-calendar',
+    'cashcompass-desktop-11-financial-reports',
+    'cashcompass-desktop-14-khmer-dashboard',
   ].map((file) => `${cashcompassMedia}/${file}.webp`),
 }
 ```
@@ -390,13 +392,13 @@ Eight images, in display order. The first is the recommended primary cover.
 | #   | File                                     | Caption                                          |
 | --- | ---------------------------------------- | ------------------------------------------------ |
 | 1   | `covers/cashcompass-cover-dark.webp`     | CashCompass: navigate your money with confidence |
-| 2   | `screenshots/02-dashboard.webp`          | Balance, cash flow and insights at a glance      |
-| 3   | `screenshots/09-cash-flow-forecast.webp` | Recorded history and projected balance           |
-| 4   | `screenshots/03-transactions.webp`       | Income, expenses and transfers across accounts   |
-| 5   | `screenshots/05-budgets.webp`            | Overall and category budgets with clear status   |
-| 6   | `screenshots/10-financial-calendar.webp` | Recorded and upcoming items by date              |
-| 7   | `screenshots/11-financial-reports.webp`  | Period reports with PDF download                 |
-| 8   | `screenshots/14-khmer-dashboard.webp`    | The same dashboard in Khmer                      |
+| 2   | `screenshots/cashcompass-desktop-02-dashboard.webp`          | Balance, cash flow and insights at a glance      |
+| 3   | `screenshots/cashcompass-desktop-09-cash-flow-forecast.webp` | Recorded history and projected balance           |
+| 4   | `screenshots/cashcompass-desktop-03-transactions.webp`       | Income, expenses and transfers across accounts   |
+| 5   | `screenshots/cashcompass-desktop-05-budgets.webp`            | Overall and category budgets with clear status   |
+| 6   | `screenshots/cashcompass-desktop-10-financial-calendar.webp` | Recorded and upcoming items by date              |
+| 7   | `screenshots/cashcompass-desktop-11-financial-reports.webp`  | Period reports with PDF download                 |
+| 8   | `screenshots/cashcompass-desktop-14-khmer-dashboard.webp`    | The same dashboard in Khmer                      |
 
 ## Media index
 
@@ -412,31 +414,31 @@ Eight images, in display order. The first is the recommended primary cover.
 
 | File                                     | Dimensions | Size   |
 | ---------------------------------------- | ---------- | ------ |
-| `screenshots/01-landing-page.webp`       | 1920×1200  | 72 KB  |
-| `screenshots/02-dashboard.webp`          | 1920×1200  | 105 KB |
-| `screenshots/03-transactions.webp`       | 1920×1200  | 107 KB |
-| `screenshots/04-accounts.webp`           | 1920×1200  | 60 KB  |
-| `screenshots/05-budgets.webp`            | 1920×1200  | 84 KB  |
-| `screenshots/06-savings-goals.webp`      | 1920×1200  | 86 KB  |
-| `screenshots/07-analytics.webp`          | 1920×1200  | 79 KB  |
-| `screenshots/08-recurring-payments.webp` | 1920×1200  | 100 KB |
-| `screenshots/09-cash-flow-forecast.webp` | 1920×1200  | 104 KB |
-| `screenshots/10-financial-calendar.webp` | 1920×1200  | 97 KB  |
-| `screenshots/11-financial-reports.webp`  | 1920×1200  | 81 KB  |
-| `screenshots/12-notifications.webp`      | 1920×1200  | 78 KB  |
-| `screenshots/13-dark-dashboard.webp`     | 1920×1200  | 103 KB |
-| `screenshots/14-khmer-dashboard.webp`    | 1920×1200  | 105 KB |
-| `screenshots/15-pdf-export.webp`         | 1920×1200  | 115 KB |
+| `screenshots/cashcompass-desktop-01-landing-page.webp`       | 1920×1200  | 72 KB  |
+| `screenshots/cashcompass-desktop-02-dashboard.webp`          | 1920×1200  | 105 KB |
+| `screenshots/cashcompass-desktop-03-transactions.webp`       | 1920×1200  | 107 KB |
+| `screenshots/cashcompass-desktop-04-accounts.webp`           | 1920×1200  | 60 KB  |
+| `screenshots/cashcompass-desktop-05-budgets.webp`            | 1920×1200  | 84 KB  |
+| `screenshots/cashcompass-desktop-06-savings-goals.webp`      | 1920×1200  | 86 KB  |
+| `screenshots/cashcompass-desktop-07-analytics.webp`          | 1920×1200  | 79 KB  |
+| `screenshots/cashcompass-desktop-08-recurring-payments.webp` | 1920×1200  | 100 KB |
+| `screenshots/cashcompass-desktop-09-cash-flow-forecast.webp` | 1920×1200  | 104 KB |
+| `screenshots/cashcompass-desktop-10-financial-calendar.webp` | 1920×1200  | 97 KB  |
+| `screenshots/cashcompass-desktop-11-financial-reports.webp`  | 1920×1200  | 81 KB  |
+| `screenshots/cashcompass-desktop-12-notifications.webp`      | 1920×1200  | 78 KB  |
+| `screenshots/cashcompass-desktop-13-dark-dashboard.webp`     | 1920×1200  | 103 KB |
+| `screenshots/cashcompass-desktop-14-khmer-dashboard.webp`    | 1920×1200  | 105 KB |
+| `screenshots/cashcompass-desktop-15-pdf-export.webp`         | 1920×1200  | 115 KB |
 
 ### Mobile screenshots
 
 | File                                | Dimensions | Size   |
 | ----------------------------------- | ---------- | ------ |
-| `mobile/01-mobile-home.png`         | 780×1688   | 187 KB |
-| `mobile/02-mobile-dashboard.png`    | 780×1688   | 176 KB |
-| `mobile/03-mobile-transactions.png` | 780×1688   | 195 KB |
-| `mobile/04-mobile-budgets.png`      | 780×1688   | 201 KB |
-| `mobile/05-mobile-calendar.png`     | 780×1688   | 168 KB |
+| `mobile/cashcompass-mobile-01-home.png`         | 780×1688   | 187 KB |
+| `mobile/cashcompass-mobile-02-dashboard.png`    | 780×1688   | 176 KB |
+| `mobile/cashcompass-mobile-03-transactions.png` | 780×1688   | 195 KB |
+| `mobile/cashcompass-mobile-04-budgets.png`      | 780×1688   | 201 KB |
+| `mobile/cashcompass-mobile-05-calendar.png`     | 780×1688   | 168 KB |
 
 ### Demo video, GIF and poster
 
@@ -465,7 +467,7 @@ are already lossless.
   to the capture day, 27 November 2026.
 - Desktop screenshots: 1440×900 viewport at 2× scale, then resized to 1920×1200 WebP (quality 90).
 - Phone screenshots: 390×844 viewport at 2× scale, saved as PNG.
-- `15-pdf-export` is not an app screen. It is the three pages of a PDF that the app exported, laid
+- `cashcompass-desktop-15-pdf-export` is not an app screen. It is the three pages of a PDF that the app exported, laid
   out on a plain background.
 - Covers: a layout made of real captures, the logo and the Geist typeface. The dark cover uses the
   dark dashboard and a dark phone capture.

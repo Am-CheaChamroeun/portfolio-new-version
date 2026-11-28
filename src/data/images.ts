@@ -23,12 +23,8 @@
  */
 import heroWorkstation from '../assets/mock/hero/developer-workstation.svg'
 import profilePortrait from '../assets/mock/profile/portrait-illustration.svg'
-import projectDashboard from '../assets/mock/projects/web-app-analytics-dashboard.svg'
-import projectKanban from '../assets/mock/projects/web-app-kanban-workspace.svg'
-import projectStorefront from '../assets/mock/projects/ecommerce-storefront.svg'
 import galleryMobile from '../assets/mock/projects/gallery-mobile.svg'
 import galleryCode from '../assets/mock/projects/gallery-code.svg'
-import projectApi from '../assets/mock/projects/backend-api-architecture.svg'
 import emblemUniversity from '../assets/mock/education/emblem-university.svg'
 import emblemAcademy from '../assets/mock/education/emblem-academy.svg'
 import emblemSchool from '../assets/mock/education/emblem-school.svg'
@@ -51,12 +47,8 @@ export const mockImages = {
   hero: heroWorkstation,
   /** Profile app portrait, until profile.photo is set */
   profile: profilePortrait,
-  /** Project previews by project slug, until project.image is set */
+  /** Project previews by project slug (none needed now: every project has a local cover; kept for future placeholders) */
   projects: {
-    'featured-project': projectDashboard,
-    'project-one': projectKanban,
-    'project-two': projectStorefront,
-    'project-three': projectApi,
   } as Record<string, string>,
   /** Extra mock frames for the case-study gallery (used after the project's own preview) */
   projectGallery: [galleryMobile, galleryCode],

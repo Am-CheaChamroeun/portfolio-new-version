@@ -1,5 +1,8 @@
 import {
+  siApacheecharts,
   siClaude,
+  siGooglegemini,
+  siZod,
   siElectron,
   siK6,
   siPinia,
@@ -42,7 +45,7 @@ import {
  * THE one registry for technology logos — Skills, the About toolbox, Work Experience, Projects and case studies all read from here.
  * To add a technology: import its `si*` icon above, add it to this map, and (if people write it in other ways,
  * e.g. "Tailwind CSS") add those spellings to `techAliases` below. Browse names at https://simpleicons.org
- * A technology with no official icon here (e.g. WebSocket, Playwright) automatically gets the neutral fallback icon.
+ * A technology with no official icon here (e.g. WebSocket, Playwright, Zustand, Dexie) automatically gets the neutral fallback icon.
  */
 export const techIcons = {
   react: siReact,
@@ -80,6 +83,9 @@ export const techIcons = {
   pwa: siPwa,
   electron: siElectron,
   vuetify: siVuetify,
+  echarts: siApacheecharts,
+  zod: siZod,
+  gemini: siGooglegemini,
 } satisfies Record<string, SimpleIcon>
 
 export type TechKey = keyof typeof techIcons
@@ -108,6 +114,9 @@ const techAliases: Record<string, TechKey> = {
   'electron.js': 'electron',
   electronjs: 'electron',
   'progressive web app': 'pwa',
+  'apache echarts': 'echarts',
+  'gemini api': 'gemini',
+  'google gemini': 'gemini',
 }
 
 /** "Tailwind CSS", "tailwind", "TailwindCSS" … → 'tailwind'. Undefined when there is no official icon (use the fallback). */

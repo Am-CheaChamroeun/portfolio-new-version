@@ -42,8 +42,8 @@ export function projectCategory(p: Project): 'frontend' | 'fullstack' | 'backend
 
 const layerOf = (name: string): 'client' | 'server' | 'data' | 'infra' => {
   const n = name.toLowerCase()
-  if (['react', 'next.js', 'vite', 'typescript', 'javascript', 'tailwind', 'redux', 'vue', 'angular', 'nuxt.js', 'tanstack query'].includes(n)) return 'client'
-  if (['nestjs', 'node.js', 'express.js', 'spring boot', 'graphql', 'postman'].includes(n)) return 'server'
+  if (['react', 'next.js', 'vite', 'typescript', 'javascript', 'tailwind', 'redux', 'vue', 'angular', 'nuxt.js', 'tanstack query', 'pinia', 'zustand', 'dexie', 'echarts'].includes(n)) return 'client'
+  if (['nestjs', 'node.js', 'express.js', 'spring boot', 'graphql', 'postman', 'gemini api'].includes(n)) return 'server'
   if (['postgresql', 'mongodb', 'mysql', 'supabase', 'firebase', 'wordpress'].includes(n)) return 'data'
   return 'infra'
 }
@@ -98,7 +98,7 @@ export function CaseStudy({
   const studyKey = `content.projects.${project.slug}.study`
   const real =
     (i18n.exists(studyKey)
-      ? (t(studyKey as 'content.projects.featured-project', {
+      ? (t(studyKey as 'content.projects.cashcompass.study', {
           returnObjects: true,
         }) as unknown as Study)
       : {}) ?? {}
@@ -126,8 +126,8 @@ export function CaseStudy({
   const alt = (n: number) => t('os.projects.study.shotAlt', { n, name: project.name })
   const shotItem = (s: MediaShot): GalleryItem => {
     const key = `content.projects.${project.slug}.media.${s.id}`
-    const caption = i18n.exists(key) ? (t(key as 'content.projects.featured-project.tagline')) : s.caption
-    return { id: s.id, caption, alt: t('os.projects.study.shotAltReal', { caption, name: project.name }), local: s.local, remote: s.remote }
+    const caption = i18n.exists(key) ? (t(key as 'content.projects.cashcompass.tagline')) : s.caption
+    return { id: s.id, caption, alt: t('os.projects.study.shotAltReal', { caption, name: project.name }), remote: s.remote }
   }
   const sets: GallerySet[] = []
   if (media?.desktop.length) sets.push({ id: 'desktop', label: t('os.projects.study.sets.desktop'), items: media.desktop.map(shotItem) })
@@ -138,7 +138,7 @@ export function CaseStudy({
     const main = pickImage(project.image, mockImages.projects[project.slug])
     return [...(main ? [main] : []), ...mockImages.projectGallery.map((src) => ({ src, isMock: true }))]
   }, [project])
-  if (!sets.length)
+  if (!sets.length && !media)
     sets.push({
       id: 'desktop',
       label: t('os.projects.study.gallery'),
@@ -165,7 +165,7 @@ export function CaseStudy({
     architecture: !!real.architecture || SHOW_PLACEHOLDERS,
     challenges: !!real.challenges || SHOW_PLACEHOLDERS,
     demo: hasDemo,
-    gallery: sets.some((x) => x.items.some((g) => !g.isMock)) || SHOW_PLACEHOLDERS,
+    gallery: sets.length > 0 && (sets.some((x) => x.items.some((g) => !g.isMock)) || SHOW_PLACEHOLDERS),
   }
   const order = Object.keys(vis).filter((k) => vis[k])
   const num = (id: string) => order.indexOf(id) + 1

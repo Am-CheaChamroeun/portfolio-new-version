@@ -359,36 +359,27 @@ export type Project = {
   gallery?: string[]
 }
 
+/** Featured on the Projects app: CashCompass. Its text lives in content.projects.cashcompass; media in data/projectMedia.ts. */
 export const featuredProject: Project = {
-  name: '[FEATURED PROJECT]',
-  slug: 'featured-project',
-  tech: ['Next.js', 'TypeScript', 'NestJS', 'PostgreSQL'],
-  accent: '#efff00',
-  liveUrl: '',
-  repoUrl: '',
+  name: 'CashCompass',
+  slug: 'cashcompass',
+  // the card shows the first four
+  tech: ['Nuxt.js', 'Vue', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind', 'Node.js', 'Pinia', 'ECharts', 'Zod', 'Vitest', 'PWA'],
+  accent: '#5cb5a0',
+  category: 'fullstack',
+  repoUrl: 'https://github.com/Am-CheaChamroeun/cash-compass',
+  liveUrl: '', // not deployed yet: add the live demo URL after deployment
 }
 
 export const projects: Project[] = [
   {
-    name: '[PROJECT NAME]',
-    slug: 'project-one',
-    tech: ['React', 'TypeScript', 'Vite'],
-    accent: '#ffd600',
-    repoUrl: '',
-  },
-  {
-    name: '[PROJECT NAME]',
-    slug: 'project-two',
-    tech: ['Next.js', 'WordPress', 'GraphQL'],
-    accent: '#efff00',
-    repoUrl: '',
-  },
-  {
-    name: '[PROJECT NAME]',
-    slug: 'project-three',
-    tech: ['NestJS', 'PostgreSQL', 'Docker'],
-    accent: '#ffd600',
-    repoUrl: '',
+    name: 'ResumeCraft',
+    slug: 'resumecraft',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Gemini API', 'Zustand', 'Dexie', 'Zod', 'Vitest', 'Playwright'],
+    accent: '#6ea8f7',
+    category: 'fullstack',
+    repoUrl: 'https://github.com/Am-CheaChamroeun/resume-builder', // the GitHub repository keeps its original name
+    liveUrl: '', // not deployed yet: add the live demo URL after deployment
   },
 ]
 

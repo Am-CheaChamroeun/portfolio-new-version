@@ -17,7 +17,7 @@ const all: Project[] = visibleProjects
 /** A project's translated text (content.projects.<slug> in the locale files). */
 function useProjectText(slug: string): ProjectText {
   const { t } = useTranslation()
-  const text = t(`content.projects.${slug}` as 'content.projects.featured-project', { returnObjects: true }) as unknown
+  const text = t(`content.projects.${slug}` as 'content.projects.cashcompass', { returnObjects: true }) as unknown
   return typeof text === 'object' && text ? (text as ProjectText) : { description: '', highlights: [] }
 }
 

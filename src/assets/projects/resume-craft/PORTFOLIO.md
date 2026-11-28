@@ -2,6 +2,8 @@
 
 Everything needed to add ResumeCraft to a developer portfolio. Paths are relative to this folder (`docs/portfolio/`).
 
+> **File names:** every media file starts with the project prefix `resumecraft-` (`resumecraft-desktop-NN-feature.webp`, `resumecraft-mobile-NN-feature.png`, `resumecraft-original-…`, `resumecraft-demo.mp4`, …) so Cloudinary public IDs are unique across projects. Standard and full old-to-new mapping: `docs/CLOUDINARY_MEDIA.md`. Screenshots, mobile images, the video, GIF and originals are no longer imported by the portfolio (covers and posters are); the code snippets below that copy images into `public/` are historical.
+
 ## Before you publish
 
 - **Verify the AI features with a real key** (`pnpm verify:ai`). They have only been tested with stand-in answers. The title says "AI-Powered", so check this first.
@@ -140,19 +142,19 @@ const resumecraft: Project = {
   // The first image is also the large picture at the top of the case study.
   gallery: [
     'resumecraft-cover-dark',
-    '03-resume-editor',
-    '02-template-gallery',
-    '05-customization',
-    '04-editor-dark',
-    '10-cover-letter-templates',
-    '09-cover-letter',
-    '11-khmer-resume',
-    '07-ats-analysis',
-    '12-pdf-export',
-    '08-my-resumes',
-    '13-version-history',
-    '06-ai-assistant',
-    '01-landing-page',
+    'resumecraft-desktop-03-resume-editor',
+    'resumecraft-desktop-02-template-gallery',
+    'resumecraft-desktop-05-customization',
+    'resumecraft-desktop-04-editor-dark',
+    'resumecraft-desktop-10-cover-letter-templates',
+    'resumecraft-desktop-09-cover-letter',
+    'resumecraft-desktop-11-khmer-resume',
+    'resumecraft-desktop-07-ats-analysis',
+    'resumecraft-desktop-12-pdf-export',
+    'resumecraft-desktop-08-my-resumes',
+    'resumecraft-desktop-13-version-history',
+    'resumecraft-desktop-06-ai-assistant',
+    'resumecraft-desktop-01-landing-page',
   ].map((file) => `${media}/${file}.webp`),
 };
 ```
@@ -287,19 +289,19 @@ const resumecraft: Project = {
 | #   | File                        | Caption                                                       |
 | --- | --------------------------- | ------------------------------------------------------------- |
 | 1   | `resumecraft-cover-dark`    | ResumeCraft: resume and cover letter builder                  |
-| 2   | `03-resume-editor`          | Structured forms beside a live, paged preview                 |
-| 3   | `02-template-gallery`       | Resume templates with layout and compatibility details        |
-| 4   | `05-customization`          | Colours, fonts and spacing for each resume                    |
-| 5   | `04-editor-dark`            | Dark interface; the document keeps its own colours            |
-| 6   | `10-cover-letter-templates` | Three cover letter styles that keep the same text             |
-| 7   | `09-cover-letter`           | Writing a letter with a live preview                          |
-| 8   | `11-khmer-resume`           | Khmer interface and Khmer resume content                      |
-| 9   | `07-ats-analysis`           | Compatibility check and keyword comparison, run on the device |
-| 10  | `12-pdf-export`             | Export window with PDF steps for each browser                 |
-| 11  | `08-my-resumes`             | A library of resumes saved in the browser                     |
-| 12  | `13-version-history`        | Preview and restore earlier versions                          |
-| 13  | `06-ai-assistant`           | The optional assistant, before any request is sent            |
-| 14  | `01-landing-page`           | Landing page                                                  |
+| 2   | `resumecraft-desktop-03-resume-editor`          | Structured forms beside a live, paged preview                 |
+| 3   | `resumecraft-desktop-02-template-gallery`       | Resume templates with layout and compatibility details        |
+| 4   | `resumecraft-desktop-05-customization`          | Colours, fonts and spacing for each resume                    |
+| 5   | `resumecraft-desktop-04-editor-dark`            | Dark interface; the document keeps its own colours            |
+| 6   | `resumecraft-desktop-10-cover-letter-templates` | Three cover letter styles that keep the same text             |
+| 7   | `resumecraft-desktop-09-cover-letter`           | Writing a letter with a live preview                          |
+| 8   | `resumecraft-desktop-11-khmer-resume`           | Khmer interface and Khmer resume content                      |
+| 9   | `resumecraft-desktop-07-ats-analysis`           | Compatibility check and keyword comparison, run on the device |
+| 10  | `resumecraft-desktop-12-pdf-export`             | Export window with PDF steps for each browser                 |
+| 11  | `resumecraft-desktop-08-my-resumes`             | A library of resumes saved in the browser                     |
+| 12  | `resumecraft-desktop-13-version-history`        | Preview and restore earlier versions                          |
+| 13  | `resumecraft-desktop-06-ai-assistant`           | The optional assistant, before any request is sent            |
+| 14  | `resumecraft-desktop-01-landing-page`           | Landing page                                                  |
 
 ## Video and GIF
 
@@ -314,6 +316,6 @@ const resumecraft: Project = {
 - Screenshots and video were captured from the app running locally in Chrome (development server, with the development badge hidden). All people, companies, schools and contact details are fictional; the sample name is the author's.
 - The video is edited from real interactions: loading waits are shortened and scenes are joined with fades. A small pointer was added so movements are visible.
 - The "Exported PDF" shot in the video is the page produced by Chrome's print-to-PDF from the resume edited in the demo. The browser's own print window is not shown.
-- Gemini could not be reached, so there is **no AI output anywhere**. For `06-ai-assistant` only, the server was started with a fake placeholder key so the assistant shows its ready state. Nothing was sent to Google.
+- Gemini could not be reached, so there is **no AI output anywhere**. For `resumecraft-desktop-06-ai-assistant` only, the server was started with a fake placeholder key so the assistant shows its ready state. Nothing was sent to Google.
 - The covers are layouts composed from real screenshots and real exported pages.
 - `originals/` holds the PNG originals of the desktop screenshots and covers. `mobile/` holds phone captures (390×844 at 2× scale).

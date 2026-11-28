@@ -27,7 +27,7 @@ export function applyRouteMeta(route: Route, projectName?: string) {
   let description = page === 'about' ? t('meta.description', { name }) : t(`meta.pages.${page}.description`)
   if (route.kind === 'app' && route.app === 'projects' && route.slug && projectName) {
     title = `${projectName} — ${t('meta.pages.projects.title')} — ${name}`
-    description = t(`content.projects.${route.slug}.description`)
+    description = t(`content.projects.${route.slug}.summary`, { defaultValue: t(`content.projects.${route.slug}.description`) }) // short summary when there is one
   }
   document.title = title
   setMeta('meta[name="description"]', 'name', 'description', description)

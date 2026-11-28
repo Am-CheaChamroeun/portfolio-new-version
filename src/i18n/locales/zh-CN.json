@@ -293,38 +293,107 @@
       "databases": "数据库"
     },
     "projects": {
-      "featured-project": {
-        "tagline": "[一句话介绍这个项目]",
-        "description": "[用两到三句话说明它的功能、面向的用户，以及你在其中的角色。]",
+      "cashcompass": {
+        "tagline": "从容掌握你的资金动向。",
+        "summary": "一款个人财务网页应用，将账户、支出、预算、储蓄目标和周期性付款集中在同一视图中，预测即将发生的收支，并导出 PDF 报告，支持英语和高棉语。",
+        "description": "CashCompass 回答三个问题：钱在哪里、花到了哪里、接下来会发生什么。它汇总各类账户，记录收入、支出和转账，并跟踪预算、储蓄目标和周期性付款。日历和 30 至 90 天的现金流预测展示即将发生的款项与预计余额，报告可下载为 PDF。应用支持英语和高棉语以及七种货币。演示模式使用浏览器中的虚构数据运行，账户模式基于 Supabase 和行级安全策略（RLS）构建。",
         "highlights": [
-          "[核心功能]",
-          "[核心功能]",
-          "[核心功能]"
-        ]
+          "预算、储蓄目标与周期性付款",
+          "30 至 90 天现金流预测与财务日历",
+          "七种货币、英语和高棉语、PDF 报告"
+        ],
+        "study": {
+          "objectives": [
+            "清楚呈现钱在哪里、花到了哪里、接下来会发生什么",
+            "跨货币、跨时间保持计算结果准确",
+            "保护记录隐私，并让任何人无需注册即可试用"
+          ],
+          "problem": "资金分散在现金、银行、银行卡和电子钱包中，且常涉及两种货币，难以追踪；简单的记账工具不显示即将到来的付款，而按当前汇率换算旧金额会改变历史数据。",
+          "solution": "一款网页应用：每笔资金变动只记录一次，余额由记录计算得出，每笔金额按其日期对应的汇率换算，并根据计划付款预测未来余额。",
+          "role": [
+            "使用 Nuxt、Vue 和 TypeScript 设计与开发应用",
+            "财务计算规则、预测与 PDF 报告",
+            "Supabase 数据结构、行级安全策略与服务端接口"
+          ],
+          "architecture": "基于 Nuxt、Vue 和 Pinia，浏览器演示与账户接口共用同一个数据仓库接口。Nitro 接口校验会话，用 Zod 验证输入，并以登录用户身份访问 Supabase，由行级安全策略保证数据归属。财务规则由浏览器、服务器和测试共同使用。",
+          "challenges": [
+            "金额精度：使用十进制运算代替浮点数",
+            "汇率历史：每笔记录按当日汇率换算",
+            "周期性付款：通过数据库加锁和唯一约束避免重复记录",
+            "高棉语 PDF：在浏览器中使用 HarfBuzz 进行文字排版"
+          ]
+        },
+        "media": {
+          "desktop-01-landing-page": "首页",
+          "desktop-02-dashboard": "余额、现金流与分析一目了然",
+          "desktop-03-transactions": "跨账户的收入、支出与转账",
+          "desktop-04-accounts": "现金、银行、储蓄、信用卡和电子钱包账户",
+          "desktop-05-budgets": "总预算与分类预算，状态清晰",
+          "desktop-06-savings-goals": "储蓄目标与进度",
+          "desktop-07-analytics": "数据分析",
+          "desktop-08-recurring-payments": "周期性付款",
+          "desktop-09-cash-flow-forecast": "历史记录与预计余额",
+          "desktop-10-financial-calendar": "按日期查看已记录和即将发生的项目",
+          "desktop-11-financial-reports": "按周期生成的报告，可下载 PDF",
+          "desktop-12-notifications": "应用内通知",
+          "desktop-13-dark-dashboard": "深色模式下的仪表盘",
+          "desktop-14-khmer-dashboard": "同一仪表盘的高棉语版本",
+          "desktop-15-pdf-export": "导出的 PDF 报告",
+          "mobile-01-home": "手机端首页",
+          "mobile-02-dashboard": "手机端仪表盘",
+          "mobile-03-transactions": "手机端交易记录",
+          "mobile-04-budgets": "手机端预算",
+          "mobile-05-calendar": "手机端日历"
+        }
       },
-      "project-one": {
-        "description": "[简短描述]",
+      "resumecraft": {
+        "tagline": "AI 辅助的简历与求职信制作工具",
+        "description": "制作保存在自己浏览器中的简历和求职信。提供 12 款简历模板和 3 款求职信模板，支持英语和高棉语实时预览编辑，可导出为 PDF 或 Word。可选的 Gemini 建议需经你确认后才会应用。",
         "highlights": [
-          "[功能]",
-          "[功能]",
-          "[功能]"
-        ]
-      },
-      "project-two": {
-        "description": "[简短描述]",
-        "highlights": [
-          "[功能]",
-          "[功能]",
-          "[功能]"
-        ]
-      },
-      "project-three": {
-        "description": "[简短描述]",
-        "highlights": [
-          "[功能]",
-          "[功能]",
-          "[功能]"
-        ]
+          "12 款简历模板和 3 款求职信模板",
+          "实时预览，支持导出 PDF 和 Word",
+          "数据本地优先，AI 辅助可选"
+        ],
+        "study": {
+          "objectives": [
+            "无需账户和数据库即可制作精美简历",
+            "让预览与导出的 PDF 保持一致，包括高棉语",
+            "提供不会擅自修改文档的 AI 辅助"
+          ],
+          "problem": "许多简历工具要求注册账户、在服务器上保存个人数据或对导出收费，部分 PDF 库还会导致高棉语文字出错。",
+          "solution": "本地优先的网页应用：由浏览器读取、排版、保存和导出文档，服务器仅用于处理 AI 请求。",
+          "role": [
+            "使用 Next.js 和 TypeScript 设计与开发应用",
+            "简历排版、分页与导出",
+            "可选 Gemini 功能的服务端接口"
+          ],
+          "architecture": "基于 Next.js 和 React，编辑器的 Zustand 状态通过 Dexie 保存到 IndexedDB。预览与打印共用同一套 HTML 渲染。接口层将 Gemini 密钥保留在服务器端，并校验每个请求和响应。",
+          "challenges": [
+            "高棉语 PDF：通过浏览器打印引擎导出",
+            "分页一致：测量内容块并放置到固定尺寸的页面",
+            "多标签页冲突：检测冲突并询问保留哪个版本",
+            "AI 虚构内容：校验响应，应用前需经用户确认"
+          ]
+        },
+        "media": {
+          "desktop-01-landing-page": "首页",
+          "desktop-02-template-gallery": "简历模板，附版式与兼容性说明",
+          "desktop-03-resume-editor": "结构化表单与实时分页预览并排显示",
+          "desktop-04-editor-dark": "深色界面，文档保持自己的配色",
+          "desktop-05-customization": "为每份简历设置颜色、字体和间距",
+          "desktop-06-ai-assistant": "可选的 AI 助手，在发送任何请求之前",
+          "desktop-07-ats-analysis": "兼容性检查与关键词对比，在本地设备上运行",
+          "desktop-08-my-resumes": "保存在浏览器中的简历库",
+          "desktop-09-cover-letter": "边写求职信边实时预览",
+          "desktop-10-cover-letter-templates": "三种求职信样式，内容保持不变",
+          "desktop-11-khmer-resume": "高棉语界面与高棉语简历内容",
+          "desktop-12-pdf-export": "导出窗口，附各浏览器的 PDF 步骤",
+          "desktop-13-version-history": "预览并恢复早期版本",
+          "mobile-01-home": "手机端首页",
+          "mobile-02-templates": "手机端模板",
+          "mobile-03-editor": "手机端编辑器",
+          "mobile-04-preview": "手机端预览"
+        }
       }
     },
     "services": {
