@@ -1,4 +1,4 @@
-import { ArrowUpRight, CheckCircle2, Download, Mail, Send } from 'lucide-react'
+import { ArrowUpRight, Check, CheckCircle2, Copy, Download, Mail, Send } from 'lucide-react'
 import { useId, useState, type FormEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from '../../components/ui/Avatar'
@@ -13,7 +13,7 @@ type Status = 'idle' | 'sending' | 'sent' | 'mailto' | 'error'
 const field =
   'w-full rounded-lg border border-card-border bg-sheet px-3 py-2 text-[14px] text-fg outline-none max-md:min-h-11 max-md:text-[16px] transition-colors placeholder:text-faint focus:border-primary'
 
-function Channel({ href, icon, label, value }: { href: string; icon: ReactNode; label: string; value: string }) {
+function Channel({ href, icon, label, value, wrap }: { href: string; icon: ReactNode; label: string; value: string; wrap?: boolean }) {
   const external = href.startsWith('http')
   return (
     <a
@@ -24,13 +24,38 @@ function Channel({ href, icon, label, value }: { href: string; icon: ReactNode; 
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-graphite text-neon ring-1 ring-neon/30">{icon}</span>
       <span className="min-w-0 flex-1">
         <span className="block text-[13px] font-medium">{label}</span>
-        <span className="block truncate font-mono text-[11px] text-faint">{value}</span>
+        <span className={`block font-mono text-[11px] text-faint ${wrap ? 'break-all' : 'truncate'}`}>{value}</span>
       </span>
       <ArrowUpRight
         size={14}
         className="shrink-0 text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
       />
     </a>
+  )
+}
+
+/** Copies the public email address; the mailto link beside it keeps working as before. */
+function CopyEmail() {
+  const { t } = useTranslation()
+  const [copied, setCopied] = useState(false)
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(socials.email)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      /* clipboard unavailable: the address is shown in full and can be selected by hand */
+    }
+  }
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="mx-2.5 mb-1 inline-flex min-h-8 items-center gap-1.5 self-start rounded-md px-2 text-[12px] font-medium text-muted transition-colors hover:bg-fg/5 hover:text-primary"
+    >
+      {copied ? <Check size={13} /> : <Copy size={13} />}
+      <span aria-live="polite">{copied ? t('os.contact.copied') : t('os.contact.copyEmail')}</span>
+    </button>
   )
 }
 
@@ -96,7 +121,8 @@ export default function ContactApp() {
             </div>
           </div>
           <Eyebrow className="px-2.5 pb-1 pt-2">{t('os.contact.channels')}</Eyebrow>
-          <Channel href={`mailto:${socials.email}`} icon={<Mail size={15} />} label={t('contact.email')} value={socials.email} />
+          <Channel href={`mailto:${socials.email}`} icon={<Mail size={15} />} label={t('contact.email')} value={socials.email} wrap />
+          <CopyEmail />
           <Channel href={socials.linkedin.url} icon={<LinkedinIcon size={15} />} label={t('contact.linkedin')} value={socials.linkedin.label} />
           <Channel href={socials.github.url} icon={<GithubIcon size={15} />} label={t('contact.github')} value={socials.github.label} />
           <Channel href={socials.telegram.url} icon={<TelegramIcon size={15} />} label={t('contact.telegram')} value={socials.telegram.label} />

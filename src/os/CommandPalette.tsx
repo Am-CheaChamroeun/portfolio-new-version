@@ -193,7 +193,17 @@ export function CommandPalette() {
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return items.filter((i) => i.group === 'recent' || i.group === 'apps' || i.group === 'actions' || i.group === 'language')
+    if (!q) {
+      // an app already listed under Recent is not repeated under Applications
+      const shown = new Set(items.filter((i) => i.group === 'recent').map((i) => i.label))
+      return items.filter(
+        (i) =>
+          i.group === 'recent' ||
+          (i.group === 'apps' && !shown.has(i.label)) ||
+          i.group === 'actions' ||
+          i.group === 'language',
+      )
+    }
     const matched = items
       .filter((i) => i.group !== 'recent')
       .map((i) => ({ i, s: score(i, q) }))

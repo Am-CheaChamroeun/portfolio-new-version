@@ -122,6 +122,16 @@ export default function AboutApp() {
                 {t('os.about.hello')}
               </button>
             </div>
+            {mobile && (
+              <button
+                type="button"
+                onClick={() => openApp('experience')}
+                className="mt-3 inline-flex min-h-10 items-center gap-1.5 text-[13px] font-medium text-muted transition-colors hover:text-primary"
+              >
+                {t('os.about.experienceCta')}
+                <ArrowRight size={14} />
+              </button>
+            )}
             <p className="mt-3 text-[12px] text-faint">{mobile ? t('os.about.hintMobile') : t('os.about.hint', { key: shortcutLabel() })}</p>
           </section>
 

@@ -1,7 +1,7 @@
 import { isReducedMotion } from '../../lib/settings'
 import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
-import { useMemo, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MockBadge } from '../../components/ui/MockBadge'
 import { mockImages, pickImage } from '../../data/images'
@@ -183,18 +183,37 @@ export function CaseStudy({
     ['gallery', t('os.projects.study.gallery')],
   ] as const
   const shownSections = sections.filter(([id]) => vis[id])
+  const scroller = useRef<HTMLDivElement>(null)
+  const settle = useRef<number[]>([])
+  const clearSettle = () => {
+    settle.current.forEach(window.clearTimeout)
+    settle.current = []
+  }
+  useEffect(() => clearSettle, [])
   const go = (id: string) => {
     const reduce = isReducedMotion()
-    document.getElementById(`cs-${id}`)?.scrollIntoView({
-      behavior: reduce ? 'auto' : 'smooth',
-      block: 'start',
-    })
+    const target = document.getElementById(`cs-${id}`)
+    if (!target) return
+    clearSettle()
+    target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+    // Images and video posters above the target can finish loading mid-scroll and
+    // push it away from where the smooth scroll was heading. Re-check once the
+    // layout has settled and snap to the right place if it drifted.
+    const recheck = () => {
+      const box = scroller.current
+      if (!box || !target.isConnected) return
+      const nav = box.querySelector('nav')?.getBoundingClientRect().height ?? 0
+      const drift = target.getBoundingClientRect().top - box.getBoundingClientRect().top - nav
+      const atEnd = box.scrollTop + box.clientHeight >= box.scrollHeight - 2
+      if (Math.abs(drift) > 24 && !(atEnd && drift > 0)) target.scrollIntoView({ behavior: 'auto', block: 'start' })
+    }
+    settle.current = [window.setTimeout(recheck, 900), window.setTimeout(recheck, 2200)]
   }
 
   const links = <ProjectActions project={project} fallbackRepo={socials.github.url} />
 
   return (
-    <div className="@container h-full overflow-y-auto scroll-smooth motion-reduce:scroll-auto">
+    <div ref={scroller} className="@container h-full overflow-y-auto scroll-smooth motion-reduce:scroll-auto">
       {/* ── hero ── */}
       <header className="os-chrome relative isolate overflow-hidden bg-graphite text-warm">
         <div
@@ -227,6 +246,21 @@ export function CaseStudy({
           <h1 className="mt-3 text-[clamp(1.75rem,4.2cqw,2.9rem)] font-semibold leading-[1.05] tracking-tight">{project.name}</h1>
           {text.tagline && <p className="mt-2 max-w-2xl text-[15px] text-neon">{text.tagline}</p>}
           <div className="mt-5">{links}</div>
+          {(vis.demo || vis.gallery) && (
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[12.5px]">
+              {(['demo', 'gallery'] as const).filter((id) => vis[id]).map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => go(id)}
+                  className="inline-flex items-center gap-1 rounded-md py-1 text-steel transition-colors hover:text-neon"
+                >
+                  {t(`os.projects.study.${id}`)}
+                  <ArrowRight size={12} className="rotate-90" aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {hero && (

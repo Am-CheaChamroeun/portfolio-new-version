@@ -152,3 +152,42 @@ test.describe('mobile', () => {
     await expect(page.getByRole('link', { name: 'View CV in a new tab (PDF)' })).toBeVisible()
   })
 })
+
+test.describe('polish pass', () => {
+  test('case-study shortcuts jump to the demo video and the gallery', async ({ page }) => {
+    await open(page, '/projects/resumecraft')
+    await page.locator('header').getByRole('button', { name: 'Demo video' }).click()
+    await expect.poll(() => page.evaluate(() => Math.round(document.getElementById('cs-demo')!.getBoundingClientRect().top)), { timeout: 5000 }).toBeLessThan(400)
+    await expect(page.locator('#cs-demo')).toBeInViewport()
+  })
+
+  test('the Specializations name is the same in the menu and the page', async ({ page }) => {
+    await open(page, '/services')
+    await expect(page.getByRole('heading', { name: 'Specializations' }).first()).toBeVisible()
+    await expect(page.getByText('Developer Tools')).toHaveCount(0)
+  })
+
+  test('the palette lists an app once when it is also in Recent', async ({ page }) => {
+    await open(page, '/about')
+    await page.keyboard.press('ControlOrMeta+k')
+    const names = await page.getByRole('option').allInnerTexts()
+    const apps = names.map((n) => n.split('\n')[0].trim())
+    expect(new Set(apps).size).toBe(apps.length)
+  })
+
+  test('Contact shows the full email and can copy it', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+    await open(page, '/contact')
+    await expect(page.getByText('amcheachamroeun87@gmail.com').first()).toBeVisible()
+    await page.getByRole('button', { name: 'Copy email address' }).click()
+    await expect(page.getByText('Copied')).toBeVisible()
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('amcheachamroeun87@gmail.com')
+  })
+
+  test('phone About has a Work Experience link', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 800 })
+    await open(page, '/about')
+    await page.locator('section').getByRole('button', { name: 'Work experience' }).click()
+    await expect(page).toHaveURL(/\/experience$/)
+  })
+})

@@ -28,7 +28,7 @@
         "description": "Roeun 获得的证书与资质。"
       },
       "services": {
-        "title": "服务",
+        "title": "专长领域",
         "description": "Roeun 的专长：全栈开发、后端与 API 开发、前端工程、金融科技、企业应用、实时应用、安全与测试。"
       },
       "monitor": {
@@ -566,7 +566,7 @@
       "education": "教育经历",
       "experience": "工作经历",
       "certificates": "证书",
-      "services": "专长",
+      "services": "专长领域",
       "monitor": "系统监视器",
       "contact": "联系",
       "terminal": "终端",
@@ -579,7 +579,7 @@
       "education": "教育资源管理器",
       "experience": "职业历程",
       "certificates": "证书查看器",
-      "services": "开发者工具",
+      "services": "专长领域",
       "monitor": "系统监视器",
       "contact": "信息",
       "terminal": "终端",
@@ -670,6 +670,7 @@
       "links": "在线找到我",
       "cv": "下载简历",
       "hello": "打个招呼",
+      "experienceCta": "工作经历",
       "narration": {
         "label": "自我介绍语音讲解",
         "play": "播放讲解",
@@ -889,6 +890,8 @@
     "contact": {
       "inbox": "收件箱",
       "channels": "联系渠道",
+      "copyEmail": "复制邮箱地址",
+      "copied": "已复制",
       "thread": "对话",
       "compose": "新信息",
       "to": "收件人",

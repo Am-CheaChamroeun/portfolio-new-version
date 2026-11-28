@@ -28,7 +28,7 @@
         "description": "Certificates and credentials earned by Roeun."
       },
       "services": {
-        "title": "Services",
+        "title": "Specializations",
         "description": "Roeun's specializations: full-stack development, backend and API development, frontend engineering, FinTech, enterprise applications, real-time apps, security and testing."
       },
       "monitor": {
@@ -579,7 +579,7 @@
       "education": "Education Explorer",
       "experience": "Career Timeline",
       "certificates": "Certificate Viewer",
-      "services": "Developer Tools",
+      "services": "Specializations",
       "monitor": "System Monitor",
       "contact": "Messages",
       "terminal": "Terminal",
@@ -670,6 +670,7 @@
       "links": "Find me online",
       "cv": "Download CV",
       "hello": "Say hello",
+      "experienceCta": "Work experience",
       "narration": {
         "label": "Voice narration of my introduction",
         "play": "Play narration",
@@ -893,6 +894,8 @@
     "contact": {
       "inbox": "Inbox",
       "channels": "Channels",
+      "copyEmail": "Copy email address",
+      "copied": "Copied",
       "thread": "Conversation",
       "compose": "New message",
       "to": "To",
